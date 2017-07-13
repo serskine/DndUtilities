@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll"
+    >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:layout_weight="1"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0"
+                >
+
+                <!-- TITLE LINE -->
+                <EditText
+                    android:id="@+id/theTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/em_name"
+                    style="@style/AppTheme.BigHeader"
+                    />
+                <!-- CONTENT LINE -->
+                <EditText
+                    android:id="@+id/theContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/em_name"
+                    style="@style/AppTheme.Weak"
+                    />
+            </LinearLayout>
+    </ScrollView>
+
+
+
+    <!-- buttons for saving and deleting -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/en_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/en_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/en_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/en_speech_button"
+                android:src="@drawable/ic_control_speech"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

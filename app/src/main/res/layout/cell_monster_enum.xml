@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+fieldId/nameText"
+        android:layout_toEndOf="@+fieldId/typeText"
+        android:id="@+id/pageText"
+        android:paddingStart="5dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/crText"
+        android:layout_below="@+fieldId/nameText"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="5dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/typeText"
+        android:layout_alignBaseline="@+fieldId/pageText"
+        android:layout_alignBottom="@+fieldId/pageText"
+        android:layout_alignStart="@+fieldId/nameText"
+        android:paddingStart="5dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="167dp"
+        android:id="@+id/nameText"
+        android:textStyle="normal|bold|italic"
+        android:textAlignment="viewStart"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

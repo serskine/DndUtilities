@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- NAME CELL -->
+    <TextView
+        android:id="@+id/theName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.BigHeader"
+        />
+
+    <!-- Prerequisite for the feat -->
+    <TextView
+        android:id="@+id/thePrerequisite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Weak"
+        />
+
+    <!-- Description -->
+    <TextView android:id="@+id/theDescription"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+
+</LinearLayout>

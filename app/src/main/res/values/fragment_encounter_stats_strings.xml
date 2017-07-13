@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fes_trivial">Trivial</string>
+    <string name="fes_easy">Easy</string>
+    <string name="fes_normal">Normal</string>
+    <string name="fes_hard">Hard</string>
+    <string name="fes_deadly">Deadly</string>
+    <string name="fes_multiply"> x </string>
+    <string name="fes_equals"> = </string>
+
+    <string name="fes_xp">%d xp</string>
+    <string name="fes_enemy_xp_formula">Total XP: %1$.2f x %2$d party xp = %3$2d xp</string>
+    <string name="fes_ally_xp_formula">Player Xp: %1$d xp / %2$d players = %3$d xp/player</string>
+
+    <string name="fes_clear_encounter">Clear Encounter</string>
+</resources>

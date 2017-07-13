@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        style="@style/AppTheme.Scroll">
+
+        <TextView
+            android:id="@+id/theThreatLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ALLIES"
+            android:textAlignment="center"
+            style="@style/AppTheme.BigHeader"/>
+
+        <!-- the list view -->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/ml_list_view"
+            style="@style/AppTheme.List"
+            >
+        </ListView>
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/theAlliesSpinner"
+        style="@style/AppTheme.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!-- Search filter bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/theSearchEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/sv_search_hint_descriptive"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoCorrect"
+            style="@style/AppTheme.EditField"
+
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:onClick="onClickClearSearchTextButton"
+            android:src="@drawable/ic_control_clear"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mv_search"
+            android:layout_weight="0.1"
+            android:onClick="onClickSearchButton"
+            android:visibility="gone"
+            style="@style/AppTheme.SearchButton"
+            />
+    </LinearLayout>
+
+
+    <!--the controls -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_add_button"
+                android:id="@+id/ml_add_button"
+                android:src="@drawable/ic_control_add"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_delete_button"
+                android:id="@+id/ml_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_clear_button"
+                android:id="@+id/ml_clear_button"
+                android:src="@drawable/ic_control_clear"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

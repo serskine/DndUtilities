@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        >
+
+
+        <!-- NAME CELL -->
+        <EditText
+            android:id="@+id/theName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_name"
+            android:inputType="textCapCharacters"
+            style="@style/AppTheme.BigHeader"
+            />
+
+        <!-- Classes text -->
+        <EditText
+            android:id="@+id/theClasses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_classes"
+            style="@style/AppTheme.Weak"
+            />
+
+        <!-- Type Line -->
+        <Spinner
+            android:id="@+id/theType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_type"
+            style="@style/AppTheme.Weak"
+            />
+
+        <Spinner
+            android:id="@+id/theSpellLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_level"
+            style="@style/AppTheme.Weak"
+            />
+
+        <!-- Casting Time -->
+        <EditText
+            android:id="@+id/theCastingTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_casting_time"
+            style="@style/AppTheme.Normal"
+            />
+
+
+        <!-- Range -->
+        <EditText
+            android:id="@+id/theRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_range"
+            style="@style/AppTheme.Normal"
+            />
+
+        <!-- Components -->
+        <EditText android:id="@+id/theComponents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_components"
+            style="@style/AppTheme.Normal"
+            />
+
+        <EditText android:id="@+id/theMaterials"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/esp_materials"
+            style="@style/AppTheme.Normal"
+            />
+
+        <!-- Duration -->
+        <EditText
+            android:id="@+id/theDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/esp_duration"
+            style="@style/AppTheme.Normal"
+            />
+
+
+        <EditText android:id="@+id/theDescription"
+            android:gravity="start|top"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/esp_description"
+            style="@style/AppTheme.EditMultiline"
+            />
+    </LinearLayout>
+
+    <!-- buttons for saving and deleting -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/esp_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/esp_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/esp_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

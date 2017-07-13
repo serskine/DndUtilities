@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_weight="0"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!-- NAME CELL -->
+            <EditText
+                android:id="@+id/emi_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emi_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapCharacters"
+                style="@style/AppTheme.BigHeader"
+                />
+
+            <EditText
+                android:id="@+id/emi_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emi_type"
+                style="@style/AppTheme.Normal"
+                />
+            <Spinner
+                android:id="@+id/emi_rarity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/AppTheme.Spinner"
+                />
+            <EditText
+                android:id="@+id/emi_attunement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emi_attunement"
+                style="@style/AppTheme.Normal"
+                />
+
+
+
+            <!-- MagicItem Location -->
+            <EditText
+                android:id="@+id/emi_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emi_location"
+                style="@style/AppTheme.Normal"
+                />
+
+
+            <!-- MagicItem Description -->
+            <com.soupthatisthick.util.view.HtmlEdit
+                android:id="@+id/emi_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emi_description"
+                android:gravity="start"
+                style="@style/AppTheme.EditField"
+                />
+            <!--style="@style/AppTheme.EditMultiline"-->
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <!-- buttons for saving and deleting -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/emi_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/emi_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="onClickCancelButton"
+                android:id="@+id/emi_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

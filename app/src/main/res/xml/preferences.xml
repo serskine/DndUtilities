@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_category_compendium_title"
+        android:summary="@string/pref_category_compendium_summary"  >
+        <intent
+            android:targetPackage="com.example.prefs"
+            android:targetClass="com.example.prefs.SettingsActivity"
+            android:action="com.example.prefs.PREFS_ONE" />
+    </PreferenceCategory>
+    <CheckBoxPreference
+        android:id="@+id/setting_use_filters"
+        android:title="@string/pref_use_filters_title"
+        android:summaryOn="@string/pref_use_filters_summary_on"
+        android:summaryOff="@string/pref_use_filters_summary_off"
+        android:defaultValue="true"
+        android:key="@string/pref_use_filters_key"
+        />
+</PreferenceScreen>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="soupthatisthick.encounterapp"
+    android:versionCode="1"
+    android:versionName="1">
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        />
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"
+        />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/dnd_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name="com.soupthatisthick.encounterbuilder.DndUtilApp"
+        >
+
+
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ViewSplashScreenActivity"
+            android:label="@string/app_name"
+            android:launchMode="standard" >
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN"
+                    />
+                <category
+                    android:name="android.intent.category.LAUNCHER"
+                    />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity"
+            android:label="Edit Databases Activity"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
+
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMapActivity"
+            android:label="Edit Map Activity"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ViewSummaryActivity"
+            android:label="@string/title_activity_view_summary"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExViewMonsterManualActivity"
+            android:label="@string/title_activity_view_monsters"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMonsterManualActivity"
+            android:label="@string/title_activity_edit_monsters"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMagicItemsListActivity"
+            android:label="@string/title_activity_view_magic_items"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditSessionActivity"
+            android:label="@string/title_activity_edit_session"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.OldEditLogsheetActivity" />
+        <!-- Working on the Edit Logsheet Activity -->
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetActivity"
+            android:label="@string/title_activity_edit_logsheet"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetsListActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.OldEditLogsheetActivity"
+            android:label="@string/title_activity_edit_logsheet"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetsListActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetsListActivity"
+            android:label="@string/title_activity_manage_player_characters"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" /><![CDATA[
+        />
+        ]]>
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity"
+            android:label="@string/title_activity_compendium"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            />
+        />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMagicItemActivity"
+            android:label="@string/title_activity_edit_magic_item"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditMagicItemActivity"
+            android:windowSoftInputMode="adjustPan"
+            />/>
+        />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellBookActivity"
+            android:label="@string/title_activity_edit_spell_book"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellBookActivity" />
+        />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellActivity"
+            android:label="@string/title_activity_edit_spell"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellActivity"
+            android:windowSoftInputMode="adjustPan"
+            />/>
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditCustomMonsterActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_edit_monster"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditMonsterManualActivity"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.PrintLogsheetActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_print_logsheet"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetActivity"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_edit_content_values"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditNotesActivity"
+            android:label="@string/title_activity_edit_notes_list"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditNoteActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_edit_note"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.TestActivity"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExViewListsActivity"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditCustomListsActivity"
+            android:label="@string/title_activity_custom_lists"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditContactsActivity"
+            android:label="@string/title_activity_edit_contacts_list"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditContactActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_edit_contact"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditContactsActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatListActivity"
+            android:label="@string/title_activity_edit_feats_list"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_edit_feat"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatListActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.builder.MeasureEncounterActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/title_activity_measure_encounter"
+            android:launchMode="standard"
+            />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.LootTableActivity"
+            android:label="@string/title_activity_roll_for_loot"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.ViewLogsActivity"
+            android:label="View Logs Activity"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            />
+
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.SettingsActivity"
+            android:label="@string/title_activity_edit_settings"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            />
+
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity"
+            android:label="@string/title_activity_search_filters"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity"
+            />
+        <activity android:name="com.soupthatisthick.util.activity.EditTableActivity"
+            android:label="@string/title_activity_test"
+            android:launchMode="standard"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            />
+
+        <!-- MAP EDITING TOOLS -->
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:launchMode="standard"
+            />
+        <!--
+            ATTENTION: This was auto-generated to add Google Play services to your project for
+            App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+</manifest>

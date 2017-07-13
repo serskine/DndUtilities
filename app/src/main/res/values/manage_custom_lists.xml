@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cell_new_item_list">New Item List</string>
+    <string name="eil_item_access_error">Error! Failed to load item with id %1$d from table %2$s!</string>
+
+    <string name="eil_clear_list_title">Clear all list of items?</string>
+    <string name="eil_clear_list_message">Are you sure you want to delete all lists of items? This action can not be undone.</string>
+    <string name="eil_delete_item_title">Delete list item?</string>
+    <string name="eil_delete_item_detail">Are you sure you want to delete this list item? This action can not be undone.</string>
+
+    <string name="ecl_clear_list_title">Clear all Custom lists?</string>
+    <string name="ecl_clear_list_message">Ary you sure you want to delete all custom lists? This action can not be undone.</string>
+    <string name="ecl_delete_item_title">Delete custom list?</string>
+    <string name="ecl_delete_item_message">Are you sure you want to delete this custom list? This action can not be undone.</string>
+</resources>

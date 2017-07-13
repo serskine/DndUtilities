@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="escf_clear_title">Clear column search filters?</string>
+    <string name="escf_clear_message">Are you sure you want to clear all column search filters? This action can not be undone.</string>
+    <string name="escf_delete_title">Delete column search filter?</string>
+    <string name="escf_delete_message">Are you sure you want to delete this search column filter? This action can not be undone.</string>
+    <string name="escf_cell_title">Table %1$s, column %2$s.</string>
+</resources>

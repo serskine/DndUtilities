@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- NAME CELL -->
+    <TextView
+        android:id="@+id/theName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.BigHeader"
+        />
+
+
+    <!-- MagicItem details (type, rarity, attunement) -->
+    <TextView
+        android:id="@+id/theType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Weak"
+        />
+
+    <!-- MagicItem Location -->
+    <TextView
+        android:id="@+id/theLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+
+    <!-- MagicItem Description -->
+    <TextView android:id="@+id/theDescription"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+
+</LinearLayout>

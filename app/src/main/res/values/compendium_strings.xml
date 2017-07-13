@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vc_select_filters">Selecting Filters</string>
+    <string name="vc_view_results">Viewing Results</string>
+    <string name="vc_tab_search">Search</string>
+    <string name="vc_tab_filters">Filters</string>
+    <string name="vc_select_all">Select all</string>
+    <string name="vc_deselect_all">Deselect all</string>
+    <string name="vc_add_to_item_list">Add to list</string>
+    <string name="vc_add_to_item_list_dialog_title">Add item to list?</string>
+
+    <!-- These are the various resource strings we will use to represent the titles of all the Dao's -->
+    <string name="vc_title_spell">Spells</string>
+    <string name="vc_title_magic_items">Magic Items</string>
+    <string name="vc_title_custom_monsters">Custom Monsters</string>
+    <string name="vc_title_standard_monsters">Standard Monsters</string>
+    <string name="vc_title_notes">Notes</string>
+    <string name="vc_title_feats">Feats</string>
+    <string name="vc_title_backgrounds">Backgrounds</string>
+    <string name="vc_title_conditions">Conditions</string>
+    <string name="vc_title_levels">Player Levels</string>
+    <string name="vc_title_challenge_ratings">Challenge Ratings</string>
+    <string name="vc_title_equipment">Equipment</string>
+    <string name="vc_title_gods">Deities</string>
+    <string name="vc_title_armor">Armor</string>
+    <string name="vc_title_lifestyles">Lifestyles</string>
+    <string name="vc_title_mounts">Mounts</string>
+    <string name="vc_title_weapons">Weapons</string>
+
+    <!-- These might be excluded from the compendium -->
+    <string name="vc_title_item_list">Lists</string>
+    <string name="vc_title_items">List Items</string>
+</resources>

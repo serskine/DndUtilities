@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.CheckBox" parent="AppTheme.Normal">
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:checked">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Edit CustomMonster Activity Strings -->
+    <string name="enm_delete_title">Delete Monster?</string>
+    <string name="enm_delete_message">Are you sure you want to delete this customMonster? This action can not be undone.</string>
+
+    <string name="enm_armor_class">Armor Class</string>
+    <string name="enm_armor_class_type">Ac Type</string>
+    <string name="enm_hit_points">Hit Points</string>
+    <string name="enm_ability_score">--</string>
+    <string name="enm_damage_vulnerability">Damage Vulnerabilities</string>
+    <string name="enm_damage_resistances">Damage Resistances</string>
+    <string name="enm_damage_immunities">Damage Immunities</string>
+    <string name="enm_condition_immunities">Condition Immunities</string>
+    <string name="enm_challenge">Challenge</string>
+    <string name="enm_xp">Xp</string>
+    <string name="enm_abilities">Abilities</string>
+    <string name="enm_legendary_actions">Legendary Actions</string>
+
+    <string name="enm_saving_throws">Saving Throws</string>
+
+    <string name="enm_skills">Skills</string>
+    <string name="enm_name">Name</string>
+    <string name="enm_size">Size</string>
+    <string name="enm_type">Type</string>
+    <string name="enm_subtype">Subtype</string>
+    <string name="enm_alignment">Alignment</string>
+    <string name="enm_ac">Ac</string>
+    <string name="enm_hp">Hp</string>
+    <string name="enm_hd">Hd</string>
+    <string name="enm_speed">Speed</string>
+    <string name="enm_str">Str</string>
+    <string name="enm_dex">Dex</string>
+    <string name="enm_con">Con</string>
+    <string name="enm_int">Int</string>
+    <string name="enm_wis">Wis</string>
+    <string name="enm_cha">Cha</string>
+    <string name="enm_str_save">Str Save</string>
+    <string name="enm_con_save">Con Save</string>
+    <string name="enm_dex_save">Dex Save</string>
+    <string name="enm_int_save">Int Save</string>
+    <string name="enm_wis_save">Wis Save</string>
+    <string name="enm_cha_save">Cha Save</string>
+    <string name="enm_acrobatics">Acrobatics</string>
+    <string name="enm_arcana">Arcana</string>
+    <string name="enm_athletics">Athletics</string>
+    <string name="enm_deception">Deception</string>
+    <string name="enm_history">History</string>
+    <string name="enm_insight">Insight</string>
+    <string name="enm_intimidation">Intimidation</string>
+    <string name="enm_medicine">Medicine</string>
+    <string name="enm_nature">Nature</string>
+    <string name="enm_performance">Performance</string>
+    <string name="enm_perception">Perception</string>
+    <string name="enm_religion">Religion</string>
+    <string name="enm_steath">Steath</string>
+    <string name="enm_survival">Survival</string>
+    <string name="enm_languages">Languages</string>
+    <string name="enm_senses">Senses</string>
+    <string name="enm_cr">Cr</string>
+    <string name="enm_dmg_vulnerability">Damage Vulnerability</string>
+    <string name="enm_dmg_resistance">Damage Resistance</string>
+    <string name="enm_dmg_immunity">Damage Immunity</string>
+    <string name="enm_condition_immunity">Condition Immunity</string>
+    <string name="enm_special_abilities">Special Abilities</string>
+    <string name="enm_reactions">Reactions</string>
+    <string name="enm_actions">Actions</string>
+    <string name="enm_legendary">Legendary</string>
+    <string name="enm_source">Source</string>
+
+
+
+    <string name="enm_other_details">Other Details</string>
+    <string name="enm_ime_search">Search</string>
+
+
+</resources>

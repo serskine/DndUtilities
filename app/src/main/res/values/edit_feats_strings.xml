@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Edit Feat Activity Strings -->
+    <string name="ef_delete_title">Delete Feat?</string>
+    <string name="ef_delete_message">Are you sure you want to delete this feat? This action can not be undone.</string>
+    <string name="ef_name">Name</string>
+    <string name="ef_description">Description</string>
+    <string name="ef_prerequisite">Prerequisites</string>
+</resources>

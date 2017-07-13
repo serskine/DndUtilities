@@ -1,0 +1,113 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:text="@string/main_button_view_compendium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewCompendiumButton"
+            android:layout_weight="1"
+            android:onClick="onClickViewCompendium"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+
+        <Button
+            android:text="@string/main_button_measure_encounter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editEncounterButton"
+            android:layout_weight="1"
+            android:onClick="onClickMeasureEncounterButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+
+            />
+
+
+        <Button
+            android:text="@string/main_button_roll_for_loot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rollForLootButton"
+            android:layout_weight="1"
+            android:onClick="onClickRollForLootButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+
+            />
+
+
+        <Button
+            android:text="@string/main_button_edit_databases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editDatabasesButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditDatabases"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:text="@string/main_button_view_logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewLogsButton"
+            android:layout_weight="1"
+            android:onClick="onClickViewLogsButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+
+            />
+
+
+        <Button
+            android:text="@string/main_button_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingsButton"
+            android:layout_weight="1"
+            android:onClick="onClickSettingsButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:text="@string/test_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editLogsheetButton"
+            android:layout_weight="1"
+            android:onClick="onClickTestButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+
+            />
+
+
+    </LinearLayout>
+</ScrollView>

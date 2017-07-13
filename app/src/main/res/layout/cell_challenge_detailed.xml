@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:stretchColumns="0,1"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <TableRow
+        android:layout_weight="1"
+        >
+        <TextView
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleText"
+            android:layout_span="4"
+            style="@style/AppTheme.BigHeader"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valueText"
+            android:layout_span="1"
+            style="@style/AppTheme.Strong"
+            />
+        <TextView
+            android:text="Proficiency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profText"
+            android:layout_span="1"
+            style="@style/AppTheme.Strong"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Max Ac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/maxAcText"
+            android:layout_span="1"
+            style="@style/AppTheme.Strong"
+            />
+        <TextView
+            android:text="Save Dc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveDcText"
+            android:layout_span="1"
+            style="@style/AppTheme.Strong"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Min Hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/minHpText"
+            android:layout_span="1"
+            style="@style/AppTheme.Normal"
+            />
+        <TextView
+            android:text="Max Hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/maxHpText"
+            android:layout_span="1"
+            style="@style/AppTheme.Normal"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Min Dmg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/minDmgText"
+            android:layout_span="1"
+            style="@style/AppTheme.Normal"
+            />
+        <TextView
+            android:text="Max Dmg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/maxDmgText"
+            android:layout_span="1"
+            style="@style/AppTheme.Normal"
+            />
+    </TableRow>
+
+</TableLayout>

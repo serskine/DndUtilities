@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll.Cell">
+    <TextView
+        android:id="@+id/theItemId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Strong.Error"/>
+    <TextView
+        android:id="@+id/theListId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Strong.Error"/>
+    <TextView
+        android:id="@+id/theMetaData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Weak.Error"/>
+    <TextView
+        android:id="@+id/theTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal.Error"/>
+    <TextView
+        android:id="@+id/thePrimaryKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal.Error"/>
+    <TextView
+        android:id="@+id/theKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal.Error"/>
+    <TextView
+        android:id="@+id/theMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Strong.Error"/>
+
+</LinearLayout>

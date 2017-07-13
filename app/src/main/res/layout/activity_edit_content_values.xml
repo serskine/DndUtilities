@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.soupthatisthick.util.activity.ViewListActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/ml_search_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/sv_search_hint_descriptive"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoCorrect"
+            style="@style/AppTheme.EditField"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:onClick="onClickClearSearchTextButton"
+            android:src="@drawable/ic_control_clear"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mv_search"
+            android:layout_weight="0.1"
+            android:onClick="onClickSearchButton"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <!-- the list view -->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/listView"
+        style="@style/AppTheme.List"
+        >
+    </ListView>
+
+    <!--the controls -->
+    <LinearLayout
+        android:id="@+id/theCommandsGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+        <!-- used to delete the session in the database -->
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/deleteButton"
+            android:gravity="center"
+            android:onClick="onClickDeleteButton"
+            style="@style/AppTheme.DeleteButton"
+            />
+        <!-- used to save the session in the database -->
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/saveButton"
+            android:gravity="center"
+            android:onClick="onClickSaveButton"
+            style="@style/AppTheme.SaveButton"
+            />
+        <!-- used to delete the session in the database -->
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cancelButton"
+            android:gravity="center"
+            android:onClick="onClickCancelButton"
+            style="@style/AppTheme.CancelButton"
+            />
+
+    </LinearLayout>
+</LinearLayout>

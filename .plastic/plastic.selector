@@ -1,0 +1,4 @@
+repository "encounter_builder"
+  path "/"
+    smartbranch "/trunk_ci/ManagePcListActivity"  
+     

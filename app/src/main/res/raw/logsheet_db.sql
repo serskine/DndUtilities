@@ -1,0 +1,45 @@
+CREATE TABLE IF NOT EXISTS "logsheets" (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`playerName`	TEXT,
+	`playerDci`	TEXT,
+	`characterName`	TEXT,
+	`faction`	TEXT,
+	`classLevels`	TEXT
+);
+CREATE TABLE IF NOT EXISTS "gameSessions" (
+	`sessionId`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`characterId`	INTEGER,
+	`adventure`	TEXT,
+	`dmName`	TEXT,
+	`dmDci`	TEXT,
+	`date`	TEXT,
+	`xpEarned`	INTEGER DEFAULT 0,
+	`goldEarned`	INTEGER DEFAULT 0,
+	`downtimeEarned`	INTEGER DEFAULT 0,
+	`renownEarned`	INTEGER DEFAULT 0,
+	`magicItemsEarned`	INTEGER DEFAULT 0,
+	`notes`	TEXT
+);
+CREATE TABLE IF NOT EXISTS "TEST_TABLE" (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`name`	TEXT,
+	`notes`	TEXT
+);
+CREATE TABLE IF NOT EXISTS `CONTACTS` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`name`	TEXT,
+	`dci`	TEXT
+);
+CREATE TABLE IF NOT EXISTS "LISTS" (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    `name` TEXT,
+    `metaData` TEXT
+);
+CREATE TABLE IF NOT EXISTS "LIST_ITEMS" (
+    `itemId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    `listId` INTEGER,
+    `metaData` TEXT,
+    `table` TEXT,
+    `primaryKey` TEXT,
+    `key` INTEGER
+);

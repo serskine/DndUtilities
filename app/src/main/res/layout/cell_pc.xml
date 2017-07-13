@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logsheet header information -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/el_logsheet_header"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/el_character_name"
+            android:id="@+id/character_name"
+            style="@style/AppTheme.SmallHeader"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/el_class_levels"
+            android:id="@+id/character_class"
+            style="@style/AppTheme.Weak"
+            /><TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/el_player_name"
+            android:id="@+id/player_name"
+            style="@style/AppTheme.SmallHeader"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/el_player_dci"
+            android:id="@+id/player_dci"
+            style="@style/AppTheme.Weak"
+            />
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/faction"
+        android:adjustViewBounds="false"
+        android:scaleType="fitEnd"
+        android:src="@drawable/no_faction_banner_trimmed"
+        />
+
+</LinearLayout>

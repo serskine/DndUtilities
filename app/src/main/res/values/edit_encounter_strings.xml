@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ee_tab_stats">Stats</string>
+    <string name="ee_tab_allies">Allies</string>
+    <string name="ee_tab_enemies">Enemies</string>
+    <string name="ee_select_enemy">Select Enemy</string>
+    <string name="ee_select_ally">Select Ally</string>
+
+</resources>

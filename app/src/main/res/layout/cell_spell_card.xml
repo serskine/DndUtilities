@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- HEADER GRID -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        >
+
+
+        <TableRow>
+            <!-- NAME CELL -->
+            <TextView
+                android:id="@+id/theName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                style="@style/AppTheme.BigHeader"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sv_casting_time"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sv_range"
+                style="@style/AppTheme.Strong"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/theCastingTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/AppTheme.Normal"
+                />
+            <TextView
+                android:id="@+id/theRange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/AppTheme.Normal"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sv_components"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sv_duration"
+                style="@style/AppTheme.Strong"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/theComponents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/AppTheme.Normal"
+                />
+            <TextView
+                android:id="@+id/theDuration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/AppTheme.Normal"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- MATERIALS WITH COST DIVIDER -->
+    <TextView android:id="@+id/theMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Weak"
+        />
+
+    <!-- DESCRIPTION AREA AND CELL -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView android:id="@+id/theDescription"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </FrameLayout>
+
+    <!-- FOOTER AREA AND SPELL TYPE CELLS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/theClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            style="@style/AppTheme.Weak"
+            />
+        <TextView
+            android:id="@+id/theType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            style="@style/AppTheme.Weak"
+            />
+    </LinearLayout>
+
+</LinearLayout>

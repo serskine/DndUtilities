@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abil_str">Strength</string>
+    <string name="abil_dex">Dexterity</string>
+    <string name="abil_con">Constitution</string>
+    <string name="abil_int">Intelligence</string>
+    <string name="abil_wis">Wisdom</string>
+    <string name="abil_cha">Charisma</string>
+    <string name="abil_str_abv">Str</string>
+    <string name="abil_dex_abv">Dex</string>
+    <string name="abil_con_abv">Con</string>
+    <string name="abil_int_abv">Int</string>
+    <string name="abil_wis_abv">Wis</string>
+    <string name="abil_cha_abv">Cha</string>
+</resources>

@@ -1,0 +1,7 @@
+REGEX
+<li>(.*)\r\n((.*): (.*),\r\n)+(.*): (.*)\r\n(.*)</li>
+<li>\r\n((([^\"\r\n]*)\"([^\"\r\n]*))+\r\n)+\s*</li>
+        \"(\w*)\": ([^,\r\n]*),?\r\n
+
+#SETTER FROM GETTER REGEX
+public void set$2\($1 $4\) \{$3this\.$4 = $2;$5\}

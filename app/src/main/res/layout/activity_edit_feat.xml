@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_session"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.soupthatisthick.encounterMap.activity.lookup.EditSessionActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/AppTheme.Scroll">
+
+        <!-- NAME CELL -->
+        <EditText
+            android:id="@+id/ef_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ef_name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            style="@style/AppTheme.BigHeader"
+            />
+
+        <!-- Prerequisite for the feat -->
+        <EditText
+            android:id="@+id/ef_prerequisite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ef_prerequisite"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            style="@style/AppTheme.Weak"
+            />
+
+        <!-- Description -->
+        <EditText android:id="@+id/ef_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ef_description"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            style="@style/AppTheme.Normal"
+            />
+
+
+        <!-- buttons for saving and deleting -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <TableRow>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/ef_delete_button"
+                    android:src="@drawable/ic_control_delete"
+                    style="@style/AppTheme.Button"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/ef_save_button"
+                    android:src="@drawable/ic_control_save"
+                    style="@style/AppTheme.Button"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/ef_cancel_button"
+                    android:src="@drawable/ic_control_cancel"
+                    style="@style/AppTheme.Button"
+                    />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>

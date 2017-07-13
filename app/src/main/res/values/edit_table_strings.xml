@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="et_clear_title">Clear all records?</string>
+    <string name="et_clear_message">Are you sure you want to clear all database records? This action can not be undone.</string>
+    <string name="et_delete_title">Delete record?</string>
+    <string name="et_delete_message">Are you sure you want to delete this record? This action can not be undone.</string>
+
+</resources>

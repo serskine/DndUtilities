@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- NAME CELL -->
+    <TextView
+        android:id="@+id/theName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.BigHeader"
+        />
+
+    <!-- AC -->
+    <TextView
+        android:id="@+id/theAc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Strong"
+        />
+
+    <!-- COST -->
+    <TextView
+        android:id="@+id/theCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Weak"
+        />
+
+    <!-- TYPE -->
+    <TextView android:id="@+id/theType"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- STRENGTH REQUIREMENT -->
+    <TextView android:id="@+id/theStrengthRequirement"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- STEALTH EFFECTS -->
+    <TextView android:id="@+id/theStealth"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- WEIGHT EFFECTS -->
+    <TextView android:id="@+id/theWeight"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+
+    <!-- DESCRIPTION -->
+    <TextView android:id="@+id/theDescription"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/AppTheme.Weak"
+        />
+
+
+
+</LinearLayout>

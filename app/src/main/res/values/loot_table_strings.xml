@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lt_results_clear">Clear</string>
+    <string name="lt_roll_add">Add roll</string>
+    <string name="lt_toggle_viewing_table">Viewing table</string>
+    <string name="lt_toggle_viewing_results">Viewing results</string>
+    <string name="lt_roll_recursive_for_table">Roll recursive for table</string>
+    <string name="lt_select_table">Select a table.</string>
+    <string name="lt_search_hint_dice_roll">Enter result of dice roll</string>
+    <string name="lt_results">List of Results</string>
+    <string name="totalGpValue">Total Value: %.2f gp</string>
+
+
+</resources>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_view_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.soupthatisthick.util.activity.ViewListActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:id="@+id/theTabsGroup"
+        >
+        <TableRow>
+            <ToggleButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/theFiltersButton"
+                android:onClick="onFiltersButtonClicked"
+                android:layout_weight="1"
+                android:text="@string/vc_tab_filters"
+                android:textOff="@string/vc_tab_filters"
+                android:textOn="@string/vc_tab_filters"
+                style="@style/AppTheme.Button"
+                />
+            <ToggleButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/theSearchButton"
+                android:onClick="onSearchButtonClicked"
+                android:layout_weight="1"
+                android:text="@string/vc_tab_search"
+                android:textOff="@string/vc_tab_search"
+                android:textOn="@string/vc_tab_search"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+    </TableLayout>
+
+    <!-- search results group -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/resultsGroup"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <EditText
+                android:id="@+id/theSearchEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:hint="@string/sv_search_hint_descriptive"
+                android:imeOptions="actionSearch"
+                android:inputType="textAutoCorrect"
+                style="@style/AppTheme.EditField"
+
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:onClick="onClickClearSearchTextButton"
+                android:src="@drawable/ic_control_clear"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mv_search"
+                android:layout_weight="0.1"
+                android:onClick="onClickSearchButton"
+                android:visibility="gone"
+                style="@style/AppTheme.SearchButton"
+                />
+        </LinearLayout>
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/theExpandableListView"
+            style="AppTheme.List"
+            />
+        <!-- Select/Deselect all Buttons -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            >
+            <TableRow>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theAddToListButton"
+                    android:layout_weight="1"
+                    android:onClick="onAddToListButtonClicked"
+                    android:text="@string/vc_add_to_item_list"
+                    style="@style/AppTheme.SmallButton"
+                    />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <!-- Search filters group -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filterGroup"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/theFilterList"
+            android:layout_weight="1"
+            style="@style/AppTheme.List"
+            />
+        <!-- Select/Deselect all Buttons -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            >
+            <TableRow>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theSelectAllFiltersButton"
+                    android:layout_weight="1"
+                    android:onClick="onSelectAllButtonClicked"
+                    android:text="@string/vc_select_all"
+                    style="@style/AppTheme.SmallButton"
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theDeSelectAllFiltersButton"
+                    android:layout_weight="1"
+                    android:onClick="onDeSelectAllButtonClicked"
+                    android:text="@string/vc_deselect_all"
+                    style="@style/AppTheme.SmallButton"
+                    />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</LinearLayout>

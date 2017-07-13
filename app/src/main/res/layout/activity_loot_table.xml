@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_loot_table"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="afterDescendants"
+
+    tools:context="com.soupthatisthick.util.activity.ViewListActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <EditText
+            android:id="@+id/theSearchEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/lt_search_hint_dice_roll"
+            android:imeOptions="actionSearch"
+            android:inputType="number"
+            style="@style/AppTheme.EditField"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:onClick="onClickClearSearchTextButton"
+            android:src="@drawable/ic_control_clear"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_control_refresh"
+            android:layout_weight="0.1"
+            android:onClick="onClickRollButton"
+            android:visibility="visible"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mv_search"
+            android:layout_weight="0.1"
+            android:onClick="onClickSearchButton"
+            android:visibility="visible"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/theRollsList"
+        android:gravity="center"
+        android:visibility="gone"
+        style="@style/AppTheme.Strong"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lt_select_table"
+        android:gravity="center"
+        android:visibility="gone"
+        style="@style/AppTheme.SmallHeader"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/theTableSpinner"
+        >
+    </Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lt_results"
+        android:gravity="center"
+        android:layout_weight="0"
+        android:visibility="gone"
+        style="@style/AppTheme.SmallHeader"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/AppTheme.Scroll"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/theTotalGpValue"
+                android:gravity="center"
+                style="@style/AppTheme.Strong"
+                />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:id="@+id/theResultsTable"
+                >
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        >
+
+        <TableRow>
+            <Button
+                android:id="@+id/theToggleViewButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickToggleView"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lt_roll_add"
+                android:onClick="onClickAddRoll"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lt_results_clear"
+                android:onClick="onClickClearButton"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

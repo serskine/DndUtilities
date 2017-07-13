@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0"
+            >
+
+            <!-- NAME LINE -->
+            <EditText
+                android:id="@+id/theName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ec_name"
+                style="@style/AppTheme.BigHeader"
+                />
+            <!-- DCI LINE -->
+            <EditText
+                android:id="@+id/theDci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ec_dci"
+                style="@style/AppTheme.Weak"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <!-- buttons for saving and deleting -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/ec_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/ec_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/ec_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

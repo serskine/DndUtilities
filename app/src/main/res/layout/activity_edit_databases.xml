@@ -1,0 +1,117 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:text="@string/main_button_edit_logsheets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editLogsheetsButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditLogsheets"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
+
+        <Button
+            android:text="@string/editdata_button_edit_custom_monsters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editCustomMonstersButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditCustomMonsters"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
+
+        <Button
+            android:text="@string/editdata_button_edit_spells"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewSpellsButton"
+            android:layout_weight="1"
+            android:onClick="onClickViewSpells"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
+        <Button
+            android:text="@string/main_button_view_magic_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewMagicItemsbutton"
+            android:layout_weight="1"
+            android:onClick="onClickViewMagicItems"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
+        <Button
+            android:text="@string/editdata_button_edit_feats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editFeatsButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditFeats"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+
+        <Button
+            android:text="@string/editdata_button_edit_personal_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notesButton"
+            android:layout_weight="1"
+            android:onClick="onClickPersonalNotesButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:text="@string/editdata_button_edit_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contactsButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditContactsButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:text="@string/editdata_button_edit_custom_lists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editCustomListsButton"
+            android:layout_weight="1"
+            android:onClick="onClickCustomListsButton"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+
+    </LinearLayout>
+</ScrollView>

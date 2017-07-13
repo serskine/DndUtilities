@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Log Sheet Strings -->
+    <string name="el_player_name">Player</string>
+    <string name="el_player_dci">Dci</string>
+    <string name="el_character_name">Character</string>
+    <string name="el_faction">Faction</string>
+    <string name="el_class_levels">Class Levels</string>
+    <string name="el_total_xp">Xp</string>
+    <string name="el_total_gold">Gold</string>
+    <string name="el_total_downtime">Down Time</string>
+    <string name="el_total_renown">Renown</string>
+    <string name="el_total_magic_items">Magic Items</string>
+    <string name="el_total_level">Total Level %d</string>
+    <string name="el_add_session">Add Session</string>
+    <string name="el_delete_pc">Delete Character</string>
+
+
+    <!-- Edit Session Activity Strings -->
+    <string name="es_valid_message">Valid</string>
+    <string name="es_invalid_message">Invalid</string>
+    <string name="es_adventure">Adventure</string>
+    <string name="es_date_pattern">Date yyyy/mm/dd</string>
+    <string name="es_dm">Dm</string>
+    <string name="es_dci">Dci</string>
+    <string name="es_xp">Xp</string>
+    <string name="es_gold">Gold</string>
+    <string name="es_downtime">Downtime</string>
+    <string name="es_renown">Renown</string>
+    <string name="es_magic_items">Magic Items</string>
+    <string name="es_notes">Notes</string>
+    <string name="es_save">Save</string>
+    <string name="es_delete">Delete</string>
+
+    <!-- alert dialog messages -->
+    <string name="el_clear_sessions_title">Clear all sessions?</string>
+    <string name="el_clear_sessions_message">Are you sure you want to delete all sessions for this ligsheet? This action can not be undone.</string>
+    <string name="el_delete_logsheet_title">Delete Logsheet?</string>
+    <string name="el_delete_logsheet_message">Are you sure you want to delete this logsheet? This action can not be undone.</string>
+    <string name="el_delete_session_title">Delete session?</string>
+    <string name="el_delete_session_message">Are you sure you want to delete this session? This action can not be undone.</string>
+</resources>

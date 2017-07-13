@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        style="@style/AppTheme.Scroll.Cell">
+
+
+        <TextView
+            android:id="@+id/theThreatLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fes_trivial"
+            android:textAlignment="center"
+            style="@style/AppTheme.HugeHeader"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/theThreatPicture"
+            style="@style/AppTheme.Picture"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.LineBreak"
+            />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="vertical">
+
+            <TableRow>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fes_easy"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        style="@style/AppTheme.Strong"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fes_normal"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        style="@style/AppTheme.Strong"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fes_hard"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        style="@style/AppTheme.Strong"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fes_deadly"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        style="@style/AppTheme.Strong"
+                        />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theEasyThreshold"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/AppTheme.Normal"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theMediumThreshold"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/AppTheme.Normal"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theHardThreshold"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/AppTheme.Normal"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/theDeadlyThreshold"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/AppTheme.Normal"
+                    />
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.LineBreak"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/theEnemyXpFormula"
+            android:textAlignment="center"
+            style="@style/AppTheme.SmallHeader"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.LineBreak"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/theAllyXpFormula"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            style="@style/AppTheme.SmallHeader"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="@string/fes_clear_encounter"
+        android:onClick="onClickClearEncounterButton"
+        style="@style/AppTheme.Button"
+        />
+</LinearLayout>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- NAME LINE -->
+    <TextView
+        android:id="@+id/theName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.BigHeader"
+        />
+
+
+    <!-- MONSTER TYPE LINE -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theTypeAndAlign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Weak"
+            />
+    </LinearLayout>
+
+
+    <!-- CHALLENGE LINE -->
+    <LinearLayout
+        android:id="@+id/theChallengeGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theCr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+        <TextView
+            android:id="@+id/theXp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- source information -->
+    <TextView
+        android:id="@+id/theSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        style="@style/AppTheme.Weak"
+        />
+
+
+    <!-- INSERT LINE BREAK HERE -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mv_linebreak"
+        android:adjustViewBounds="false"
+        android:scaleType="fitXY"
+        android:scaleY="0.5"
+        />
+
+    <!-- ARMOR CLASS LINE -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theAc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+        <TextView
+            android:id="@+id/theAcType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- HIT POINTS LINE -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theHp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+        <TextView
+            android:id="@+id/theHd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- SAVES LINE -->
+    <LinearLayout
+        android:id="@+id/theSavesGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theSaves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- SKILLS LINE -->
+    <LinearLayout
+        android:id="@+id/theSkillsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theSkills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- MOVEMENT LINE -->
+    <LinearLayout
+        android:id="@+id/theSpeedGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- INSERT LINE BREAK HERE -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mv_linebreak"
+        android:scaleType="fitXY"
+        android:scaleY="0.5"
+        android:adjustViewBounds="false"
+        />
+
+    <!-- ABILITY LABELS LINE -->
+    <LinearLayout
+        android:id="@+id/theAbilityScoresGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- STR -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:text="@string/mv_str"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theStr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+        <!-- DEX -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:text="@string/mv_dex"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theDex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+        <!-- CON -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:text="@string/mv_con"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theCon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+        <!-- INT -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:text="@string/mv_int"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theInt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+        <!-- WIS -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/mv_wis"
+                android:textAlignment="center"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theWis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+        <!-- CHA -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:text="@string/mv_cha"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theCha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                style="@style/AppTheme.Normal"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- INSERT LINE BREAK HERE -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mv_linebreak"
+        android:scaleType="fitXY"
+        android:scaleY="0.5"
+        android:adjustViewBounds="false" />
+
+    <!-- DAMAGE VULNERABILITY LINE -->
+    <LinearLayout
+        android:id="@+id/theDmgVulnerabilityGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theDmgVulnerability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- DAMAGE RESISTANCES LINE -->
+    <LinearLayout
+        android:id="@+id/theDmgResistanceGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theDmgResistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- DAMAGE IMMUNITIES LINE -->
+    <LinearLayout
+        android:id="@+id/theDmgImmunityGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theDmgImmunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- CONDITION IMMUNITIES LINE -->
+    <LinearLayout
+        android:id="@+id/theConditionImmunityGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/theConditionImmunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- SENSES LINE -->
+    <LinearLayout
+        android:id="@+id/theSensesGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theSenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- LANGUAGES LINE -->
+    <LinearLayout
+        android:id="@+id/theLanguagesGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/theLanguages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <!-- INSERT LINE BREAK HERE -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mv_linebreak"
+        android:scaleType="fitXY"
+        android:scaleY="0.5"
+        android:adjustViewBounds="false"
+        />
+
+
+    <TextView
+        android:id="@+id/theAbilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <LinearLayout
+        android:id="@+id/theActionsGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/theActionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mv_actions"
+            style="@style/AppTheme.SmallHeader"
+
+            />
+
+        <TextView
+            android:id="@+id/theActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/theReactionsGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/theReactionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mv_reactons"
+            style="@style/AppTheme.SmallHeader"
+
+            />
+
+        <TextView
+            android:id="@+id/theReactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/theLegendaryActionsGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/theLegendaryActionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mv_legendary_actions"
+            style="@style/AppTheme.SmallHeader"
+            />
+
+        <TextView
+            android:id="@+id/theLegendary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Normal"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/theOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+</LinearLayout>

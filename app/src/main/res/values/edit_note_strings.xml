@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Edit CustomMonster Activity Strings -->
+    <string name="en_delete_title">Delete Note?</string>
+    <string name="en_delete_message">Are you sure you want to delete this note? This action can not be undone.</string>
+    <string name="en_title">Title</string>
+    <string name="en_content">Content</string>
+</resources>

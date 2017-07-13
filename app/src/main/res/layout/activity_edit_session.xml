@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_session"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.soupthatisthick.encounterMap.activity.lookup.EditSessionActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/AppTheme.Scroll">
+
+        <!-- SESSION IDENTIFICATION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/theSessionId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone"
+                style="@style/AppTheme.Strong"
+                />
+            <TextView
+                android:id="@+id/theCharacterId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/AppTheme.Strong"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/adventureName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/es_adventure"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            style="@style/AppTheme.BigHeader"
+            />
+
+        <EditText
+            android:id="@+id/datePlayed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/es_date_pattern"
+            android:imeOptions="actionDone"
+            android:inputType="date"
+            style="@style/AppTheme.Strong"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/dm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:hint="@string/es_dm"
+                style="@style/AppTheme.Normal"
+                />
+
+            <EditText
+                android:id="@+id/dmDci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:hint="@string/es_dci"
+                style="@style/AppTheme.Normal"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/session_details_group"
+            android:gravity="top">
+
+            <!-- Earned Statistics -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5"
+                >
+
+
+                <EditText
+                    android:id="@+id/xpEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/es_xp"
+                    style="@style/AppTheme.Normal"
+                    />
+
+                <EditText
+                    android:id="@+id/goldEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/es_gold"
+                    style="@style/AppTheme.Normal"
+                    />
+
+                <EditText
+                    android:id="@+id/downtimeEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/es_downtime"
+                    style="@style/AppTheme.Normal"
+                    />
+
+                <EditText
+                    android:id="@+id/renownEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/es_renown"
+                    style="@style/AppTheme.Normal"
+                    />
+                <EditText
+                    android:id="@+id/magicItemsEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/es_magic_items"
+                    style="@style/AppTheme.Normal"
+                    />
+            </LinearLayout>
+
+            <!-- NOTES TABLE IS IN A FRAME TO MAKE EVEN PADDING -->
+            <com.soupthatisthick.util.view.HtmlEdit
+                android:id="@+id/notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:inputType="textMultiLine"
+                android:imeOptions="actionDone"
+                android:hint="@string/es_notes"
+                android:maxLines="9"
+                android:lines="9"
+                android:scrollHorizontally="false"
+                android:scrollbars="none"
+                android:gravity="left|start"
+                style="@style/AppTheme.Weak"
+                />
+        </LinearLayout>
+
+        <!-- used for error messages -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/error_message"
+            android:gravity="center"
+            style="@style/AppTheme.SmallHeader"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/theCommandsGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+        <!-- used to delete the session in the database -->
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/deleteButton"
+            android:gravity="center"
+            android:text="@string/es_delete"
+            android:onClick="onClickDeleteButton"
+            style="@style/AppTheme.DeleteButton"
+            />
+        <!-- used to save the session in the database -->
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/saveButton"
+            android:gravity="center"
+            android:text="@string/es_save"
+            android:onClick="onClickSaveButton"
+            style="@style/AppTheme.SaveButton"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll.Cell"
+    >
+
+    <!-- NAME LINE -->
+    <TextView
+        android:id="@+id/theName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.BigHeader"
+        />
+
+
+    <!-- skills text -->
+    <TextView
+        android:id="@+id/theSkills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+    <!-- tools text -->
+    <TextView
+        android:id="@+id/theTools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+    <!-- languages text -->
+    <TextView
+        android:id="@+id/theLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- languages text -->
+    <TextView
+        android:id="@+id/theEquipment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- INSERT LINE BREAK HERE -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mv_linebreak"
+        android:adjustViewBounds="false"
+        android:scaleType="fitXY"
+        android:scaleY="0.5"
+        />
+
+    <!-- description -->
+    <TextView
+        android:id="@+id/theDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <TextView
+        android:id="@+id/theFeatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+
+</LinearLayout>

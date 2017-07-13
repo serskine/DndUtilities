@@ -1,0 +1,16 @@
+<resources>
+    <color name="splash_screen">#FFFFFFFF</color>
+    <color name="splash_screen_text">#000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="shadow_light">#44000000</color>
+    <color name="shadow_dark">#99000000</color>
+    <color name="normal_text_color">#FF000000</color>
+    <color name="normal_hint_color">#77000000</color>
+    <color name="error_text_color">#FFFF0000</color>
+    <color name="error_hint_color">#77FF0000</color>
+    <color name="valid_text_color">#FF28C251</color>
+    <color name="valid_hint_color">#7728C251</color>
+    <color name="warning_text_color">#FFF5F900</color>
+    <color name="warning_hint_color">#77f5f900</color>
+    <color name="button_color">#d0ff0900</color>
+</resources>

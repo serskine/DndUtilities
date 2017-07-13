@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS "LISTS" (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    `name` TEXT,
+    `metaData` TEXT
+);
+CREATE TABLE IF NOT EXISTS "LIST_ITEMS" (
+    `itemId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    `listId` INTEGER,
+    `metaData` TEXT,
+    `table` TEXT,
+    `primaryKey` TEXT,
+    `key` INTEGER
+);
+PRAGMA user_version = 3;

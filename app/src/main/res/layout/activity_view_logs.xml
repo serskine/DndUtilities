@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.soupthatisthick.util.activity.ViewListActivity"
+    style="@style/AppTheme.Scroll"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        >
+
+        <EditText
+            android:id="@+id/vl_search_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/sv_search_hint_regex"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoCorrect"
+            style="@style/AppTheme.EditField"
+
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:onClick="onClickClearSearchTextButton"
+            android:src="@drawable/ic_control_clear"
+            />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/vl_scroll_view"
+    >
+        <TextView
+            android:id="@+id/vl_console_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:scrollHorizontally="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            style="@style/AppTheme.Console"
+            />
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:layout_weight="1"
+        android:visibility="gone"
+        >
+
+        <ListView
+            android:id="@+id/vl_list_view"
+            style="AppTheme.List"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="visible">*
+
+        </ListView>
+
+    </HorizontalScrollView>
+
+    <!--the controls -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TableRow>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="onClickUpdateButton"
+                android:visibility="visible"
+                android:id="@+id/vl_update_button"
+                style="@style/AppTheme.PlayButton"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_mv_search"
+                android:layout_weight="1"
+                android:onClick="onClickSearchButton"
+                android:visibility="visible"
+                style="@style/AppTheme.SearchButton"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

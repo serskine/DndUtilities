@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Scroll">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:orientation="vertical">
+
+                    <!-- NAME LINE -->
+                    <EditText
+                        android:id="@+id/theName"
+                        style="@style/AppTheme.BigHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_name" />
+                </FlowLayout>
+
+                <!-- MONSTER TYPE, SUBTYPE AND ALIGNMENT LINE -->
+                <com.soupthatisthick.util.view.FlowLayout
+                    android:id="@+id/theTypeAndAlignGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <EditText
+                        android:id="@+id/theSize"
+                        style="@style/AppTheme.Weak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_size" />
+                    <EditText
+                        android:id="@+id/theType"
+                        style="@style/AppTheme.Weak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_type" />
+                    <EditText
+                        android:id="@+id/theSubtype"
+                        style="@style/AppTheme.Weak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_subtype" />
+                    <EditText
+                        android:id="@+id/theAlignment"
+                        style="@style/AppTheme.Weak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_alignment" />
+
+                </com.soupthatisthick.util.view.FlowLayout>
+
+                <!-- source information -->
+                <EditText
+                    android:id="@+id/theSource"
+                    style="@style/AppTheme.Weak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:hint="@string/enm_source" />
+
+
+                <!-- INSERT LINE BREAK HERE -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="false"
+                    android:scaleType="fitXY"
+                    android:scaleY="0.5"
+                    android:src="@drawable/ic_mv_linebreak" />
+
+                <!-- ARMOR CLASS LINE -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/theAc"
+                        style="@style/AppTheme.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_armor_class"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <!-- HIT POINTS LINE -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/theHp"
+                        style="@style/AppTheme.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_hit_points"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/theHd"
+                        style="@style/AppTheme.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_hd" />
+                </LinearLayout>
+
+                <!-- SAVES LINE -->
+                <com.soupthatisthick.util.view.FlowLayout
+                    android:id="@+id/theSavesGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <EditText
+                        android:id="@+id/theStrSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_str_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                    <EditText
+                        android:id="@+id/theDexSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_dex_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                    <EditText
+                        android:id="@+id/theConSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_con_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                    <EditText
+                        android:id="@+id/theIntSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_int_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                    <EditText
+                        android:id="@+id/theWisSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_wis_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                    <EditText
+                        android:id="@+id/theChaSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enm_cha_save"
+                        style="@style/AppTheme.Normal"
+                        />
+                </com.soupthatisthick.util.view.FlowLayout>
+
+                <!-- SKILLS LINE -->
+                <com.soupthatisthick.util.view.FlowLayout
+            android:id="@+id/theSkillsGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <EditText
+                android:id="@+id/theAcrobatics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_acrobatics"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theArcana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_arcana"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theAthletics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_athletics"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theDeception"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_deception"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_history"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theInsight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_insight"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theIntimidation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_intimidation"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theMedicine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_medicine"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theNature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_nature"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/thePerformance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_performance"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/thePerception"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_perception"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theReligion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_religion"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theSteath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_steath"
+                style="@style/AppTheme.Normal"
+                />
+            <EditText
+                android:id="@+id/theSurvival"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_survival"
+                style="@style/AppTheme.Normal"
+                />
+        </com.soupthatisthick.util.view.FlowLayout>
+
+            <!-- MOVEMENT LINE -->
+            <LinearLayout
+                android:id="@+id/theSpeedGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theSpeed"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_speed" />
+            </LinearLayout>
+
+            <!-- INSERT LINE BREAK HERE -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:scaleType="fitXY"
+                android:scaleY="0.5"
+                android:src="@drawable/ic_mv_linebreak" />
+
+            <!-- ABILITY LABELS LINE -->
+            <LinearLayout
+                android:id="@+id/theAbilityScoresGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- STR -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_str"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theStr"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theStrMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <!-- DEX -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_dex"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theDex"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theDexMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <!-- CON -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_con"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theCon"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theConMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <!-- INT -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_int"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theInt"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theIntMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <!-- WIS -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_wis"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theWis"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theWisMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <!-- CHA -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/mv_cha"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/theCha"
+                        style="@style/AppTheme.EditField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="@string/enm_ability_score"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/theChaMod"
+                        style="@style/AppTheme.Strong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- INSERT LINE BREAK HERE -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:scaleType="fitXY"
+                android:scaleY="0.5"
+                android:src="@drawable/ic_mv_linebreak" />
+
+            <!-- DAMAGE VULNERABILITIES LINE -->
+            <LinearLayout
+                android:id="@+id/theDmgVulnerabilityGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/theDmgVulnerability"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_damage_resistances" />
+            </LinearLayout>
+
+
+            <!-- DAMAGE RESISTANCES LINE -->
+            <LinearLayout
+                android:id="@+id/theDmgResistanceGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/theDmgResistance"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_damage_resistances" />
+            </LinearLayout>
+
+            <!-- DAMAGE IMMUNITIES LINE -->
+            <LinearLayout
+                android:id="@+id/theDmgImmunityGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theDmgImmunity"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_damage_immunities" />
+            </LinearLayout>
+
+            <!-- CONDITION IMMUNITIES LINE -->
+            <LinearLayout
+                android:id="@+id/theConditionImmunityGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theConditionImmunity"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_condition_immunities" />
+            </LinearLayout>
+
+            <!-- SENSES LINE -->
+            <LinearLayout
+                android:id="@+id/theSensesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theSenses"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_senses" />
+            </LinearLayout>
+
+            <!-- LANGUAGES LINE -->
+            <LinearLayout
+                android:id="@+id/theLanguagesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theLanguages"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_languages" />
+            </LinearLayout>
+
+            <!-- CHALLENGE LINE -->
+            <LinearLayout
+                android:id="@+id/theChallengeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/theCr"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_challenge" />
+
+                <EditText
+                    android:id="@+id/theXp"
+                    style="@style/AppTheme.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_xp"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- INSERT LINE BREAK HERE -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:scaleType="fitXY"
+                android:scaleY="0.5"
+                android:src="@drawable/ic_mv_linebreak" />
+
+
+            <com.soupthatisthick.util.view.HtmlEdit
+                android:id="@+id/theAbilities"
+                style="@style/AppTheme.EditMultiline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="enm_abilities" />
+
+            <LinearLayout
+                android:id="@+id/theActionsGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/theActionsLabel"
+                    style="@style/AppTheme.SmallHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mv_actions"
+
+                    />
+
+                <com.soupthatisthick.util.view.HtmlEdit
+                    android:id="@+id/theActions"
+                    style="@style/AppTheme.EditMultiline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_actions" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/theReactionsGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/theReactionsLabel"
+                    style="@style/AppTheme.SmallHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mv_actions"
+
+                    />
+
+                <com.soupthatisthick.util.view.HtmlEdit
+                    android:id="@+id/theReactions"
+                    style="@style/AppTheme.EditMultiline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_reactions" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/theLegendaryActionsGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/theLegendaryActionsLabel"
+                    style="@style/AppTheme.SmallHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mv_legendary_actions" />
+
+                <com.soupthatisthick.util.view.HtmlEdit
+                    android:id="@+id/theLegendary"
+                    style="@style/AppTheme.EditMultiline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enm_legendary_actions" />
+            </LinearLayout>
+
+            <com.soupthatisthick.util.view.HtmlEdit
+                android:id="@+id/theOther"
+                style="@style/AppTheme.EditMultiline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enm_other_details" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- buttons for saving and deleting -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/enm_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/enm_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/enm_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>
