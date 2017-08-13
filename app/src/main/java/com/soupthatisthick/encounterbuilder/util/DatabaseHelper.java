@@ -208,12 +208,12 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
         InputStream myInput =  new FileInputStream(inputPath);
 
         /*
-         * Open the empty db in interal storage as the output stream.
+         * Open the empty theDaoMaster in interal storage as the output stream.
          */
         OutputStream myOutput = new FileOutputStream(outputPath);
 
         /*
-         * Copy over the empty db in internal storage with the database in the
+         * Copy over the empty theDaoMaster in internal storage with the database in the
          * assets folder.
          */
         FileHelper.copyFile(myInput, myOutput);
@@ -237,10 +237,10 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
         // Open the database in the assets folder as the input stream.
         InputStream myInput = myContext.getAssets().open(DB_NAME);
 
-        // Open the empty db in external shared storage as the output stream.
+        // Open the empty theDaoMaster in external shared storage as the output stream.
         OutputStream myOutput = new FileOutputStream(outputPath);
 
-        // Copy over the empty db shared external storage with the database in the assets folder.
+        // Copy over the empty theDaoMaster shared external storage with the database in the assets folder.
         FileHelper.copyFile(myInput, myOutput);
 
         // Access the copied database so SQLiteHelper will cache it and mark it as created.
@@ -260,7 +260,7 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
         close();
 
         /*
-         * Open the empty db in interal storage as the output stream.
+         * Open the empty theDaoMaster in interal storage as the output stream.
          */
         Logger.info(" - opening target file " + DB_PATH);
         OutputStream myOutput = new FileOutputStream(DB_PATH);
@@ -272,7 +272,7 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
         InputStream myInput = myContext.getAssets().open(DB_NAME);
 
         /*
-         * Copy over the empty db in internal storage with the database in the
+         * Copy over the empty theDaoMaster in internal storage with the database in the
          * assets folder.
          */
         Logger.info(" - copying from " + DB_NAME + " => " + DB_PATH);

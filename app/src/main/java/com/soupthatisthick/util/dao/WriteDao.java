@@ -65,7 +65,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
         Cursor cursor = null;
         Record record = null;
 
-        Logger.debug("creating record in dao for table " + getTable() + " in db " + daoMaster.getDatabaseName());
+        Logger.debug("creating record in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
         try {
             SQLiteDatabase db = daoMaster.getWritableDatabase();
             record = createNewModel();
@@ -132,7 +132,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
     {
         Long id = getId(record);
         if (id==null) {
-            Logger.debug("updating record (" + id.toString() + ") in dao for table " + getTable() + " in db " + daoMaster.getDatabaseName());
+            Logger.debug("updating record (" + id.toString() + ") in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
             return false;
         } else {
             return update(id, record);
@@ -151,7 +151,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
         ContentValues contentValues = getContentValues(record);
         contentValues.put(getIdColumn(), theId);
 
-        Logger.debug("updating record (" + theId.toString() + ") in dao for table " + getTable() + " in db " + daoMaster.getDatabaseName());
+        Logger.debug("updating record (" + theId.toString() + ") in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
 
         String whereClause = "(" + getIdColumn() + "=?)";
         String[] args = new String[] { theId.toString() };
@@ -168,7 +168,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
     public boolean delete(@NonNull Long theId) {
         SQLiteDatabase db = daoMaster.getWritableDatabase();
 
-        Logger.debug("deleting record (" + theId.toString() + ") in dao for table " + getTable() + " in db " + daoMaster.getDatabaseName());
+        Logger.debug("deleting record (" + theId.toString() + ") in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
         String whereClause = "(" + getIdColumn() + "=?)";
         String[] args = new String[] { theId.toString() };
         int rowsAffected = db.delete(getTable(), whereClause, args);
@@ -180,7 +180,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
      */
     @Override
     public void clear() {
-        Logger.debug("clearing dao table " + getTable() + " in db " + daoMaster.getDatabaseName());
+        Logger.debug("clearing dao table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
         SQLiteDatabase db = daoMaster.getWritableDatabase();
         db.delete(getTable(), "1", null);
     }

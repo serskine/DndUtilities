@@ -29,9 +29,9 @@ public abstract class DaoViewListActivity<DataType> extends ViewListActivity<Dat
         super.onStop();
         Logger.debug("onStop()");
 
-        if (db != null) {
-            db.close();
-            db = null;
+        if (theDaoMaster != null) {
+            theDaoMaster.close();
+            theDaoMaster = null;
         }
     }
 
@@ -39,8 +39,8 @@ public abstract class DaoViewListActivity<DataType> extends ViewListActivity<Dat
     @Override
     protected void loadAllData() {
         try {
-            db = createDaoMaster(getBaseContext());
-            readDao = createReadDao(db);
+            theDaoMaster = createDaoMaster(getBaseContext());
+            readDao = createReadDao(theDaoMaster);
             Logger.info("Opened readDao for table " + readDao.getTable() + ".");
             readDao.logContents();
         } catch (Exception e) {

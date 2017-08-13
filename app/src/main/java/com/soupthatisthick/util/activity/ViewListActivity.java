@@ -29,7 +29,7 @@ public abstract class ViewListActivity<DataType> extends AppActivity {
     protected ListView theListView;
     protected EditText theSearchEdit;
     protected CustomListAdapter<DataType> theListAdapter;
-    protected DaoMaster db;
+    protected DaoMaster theDaoMaster;
 
     protected static final String KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT";
     protected static final int SHARED_PREF_MODE = 0;
