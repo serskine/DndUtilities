@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_itemlist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.soupthatisthick.encounterMap.activity.lookup.EditItemListActivity">
+
+    <!-- header information -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Scroll">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/el_header"
+            >
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/eil_name_label"
+                    style="@style/AppTheme.Strong"
+                    />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/eil_name_edit"
+                    style="@style/AppTheme.Normal"
+                    />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <!-- Individual session details -->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/session_list"
+        android:padding="15dp"
+        style="@style/AppTheme.Scroll">
+    </ListView>
+
+    <!--the controls -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TableRow>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_add_button"
+                android:onClick="onClickAddButton"
+                android:id="@+id/ml_add_button"
+                android:src="@drawable/ic_control_add"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_delete_button"
+                android:onClick="onClickDeleteButton"
+                android:id="@+id/ml_delete_button"
+                android:src="@drawable/ic_control_delete"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_clear_button"
+                android:onClick="onClickClearButton"
+                android:id="@+id/ml_clear_button"
+                android:src="@drawable/ic_control_clear"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_edit_button"
+                android:onClick="onClickEditButton"
+                android:id="@+id/ml_edit_button"
+                android:src="@drawable/ic_control_edit"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_edit_button"
+                android:onClick="onClickSaveMastButton"
+                android:id="@+id/ml_save_button"
+                android:src="@drawable/ic_control_save"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>
+
