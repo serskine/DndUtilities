@@ -88,7 +88,7 @@ public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity
 
         super.onPause();
 
-        DaoMaster.close(db);
+        DaoMaster.close(theDaoMaster);
     }
 
 
@@ -97,15 +97,15 @@ public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity
     protected void loadAllData() {
         Logger.debug("loadAllData()");
         try {
-            db = createDaoMaster(getBaseContext());
-            detailDao = createDetailDao(db);
+            theDaoMaster = createDaoMaster(getBaseContext());
+            detailDao = createDetailDao(theDaoMaster);
             if (detailDao!=null) {
                 Logger.info("Opened write dao for table " + detailDao.getTable() + ".");
             } else {
                 Logger.warning("There is no detail dao!");
             }
 
-            mastDao = createMastDao(db);
+            mastDao = createMastDao(theDaoMaster);
             if (mastDao!=null) {
                 Logger.info("Opened write dao for table " + mastDao.getTable() + ".");
             } else {
