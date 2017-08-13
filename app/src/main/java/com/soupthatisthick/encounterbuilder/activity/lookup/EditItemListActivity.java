@@ -1,8 +1,10 @@
 package com.soupthatisthick.encounterbuilder.activity.lookup;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemAdapter;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
@@ -11,6 +13,7 @@ import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Item;
 import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomListAdapter;
+import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.activity.DaoEditListActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
@@ -24,6 +27,34 @@ import soupthatisthick.encounterapp.R;
  */
 
 public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
+
+    ItemList mastModel = new ItemList();
+    UiWatcher uiWatcher = new UiWatcher() {
+        @Override
+        protected void onUiUpdate() {
+            updateUi();
+        }
+    };
+
+    private EditText nameEdit;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        nameEdit = (EditText) findViewById(R.id.eil_name_edit);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uiWatcher.listenTo(nameEdit);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiWatcher.ignore(nameEdit);
+    }
 
     @Override
     protected DaoMaster createDaoMaster(Context context) throws Exception {
@@ -70,6 +101,7 @@ public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
         return new ExItemAdapter(layoutInflater, theDaoMaster);
     }
 
+
     /**
      * This will save the information about the list of information.
      *
@@ -77,6 +109,11 @@ public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
      */
     @Override
     protected void onClickSaveMastButton(View view) {
-        Logger.debug("TODO: SAVE THE NEW LIST");
+
+        getMastDao().update(mastModel);
+    }
+
+    protected final void updateUi() {
+        mastModel.setName(nameEdit.getText().toString());
     }
 }
