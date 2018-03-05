@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EncounterBuilder.iml" filepath="$PROJECT_DIR$/EncounterBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DndUtilities.iml" filepath="$PROJECT_DIR$/DndUtilities.iml" />
+      <module fileurl="file://C:\Users\stuart.erskine\IdeaProjects\DndUtilities\EncounterBuilder.iml" filepath="C:\Users\stuart.erskine\IdeaProjects\DndUtilities\EncounterBuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\stuart.erskine\IdeaProjects\DndUtilities\app\app.iml" filepath="C:\Users\stuart.erskine\IdeaProjects\DndUtilities\app\app.iml" />
     </modules>
   </component>
 </project>

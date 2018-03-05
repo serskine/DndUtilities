@@ -10,8 +10,8 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+fieldId/nameText"
-        android:layout_toEndOf="@+fieldId/typeText"
+        android:layout_below="@+id/nameText"
+        android:layout_toEndOf="@+id/typeText"
         android:id="@+id/pageText"
         android:paddingStart="5dp" />
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/crText"
-        android:layout_below="@+fieldId/nameText"
+        android:layout_below="@+id/nameText"
         android:layout_alignParentEnd="true"
         android:paddingEnd="5dp" />
 
@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/typeText"
-        android:layout_alignBaseline="@+fieldId/pageText"
-        android:layout_alignBottom="@+fieldId/pageText"
-        android:layout_alignStart="@+fieldId/nameText"
+        android:layout_alignBaseline="@+id/pageText"
+        android:layout_alignBottom="@+id/pageText"
+        android:layout_alignStart="@+id/nameText"
         android:paddingStart="5dp" />
 
     <TextView
