@@ -153,11 +153,6 @@ public class SessionDao extends WriteDao<Session> {
         columns.add(COL_DM_DCI);
         columns.add(COL_DM_NAME);
 
-        columns.add(COL_XP);
-        columns.add(COL_GOLD);
-        columns.add(COL_DOWNTIME);
-        columns.add(COL_RENOWN);
-        columns.add(COL_MAGIC_ITEMS);
         columns.add(COL_NOTES);
 
         return columns;

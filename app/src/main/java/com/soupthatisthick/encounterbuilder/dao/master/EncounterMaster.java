@@ -77,10 +77,15 @@ public class EncounterMaster extends DaoMaster {
             String tag;
 
             switch(currentVersion) {
+                case 1:
+                    is = res.openRawResource(R.raw.encounters_migrate_1_to_2);
+                    tag = "encounters_migrate_1_to_2";
+                    break;
                 default:
                     is = null;
-                    tag = "unknown";
+                    tag = "encounters_db";
                     break;
+
             }
 
 
