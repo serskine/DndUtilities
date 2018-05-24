@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DndUtilities.iml" filepath="$PROJECT_DIR$/DndUtilities.iml" />
       <module fileurl="file://$PROJECT_DIR$/EncounterBuilder.iml" filepath="$PROJECT_DIR$/EncounterBuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
