@@ -5,7 +5,7 @@
                 <item name="android:fontFamily">sans-serif</item>
         </style>
         <style name="AppTheme.Header" parent="AppTheme">
-                <item name="android:fontFamily">sans-serif-smallcaps</item>
+                <item name="android:fontFamily">@font/mr_eaves_small_caps</item>
         </style>
 
         <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
