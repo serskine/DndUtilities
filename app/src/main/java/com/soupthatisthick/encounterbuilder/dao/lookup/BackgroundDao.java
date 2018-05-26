@@ -1,4 +1,4 @@
-package com.soupthatisthick.encounterbuilder.dao.master;
+package com.soupthatisthick.encounterbuilder.dao.lookup;
 
 import android.content.ContentValues;
 import android.database.Cursor;

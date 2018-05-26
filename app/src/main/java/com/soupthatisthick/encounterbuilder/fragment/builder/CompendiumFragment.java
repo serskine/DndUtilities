@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.ToggleButton;
 
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
-import com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
@@ -39,7 +38,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.NotesDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.SpellDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.WeaponDao;
-import com.soupthatisthick.encounterbuilder.dao.master.BackgroundDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;

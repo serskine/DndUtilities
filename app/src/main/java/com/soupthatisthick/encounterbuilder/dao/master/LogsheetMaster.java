@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import com.soupthatisthick.util.FileHelper;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.Logger;
@@ -29,6 +31,7 @@ public class LogsheetMaster extends DaoMaster {
 
     //private String ASSET_PATH = mycontext.getApplicationContext().getPackageName()+"/databases/";
 
+    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public LogsheetMaster(Context context) throws IOException {
 
         super(
@@ -87,6 +90,10 @@ public class LogsheetMaster extends DaoMaster {
             case 2:
                 is = res.openRawResource(R.raw.logsheet_migrate_2_to_3);
                 tag = "logsheet_migrate_1_to_2";
+                break;
+            case 3:
+                is = res.openRawResource(R.raw.logsheet_migrate_3_to_4);
+                tag = "logsheet_migrate_2_to_3";
                 break;
             default:
                 is = null;
