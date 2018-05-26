@@ -11,7 +11,7 @@ import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
-import org.greenrobot.greendao.annotation.Entity;
+//import org.greenrobot.greendao.annotation.Entity;
 
 import java.io.IOException;
 import java.util.ArrayList;

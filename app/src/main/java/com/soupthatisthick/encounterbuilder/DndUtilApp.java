@@ -1,7 +1,7 @@
 package com.soupthatisthick.encounterbuilder;
 
-import android.app.Application;
 import android.support.annotation.CallSuper;
+import android.support.multidex.MultiDexApplication;
 
 import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
 
@@ -10,7 +10,7 @@ import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class DndUtilApp extends Application {
+public class DndUtilApp extends MultiDexApplication {
 
     private static DndUtilApp INSTANCE;
 

@@ -1,24 +1,24 @@
 package com.soupthatisthick.encounterbuilder.model.builder;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
 
 /**
  * Created by Owner on 6/20/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity
+// @Entity
 public class EncounterAlly {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "encounterId")
+    // @Property(nameInDb = "encounterId")
     private Long encounterId;
 
-    @Property(nameInDb = "playerId")
+    // @Property(nameInDb = "playerId")
     private Long playerId;
 
     public Long getId() {
