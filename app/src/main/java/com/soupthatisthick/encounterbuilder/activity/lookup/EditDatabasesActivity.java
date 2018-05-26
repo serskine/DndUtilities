@@ -72,9 +72,5 @@ public class EditDatabasesActivity extends AppActivity {
         startActivity(intent);
     }
 
-    public void onClickEditLogsheets(View view) {
-        Intent intent = new Intent(this, EditLogsheetsListActivity.class);
-        startActivity(intent);
-    }
 
 }

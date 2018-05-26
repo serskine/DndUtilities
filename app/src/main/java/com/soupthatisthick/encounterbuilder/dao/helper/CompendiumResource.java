@@ -237,12 +237,20 @@ public class CompendiumResource {
 
     }
 
-    private void initDao(int titleResourceId, ReadDao<? extends Object> dao)
+    private void initDao(final int titleResourceId, final ReadDao<? extends Object> dao)
     {
-        String name = context.getResources().getString(titleResourceId);
-        Logger.info("Opened dao on table " + dao.getTable() + ".");
-        dao.logSchema();
-        usableDaos.put(name, dao);
+        AsyncTask<Void,Void,Void> loadDaoTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String name = context.getResources().getString(titleResourceId);
+                Logger.info("Opened dao on table " + dao.getTable() + ".");
+                dao.logSchema();
+                usableDaos.put(name, dao);
+
+                return null;
+            }
+        };
+        loadDaoTask.execute();
     }
 
     public final List<Object> searchForResults(String searchText) throws Exception {
@@ -319,5 +327,6 @@ public class CompendiumResource {
     {
         Collections.sort(theList, new SortByTitleComparator());
     }
+
 
 }

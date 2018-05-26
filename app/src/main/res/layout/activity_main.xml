@@ -22,6 +22,18 @@
             android:visibility="visible"
             />
 
+        <Button
+            android:text="@string/main_button_edit_logsheets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editLogsheetsButton"
+            android:layout_weight="1"
+            android:onClick="onClickEditLogsheets"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
 
         <Button
             android:text="@string/main_button_measure_encounter"
@@ -65,21 +77,6 @@
             android:textSize="@dimen/text_big"
             android:visibility="visible"
             />
-
-        <Button
-            android:text="@string/main_button_view_logs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewLogsButton"
-            android:layout_weight="1"
-            android:onClick="onClickViewLogsButton"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            android:visibility="visible"
-
-            />
-
 
         <Button
             android:text="@string/main_button_settings"

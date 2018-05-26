@@ -19,9 +19,6 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         />
     <uses-permission
-        android:name="android.permission.READ_LOGS"
-        />
-    <uses-permission
         android:name="android.permission.INTERNET"
         />
     <uses-feature
@@ -107,9 +104,8 @@
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetsListActivity"
             android:label="@string/title_activity_manage_player_characters"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" /><![CDATA[
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
         />
-        ]]>
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity"
             android:label="@string/title_activity_compendium"
@@ -212,11 +208,6 @@
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.LootTableActivity"
             android:label="@string/title_activity_roll_for_loot"
-            android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            />
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.ViewLogsActivity"
-            android:label="View Logs Activity"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
             />

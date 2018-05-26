@@ -38,17 +38,6 @@ public class MainActivity extends AppActivity {
 
     public void onClickTestButton(View view)
     {
-//        Intent intent = new Intent(this, EditTableActivity.class);
-//
-//        // Set up to edit a database table using content values
-//        intent.putExtra(EditTableActivity.KEY_PRIMARY_KEY, "id");
-//        intent.putExtra(EditTableActivity.KEY_TABLE, "TEST_TABLE");
-//        intent.putExtra(EditTableActivity.KEY_PATH, DaoMaster.DATABASE_FILE_PATH);
-//        intent.putExtra(EditTableActivity.KEY_FILENAME, EncounterMaster.DB_FILE);
-//        intent.putExtra(EditTableActivity.KEY_VERSION, EncounterMaster.VERSION);
-//
-//        startActivity(intent);
-
         EditTableActivity.launch(
             this,
             DaoMaster.DATABASE_FILE_PATH,
@@ -74,13 +63,6 @@ public class MainActivity extends AppActivity {
     public void onClickRollForLootButton(View view)
     {
         Intent intent = new Intent(this, LootTableActivity.class);
-        startActivity(intent);
-    }
-
-
-    public void onClickViewLogsButton(View view)
-    {
-        Intent intent = new Intent(this, ViewLogsActivity.class);
         startActivity(intent);
     }
 
@@ -120,20 +102,9 @@ public class MainActivity extends AppActivity {
         startActivity(intent);
     }
 
-
-    public void onClickEditMap(View view) {
-        Intent intent = new Intent(this, EditMapActivity.class);
-        startActivity(intent);
-    }
-
     public void onClickEditCustomMonsters(View view)
     {
         Intent intent = new Intent(this, EditMonsterManualActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClickViewMonsters(View view) {
-        Intent intent = new Intent(this, ExViewMonsterManualActivity.class);
         startActivity(intent);
     }
 
@@ -147,9 +118,8 @@ public class MainActivity extends AppActivity {
         startActivity(intent);
     }
 
-    public void onClickManageCharactersButton(View view) {
+    public void onClickEditLogsheets(View view) {
         Intent intent = new Intent(this, EditLogsheetsListActivity.class);
         startActivity(intent);
     }
-
 }
