@@ -2,33 +2,33 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/9/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-@Entity(nameInDb = "ROLL_TABLE")
+// @Entity(nameInDb = "ROLL_TABLE")
 public class RollTable extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "dieQty")
+    // @Property(nameInDb = "dieQty")
     private int dieCount;
 
-    @Property(nameInDb = "dieSize")
+    // @Property(nameInDb = "dieSize")
     private int dieSize;
 
-    @Generated(hash = 1182137725)
+    // @Generated(hash = 1182137725)
     public RollTable(Long id, String name, int dieCount, int dieSize) {
         this.id = id;
         this.name = name;
@@ -36,7 +36,7 @@ public class RollTable extends DaoModel {
         this.dieSize = dieSize;
     }
 
-    @Generated(hash = 820797020)
+    // @Generated(hash = 820797020)
     public RollTable() {
     }
 

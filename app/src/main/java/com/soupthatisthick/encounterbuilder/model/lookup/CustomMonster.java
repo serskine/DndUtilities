@@ -4,108 +4,108 @@ import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 1/26/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "CUSTOM_MONSTERS")
+// @Entity(nameInDb = "CUSTOM_MONSTERS")
 public class CustomMonster extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "type")
+    // @Property(nameInDb = "type")
     private String type;
 
-    @Property(nameInDb = "alignment")
+    // @Property(nameInDb = "alignment")
     private String alignment;
 
-    @Property(nameInDb = "ac")
+    // @Property(nameInDb = "ac")
     private int ac;
 
-    @Property(nameInDb = "acType")
+    // @Property(nameInDb = "acType")
     private String acType;
 
-    @Property(nameInDb = "hp")
+    // @Property(nameInDb = "hp")
     private String hp;
 
-    @Property(nameInDb = "hd")
+    // @Property(nameInDb = "hd")
     private String hd;
 
-    @Property(nameInDb = "speed")
+    // @Property(nameInDb = "speed")
     private String speed;
 
-    @Property(nameInDb = "str")
+    // @Property(nameInDb = "str")
     private int strength;
 
-    @Property(nameInDb = "dex")
+    // @Property(nameInDb = "dex")
     private int dexterity;
 
-    @Property(nameInDb = "con")
+    // @Property(nameInDb = "con")
     private int constitution;
 
-    @Property(nameInDb = "int")
+    // @Property(nameInDb = "int")
     private int intelligence;
 
-    @Property(nameInDb = "wis")
+    // @Property(nameInDb = "wis")
     private int wisdom;
 
-    @Property(nameInDb = "cha")
+    // @Property(nameInDb = "cha")
     private int charisma;
 
-    @Property(nameInDb = "saves")
+    // @Property(nameInDb = "saves")
     private String saves;
 
-    @Property(nameInDb = "skills")
+    // @Property(nameInDb = "skills")
     private String skills;
 
-    @Property(nameInDb = "dmgResistance")
+    // @Property(nameInDb = "dmgResistance")
     private String dmgResistance;
 
-    @Property(nameInDb = "dmgImmunity")
+    // @Property(nameInDb = "dmgImmunity")
     private String dmgImmunity;
 
-    @Property(nameInDb = "conditionImmunity")
+    // @Property(nameInDb = "conditionImmunity")
     private String conditionImmunity;
 
-    @Property(nameInDb = "senses")
+    // @Property(nameInDb = "senses")
     private String senses;
 
-    @Property(nameInDb = "languages")
+    // @Property(nameInDb = "languages")
     private String languages;
 
-    @Property(nameInDb = "cr")
+    // @Property(nameInDb = "cr")
     private String cr;
 
-    @Property(nameInDb = "xp")
+    // @Property(nameInDb = "xp")
     private int xp;
 
-    @Property(nameInDb = "abilities")
+    // @Property(nameInDb = "abilities")
     private String abilities;
 
-    @Property(nameInDb = "actions")
+    // @Property(nameInDb = "actions")
     private String actions;
 
-    @Property(nameInDb = "legendary")
+    // @Property(nameInDb = "legendary")
     private String legendaryActions;
 
-    @Property(nameInDb = "other")
+    // @Property(nameInDb = "other")
     private String other;
 
-    @Property(nameInDb = "source")
+    // @Property(nameInDb = "source")
     private String source;
 
 
-    @Generated(hash = 1458489455)
+    // @Generated(hash = 1458489455)
     public CustomMonster(Long id, String name, String type, String alignment,
             int ac, String acType, String hp, String hd, String speed, int strength,
             int dexterity, int constitution, int intelligence, int wisdom,
@@ -144,7 +144,7 @@ public class CustomMonster extends DaoModel {
         this.source = source;
     }
 
-    @Generated(hash = 759376027)
+    // @Generated(hash = 759376027)
     public CustomMonster() {
     }
 
@@ -381,7 +381,7 @@ public class CustomMonster extends DaoModel {
         this.source = source;
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         return String.format("%s (%s %d xp)", getName(), getCr(), getXp());

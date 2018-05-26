@@ -2,46 +2,46 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "ARMOR")
+// // @Entity(nameInDb = "ARMOR")
 public class Armor extends DaoModel {
 
-    @Id
+    // // @Id
     private Long id;
 
-    @Property(nameInDb = "id")
+    // // @Property(nameInDb = "id")
     private String name;
 
-    @Property(nameInDb = "cost")
+    // // @Property(nameInDb = "cost")
     private String cost;
 
-    @Property(nameInDb = "ac")
+    // // @Property(nameInDb = "ac")
     private String ac;
 
-    @Property(nameInDb = "strength")
+    // // @Property(nameInDb = "strength")
     private String strengthRequirement;
 
-    @Property(nameInDb = "stealth")
+    // // @Property(nameInDb = "stealth")
     private String stealthEffect;
 
-    @Property(nameInDb = "weight")
+    // // @Property(nameInDb = "weight")
     private String weight;
 
-    @Property(nameInDb = "type")
+    // // @Property(nameInDb = "type")
     private String type;
 
-    @Property(nameInDb = "description")
+    // // @Property(nameInDb = "description")
     private String description;
 
-    @Generated(hash = 1795786874)
+    // // @Generated(hash = 1795786874)
     public Armor(Long id, String name, String cost, String ac,
             String strengthRequirement, String stealthEffect, String weight,
             String type, String description) {
@@ -56,7 +56,7 @@ public class Armor extends DaoModel {
         this.description = description;
     }
 
-    @Generated(hash = 560524666)
+    // // @Generated(hash = 560524666)
     public Armor() {
     }
 

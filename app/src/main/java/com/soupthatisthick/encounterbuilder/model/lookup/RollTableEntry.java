@@ -2,56 +2,56 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/9/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "ROLL_TABLE_ENTRY")
+// @Entity(nameInDb = "ROLL_TABLE_ENTRY")
 public class RollTableEntry extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "entryId")
+    // @Id
+    // @Property(nameInDb = "entryId")
     private Long id;
 
-    @Property(nameInDb = "tableId")
+    // @Property(nameInDb = "tableId")
     private Long tableId;
 
-    @Property(nameInDb = "rerollTableId")
+    // @Property(nameInDb = "rerollTableId")
     private Long reRollTableId;
 
-    @Property(nameInDb = "minRoll")
+    // @Property(nameInDb = "minRoll")
     private Integer minRoll;
 
-    @Property(nameInDb = "maxRoll")
+    // @Property(nameInDb = "maxRoll")
     private Integer maxRoll;
 
-    @Property(nameInDb = "dieQty")
+    // @Property(nameInDb = "dieQty")
     private Integer dieQty;
 
-    @Property(nameInDb = "dieSize")
+    // @Property(nameInDb = "dieSize")
     private Integer dieSize;
 
-    @Property(nameInDb = "rollMul")
+    // @Property(nameInDb = "rollMul")
     private Integer rollMul;
 
-    @Property(nameInDb = "rollAvg")
+    // @Property(nameInDb = "rollAvg")
     private Integer rollAvg;
 
-    @Property(nameInDb = "result")
+    // @Property(nameInDb = "result")
     private String result;
 
-    @Property(nameInDb = "unit")
+    // @Property(nameInDb = "unit")
     private String unit;
 
-    @Property(nameInDb = "unitGpValue")
+    // @Property(nameInDb = "unitGpValue")
     private Double unitGpValue;
 
-    @Generated(hash = 132354382)
+    // @Generated(hash = 132354382)
     public RollTableEntry(Long id, Long tableId, Long reRollTableId, Integer minRoll, Integer maxRoll,
             Integer dieQty, Integer dieSize, Integer rollMul, Integer rollAvg, String result, String unit,
             Double unitGpValue) {
@@ -69,7 +69,7 @@ public class RollTableEntry extends DaoModel {
         this.unitGpValue = unitGpValue;
     }
 
-    @Generated(hash = 466988778)
+    // @Generated(hash = 466988778)
     public RollTableEntry() {
     }
 
@@ -153,7 +153,7 @@ public class RollTableEntry extends DaoModel {
         this.result = result;
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         String rollText =   (getMinRoll()==getMaxRoll())

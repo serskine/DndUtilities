@@ -5,181 +5,181 @@ import android.support.annotation.Nullable;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.util.Logger;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 3/13/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "STANDARD_MONSTERS")
+// @Entity(nameInDb = "STANDARD_MONSTERS")
 public class StandardMonster extends DaoModel {
 
     //
     // The variables
     //
-	@Id
-	@Property(nameInDb = "id")
+	// @Id
+	// @Property(nameInDb = "id")
     private Long id;
 
 
-	@Property(nameInDb = "name")
+	// @Property(nameInDb = "name")
 	private String name;
 
-	@Property(nameInDb = "size")
+	// @Property(nameInDb = "size")
 	private String size;
 
-	@Property(nameInDb = "type")
+	// @Property(nameInDb = "type")
 	private String type;
 
-	@Property(nameInDb = "subtype")
+	// @Property(nameInDb = "subtype")
 	private String subType;
 
-	@Property(nameInDb = "alignment")
+	// @Property(nameInDb = "alignment")
 	private String alignment;
 
-	@Property(nameInDb = "armor_class")
+	// @Property(nameInDb = "armor_class")
 	private String armorClass;
 
-	@Property(nameInDb = "hit_points")
+	// @Property(nameInDb = "hit_points")
 	private String hitPoints;
 
-	@Property(nameInDb = "hit_dice")
+	// @Property(nameInDb = "hit_dice")
 	private String hitDice;
 
-	@Property(nameInDb = "speed")
+	// @Property(nameInDb = "speed")
 	private String speed;
 
 
-	@Property(nameInDb = "strength")
+	// @Property(nameInDb = "strength")
 	private int strength;
 
-	@Property(nameInDb = "dexterity")
+	// @Property(nameInDb = "dexterity")
 	private int dexterity;
 
-	@Property(nameInDb = "constitution")
+	// @Property(nameInDb = "constitution")
 	private int constitution;
 
-	@Property(nameInDb = "intelligence")
+	// @Property(nameInDb = "intelligence")
 	private int intelligence;
 
-	@Property(nameInDb = "wisdom")
+	// @Property(nameInDb = "wisdom")
 	private int wisdom;
 
-	@Property(nameInDb = "charisma")
+	// @Property(nameInDb = "charisma")
 	private int charisma;
 
 
-	@Property(nameInDb = "strength_save")
+	// @Property(nameInDb = "strength_save")
 	private Integer strengthSave;
 
-	@Property(nameInDb = "dexterity_save")
+	// @Property(nameInDb = "dexterity_save")
 	private Integer dexteritySave;
 
-	@Property(nameInDb = "constitution_save")
+	// @Property(nameInDb = "constitution_save")
 	private Integer constitutionSave;
 
-	@Property(nameInDb = "intelligence_save")
+	// @Property(nameInDb = "intelligence_save")
 	private Integer intelligenceSave;
 
-	@Property(nameInDb = "wisdom_save")
+	// @Property(nameInDb = "wisdom_save")
 	private Integer wisdomSave;
 
-	@Property(nameInDb = "charisma_save")
+	// @Property(nameInDb = "charisma_save")
 	private Integer charismaSave;
 
 
-	@Property(nameInDb = "acrobatics")
+	// @Property(nameInDb = "acrobatics")
 	private Integer acrobatics;
 
-	@Property(nameInDb = "arcana")
+	// @Property(nameInDb = "arcana")
 	private Integer arcana;
 
-	@Property(nameInDb = "athletics")
+	// @Property(nameInDb = "athletics")
 	private Integer athletics;
 
-	@Property(nameInDb = "deception")
+	// @Property(nameInDb = "deception")
 	private Integer deception;
 
-	@Property(nameInDb = "history")
+	// @Property(nameInDb = "history")
 	private Integer history;
 
-	@Property(nameInDb = "insight")
+	// @Property(nameInDb = "insight")
 	private Integer insight;
 
-	@Property(nameInDb = "investigation")
+	// @Property(nameInDb = "investigation")
 	private Integer investigation;
 
-	@Property(nameInDb = "intimidation")
+	// @Property(nameInDb = "intimidation")
 	private Integer intimidation;
 
-	@Property(nameInDb = "medicine")
+	// @Property(nameInDb = "medicine")
 	private Integer medicine;
 
-	@Property(nameInDb = "nature")
+	// @Property(nameInDb = "nature")
 	private Integer nature;
 
-	@Property(nameInDb = "perception")
+	// @Property(nameInDb = "perception")
 	private Integer perception;
 
-	@Property(nameInDb = "performance")
+	// @Property(nameInDb = "performance")
 	private Integer performance;
 
-	@Property(nameInDb = "persuasion")
+	// @Property(nameInDb = "persuasion")
 	private Integer persuasion;
 
-	@Property(nameInDb = "religion")
+	// @Property(nameInDb = "religion")
 	private Integer religion;
 
-	@Property(nameInDb = "stealth")
+	// @Property(nameInDb = "stealth")
 	private Integer stealth;
 
-	@Property(nameInDb = "survival")
+	// @Property(nameInDb = "survival")
 	private Integer survival;
 
 
-	@Property(nameInDb = "damage_vulnerabilities")
+	// @Property(nameInDb = "damage_vulnerabilities")
 	private String damageVulnerabilities;
 
-	@Property(nameInDb = "damage_resistances")
+	// @Property(nameInDb = "damage_resistances")
 	private String damageResistances;
 
-	@Property(nameInDb = "damage_immunities")
+	// @Property(nameInDb = "damage_immunities")
 	private String damageImmunities;
 
-	@Property(nameInDb = "condition_immunities")
+	// @Property(nameInDb = "condition_immunities")
 	private String conditionImmunities;
 
 
-	@Property(nameInDb = "senses")
+	// @Property(nameInDb = "senses")
 	private String senses;
 
-	@Property(nameInDb = "languages")
+	// @Property(nameInDb = "languages")
 	private String languages;
 
-	@Property(nameInDb = "challenge_rating")
+	// @Property(nameInDb = "challenge_rating")
 	private String challengeRating;
 
 
-	@Property(nameInDb = "special_abilities")
+	// @Property(nameInDb = "special_abilities")
 	private String specialAbilities;
 
-	@Property(nameInDb = "actions")
+	// @Property(nameInDb = "actions")
 	private String actions;
 
-	@Property(nameInDb = "legendary_actions")
+	// @Property(nameInDb = "legendary_actions")
 	private String legendaryActions;
 
-	@Property(nameInDb = "reactions")
+	// @Property(nameInDb = "reactions")
 	private String reactions;
 
 
-	@Property(nameInDb = "source")
+	// @Property(nameInDb = "source")
 	private String source;
 
-	@Generated(hash = 1262641813)
+	// @Generated(hash = 1262641813)
 	public StandardMonster(Long id, String name, String size, String type,
 		String subType, String alignment, String armorClass, String hitPoints,
 		String hitDice, String speed, Integer strength, Integer dexterity, Integer constitution,
@@ -245,7 +245,7 @@ public class StandardMonster extends DaoModel {
 		this.source = source;
 	}
 
-	@Generated(hash = 2059983092)
+	// @Generated(hash = 2059983092)
 	public StandardMonster() {
 	}
 
@@ -292,9 +292,9 @@ public class StandardMonster extends DaoModel {
 
 	/**
 	 * This will return the provided stat unless it is null. Then it will provide the provided ability modifier
-	 * @param skillOrSave
-	 * @param modifier
-	 * @return
+	 * // @param skillOrSave
+	 * // @param modifier
+	 * // @return
 	 */
 	private static final int getBonus(@Nullable Integer skillOrSave, int modifier) {
 		if (skillOrSave==null) {

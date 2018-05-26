@@ -2,38 +2,38 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "MOUNTS")
+// @Entity(nameInDb = "MOUNTS")
 public class Mount extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "cost")
+    // @Property(nameInDb = "cost")
     private String cost;
 
-    @Property(nameInDb = "speed")
+    // @Property(nameInDb = "speed")
     private String speed;
 
-    @Property(nameInDb = "carry")
+    // @Property(nameInDb = "carry")
     private String carry;
 
-    @Property(nameInDb = "description")
+    // @Property(nameInDb = "description")
     private String description;
 
-    @Generated(hash = 920890881)
+    // @Generated(hash = 920890881)
     public Mount(Long id, String name, String cost, String speed, String carry,
             String description) {
         this.id = id;
@@ -44,7 +44,7 @@ public class Mount extends DaoModel {
         this.description = description;
     }
 
-    @Generated(hash = 2014362176)
+    // @Generated(hash = 2014362176)
     public Mount() {
     }
 

@@ -2,42 +2,42 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 2/2/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-@Entity(nameInDb = "MAGIC_ITEMS")
+// @Entity(nameInDb = "MAGIC_ITEMS")
 public class MagicItem extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "type")
+    // @Property(nameInDb = "type")
     private String type;
 
-    @Property(nameInDb = "rarity")
+    // @Property(nameInDb = "rarity")
     private String rarity;
 
-    @Property(nameInDb = "attunement")
+    // @Property(nameInDb = "attunement")
     private String attunement;
 
-    @Property(nameInDb = "location")
+    // @Property(nameInDb = "location")
     private String location;
 
-    @Property(nameInDb = "description")
+    // @Property(nameInDb = "description")
     private String description;
 
-    @Generated(hash = 547490682)
+    // @Generated(hash = 547490682)
     public MagicItem(Long id, String name, String type, String rarity, String attunement, String location, String description) {
         this.id = id;
         this.name = name;
@@ -48,7 +48,7 @@ public class MagicItem extends DaoModel {
         this.description = description;
     }
 
-    @Generated(hash = 22852346)
+    // @Generated(hash = 22852346)
     public MagicItem() {
     }
 
@@ -108,7 +108,7 @@ public class MagicItem extends DaoModel {
         this.id = id;
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         return "magicItem[" + getId() + "][" + getName() + "][" + getType() + "][" + getRarity() + "][" + getAttunement() + "]";

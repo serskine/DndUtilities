@@ -2,50 +2,50 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "LEVEL_DETAILS")
+// @Entity(nameInDb = "LEVEL_DETAILS")
 public class Level extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "xp")
+    // @Property(nameInDb = "xp")
     private Integer xp;
 
-    @Property(nameInDb = "level")
+    // @Property(nameInDb = "level")
     private Integer level;
 
-    @Property(nameInDb = "proficiency")
+    // @Property(nameInDb = "proficiency")
     private Integer proficiency;
 
-    @Property(nameInDb = "tier")
+    // @Property(nameInDb = "tier")
     private Integer tier;
 
-    @Property(nameInDb = "easy")
+    // @Property(nameInDb = "easy")
     private Integer easy;
 
-    @Property(nameInDb = "normal")
+    // @Property(nameInDb = "normal")
     private Integer normal;
 
-    @Property(nameInDb = "hard")
+    // @Property(nameInDb = "hard")
     private Integer hard;
 
-    @Property(nameInDb = "deadly")
+    // @Property(nameInDb = "deadly")
     private Integer deadly;
 
-    @Generated(hash = 721781773)
+    // @Generated(hash = 721781773)
     public Level(Long id, String name, Integer xp, Integer level,
             Integer proficiency, Integer tier, Integer easy, Integer normal,
             Integer hard, Integer deadly) {
@@ -61,7 +61,7 @@ public class Level extends DaoModel {
         this.deadly = deadly;
     }
 
-    @Generated(hash = 723561372)
+    // @Generated(hash = 723561372)
     public Level() {
     }
 
@@ -145,7 +145,7 @@ public class Level extends DaoModel {
         this.name = name;
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         return String.format("%s (%d xp)", getName(), getXp());

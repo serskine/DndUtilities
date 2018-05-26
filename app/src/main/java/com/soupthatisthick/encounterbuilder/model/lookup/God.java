@@ -2,41 +2,41 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "GODS")
+// @Entity(nameInDb = "GODS")
 public class God extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "alignment")
+    // @Property(nameInDb = "alignment")
     private String alignment;
 
-    @Property(nameInDb = "domains")
+    // @Property(nameInDb = "domains")
     private String domains;
 
-    @Property(nameInDb = "symbol")
+    // @Property(nameInDb = "symbol")
     private String symbol;
 
-    @Property(nameInDb = "source")
+    // @Property(nameInDb = "source")
     private String source;
 
-    @Property(nameInDb = "notes")
+    // @Property(nameInDb = "notes")
     private String notes;
 
-    @Generated(hash = 866637231)
+    // @Generated(hash = 866637231)
     public God(Long id, String name, String alignment, String domains,
             String symbol, String source, String notes) {
         this.id = id;
@@ -48,7 +48,7 @@ public class God extends DaoModel {
         this.notes = notes;
     }
 
-    @Generated(hash = 691480775)
+    // @Generated(hash = 691480775)
     public God() {
     }
 

@@ -2,32 +2,32 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "FEATS")
+// @Entity(nameInDb = "FEATS")
 public class Feat extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "prerequisite")
+    // @Property(nameInDb = "prerequisite")
     private String prerequisite;
 
-    @Property(nameInDb = "description")
+    // @Property(nameInDb = "description")
     private String description;
 
-    @Generated(hash = 57394742)
+    // @Generated(hash = 57394742)
     public Feat(Long id, String name, String prerequisite, String description) {
         this.id = id;
         this.name = name;
@@ -35,7 +35,7 @@ public class Feat extends DaoModel {
         this.description = description;
     }
 
-    @Generated(hash = 1953217192)
+    // @Generated(hash = 1953217192)
     public Feat() {
     }
 

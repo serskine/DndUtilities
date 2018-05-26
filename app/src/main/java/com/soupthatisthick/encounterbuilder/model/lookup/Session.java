@@ -3,61 +3,61 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.util.dao.ReadDao;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
 
 import java.util.Date;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 2/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "gameSessions")
+// @Entity(nameInDb = "gameSessions")
 public class Session extends DaoModel {
 
     // This is not a property stored in the database
     private Long rowId;
 
-    @Id
-    @Property(nameInDb = "sessionId")
+    // @Id
+    // @Property(nameInDb = "sessionId")
     private Long sessionId;
 
-    @Property(nameInDb = "characterId")
+    // @Property(nameInDb = "characterId")
     private Long characterId;
 
-    @Property(nameInDb = "adventure")
+    // @Property(nameInDb = "adventure")
     private String adventure;
 
-    @Property(nameInDb = "date")
+    // @Property(nameInDb = "date")
     private Date date;
 
-    @Property(nameInDb = "dmName")
+    // @Property(nameInDb = "dmName")
     private String dmName;
 
-    @Property(nameInDb = "dmDci")
+    // @Property(nameInDb = "dmDci")
     private String dmDci;
 
-    @Property(nameInDb = "xpEarned")
+    // @Property(nameInDb = "xpEarned")
     private int xp;
 
-    @Property(nameInDb = "goldEarned")
+    // @Property(nameInDb = "goldEarned")
     private int gold;
 
-    @Property(nameInDb = "downtimeEarned")
+    // @Property(nameInDb = "downtimeEarned")
     private int downtime;
 
-    @Property(nameInDb = "renownEarned")
+    // @Property(nameInDb = "renownEarned")
     private int renown;
 
-    @Property(nameInDb = "magicItemsEarned")
+    // @Property(nameInDb = "magicItemsEarned")
     private int magicItems;
 
-    @Property(nameInDb = "notes")
+    // @Property(nameInDb = "notes")
     private String notes;
 
-    @Generated(hash = 597483656)
+    // @Generated(hash = 597483656)
     public Session(Long rowId, Long sessionId, Long characterId, String adventure, Date date, String dmName, String dmDci, int xp, int gold, int downtime, int renown,
             int magicItems, String notes) {
         this.rowId = rowId;
@@ -75,11 +75,11 @@ public class Session extends DaoModel {
         this.notes = notes;
     }
 
-    @Generated(hash = 1317889643)
+    // @Generated(hash = 1317889643)
     public Session() {
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         return "<" + ReadDao.COL_THE_ROWID + "=" + getRowId() + ">: " + getAdventure() + " on " + getDate().toString() + " under " + getDmName() + "(" + getDmDci() + ")";
@@ -189,7 +189,7 @@ public class Session extends DaoModel {
         this.rowId = rowId;
     }
 
-    @Override
+    // @Override
     public Long getId() {
         return getSessionId();
     }

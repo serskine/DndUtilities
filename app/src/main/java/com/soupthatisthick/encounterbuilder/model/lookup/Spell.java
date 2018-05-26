@@ -2,53 +2,53 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+// import org.greenrobot.greendao.annotation.Entity;
+// import org.greenrobot.greendao.annotation.Id;
+// import org.greenrobot.greendao.annotation.Property;
+// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 1/27/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-@Entity(nameInDb = "EDITABLE_SPELLS")
+// @Entity(nameInDb = "EDITABLE_SPELLS")
 public class Spell extends DaoModel {
 
-    @Id
-    @Property(nameInDb = "id")
+    // @Id
+    // @Property(nameInDb = "id")
     private Long id;
 
-    @Property(nameInDb = "level")
+    // @Property(nameInDb = "level")
     private int level;
 
-    @Property(nameInDb = "name")
+    // @Property(nameInDb = "name")
     private String name;
 
-    @Property(nameInDb = "type")
+    // @Property(nameInDb = "type")
     private String type;
 
-    @Property(nameInDb = "castingTime")
+    // @Property(nameInDb = "castingTime")
     private String castingTime;
 
-    @Property(nameInDb = "range")
+    // @Property(nameInDb = "range")
     private String range;
 
-    @Property(nameInDb = "components")
+    // @Property(nameInDb = "components")
     private String components;
 
-    @Property(nameInDb = "duration")
+    // @Property(nameInDb = "duration")
     private String duration;
 
-    @Property(nameInDb = "description")
+    // @Property(nameInDb = "description")
     private String description;
 
-    @Property(nameInDb = "materials")
+    // @Property(nameInDb = "materials")
     private String materials;
 
-    @Property(nameInDb = "class")
+    // @Property(nameInDb = "class")
     private String classes;
 
-    @Generated(hash = 449169983)
+    // @Generated(hash = 449169983)
     public Spell(Long id, int level, String name, String type, String castingTime,
             String range, String components, String duration, String description,
             String materials, String classes) {
@@ -65,7 +65,7 @@ public class Spell extends DaoModel {
         this.classes = classes;
     }
 
-    @Generated(hash = 2133214849)
+    // @Generated(hash = 2133214849)
     public Spell() {
     }
 
@@ -157,7 +157,7 @@ public class Spell extends DaoModel {
         this.id = id;
     }
 
-    @Override
+    // @Override
     public String toString()
     {
         return "spell(" + getId()+")[" + getName() + "]";
