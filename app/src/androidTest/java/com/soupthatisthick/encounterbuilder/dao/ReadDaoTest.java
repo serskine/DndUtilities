@@ -47,6 +47,11 @@ public class ReadDaoTest extends InstrumentationTest {
 
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     @Test
     public void testLogContents()
     {

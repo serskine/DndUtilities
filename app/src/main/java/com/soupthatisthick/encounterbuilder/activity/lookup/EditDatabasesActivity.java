@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.soupthatisthick.encounterbuilder.activity.storage.StorageActivity;
 import com.soupthatisthick.util.activity.AppActivity;
 
 import soupthatisthick.encounterapp.R;
@@ -19,6 +20,11 @@ public class EditDatabasesActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_databases);
+    }
+
+    public void onClickManageDatabaseStorage(View view) {
+        Intent intent = new Intent(this, StorageActivity.class);
+        startActivity(intent);
     }
 
     public void onClickEditFeats(View view)

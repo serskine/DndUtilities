@@ -58,8 +58,19 @@ public class LoggerTest extends InstrumentationTest {
         Logger.error("TESTING ERROR", null);
     }
 
+    @Test
+    public void testTitle() {
+        Log.e(TAG,"*************************");
+        Logger.title("TESTING TITLE");
+    }
+
     @Override
     protected void onSetup() {
         // Do nothing. It's not required
+    }
+
+    @Override
+    protected void onTeardown() {
+
     }
 }

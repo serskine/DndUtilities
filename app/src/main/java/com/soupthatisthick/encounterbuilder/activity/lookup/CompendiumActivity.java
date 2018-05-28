@@ -330,7 +330,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
                         return Boolean.TRUE;
                     } catch (Exception e) {
-                        Logger.error("Failed to open all the dao's!", e);
+                        Logger.error("Failed to open all the dao's!\n" + e.getMessage(), e);
                         finish();
                         return Boolean.FALSE;
                     }

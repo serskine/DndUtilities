@@ -46,4 +46,9 @@ public class SpellDaoTest extends InstrumentationTest {
             fail(e.getMessage());
         }
     }
+
+    @Override
+    protected void onTeardown() {
+
+    }
 }

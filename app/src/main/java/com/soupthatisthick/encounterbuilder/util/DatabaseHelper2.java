@@ -32,8 +32,15 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
     private final File internalDir;
 
     private boolean createdDatabase = false;
-    private boolean upgradeDatabase = false;
+    private boolean migrateDatabase = false;
 
+
+    public enum Location {
+        ASSETS_DIRECTORY,
+        INTERNAL_FILES_DIR,
+        EXTERNAL_FILES_DIR,
+        WORKING_DATABASE_DIR;
+    };
 
     /**
      * Create a helper object to create, open, and/or manage a database.
@@ -99,13 +106,13 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
      * database in the internal data system.
      */
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public final void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         /*
          * Signal that the database needs to be upgraded for the copy method of
          * creation. The copy process must be performed after the database has
          * been opened or the database will be corrupted.
          */
-        upgradeDatabase = true;
+        migrateDatabase = true;
 
         /*
          * This will upgrade by reading a sql file and executing the commands in
@@ -118,72 +125,79 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
         }
     }
 
-    public String getFileName(boolean isBackup) {
+    @Override
+    public final void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        /*
+         * Signal that the database needs to be upgraded for the copy method of
+         * creation. The copy process must be performed after the database has
+         * been opened or the database will be corrupted.
+         */
+        migrateDatabase = true;
+
+        /*
+         * This will upgrade by reading a sql file and executing the commands in
+         * it.
+         */
+        try {
+            migrateDatabase(db, oldVersion, newVersion);
+        } catch (Exception ex) {
+            Logger.error("Failed to migrate the database from version " + oldVersion + " => version " + newVersion, ex);
+        }
+    }
+
+    public final String getFileName(boolean isBackup) {
         return (isBackup) ? backupName(name) : name;
     }
 
-    public String getInternalFilePath(boolean isBackup) {
-        return internalDir.getAbsolutePath() + "/" + getFileName(isBackup);
+    public final String getLocationPath(@NonNull Location location, boolean isBackup) {
+        switch(location) {
+            case INTERNAL_FILES_DIR:
+                return internalDir.getAbsolutePath() + "/" + getFileName(isBackup);
+            case EXTERNAL_FILES_DIR:
+                return externalDir.getAbsolutePath() + "/" + getFileName(isBackup);
+            case WORKING_DATABASE_DIR:
+                return context.getDatabasePath(getFileName(isBackup)).getAbsolutePath();
+            case ASSETS_DIRECTORY:
+                throw new RuntimeException("Location " + location + " does not have a directory because it's in the APK.");
+            default:
+                throw new RuntimeException("Location " + location + " does not yet have a directory defined for it yet.");
+        }
     }
 
-    public String getExternalFilePath(boolean isBackup) {
-        return externalDir.getAbsolutePath() + "/" + getFileName(isBackup);
-    }
+    public final void copy(
+            @NonNull Location source,
+            @NonNull Location destination,
+            boolean asBackup
+    ) throws IOException {
+        InputStream myInput;
+        OutputStream myOutput;
+        String inputPath;
+        String outputPath;
 
-    public void copyFromAssetsToExternalStorage(boolean isBackup) throws IOException {
-        final String targetFile = getExternalFilePath(isBackup);
-        close();
+        switch(source) {
+            case ASSETS_DIRECTORY:
+                inputPath = "application/assets/";
+                myInput = context.getAssets().open(name);
+                break;
+            case INTERNAL_FILES_DIR:
+            case EXTERNAL_FILES_DIR:
+            case WORKING_DATABASE_DIR:
+            default:
+                inputPath = getLocationPath(source, false);
+                myInput = new FileInputStream(inputPath);
+                break;
+        }
 
-        OutputStream myOutput = new FileOutputStream(targetFile);
-        InputStream myInput = context.getAssets().open(name);
+        outputPath = getLocationPath(destination, asBackup);
+        myOutput = new FileOutputStream(outputPath);
 
         FileHelper.copyFile(myInput, myOutput);
-        Logger.info("Copied assets/" + name + " => " + targetFile );
+        Logger.info("Copied " + inputPath + " => " + outputPath );
 
         getWritableDatabase().close();
+
     }
 
-    public void copyFromAssetsToInternalStorage(boolean isBackup) throws IOException {
-        final String targetFile = getInternalFilePath(isBackup);
-        close();
-
-        OutputStream myOutput = new FileOutputStream(targetFile);
-        InputStream myInput = context.getAssets().open(name);
-
-        FileHelper.copyFile(myInput, myOutput);
-        Logger.info("Copied assets/" + name + " => " + targetFile );
-
-        getWritableDatabase().close();
-    }
-
-    public void copyFromInternalToExternalStorage(boolean isBackup) throws IOException {
-        final String outputFile = getExternalFilePath(isBackup);
-        final String inputFile = getInternalFilePath(false);
-        close();
-
-        OutputStream myOutput = new FileOutputStream(outputFile);
-        InputStream myInput = new FileInputStream(inputFile);
-
-        FileHelper.copyFile(myInput, myOutput);
-        Logger.info("Copied " + inputFile + " => " + outputFile );
-
-        getWritableDatabase().close();
-    }
-
-
-    public void copyFromExternalToInternalStorage(boolean isBackup) throws IOException {
-        final String outputFile = getInternalFilePath(isBackup);
-        final String inputFile = getExternalFilePath(false);
-        close();
-
-        OutputStream myOutput = new FileOutputStream(outputFile);
-        InputStream myInput = new FileInputStream(inputFile);
-
-        FileHelper.copyFile(myInput, myOutput);
-        Logger.info("Copied " + inputFile + " => " + inputFile );
-
-        getWritableDatabase().close();
-    }
 
     public static final String backupName(final String originalName) {
         return "backup_of_" + originalName;
@@ -195,17 +209,17 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
      * - attempt to copy from external storage to internal working storage
      * - if we were unable to update the internal working storage from an external source, use the one found in the assets directory instead
      */
-    public void updateDatabase() {
+    public final void updateDatabase() {
         boolean copiedFromExternal = false;
         try {
             Logger.info("Creating backup of the working database.");
-            copyFromInternalToExternalStorage(true);    // Create the backup
+            copy(Location.WORKING_DATABASE_DIR, Location.EXTERNAL_FILES_DIR, true);
         } catch (Exception e) {
             Logger.warning(e.getMessage());
         }
         try {
             Logger.info("Updating the working database from the external source.");
-            copyFromExternalToInternalStorage(false);
+            copy(Location.EXTERNAL_FILES_DIR, Location.WORKING_DATABASE_DIR, false);
             copiedFromExternal = true;
         } catch (Exception e) {
             Logger.warning(e.getMessage());
@@ -213,13 +227,13 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
 
         // We only want to update from the assets directory if we failed to copy from the external directory
         if  (   !copiedFromExternal
-            &&  (   isUpgradeDatabase()
+            &&  (   isMigrateDatabase()
                 ||  isCreatedDatabase()
                 )
             ) {
             Logger.info("There was no external database to use. Updating the working database from the assets database instead.");
             try {
-                copyFromAssetsToInternalStorage(false); // Overwrite the original
+                copy(Location.ASSETS_DIRECTORY, Location.WORKING_DATABASE_DIR, false);
             } catch (IOException e) {
                 Logger.warning(e.getMessage());
             }
@@ -228,46 +242,37 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
     }
 
     /**
-     * This will create a file object to the internal storage file we us when running the app
-     * @param isBackup determines the name of the file
-     * @return a {@link File}
+     * This will get the file at the specified location if possible.
+     * Note it is NOT possible to get the file from {@link Location#ASSETS_DIRECTORY}
+     * @param location is the location we expect the file to be in
+     * @param isBackup tells us if the file has the backup filename
+     * @return a {@link File} accessing the desired location if possible
      */
-    public File getInternalStorageFile(boolean isBackup) {
-        return new File(getInternalFilePath(isBackup));
-    }
-
-    /**
-     * This will create a file object to the external storage file we us when running the app
-     * @param isBackup determines the name of the file
-     * @return a {@link File}
-     */
-    public File getExternalStorageFile(boolean isBackup) {
-        return new File(getExternalFilePath(isBackup));
+    public final File getLocationFile(Location location, boolean isBackup) {
+        return new File(getLocationPath(location, isBackup));
     }
 
     /**
      * This will delete all originals and backup files in the internal and external storage directories
      */
-    public void cleanAllQuietly() {
-        try {
-            getInternalStorageFile(false).delete();
-        } catch (Exception e) {
-            Logger.warning(e.getMessage());
-        }
-        try {
-            getExternalStorageFile(false).delete();
-        } catch (Exception e) {
-            Logger.warning(e.getMessage());
-        }
-        try {
-            getInternalStorageFile(true).delete();
-        } catch (Exception e) {
-            Logger.warning(e.getMessage());
-        }
-        try {
-            getExternalStorageFile(true).delete();
-        } catch (Exception e) {
-            Logger.warning(e.getMessage());
+    public final void cleanAllQuietly() {
+        Logger.info("Cleaning all locations for database " + getDatabaseName());
+        for(Location location : Location.values()) {
+            if (location != Location.ASSETS_DIRECTORY) {
+                String message = "";
+                try {
+                    getLocationFile(location, false).delete();
+                    getLocationFile(location, true).delete();
+                } catch (Exception e) {
+                    message = e.getMessage();
+                }
+
+                if (message.length()<1) {
+                    Logger.info(" - cleaning location " + location + ": SUCCESS!");
+                } else {
+                    Logger.warning(" - cleaning location " + location + ": FAILURE!\n" + message);
+                }
+            }
         }
     }
 
@@ -353,7 +358,7 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
      * This will determine if the database was upgraded
      * @return true if it was upgraded (or downgraded) false otherwise
      */
-    public boolean isUpgradeDatabase() {
-        return upgradeDatabase;
+    public boolean isMigrateDatabase() {
+        return migrateDatabase;
     }
 }

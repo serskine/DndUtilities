@@ -34,7 +34,7 @@ public abstract class InstrumentationTest {
     }
 
     protected abstract void onSetup();
-
+    protected abstract void onTeardown();
     @Test
     public final void testSetup()
     {
@@ -45,7 +45,10 @@ public abstract class InstrumentationTest {
     @After
     public void tearDown()
     {
+        Logger.info("Begin Teardown");
+        onTeardown();
         context = null;
+        Logger.info("End Teardown");
     }
 
 }

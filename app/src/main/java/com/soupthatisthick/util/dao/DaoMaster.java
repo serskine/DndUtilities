@@ -52,6 +52,8 @@ public class DaoMaster extends DatabaseHelper2
     public final void logSchema()
     {
         Logger.title("DaoMaster " + getDatabaseName() + " version " + getReadableDatabase().getVersion(), 1);
+
+
         Map<String, Set<String>> schema = getSchema();
 
         Map<String, String> tableMap = new HashMap<>();
@@ -147,7 +149,7 @@ public class DaoMaster extends DatabaseHelper2
      * @return true if the database file exists
      */
     public boolean exists() {
-        File dbFile = getInternalStorageFile(false);
+        File dbFile = getLocationFile(Location.WORKING_DATABASE_DIR, false);
         return (dbFile != null && dbFile.exists());
     }
 
@@ -157,15 +159,23 @@ public class DaoMaster extends DatabaseHelper2
      * @return true if the file was present before and deleted
      */
     public boolean delete() {
+        boolean internalDeleted = true;
         try {
-            File dbFile = getInternalStorageFile(false);
+            getWritableDatabase().close();
+            File dbFile = getLocationFile(Location.WORKING_DATABASE_DIR, false);
             if (dbFile != null) {
-                return dbFile.delete();
+                internalDeleted = dbFile.delete();
             }
         } catch (Exception e) {
             Logger.warning(e.getMessage());
         }
-        return false;
+        try {
+            getContext().deleteDatabase(getDatabaseName());
+        } catch (Exception e) {
+            Logger.warning(e.getMessage());
+            internalDeleted = false;
+        }
+        return internalDeleted;
     }
 
 

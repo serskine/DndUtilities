@@ -2,84 +2,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
 
-        <Button
-            android:text="@string/editdata_manage_storage"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/manageDatabaseStorageButton"
+            android:id="@+id/messageView"
             android:layout_weight="1"
-            android:onClick="onClickManageDatabaseStorage"
             style="@style/AppTheme.Scroll"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
-            />
-
-
-        <Button
-            android:text="@string/editdata_button_edit_custom_monsters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editCustomMonstersButton"
-            android:layout_weight="1"
-            android:onClick="onClickEditCustomMonsters"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            />
-
-
-        <Button
-            android:text="@string/editdata_button_edit_spells"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewSpellsButton"
-            android:layout_weight="1"
-            android:onClick="onClickViewSpells"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
+            android:visibility="gone"
             />
 
         <Button
-            android:text="@string/main_button_view_magic_items"
+            android:text="@string/st_reset_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/viewMagicItemsbutton"
+            android:id="@+id/resetButton"
             android:layout_weight="1"
-            android:onClick="onClickViewMagicItems"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            />
-
-        <Button
-            android:text="@string/editdata_button_edit_feats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editFeatsButton"
-            android:layout_weight="1"
-            android:onClick="onClickEditFeats"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            android:visibility="visible"
-            />
-
-
-        <Button
-            android:text="@string/editdata_button_edit_personal_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/notesButton"
-            android:layout_weight="1"
-            android:onClick="onClickPersonalNotesButton"
+            android:onClick="onResetButtonClicked"
             style="@style/AppTheme.Scroll"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
@@ -87,12 +34,12 @@
             />
 
         <Button
-            android:text="@string/editdata_button_edit_contacts"
+            android:text="@string/st_save_backup_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/contactsButton"
+            android:id="@+id/saveBackupButton"
             android:layout_weight="1"
-            android:onClick="onClickEditContactsButton"
+            android:onClick="onSaveBackupButtonClicked"
             style="@style/AppTheme.Scroll"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
@@ -100,18 +47,43 @@
             />
 
         <Button
-            android:text="@string/editdata_button_edit_custom_lists"
+            android:text="@string/st_load_backup_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editCustomListsButton"
+            android:id="@+id/restoreBackupButton"
             android:layout_weight="1"
-            android:onClick="onClickCustomListsButton"
+            android:onClick="onLoadBackupClicked"
             style="@style/AppTheme.Scroll"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
             android:visibility="visible"
             />
 
+        <Button
+            android:text="@string/st_import_external_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/importButton"
+            android:layout_weight="1"
+            android:onClick="onImportButtonClicked"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:text="@string/st_export_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exportButton"
+            android:layout_weight="1"
+            android:onClick="onExportButtonClicked"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            android:visibility="visible"
+            />
 
     </LinearLayout>
 </ScrollView>

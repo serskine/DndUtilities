@@ -108,6 +108,11 @@ public class HttpTest extends InstrumentationTest {
         // Do nothing
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     /**
      * Logs the response to the console.
      * @param response

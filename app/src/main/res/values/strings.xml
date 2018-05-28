@@ -75,6 +75,7 @@
     <string name="title_activity_camera">Camera Activity</string>
     <string name="title_activity_search_filters">Select Search Filters</string>
     <string name="title_activity_test">TEST ACTIVITY</string>
+    <string name="title_activity_storage">Storage Activite</string>
 
     <string name="add_player_text">Add Player</string>
     <string name="remove_player_text">Remove Player</string>
@@ -91,6 +92,7 @@
 
     <!--Edit Data Strings -->
     <string name="editdata_button_test">TEST</string>
+    <string name="editdata_manage_storage">Manage Storage</string>
     <string name="editdata_button_edit_feats">Feats</string>
     <string name="editdata_button_edit_contacts">Contacts</string>
     <string name="editdata_button_edit_custom_lists">Custom Lists</string>
@@ -323,4 +325,17 @@
     <!-- View Logs Activity -->
     <string name="vl_refresh_button">Refresh Button</string>
     <string name="log_entry_regex">(\\d+)-(\\d+) (\\d+):(\\d+):(\\d+)</string>
+
+    <!-- Storage Activity -->
+    <string name="st_export_title">Export Database</string>
+    <string name="st_save_backup_title">Save Backup</string>
+    <string name="st_load_backup_title">Load Backup</string>
+    <string name="st_import_external_title">Import Database</string>
+    <string name="st_reset_title">Reset Database"</string>
+
+    <string name="st_export_desc">This will export the working database into the external files directory.</string>
+    <string name="st_save_backup_desc">This will save the working database to private internal storage</string>
+    <string name="st_import_backup_desc">This will replace the working database with the data stored in the backup internal storage</string>
+    <string name="st_import_external_desc">This will replace the working database with the data stored in the external storage location. You should backup the working data first before you do this.</string>
+    <string name="st_reset_desc">This will reset all the data with the default data stored in the apk.</string>
 </resources>
