@@ -26,6 +26,7 @@
     <string name="vc_title_lifestyles">Lifestyles</string>
     <string name="vc_title_mounts">Mounts</string>
     <string name="vc_title_weapons">Weapons</string>
+    <string name="vc_title_entity">Entity</string>
 
     <!-- These might be excluded from the compendium -->
     <string name="vc_title_item_list">Lists</string>

@@ -50,7 +50,7 @@ public class LogsheetMaster extends DaoMaster {
     public void onCreate(SQLiteDatabase db) {
         super.onCreate(db);
 
-        Resources res = this.myContext.getResources();
+        Resources res = this.getContext().getResources();
         InputStream is = res.openRawResource(R.raw.logsheet_db);
 
         try {
@@ -79,7 +79,7 @@ public class LogsheetMaster extends DaoMaster {
     @Override
     protected void upgrade(SQLiteDatabase db, int currentVersion) throws Exception {
         super.upgrade(db, currentVersion);
-        Resources res = this.myContext.getResources();
+        Resources res = this.getContext().getResources();
         InputStream is;
         String tag;
         switch(currentVersion) {

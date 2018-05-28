@@ -11,6 +11,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
 import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
 import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
 import com.soupthatisthick.encounterbuilder.model.lookup.Feat;
 import com.soupthatisthick.encounterbuilder.model.lookup.God;
@@ -98,6 +99,9 @@ public class CompendiumDetailCell extends CompendiumCell {
             case MOUNT:
                 MountDetailCell mountDetailCell = new MountDetailCell(inflater, convertView, parent);
                 return mountDetailCell;
+            case ENTITY:
+                CompendiumDetailCell compendiumDetailCell = new CompendiumDetailCell(inflater, convertView, parent);
+
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;
@@ -176,6 +180,9 @@ public class CompendiumDetailCell extends CompendiumCell {
                 break;
             case MOUNT:
                 ((MountDetailCell) cell).updateUi((Mount) item);
+                break;
+            case ENTITY:
+                ((EntityDetailCell) cell).updateUi((Entity) item);
                 break;
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);

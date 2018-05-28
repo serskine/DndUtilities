@@ -6,6 +6,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.CustomMonsterDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
@@ -23,6 +24,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
 import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
 import com.soupthatisthick.encounterbuilder.model.lookup.Feat;
 import com.soupthatisthick.encounterbuilder.model.lookup.God;
@@ -59,7 +61,9 @@ public enum Category
     LEVEL(-13, LevelDao.TBL_LEVEL_DETAILS, LevelDao.COL_ID),
     GOD(-14, GodsDao.TBL_GODS, GodsDao.COL_ID),
     LIFESTYLE(-15, LifeStyleDao.TBL_LIFESTYLE, LifeStyleDao.COL_ID),
-    MOUNT(-16, MountDao.TBL_MOUNTS, MountDao.COL_ID);
+    MOUNT(-16, MountDao.TBL_MOUNTS, MountDao.COL_ID),
+    ENTITY(-17, EntityDao.TBL_ENTITY, EntityDao.COL_ID),
+    ;
 
     public final int orderValue;
     public final String tableName, primaryKey;
@@ -73,74 +77,59 @@ public enum Category
 
     public static final Category parse(@Nullable Object item)
     {
-        if (item==null)
-        {
+        if (item==null) {
             return DEFAULT;
         }
-
-        if (item.getClass().equals(Condition.class))
-        {
+        if (item.getClass().equals(Condition.class)) {
             return CONDITION;
         }
-        if (item.getClass().equals(Spell.class))
-        {
+        if (item.getClass().equals(Spell.class)) {
             return SPELL;
         }
-        if (item.getClass().equals(CustomMonster.class))
-        {
+        if (item.getClass().equals(CustomMonster.class)) {
             return CUSTOM_MONSTER;
         }
-        if (item.getClass().equals(StandardMonster.class))
-        {
+        if (item.getClass().equals(StandardMonster.class)) {
             return STANDARD_MONSTER;
         }
-        if (item.getClass().equals(MagicItem.class))
-        {
+        if (item.getClass().equals(MagicItem.class)) {
             return MAGIC_ITEM;
         }
-        if (item.getClass().equals(Feat.class))
-        {
+        if (item.getClass().equals(Feat.class)) {
             return FEAT;
         }
-        if (item.getClass().equals(Background.class))
-        {
+        if (item.getClass().equals(Background.class)) {
             return BACKGROUND;
         }
-        if (item.getClass().equals(Armor.class))
-        {
+        if (item.getClass().equals(Armor.class)) {
             return ARMOR;
         }
-        if (item.getClass().equals(Weapon.class))
-        {
+        if (item.getClass().equals(Weapon.class)) {
             return WEAPON;
         }
-        if (item.getClass().equals(Equipment.class))
-        {
+        if (item.getClass().equals(Equipment.class)) {
             return EQUIPMENT;
         }
-        if (item.getClass().equals(Note.class))
-        {
+        if (item.getClass().equals(Note.class)) {
             return NOTE;
         }
-        if (item.getClass().equals(ChallengeRating.class))
-        {
+        if (item.getClass().equals(ChallengeRating.class)) {
             return CHALLENGE_RATING;
         }
-        if (item.getClass().equals(Level.class))
-        {
+        if (item.getClass().equals(Level.class)) {
             return LEVEL;
         }
-        if (item.getClass().equals(God.class))
-        {
+        if (item.getClass().equals(God.class)) {
             return GOD;
         }
-        if (item.getClass().equals(LifeStyle.class))
-        {
+        if (item.getClass().equals(LifeStyle.class)) {
             return LIFESTYLE;
         }
-        if (item.getClass().equals(Mount.class))
-        {
+        if (item.getClass().equals(Mount.class)) {
             return MOUNT;
+        }
+        if (item.getClass().equals(Entity.class)) {
+            return ENTITY;
         }
         return DEFAULT;
     }

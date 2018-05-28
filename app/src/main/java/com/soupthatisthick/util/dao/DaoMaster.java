@@ -6,9 +6,11 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.util.DatabaseHelper;
+import com.soupthatisthick.encounterbuilder.util.DatabaseHelper2;
 import com.soupthatisthick.encounterbuilder.util.Text;
 import com.soupthatisthick.util.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +24,13 @@ import static com.soupthatisthick.util.dao.SqlUtil.getTableColumnsSet;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class DaoMaster extends DatabaseHelper
+public class DaoMaster extends DatabaseHelper2
 {
 
     public static final String DATABASE_FILE_PATH = "/databases/";
+
+    private final int codeVersion;
+    private final int realVersion;
 
     public DaoMaster(
         Context context,
@@ -33,10 +38,13 @@ public class DaoMaster extends DatabaseHelper
         String dbName,
         int version
     ) throws IOException {
-        super(context,dbDirectory,dbName,version);
+        super(context,dbName, null, version);
         // Cause us to open the database
-        getReadableDatabase();
-        Logger.debug("Created DaoMaster for database " + getDatabaseName());
+        this.codeVersion = version;
+        SQLiteDatabase currentDb = getReadableDatabase();
+        realVersion = currentDb.getVersion();
+
+        Logger.debug("Created DaoMaster for database " + getDatabaseName() + " codeVersion: " + codeVersion + " readVersion: " + realVersion);
         logSchema();
 
     }
@@ -134,8 +142,31 @@ public class DaoMaster extends DatabaseHelper
         Logger.info(" - Daomaster database downgrade from version " + currentVersion + " to " + (currentVersion + 1) + ".");
     }
 
+    /**
+     * Used to check if the database file we wish to use exists or not in internal storage.
+     * @return true if the database file exists
+     */
+    public boolean exists() {
+        File dbFile = getInternalStorageFile(false);
+        return (dbFile != null && dbFile.exists());
+    }
 
 
+    /**
+     * This will delete the database file if it exists
+     * @return true if the file was present before and deleted
+     */
+    public boolean delete() {
+        try {
+            File dbFile = getInternalStorageFile(false);
+            if (dbFile != null) {
+                return dbFile.delete();
+            }
+        } catch (Exception e) {
+            Logger.warning(e.getMessage());
+        }
+        return false;
+    }
 
 
 }

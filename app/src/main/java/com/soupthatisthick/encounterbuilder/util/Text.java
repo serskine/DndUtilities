@@ -95,7 +95,7 @@ public class Text {
         char space,
         int rowLength
     ) {
-        String output = "";
+        String output = "\n";
 
         text = (text==null) ? "" : text;
 

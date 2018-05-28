@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.soupthatisthick.util.FileHelper;
 import com.soupthatisthick.util.Logger;
@@ -21,7 +22,7 @@ import soupthatisthick.encounterapp.R;
 
 public class DndMaster extends DaoMaster {
 
-    public static final int VERSION = 12;
+    public static final int VERSION = 13;
     private static final String DB_FILE = "dnd.db";
 
     // This represents the number of sql errors we will allow before throwing a fatal error.
@@ -70,7 +71,7 @@ public class DndMaster extends DaoMaster {
                 errorStatements += "error[" + errorCount + "] = " + statement + "\n";
                 if (errorCount > allowableErrorCount)
                 {
-                    String errorMessage = "Error while processing swl statement from file with tag " + tag + ".\n";
+                    String errorMessage = "Error while processing sql statement from file with tag " + tag + ".\n";
                     errorMessage += " - We have reached the maximum number of sql statement errors (" + allowableErrorCount + ")\n";
                     errorMessage += errorStatements;
                     throw new RuntimeException(errorMessage);
@@ -86,7 +87,8 @@ public class DndMaster extends DaoMaster {
     public void onCreate(SQLiteDatabase db) {
         super.onCreate(db);
 
-        Resources res = this.myContext.getResources();
+        Logger.info("Created database " + db.getPath() + " version " + db.getVersion() + ".");
+        Resources res = this.getContext().getResources();
         InputStream schemaIs = res.openRawResource(R.raw.dnd_db_schema);
 
         try {
@@ -104,7 +106,8 @@ public class DndMaster extends DaoMaster {
     @Override
     protected void upgrade(SQLiteDatabase db, int currentVersion) throws Exception {
         super.upgrade(db, currentVersion);
-        Resources res = this.myContext.getResources();
+        Resources res = this.getContext().getResources();
+        Logger.info("Upgrading database to version " + currentVersion + ".");
         InputStream is;
         String tag;
         switch(currentVersion) {
@@ -147,6 +150,14 @@ public class DndMaster extends DaoMaster {
             case 10:
                 is = res.openRawResource(R.raw.dnd_migrate_10_to_11);
                 tag = "dnd_migrate_10_to_11";
+                break;
+            case 11:
+                is = res.openRawResource(R.raw.dnd_migrate_11_to_12);
+                tag = "dnd_migrate_11_to_12";
+                break;
+            case 12:
+                is = res.openRawResource(R.raw.dnd_migrate_12_to_13);
+                tag = "dnd_migrate_12_to_13";
                 break;
             default:
                 is = null;

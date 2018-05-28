@@ -16,14 +16,17 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
+import com.soupthatisthick.encounterbuilder.DndUtilApp;
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.TextSelectionAdapter;
+import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
@@ -43,6 +46,8 @@ import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.model.Selection;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
@@ -50,6 +55,7 @@ import com.soupthatisthick.util.activity.ViewToggleListActivity;
 import com.soupthatisthick.util.adapters.WriteCellAdapter;
 import com.soupthatisthick.util.dao.Dao;
 import com.soupthatisthick.util.dao.ReadDao;
+import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +66,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import soupthatisthick.encounterapp.R;
+
+import static com.soupthatisthick.encounterbuilder.util.sort.Category.DEFAULT;
 
 /**
  * Created by Owner on 4/12/2017.
@@ -89,6 +97,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private LifeStyleDao lifeStyleDao;
     private MountDao mountDao;
     private WeaponDao weaponDao;
+    private EntityDao entityDao;
+
+    CompendiumResource compendiumResource;
 
     private ItemListDao itemListDao;
     private ItemDao itemDao;
@@ -135,8 +146,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private Set<String> selectedFilters = new HashSet<>();
 
 
-    private class FilterSelectionListener implements WriteCellAdapter.Listener
-    {
+    private class FilterSelectionListener implements WriteCellAdapter.Listener {
 
         @Override
         public void positionUpdated(
@@ -192,8 +202,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     /**
      * This will determine if we want to display all the filter tabs
      */
-    private void checkTabVisibility()
-    {
+    private void checkTabVisibility() {
         // Load the preference of the use filters
         boolean showTabs = globalPreferences.getBoolean(
                 getString(R.string.pref_use_filters_key),
@@ -220,8 +229,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     }
 
     @Override
-    public void loadAllData()
-    {
+    public void loadAllData() {
         final AsyncTask<Object, Object, Boolean> loadTask = new AsyncTask<Object, Object, Boolean>()
         {
 
@@ -314,6 +322,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
                         weaponDao = new WeaponDao(dndMaster);
                         initDao(R.string.vc_title_weapons, weaponDao);
+
+                        entityDao = new EntityDao(dndMaster);
+                        initDao(R.string.vc_title_entity, entityDao);
 
                         Logger.info("Completed opening all the dao's!");
 
@@ -447,7 +458,18 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addRecordsLike(@NonNull String searchText,  ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            results.addAll(dao.getRecordsLike(searchText));
+            if (dao instanceof EntityDao) {
+                EntityDao theEntityDao = (EntityDao) dao;
+                List<Entity> theEntities = theEntityDao.getRecordsLike(searchText);
+                for(Entity entity : theEntities) {
+                    Category category = entity.getEntityCategory();
+                    if (category!=null && category != DEFAULT) {
+                        Long id = entity.getCategoryColumnId(category);
+                    }
+                }
+            } else {
+                results.addAll(dao.getRecordsLike(searchText));
+            }
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -456,7 +478,18 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addAllRecords(ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            results.addAll(dao.getAllRecords());
+            if (dao instanceof EntityDao) {
+                EntityDao theEntityDao = (EntityDao) dao;
+                List<Entity> theEntities = theEntityDao.getAllRecords();
+                for(Entity entity : theEntities) {
+                    Category category = entity.getEntityCategory();
+                    if (category!=null && category != DEFAULT) {
+                        Long id = entity.getCategoryColumnId(category);
+                    }
+                }
+            } else {
+                results.addAll(dao.getAllRecords());
+            }
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -569,19 +602,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.debug("CLICKED ON POSITION " + which);
-//                        ItemList list = itemListAdapter.getCastedItem(which);
-//                        for (Object itemObject : items) {
-//                            if (itemObject instanceof DaoModel) {
-//                                DaoModel model = (DaoModel) itemObject;
-//                                Item newItem = itemDao.create();
-//                                newItem.init(model);
-//                                itemDao.update(newItem);
-//                                Logger.debug(" itemObject (" + itemObject.toString() + ") has been added to list " + list.toString());
-//                            } else {
-//                                Logger.warning(" itemObject (" + itemObject.toString() + ") is not an instance of a DaoModel.");
-//                            }
-//                        }
-
+                    throw new RuntimeException("TODO: Implement adding to a list!");
                 }
             });
 
@@ -618,5 +639,74 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         }
         return items;
     }
+
+
+
+    public WriteDao<? extends Object> getDaoForCategory(Category category) {
+        if (category==null) return null;
+        switch(category) {
+            case CONDITION:
+                return conditionDao;
+            case CUSTOM_MONSTER:
+                return customMonsterDao;
+            case STANDARD_MONSTER:
+                return standardMonsterDao;
+            case MAGIC_ITEM:
+                return magicItemDao;
+            case SPELL:
+                return spellDao;
+            case FEAT:
+                return featDao;
+            case BACKGROUND:
+                return backgroundDao;
+            case ARMOR:
+                return armorDao;
+            case WEAPON:
+                return weaponDao;
+            case EQUIPMENT:
+                return equipmentDao;
+            case NOTE:
+                return notesDao;
+            case CHALLENGE_RATING:
+                return challengeRatingDao;
+            case LEVEL:
+                return levelDao;
+            case GOD:
+                return godsDao;
+            case LIFESTYLE:
+                return lifeStyleDao;
+            case MOUNT:
+                return mountDao;
+            case ENTITY:
+                return entityDao;
+            case DEFAULT:
+                return null;
+        }
+        throw new RuntimeException("Failed to determine a dao for category " + category + ".");
+    }
+
+    /**
+     * This is used to get the child entity from of the specified Entity model
+     * @param entity is the pointer {@link Entity}
+     * @return null if the child entity does not exist
+     */
+    public Object getEntityChild(Entity entity) {
+        Category category = entity.getEntityCategory();
+        WriteDao<? extends Object> writeDao = getDaoForCategory(category);
+        if (writeDao == null) {
+            return null;
+        } else {
+            Long theId = entity.getCategoryColumnId(category);
+            if (theId != null) {
+                synchronized (DB_LOCK) {
+                    return writeDao.load(theId);
+                }
+            } else {
+                return null;
+            }
+        }
+    }
+
+
 }
 
