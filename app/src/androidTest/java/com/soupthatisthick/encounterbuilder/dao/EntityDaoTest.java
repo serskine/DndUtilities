@@ -5,6 +5,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.CustomMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.util.DatabaseHelper2;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.json.JsonUtil;
@@ -25,8 +26,10 @@ public class EntityDaoTest extends InstrumentationTest {
     protected void onSetup() {
         try {
             db = new DndMaster(context);
+            db.copy(DatabaseHelper2.Location.ASSETS_DIRECTORY, DatabaseHelper2.Location.WORKING_DATABASE_DIR, false);
             db.logSchema();
             dao = new EntityDao(db);
+
         } catch (Exception e) {
             fail(e.getMessage());
         }

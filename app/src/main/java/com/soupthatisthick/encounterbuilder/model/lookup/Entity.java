@@ -166,21 +166,21 @@ public class Entity extends DaoModel {
     }
     
     public Category getChildCategory() {
-        if (this.entityId != null) return Category.ENTITY;
-        if (this.armorId != null) return Category.ARMOR;
-        if (this.characterAdvancementId != null) return Category.LEVEL;
-        if (this.conditionId != null) return Category.CONDITION;
-        if (this.customMonsterId != null) return Category.CUSTOM_MONSTER;
-        if (this.spellId != null) return Category.SPELL;
-        if (this.equipmentId != null) return Category.EQUIPMENT;
-        if (this.featId != null) return Category.FEAT;
-        if (this.godId != null) return Category.GOD;
-        if (this.lifestyleId != null) return Category.LIFESTYLE;
-        if (this.magicItemId != null) return Category.MAGIC_ITEM;
-        if (this.mountId != null) return Category.MOUNT;
-        if (this.noteId != null) return Category.NOTE;
-        if (this.standardMonsterId != null) return Category.STANDARD_MONSTER;
-        if (this.weaponId != null) return Category.WEAPON;
+        if (isValidId(this.entityId)) return Category.ENTITY;
+        if (isValidId(this.armorId)) return Category.ARMOR;
+        if (isValidId(this.characterAdvancementId)) return Category.LEVEL;
+        if (isValidId(this.conditionId)) return Category.CONDITION;
+        if (isValidId(this.customMonsterId)) return Category.CUSTOM_MONSTER;
+        if (isValidId(this.spellId)) return Category.SPELL;
+        if (isValidId(this.equipmentId)) return Category.EQUIPMENT;
+        if (isValidId(this.featId)) return Category.FEAT;
+        if (isValidId(this.godId)) return Category.GOD;
+        if (isValidId(this.lifestyleId)) return Category.LIFESTYLE;
+        if (isValidId(this.magicItemId)) return Category.MAGIC_ITEM;
+        if (isValidId(this.mountId)) return Category.MOUNT;
+        if (isValidId(this.noteId)) return Category.NOTE;
+        if (isValidId(this.standardMonsterId)) return Category.STANDARD_MONSTER;
+        if (isValidId(this.weaponId)) return Category.WEAPON;
 
         // TODO: Implement category and ui's for the following tables daos
 //        if (this.waterborneVechicleId != null) return Category.DEFAULT;
@@ -274,44 +274,63 @@ public class Entity extends DaoModel {
             throw new RuntimeException("There can never be an entity column assigned to a null category.");
         }
 
+        Long theId = null;
         switch(category) {
             case CONDITION:
-                return getConditionId();
+                theId = getConditionId();
+				break;
             case CUSTOM_MONSTER:
-                return getCustomMonsterId();
+                theId = getCustomMonsterId();
+				break;
             case STANDARD_MONSTER:
-                return getStandardMonsterId();
+                theId = getStandardMonsterId();
+				break;
             case MAGIC_ITEM:
-                return getMagicItemId();
+                theId = getMagicItemId();
+				break;
             case SPELL:
-                return getSpellId();
+                theId = getSpellId();
+				break;
             case FEAT:
-                return getFeatId();
+                theId = getFeatId();
+				break;
             case ARMOR:
-                return getArmorId();
+                theId = getArmorId();
+				break;
             case WEAPON:
-                return getWeaponId();
+                theId = getWeaponId();
+				break;
             case EQUIPMENT:
-                return getEquipmentId();
+                theId = getEquipmentId();
+				break;
             case NOTE:
-                return getNoteId();
+                theId = getNoteId();
+				break;
             case LEVEL:
-                return getCharacterAdvancementId();
+                theId = getCharacterAdvancementId();
+				break;
             case GOD:
-                return getGodId();
+                theId = getGodId();
+				break;
             case LIFESTYLE:
-                return getLifestyleId();
+                theId = getLifestyleId();
+				break;
             case MOUNT:
-                return getMountId();
+                theId = getMountId();
+				break;
             case ENTITY:
-                return getEntityId();
+                theId = getEntityId();
+				break;
             case BACKGROUND:
             case CHALLENGE_RATING:
             case DEFAULT:
             default:
                 throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
-
+        if (!isValidId(theId)) {
+            throw new RuntimeException("Category " + category + " has an invalid id value of " + ((theId==null) ? "null" : "" + theId) + ".");
+        }
+        return theId;
     }
 
     
@@ -580,4 +599,7 @@ public class Entity extends DaoModel {
         this.weaponId = weaponId;
     }
 
+    private static boolean isValidId(Long id) {
+        return ((id!=null) && (id>0));
+    }
 }
