@@ -681,11 +681,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      * @return the object to be displayed
      */
     private Object getDisplayObject(DaoModel item) {
-        return getDisplayObject(" -> ", item);
-    }
-    private Object getDisplayObject(String prefix, DaoModel item) {
-
-
 
         if (item==null) {
             throw new RuntimeException("We can't get the display item of a null object!");
@@ -704,7 +699,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                     if (child==null) {
                         throw new RuntimeException("Entity(" + entity.getId() + ") refers to table " + writeDao.getTable() + "(" + theId + ") but the record does not exist!");
                     } else {
-                        return getDisplayObject(" ->" + prefix, child);
+                        return getDisplayObject(child);
                     }
                 }
             } else {
