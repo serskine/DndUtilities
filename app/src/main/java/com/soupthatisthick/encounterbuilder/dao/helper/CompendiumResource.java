@@ -396,7 +396,7 @@ public class CompendiumResource {
      * @return null if the child entity does not exist
      */
     public Object getEntityChild(Entity entity) {
-        Category category = entity.getEntityCategory();
+        Category category = entity.getChildCategory();
         WriteDao<? extends Object> writeDao = getDaoForCategory(category);
         if (writeDao == null) {
             return null;

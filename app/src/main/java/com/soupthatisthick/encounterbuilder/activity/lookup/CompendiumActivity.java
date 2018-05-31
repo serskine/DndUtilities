@@ -16,7 +16,6 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
-import com.soupthatisthick.encounterbuilder.DndUtilApp;
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
@@ -45,6 +44,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
@@ -66,8 +66,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import soupthatisthick.encounterapp.R;
-
-import static com.soupthatisthick.encounterbuilder.util.sort.Category.DEFAULT;
 
 /**
  * Created by Owner on 4/12/2017.
@@ -458,18 +456,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addRecordsLike(@NonNull String searchText,  ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            if (dao instanceof EntityDao) {
-                EntityDao theEntityDao = (EntityDao) dao;
-                List<Entity> theEntities = theEntityDao.getRecordsLike(searchText);
-                for(Entity entity : theEntities) {
-                    Category category = entity.getEntityCategory();
-                    if (category!=null && category != DEFAULT) {
-                        Long id = entity.getCategoryColumnId(category);
-                    }
-                }
-            } else {
-                results.addAll(dao.getRecordsLike(searchText));
-            }
+            results.addAll(getDisplayObjects((List<? extends DaoModel>) dao.getRecordsLike(searchText)));
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -478,18 +465,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addAllRecords(ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            if (dao instanceof EntityDao) {
-                EntityDao theEntityDao = (EntityDao) dao;
-                List<Entity> theEntities = theEntityDao.getAllRecords();
-                for(Entity entity : theEntities) {
-                    Category category = entity.getEntityCategory();
-                    if (category!=null && category != DEFAULT) {
-                        Long id = entity.getCategoryColumnId(category);
-                    }
-                }
-            } else {
-                results.addAll(dao.getAllRecords());
-            }
+            results.addAll(getDisplayObjects((List<? extends DaoModel>) dao.getAllRecords()));
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -643,7 +619,10 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
 
     public WriteDao<? extends Object> getDaoForCategory(Category category) {
-        if (category==null) return null;
+        if (category==null) {
+            throw new RuntimeException("We can't determine a writeDao for a null category!");
+        }
+
         switch(category) {
             case CONDITION:
                 return conditionDao;
@@ -680,30 +659,67 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             case ENTITY:
                 return entityDao;
             case DEFAULT:
-                return null;
+            default:
+                throw new RuntimeException("Failed to determine a dao for category " + category + ".");
         }
-        throw new RuntimeException("Failed to determine a dao for category " + category + ".");
+    }
+
+    private List<? extends Object> getDisplayObjects(List<? extends DaoModel> foundItems) {
+        List<DaoModel> displayItems = new ArrayList<>();
+        for(DaoModel foundItem : foundItems) {
+            try {
+                Logger.debug("Looking for display item of " + foundItem.getClass().getSimpleName() + ": " + foundItem.toString());
+                DaoModel displayObject = (DaoModel) getDisplayObject(foundItem);
+                displayItems.add(displayObject);
+            } catch (Exception e) {
+                Logger.warning("Failed to add display object for found item. " + e.getMessage());
+            }
+        }
+        return displayItems;
     }
 
     /**
-     * This is used to get the child entity from of the specified Entity model
-     * @param entity is the pointer {@link Entity}
-     * @return null if the child entity does not exist
+     * This is a recursive method used to return the object we wish to display in the compendium.
+     * It it's an entity, it will recursively call itself until it finds a non-Entity object or null
+     * @param item is the item we want a display item for
+     * @return the object to be displayed
      */
-    public Object getEntityChild(Entity entity) {
-        Category category = entity.getEntityCategory();
-        WriteDao<? extends Object> writeDao = getDaoForCategory(category);
-        if (writeDao == null) {
-            return null;
-        } else {
-            Long theId = entity.getCategoryColumnId(category);
+    private Object getDisplayObject(DaoModel item) {
+        return getDisplayObject(" -> ", item);
+    }
+    private Object getDisplayObject(String prefix, DaoModel item) {
+
+
+
+        if (item==null) {
+            throw new RuntimeException("We can't get the display item of a null object!");
+        }
+        Logger.debug(prefix + "looking for display object of class " + item.getClass().getSimpleName() + "...");
+        Logger.debug(prefix + item.json());
+
+        // Recursively call by it's child object
+        if (item instanceof Entity) {
+            Entity entity = (Entity) item;
+            Category childCategory = entity.getChildCategory();
+            WriteDao<? extends Object> writeDao = getDaoForCategory(childCategory);
+            Logger.debug(prefix + "Found writeDao(" + writeDao.getTable() + ") for category " + childCategory + ".");
+
+            Long theId = entity.getCategoryColumnId(childCategory);
             if (theId != null) {
                 synchronized (DB_LOCK) {
-                    return writeDao.load(theId);
+                    DaoModel child = (DaoModel) writeDao.load(theId);
+                    if (child==null) {
+                        throw new RuntimeException("Entity(" + entity.getId() + ") refers to table " + writeDao.getTable() + "(" + theId + ") but the record does not exist!");
+                    } else {
+                        return getDisplayObject(" ->" + prefix, child);
+                    }
                 }
             } else {
-                return null;
+                throw new RuntimeException("Entity(" + entity.getId() + ") is isolated and points to nothing!");
             }
+        } else {
+            Logger.debug(prefix + "Found display item of type " + item.getClass().getSimpleName() + ".");
+            return item;
         }
     }
 

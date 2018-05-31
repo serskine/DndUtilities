@@ -165,7 +165,7 @@ public class Entity extends DaoModel {
         this.weaponId = null;
     }
     
-    public Category getEntityCategory() {
+    public Category getChildCategory() {
         if (this.entityId != null) return Category.ENTITY;
         if (this.armorId != null) return Category.ARMOR;
         if (this.characterAdvancementId != null) return Category.LEVEL;
@@ -214,6 +214,7 @@ public class Entity extends DaoModel {
             throw new RuntimeException("There can never be an entity column assigned to a null category.");
         }
         clearAllIds();
+
         switch(category) {
             case CONDITION:
                 setConditionId(newId);
@@ -263,17 +264,17 @@ public class Entity extends DaoModel {
             case BACKGROUND:
             case CHALLENGE_RATING:
             case DEFAULT:
-                
+            default:
+                throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
-        throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
     }
     
     public Long getCategoryColumnId(@NonNull Category category) {
         if (category==null) {
             throw new RuntimeException("There can never be an entity column assigned to a null category.");
         }
-        switch(category) {
 
+        switch(category) {
             case CONDITION:
                 return getConditionId();
             case CUSTOM_MONSTER:
@@ -307,9 +308,10 @@ public class Entity extends DaoModel {
             case BACKGROUND:
             case CHALLENGE_RATING:
             case DEFAULT:
-                        
+            default:
+                throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
-        throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
+
     }
 
     
@@ -577,4 +579,5 @@ public class Entity extends DaoModel {
     public void setWeaponId(Long weaponId) {
         this.weaponId = weaponId;
     }
+
 }

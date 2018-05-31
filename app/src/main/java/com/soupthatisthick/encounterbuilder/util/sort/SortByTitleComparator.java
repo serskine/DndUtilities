@@ -7,6 +7,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
 import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
 import com.soupthatisthick.encounterbuilder.model.lookup.Feat;
 import com.soupthatisthick.encounterbuilder.model.lookup.God;
@@ -109,6 +110,8 @@ public class SortByTitleComparator implements Comparator<Object> {
                 return ((LifeStyle) obj).getName();
             case MOUNT:
                 return ((Mount) obj).getName();
+            case ENTITY:
+                return ((Entity) obj).toString();
             default:
                 return obj.toString();
         }

@@ -338,4 +338,9 @@
     <string name="st_import_backup_desc">This will replace the working database with the data stored in the backup internal storage</string>
     <string name="st_import_external_desc">This will replace the working database with the data stored in the external storage location. You should backup the working data first before you do this.</string>
     <string name="st_reset_desc">This will reset all the data with the default data stored in the apk.</string>
+
+    <!-- storage titles foe the databases -->
+    <string name="st_db_logsheet">Logsheets Database</string>
+    <string name="st_db_encounter">Encounter Database</string>
+    <string name="st_db_compendium">Compendium Database</string>
 </resources>

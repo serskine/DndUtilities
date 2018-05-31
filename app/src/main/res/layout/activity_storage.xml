@@ -1,89 +1,128 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
->
+    android:orientation="vertical"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        style="@style/AppTheme.Scroll"
         >
-
-        <TextView
+        <CheckBox
+            android:text="@string/st_db_logsheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/messageView"
+            android:id="@+id/logsheet_toggle"
             android:layout_weight="1"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            android:visibility="gone"
-            />
-
-        <Button
-            android:text="@string/st_reset_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/resetButton"
-            android:layout_weight="1"
-            android:onClick="onResetButtonClicked"
-            style="@style/AppTheme.Scroll"
+            style="@style/AppTheme.CheckBox"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
             android:visibility="visible"
             />
 
-        <Button
-            android:text="@string/st_save_backup_title"
+        <CheckBox
+            android:text="@string/st_db_encounter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/saveBackupButton"
+            android:id="@+id/encounters_toggle"
             android:layout_weight="1"
-            android:onClick="onSaveBackupButtonClicked"
-            style="@style/AppTheme.Scroll"
+            style="@style/AppTheme.CheckBox"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
             android:visibility="visible"
             />
 
-        <Button
-            android:text="@string/st_load_backup_title"
+        <CheckBox
+            android:text="@string/st_db_compendium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/restoreBackupButton"
+            android:id="@+id/compendium_toggle"
             android:layout_weight="1"
-            android:onClick="onLoadBackupClicked"
-            style="@style/AppTheme.Scroll"
+            style="@style/AppTheme.CheckBox"
             android:textAllCaps="true"
             android:textSize="@dimen/text_big"
             android:visibility="visible"
             />
+        </LinearLayout>
 
-        <Button
-            android:text="@string/st_import_external_title"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/importButton"
             android:layout_weight="1"
-            android:onClick="onImportButtonClicked"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            android:visibility="visible"
-            />
 
-        <Button
-            android:text="@string/st_export_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/exportButton"
-            android:layout_weight="1"
-            android:onClick="onExportButtonClicked"
-            style="@style/AppTheme.Scroll"
-            android:textAllCaps="true"
-            android:textSize="@dimen/text_big"
-            android:visibility="visible"
-            />
-
-    </LinearLayout>
-</ScrollView>
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/messageView"
+                android:layout_weight="1"
+                style="@style/AppTheme.Scroll"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_normal"
+                android:visibility="invisible"
+                />
+        </ScrollView>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+        <TableRow>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/st_reset_title"
+                android:hint="@string/st_reset_desc"
+                android:onClick="onResetButtonClicked"
+                android:id="@+id/resetButton"
+                android:src="@drawable/ic_control_refresh"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ml_clear_button"
+                android:onClick="onLoadBackupClicked"
+                android:id="@+id/restoreBackupButton"
+                android:src="@drawable/ic_internal_download_black_24dp"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/st_save_backup_title"
+                android:hint="@string/st_save_backup_desc"
+                android:onClick="onSaveBackupButtonClicked"
+                android:id="@+id/saveBackupButton"
+                android:src="@drawable/ic_internal_upload_black_24dp"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/st_import_external_title"
+                android:hint="@string/st_import_external_desc"
+                android:onClick="onImportButtonClicked"
+                android:id="@+id/importButton"
+                android:src="@drawable/ic_external_download_black_24dp"
+                style="@style/AppTheme.Button"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/st_export_title"
+                android:hint="@string/st_export_desc"
+                android:onClick="onExportButtonClicked"
+                android:id="@+id/exportButton"
+                android:src="@drawable/ic_external_upload_black_24dp"
+                style="@style/AppTheme.Button"
+                />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -30,7 +30,7 @@ public class EntityDetailCell extends ReadCell<Entity> {
     @Override
     public void updateUi(Entity entity) {
         if (entity.getEntityId() != null) {
-            Category category = entity.getEntityCategory();
+            Category category = entity.getChildCategory();
             Long theId = entity.getCategoryColumnId(category);
 
         }
