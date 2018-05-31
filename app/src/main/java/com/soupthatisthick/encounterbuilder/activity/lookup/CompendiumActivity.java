@@ -122,10 +122,8 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         if (selectedPositions.contains(position))
         {
             selectedPositions.remove(position);
-            Logger.debug("Deselected position " + position);
         } else {
             selectedPositions.add(position);
-            Logger.debug("Selected position " + position);
         }
     }
 
@@ -577,7 +575,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             builder.setAdapter(itemListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Logger.debug("CLICKED ON POSITION " + which);
                     throw new RuntimeException("TODO: Implement adding to a list!");
                 }
             });
@@ -668,7 +665,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         List<DaoModel> displayItems = new ArrayList<>();
         for(DaoModel foundItem : foundItems) {
             try {
-                Logger.debug("Looking for display item of " + foundItem.getClass().getSimpleName() + ": " + foundItem.toString());
                 DaoModel displayObject = (DaoModel) getDisplayObject(foundItem);
                 displayItems.add(displayObject);
             } catch (Exception e) {
@@ -694,15 +690,12 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         if (item==null) {
             throw new RuntimeException("We can't get the display item of a null object!");
         }
-        Logger.debug(prefix + "looking for display object of class " + item.getClass().getSimpleName() + "...");
-        Logger.debug(prefix + item.json());
 
         // Recursively call by it's child object
         if (item instanceof Entity) {
             Entity entity = (Entity) item;
             Category childCategory = entity.getChildCategory();
             WriteDao<? extends Object> writeDao = getDaoForCategory(childCategory);
-            Logger.debug(prefix + "Found writeDao(" + writeDao.getTable() + ") for category " + childCategory + ".");
 
             Long theId = entity.getCategoryColumnId(childCategory);
             if (theId != null) {
@@ -718,7 +711,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                 throw new RuntimeException("Entity(" + entity.getId() + ") is isolated and points to nothing!");
             }
         } else {
-            Logger.debug(prefix + "Found display item of type " + item.getClass().getSimpleName() + ".");
             return item;
         }
     }
