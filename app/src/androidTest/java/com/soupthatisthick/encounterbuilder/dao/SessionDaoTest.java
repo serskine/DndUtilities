@@ -83,6 +83,11 @@ public class SessionDaoTest extends InstrumentationTest {
 
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     private static final void logList(Collection<Session> list)
     {
         int count = 0;

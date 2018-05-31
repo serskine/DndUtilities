@@ -35,7 +35,7 @@ public class ViewUtil {
     public static final int WARNING_TEXT_COLOR = 0xFFF5F900;
     public static final int WARING_HINT_COLOR = 0x77F5F900;
 
-    private static final int errorTextColor(Context context)
+    public static final int errorTextColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.error_text_color);
@@ -44,7 +44,7 @@ public class ViewUtil {
         }
     }
 
-    private static final int errorHintColor(Context context)
+    public static final int errorHintColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.error_hint_color);
@@ -68,7 +68,7 @@ public class ViewUtil {
     }
 
 
-    private static final int normalTextColor(Context context)
+    public static final int normalTextColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.normal_text_color);
@@ -78,7 +78,7 @@ public class ViewUtil {
         }
     }
 
-    private static final int normalHintColor(Context context)
+    public static final int normalHintColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.normal_hint_color);
@@ -87,7 +87,7 @@ public class ViewUtil {
         }
     }
 
-    private static final int warningTextColor(Context context)
+    public static final int warningTextColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.warning_text_color);
@@ -97,7 +97,7 @@ public class ViewUtil {
         }
     }
 
-    private static final int warningHintColor(Context context)
+    public static final int warningHintColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.warning_hint_color);
@@ -107,7 +107,7 @@ public class ViewUtil {
     }
 
 
-    private static final int validTextColor(Context context)
+    public static final int validTextColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.valid_text_color);
@@ -117,7 +117,7 @@ public class ViewUtil {
         }
     }
 
-    private static final int validHintColor(Context context)
+    public static final int validHintColor(Context context)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getColor(R.color.valid_hint_color);

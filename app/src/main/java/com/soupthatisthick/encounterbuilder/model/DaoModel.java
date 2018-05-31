@@ -1,6 +1,7 @@
 package com.soupthatisthick.encounterbuilder.model;
 
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
+import com.soupthatisthick.util.json.JsonUtil;
 
 /**
  * Created by Owner on 5/31/2017.
@@ -44,5 +45,9 @@ public abstract class DaoModel {
     public String toString()
     {
         return String.format("%s{%s}", getClass().getSimpleName(), getId());
+    }
+
+    public final String json() {
+        return JsonUtil.toJson(this, true);
     }
 }

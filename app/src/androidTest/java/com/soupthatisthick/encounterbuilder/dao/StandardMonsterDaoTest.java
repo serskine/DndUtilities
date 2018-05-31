@@ -39,6 +39,11 @@ public class StandardMonsterDaoTest extends InstrumentationTest {
         }
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     @Test
     public void testReadDao()
     {

@@ -9,6 +9,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.CustomMonsterDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
@@ -27,10 +28,13 @@ import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.model.Selection;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.dao.Dao;
 import com.soupthatisthick.util.dao.ReadDao;
+import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,6 +81,7 @@ public class CompendiumResource {
     private LifeStyleDao lifeStyleDao;
     private MountDao mountDao;
     private WeaponDao weaponDao;
+    private EntityDao entityDao;
 
     private ItemListDao itemListDao;
     private ItemDao itemDao;
@@ -193,11 +198,14 @@ public class CompendiumResource {
                         itemDao = new ItemDao(logsheetMaster);
                         initDao(R.string.vc_title_items, itemDao);
 
+                        entityDao = new EntityDao(dndMaster);
+                        initDao(R.string.vc_title_entity, entityDao);
+
                         Logger.info("Completed opening all the dao's!");
 
                         return Boolean.TRUE;
                     } catch (Exception e) {
-                        Logger.error("Failed to open all the dao's!", e);
+                        Logger.error("Failed to open all the dao's! " + e.getMessage(), e);
                         return Boolean.FALSE;
                     }
                 }
@@ -294,7 +302,17 @@ public class CompendiumResource {
     private void addRecordsLike(@NonNull String searchText, ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            results.addAll(dao.getRecordsLike(searchText));
+            if (dao == entityDao) {
+                List<Entity> theEntities = entityDao.getRecordsLike(searchText);
+                for(Entity theEntity : theEntities) {
+                    Object child = getEntityChild(theEntity);
+                    if (child!=null) {
+                        results.add(child);
+                    }
+                }
+            } else {
+                results.addAll(dao.getRecordsLike(searchText));
+            }
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -328,5 +346,70 @@ public class CompendiumResource {
         Collections.sort(theList, new SortByTitleComparator());
     }
 
+
+    public WriteDao<? extends Object> getDaoForCategory(Category category) {
+        if (category==null) return null;
+        switch(category) {
+            case CONDITION:
+                return conditionDao;
+            case CUSTOM_MONSTER:
+                return customMonsterDao;
+            case STANDARD_MONSTER:
+                return standardMonsterDao;
+            case MAGIC_ITEM:
+                return magicItemDao;
+            case SPELL:
+                return spellDao;
+            case FEAT:
+                return featDao;
+            case BACKGROUND:
+                return backgroundDao;
+            case ARMOR:
+                return armorDao;
+            case WEAPON:
+                return weaponDao;
+            case EQUIPMENT:
+                return equipmentDao;
+            case NOTE:
+                return notesDao;
+            case CHALLENGE_RATING:
+                return challengeRatingDao;
+            case LEVEL:
+                return levelDao;
+            case GOD:
+                return godsDao;
+            case LIFESTYLE:
+                return lifeStyleDao;
+            case MOUNT:
+                return mountDao;
+            case ENTITY:
+                return entityDao;
+            case DEFAULT:
+                return null;
+        }
+        throw new RuntimeException("Failed to determine a dao for category " + category + ".");
+    }
+
+    /**
+     * This is used to get the child entity from of the specified Entity model
+     * @param entity is the pointer {@link Entity}
+     * @return null if the child entity does not exist
+     */
+    public Object getEntityChild(Entity entity) {
+        Category category = entity.getChildCategory();
+        WriteDao<? extends Object> writeDao = getDaoForCategory(category);
+        if (writeDao == null) {
+            return null;
+        } else {
+            Long theId = entity.getCategoryColumnId(category);
+            if (theId != null) {
+                synchronized (DB_LOCK) {
+                    return writeDao.load(theId);
+                }
+            } else {
+                return null;
+            }
+        }
+    }
 
 }

@@ -9,6 +9,18 @@
         android:orientation="vertical"
         >
 
+        <Button
+            android:text="@string/editdata_manage_storage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/manageDatabaseStorageButton"
+            android:layout_weight="1"
+            android:onClick="onClickManageDatabaseStorage"
+            style="@style/AppTheme.Scroll"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_big"
+            />
+
 
         <Button
             android:text="@string/editdata_button_edit_custom_monsters"

@@ -186,6 +186,11 @@ public class WriteDaoTest extends InstrumentationTest {
 
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     @Test
     public void testCreate()
     {

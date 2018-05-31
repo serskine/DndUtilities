@@ -53,6 +53,11 @@ public class PcDaoTest extends InstrumentationTest {
 
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     private static final void logList(Collection<Pc> pcList)
     {
         int count = 0;

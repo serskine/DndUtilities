@@ -59,6 +59,11 @@ public class CustomMonsterDaoTest extends InstrumentationTest {
 
     }
 
+    @Override
+    protected void onTeardown() {
+
+    }
+
     private static final void logList(Collection<CustomMonster> list)
     {
         int count = 0;

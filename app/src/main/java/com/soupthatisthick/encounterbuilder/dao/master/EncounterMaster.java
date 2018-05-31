@@ -43,7 +43,7 @@ public class EncounterMaster extends DaoMaster {
         public void onCreate(SQLiteDatabase db) {
             super.onCreate(db);
 
-            Resources res = this.myContext.getResources();
+            Resources res = this.getContext().getResources();
             InputStream is = res.openRawResource(R.raw.encounters_db);
             String tag = "encounters_db";
 
@@ -72,7 +72,7 @@ public class EncounterMaster extends DaoMaster {
         @Override
         protected void upgrade(SQLiteDatabase db, int currentVersion) throws Exception {
             super.upgrade(db, currentVersion);
-            Resources res = this.myContext.getResources();
+            Resources res = this.getContext().getResources();
             InputStream is;
             String tag;
 

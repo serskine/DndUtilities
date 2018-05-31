@@ -21,9 +21,11 @@ import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.TextSelectionAdapter;
+import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
@@ -42,7 +44,10 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
@@ -50,6 +55,7 @@ import com.soupthatisthick.util.activity.ViewToggleListActivity;
 import com.soupthatisthick.util.adapters.WriteCellAdapter;
 import com.soupthatisthick.util.dao.Dao;
 import com.soupthatisthick.util.dao.ReadDao;
+import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,6 +95,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private LifeStyleDao lifeStyleDao;
     private MountDao mountDao;
     private WeaponDao weaponDao;
+    private EntityDao entityDao;
+
+    CompendiumResource compendiumResource;
 
     private ItemListDao itemListDao;
     private ItemDao itemDao;
@@ -113,10 +122,8 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         if (selectedPositions.contains(position))
         {
             selectedPositions.remove(position);
-            Logger.debug("Deselected position " + position);
         } else {
             selectedPositions.add(position);
-            Logger.debug("Selected position " + position);
         }
     }
 
@@ -135,8 +142,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private Set<String> selectedFilters = new HashSet<>();
 
 
-    private class FilterSelectionListener implements WriteCellAdapter.Listener
-    {
+    private class FilterSelectionListener implements WriteCellAdapter.Listener {
 
         @Override
         public void positionUpdated(
@@ -192,8 +198,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     /**
      * This will determine if we want to display all the filter tabs
      */
-    private void checkTabVisibility()
-    {
+    private void checkTabVisibility() {
         // Load the preference of the use filters
         boolean showTabs = globalPreferences.getBoolean(
                 getString(R.string.pref_use_filters_key),
@@ -220,8 +225,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     }
 
     @Override
-    public void loadAllData()
-    {
+    public void loadAllData() {
         final AsyncTask<Object, Object, Boolean> loadTask = new AsyncTask<Object, Object, Boolean>()
         {
 
@@ -315,11 +319,14 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                         weaponDao = new WeaponDao(dndMaster);
                         initDao(R.string.vc_title_weapons, weaponDao);
 
+                        entityDao = new EntityDao(dndMaster);
+                        initDao(R.string.vc_title_entity, entityDao);
+
                         Logger.info("Completed opening all the dao's!");
 
                         return Boolean.TRUE;
                     } catch (Exception e) {
-                        Logger.error("Failed to open all the dao's!", e);
+                        Logger.error("Failed to open all the dao's!\n" + e.getMessage(), e);
                         finish();
                         return Boolean.FALSE;
                     }
@@ -447,7 +454,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addRecordsLike(@NonNull String searchText,  ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            results.addAll(dao.getRecordsLike(searchText));
+            results.addAll(getDisplayObjects((List<? extends DaoModel>) dao.getRecordsLike(searchText)));
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -456,7 +463,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private void addAllRecords(ReadDao<? extends Object> dao, List<Object> results)
     {
         try {
-            results.addAll(dao.getAllRecords());
+            results.addAll(getDisplayObjects((List<? extends DaoModel>) dao.getAllRecords()));
         } catch (Exception e) {
             onDaoSessionFail(dao, e);
         }
@@ -568,20 +575,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             builder.setAdapter(itemListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Logger.debug("CLICKED ON POSITION " + which);
-//                        ItemList list = itemListAdapter.getCastedItem(which);
-//                        for (Object itemObject : items) {
-//                            if (itemObject instanceof DaoModel) {
-//                                DaoModel model = (DaoModel) itemObject;
-//                                Item newItem = itemDao.create();
-//                                newItem.init(model);
-//                                itemDao.update(newItem);
-//                                Logger.debug(" itemObject (" + itemObject.toString() + ") has been added to list " + list.toString());
-//                            } else {
-//                                Logger.warning(" itemObject (" + itemObject.toString() + ") is not an instance of a DaoModel.");
-//                            }
-//                        }
-
+                    throw new RuntimeException("TODO: Implement adding to a list!");
                 }
             });
 
@@ -618,5 +612,104 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         }
         return items;
     }
+
+
+
+    public WriteDao<? extends Object> getDaoForCategory(Category category) {
+        if (category==null) {
+            throw new RuntimeException("We can't determine a writeDao for a null category!");
+        }
+
+        switch(category) {
+            case CONDITION:
+                return conditionDao;
+            case CUSTOM_MONSTER:
+                return customMonsterDao;
+            case STANDARD_MONSTER:
+                return standardMonsterDao;
+            case MAGIC_ITEM:
+                return magicItemDao;
+            case SPELL:
+                return spellDao;
+            case FEAT:
+                return featDao;
+            case BACKGROUND:
+                return backgroundDao;
+            case ARMOR:
+                return armorDao;
+            case WEAPON:
+                return weaponDao;
+            case EQUIPMENT:
+                return equipmentDao;
+            case NOTE:
+                return notesDao;
+            case CHALLENGE_RATING:
+                return challengeRatingDao;
+            case LEVEL:
+                return levelDao;
+            case GOD:
+                return godsDao;
+            case LIFESTYLE:
+                return lifeStyleDao;
+            case MOUNT:
+                return mountDao;
+            case ENTITY:
+                return entityDao;
+            case DEFAULT:
+            default:
+                throw new RuntimeException("Failed to determine a dao for category " + category + ".");
+        }
+    }
+
+    private List<? extends Object> getDisplayObjects(List<? extends DaoModel> foundItems) {
+        List<DaoModel> displayItems = new ArrayList<>();
+        for(DaoModel foundItem : foundItems) {
+            try {
+                DaoModel displayObject = (DaoModel) getDisplayObject(foundItem);
+                displayItems.add(displayObject);
+            } catch (Exception e) {
+                Logger.warning("Failed to add display object for found item. " + e.getMessage());
+            }
+        }
+        return displayItems;
+    }
+
+    /**
+     * This is a recursive method used to return the object we wish to display in the compendium.
+     * It it's an entity, it will recursively call itself until it finds a non-Entity object or null
+     * @param item is the item we want a display item for
+     * @return the object to be displayed
+     */
+    private Object getDisplayObject(DaoModel item) {
+
+        if (item==null) {
+            throw new RuntimeException("We can't get the display item of a null object!");
+        }
+
+        // Recursively call by it's child object
+        if (item instanceof Entity) {
+            Entity entity = (Entity) item;
+            Category childCategory = entity.getChildCategory();
+            WriteDao<? extends Object> writeDao = getDaoForCategory(childCategory);
+
+            Long theId = entity.getCategoryColumnId(childCategory);
+            if (theId != null) {
+                synchronized (DB_LOCK) {
+                    DaoModel child = (DaoModel) writeDao.load(theId);
+                    if (child==null) {
+                        throw new RuntimeException("Entity(" + entity.getId() + ") refers to table " + writeDao.getTable() + "(" + theId + ") but the record does not exist!");
+                    } else {
+                        return getDisplayObject(child);
+                    }
+                }
+            } else {
+                throw new RuntimeException("Entity(" + entity.getId() + ") is isolated and points to nothing!");
+            }
+        } else {
+            return item;
+        }
+    }
+
+
 }
 

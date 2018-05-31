@@ -11,11 +11,15 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.soupthatisthick.util.FileHelper;
 import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.dao.DaoMaster;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,16 +39,17 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
      * storage. The package of the application is part of the path of the
      * directory.
      */
-    protected final String DB_DIR;
     protected final String DB_NAME;
     protected final String DB_PATH;
-    protected final String OLD_DB_PATH;
 
     protected final Context myContext;
 
     private boolean createDatabase = false;
     private boolean upgradeDatabase = false;
     private boolean copyToExternalStorage = false;
+
+    private File externalDir;
+    private File internalDir;
 
 
     /**
@@ -54,20 +59,22 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
      * @param context
      */
     public DatabaseHelper(Context context, String dbDirectory, String dbName, int dbVersion) {
-        super(context, dbName, null, dbVersion);
+        super(
+                context,
+                dbName,
+                null,
+                dbVersion
+        );
 
-        myContext = context;
+        myContext = context.getApplicationContext();
 
+        externalDir = context.getApplicationContext().getExternalFilesDir(null);
+        internalDir = context.getApplicationContext().getFilesDir();
 
         DB_NAME = dbName;
 
-        // Get the path of the database that is based on the context.
-        DB_PATH = myContext.getDatabasePath(DB_NAME).getAbsolutePath();
-
-        DB_DIR = dbDirectory;
-
-        // This is where we will put a copy of the old database file.
-        OLD_DB_PATH = myContext.getExternalFilesDir(null) + "/old_" + DB_NAME;
+        // Relative path of the file given the desired type of directory context
+        DB_PATH = dbDirectory;
 
         initializeDataBase();
 
@@ -81,6 +88,7 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
      */
     protected final void migrateDatabase(SQLiteDatabase db, int prevVersion, int targetVersion) throws Exception
     {
+        Logger.info("Migrating database " + db.getPath() + " from version " + prevVersion + " to version " + targetVersion);
         if (targetVersion > prevVersion)
         {
             for(int version = prevVersion; version < targetVersion; version++)
@@ -125,9 +133,12 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
          * before opening the database. In all cases opening the database copies
          * the database in internal storage to the cache.
          */
-        getWritableDatabase();
+        SQLiteDatabase currentDb = getWritableDatabase();
 
+        Logger.info("Initializing currentDb version " + currentDb.getVersion());
+        upgradeDatabase = true;
         if (createDatabase) {
+            Logger.info("Creating database " + DB_NAME);
             copyToExternalStorage = true;
             /*
              * If the database is created by the copy method, then the creation
@@ -141,9 +152,10 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
                  */
                 copyDatabaseFromAssetsFolderToSystemFolder();
             } catch (IOException e) {
-                Logger.error(e.getMessage(), e);
+                Logger.warning(e.getMessage());
             }
         } else if (upgradeDatabase) {
+            Logger.info("Keeping the old database " + getWritableDatabase().getPath());
             copyToExternalStorage = true;
             /*
              * If the database is upgraded by the copy and reload method, then
@@ -155,33 +167,18 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
              * database into the new database in the cache and then deleting the
              * old database from internal storage.
              */
+            Logger.debug("Upgrading the old database");
+
             try {
-                Logger.info("Copying of the database file to a new location");
-                Logger.info(" - " + DB_PATH + " => " + OLD_DB_PATH);
-                FileHelper.copyFile(DB_PATH, OLD_DB_PATH);  // Remember the old copy of the database
-
-                copyDatabaseFromAssetsFolderToSystemFolder();
-
-                /*
-                 * Add code to load data into the new database from the old
-                 * database and then delete the old database from internal
-                 * storage after all data has been transferred.
-                 */
-
+                copyWorkingDatabaseToExternalStorageAsBackup();
             } catch (IOException e) {
-                throw new Error("Error copying database", e);
+                Logger.warning(e.getMessage());
             }
-        }
 
-        // Copy from the system folder into the shared external storage folder
-        if (copyToExternalStorage) {
             try {
-                copyDatabaseFromSystemFolderToSharedExternalStorage();
-                copyToExternalStorage = false;
-                Logger.info("Finished copying the used database into the shared external storage folder.");
-            } catch (Exception e) {
-                copyToExternalStorage = true;   // Attempt again next time.
-                Logger.error("Failed to copy used system database into shared external storage.", e);
+                copyDatabaseFromAssetsFolderToSystemFolder();
+            } catch (IOException e) {
+                Logger.warning(e.getMessage());
             }
         }
 
@@ -193,7 +190,7 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
      */
     private void copyDatabaseFromSystemFolderToSharedExternalStorage() throws IOException {
         String inputPath = DB_PATH;
-        String outputPath = myContext.getExternalFilesDir(null) + "/" + DB_NAME;
+        String outputPath = myContext.getApplicationContext().getExternalFilesDir(null) + "/" + DB_NAME;
         Logger.info("Copying the system database to the external files folder for sharing.");
         Logger.info("- From " + inputPath + " => " + outputPath);
         /*
@@ -228,7 +225,7 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
     private void copyDatabaseFromAssetsFolderToSharedExternalStorage() throws IOException {
         Logger.info("Copying assets => external storage");
 
-        String outputPath = myContext.getExternalFilesDir(null) + "/" + DB_NAME;
+        String outputPath = externalDir.getAbsolutePath() + "/" + DB_PATH + DB_NAME;
 
         // Close SQLiteOpenHelper so it will commit the created empty database
         // to internal storage.
@@ -236,6 +233,28 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
 
         // Open the database in the assets folder as the input stream.
         InputStream myInput = myContext.getAssets().open(DB_NAME);
+
+        // Open the empty theDaoMaster in external shared storage as the output stream.
+        OutputStream myOutput = new FileOutputStream(outputPath);
+
+        // Copy over the empty theDaoMaster shared external storage with the database in the assets folder.
+        FileHelper.copyFile(myInput, myOutput);
+
+        // Access the copied database so SQLiteHelper will cache it and mark it as created.
+        getWritableDatabase().close();
+    }
+
+    private void copyWorkingDatabaseToExternalStorageAsBackup() throws IOException {
+        Logger.info("Copying assets => external storage");
+
+        String outputPath = externalDir.getAbsolutePath() + "/" + DB_PATH + getBackupFilename(DB_NAME);
+
+        // Close SQLiteOpenHelper so it will commit the created empty database
+        // to internal storage.
+        close();
+
+        // Open the database in the assets folder as the input stream.
+        InputStream myInput = new FileInputStream(externalDir.getAbsolutePath() + DB_NAME);
 
         // Open the empty theDaoMaster in external shared storage as the output stream.
         OutputStream myOutput = new FileOutputStream(outputPath);
@@ -262,20 +281,21 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
         /*
          * Open the empty theDaoMaster in interal storage as the output stream.
          */
-        Logger.info(" - opening target file " + DB_PATH);
-        OutputStream myOutput = new FileOutputStream(DB_PATH);
+        final String outputPath = externalDir.getAbsolutePath() + "/" + DB_NAME;
+        Logger.info(" - opening target file " + outputPath);
+        OutputStream myOutput = new FileOutputStream(outputPath);
 
         /*
          * Open the database in the assets folder as the input stream.
          */
-        Logger.info(" - opening source file " + DB_NAME);
+        Logger.info(" - opening source file in the assets folder" + DB_NAME);
         InputStream myInput = myContext.getAssets().open(DB_NAME);
 
         /*
          * Copy over the empty theDaoMaster in internal storage with the database in the
          * assets folder.
          */
-        Logger.info(" - copying from " + DB_NAME + " => " + DB_PATH);
+        Logger.info(" - copying from " + DB_NAME + " => " + outputPath);
         FileHelper.copyFile(myInput, myOutput);
 
         /*
@@ -412,5 +432,9 @@ public abstract class DatabaseHelper extends SQLiteOpenHelper
             Logger.error(String.format("[%s] FAILED!! %s", tag, statement), e);
             return false;
         }
+    }
+
+    protected static String getBackupFilename(String originalFilename) {
+        return "old_" + originalFilename;
     }
 }
