@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemAdapter;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Item;
 import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
@@ -93,7 +93,7 @@ public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
 
     @Override
     protected WriteDao<ItemList> createMastDao(DaoMaster daoMaster) throws Exception {
-        return new ItemListDao(daoMaster);
+        return new EntityListDao(daoMaster);
     }
 
     @Override

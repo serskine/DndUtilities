@@ -30,7 +30,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LevelDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
@@ -99,7 +99,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
     CompendiumResource compendiumResource;
 
-    private ItemListDao itemListDao;
+    private EntityListDao entityListDao;
     private ItemDao itemDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
@@ -264,7 +264,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
 
                         // Open these dao's so we can add items to lists from the Compendium Activity
-                        itemListDao = new ItemListDao(logsheetMaster);
+                        entityListDao = new EntityListDao(logsheetMaster);
                         itemDao = new ItemDao(logsheetMaster);
 
                         //
@@ -571,7 +571,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             builder.setTitle(R.string.vc_add_to_item_list_dialog_title);
 
             final ItemListSummaryAdapter itemListAdapter = new ItemListSummaryAdapter(getLayoutInflater());
-            itemListAdapter.setData(itemListDao.getAllRecords());
+            itemListAdapter.setData(entityListDao.getAllRecords());
             builder.setAdapter(itemListAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

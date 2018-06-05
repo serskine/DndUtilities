@@ -38,14 +38,8 @@ public class MainActivity extends AppActivity {
 
     public void onClickTestButton(View view)
     {
-        EditTableActivity.launch(
-            this,
-            DaoMaster.DATABASE_FILE_PATH,
-            EncounterMaster.DB_FILE,
-            EncounterMaster.VERSION,
-            "TEST_TABLE",
-            "id"
-        );
+        Intent intent = new Intent(this, EditCustomListsActivity.class);
+        startActivity(intent);
     }
 
     public void onClickMeasureEncounterButton(View view)

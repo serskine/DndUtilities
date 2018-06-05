@@ -57,11 +57,6 @@ public class EditDatabasesActivity extends AppActivity {
         startActivity(intent);
     }
 
-    public void onClickEditMap(View view) {
-        Intent intent = new Intent(this, EditMapActivity.class);
-        startActivity(intent);
-    }
-
     public void onClickEditCustomMonsters(View view)
     {
         Intent intent = new Intent(this, EditMonsterManualActivity.class);

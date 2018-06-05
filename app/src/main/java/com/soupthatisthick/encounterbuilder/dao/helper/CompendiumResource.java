@@ -14,7 +14,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LevelDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
@@ -83,7 +83,7 @@ public class CompendiumResource {
     private WeaponDao weaponDao;
     private EntityDao entityDao;
 
-    private ItemListDao itemListDao;
+    private EntityListDao entityListDao;
     private ItemDao itemDao;
 
     protected final Context context;
@@ -192,8 +192,8 @@ public class CompendiumResource {
 
 
                         // These might be excluded from the compendium...
-                        itemListDao = new ItemListDao(logsheetMaster);
-                        initDao(R.string.vc_title_item_list, itemListDao);
+                        entityListDao = new EntityListDao(logsheetMaster);
+                        initDao(R.string.vc_title_item_list, entityListDao);
 
                         itemDao = new ItemDao(logsheetMaster);
                         initDao(R.string.vc_title_items, itemDao);

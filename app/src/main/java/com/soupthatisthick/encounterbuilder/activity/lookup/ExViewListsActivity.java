@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomListAdapter;
@@ -28,7 +28,7 @@ public class ExViewListsActivity extends DaoViewListActivity<ItemList> {
 
     @Override
     protected ReadDao<ItemList> createReadDao(DaoMaster db) throws Exception {
-        return new ItemListDao(db);
+        return new EntityListDao(db);
     }
 
     @Override

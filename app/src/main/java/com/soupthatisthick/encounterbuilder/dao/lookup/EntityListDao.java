@@ -20,13 +20,13 @@ import java.util.Set;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ItemListDao extends WriteDao<ItemList> {
+public class EntityListDao extends WriteDao<ItemList> {
 
     public static final String TBL_LISTS = "LISTS";
     public static final String COL_ID = "id";
     public static final String COL_NAME = "name";
 
-    public ItemListDao(DaoMaster daoMaster) throws IOException {
+    public EntityListDao(DaoMaster daoMaster) throws IOException {
         super(daoMaster, TBL_LISTS);
     }
 
