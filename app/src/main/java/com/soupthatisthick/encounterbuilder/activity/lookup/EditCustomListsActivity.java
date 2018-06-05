@@ -1,6 +1,7 @@
 package com.soupthatisthick.encounterbuilder.activity.lookup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.soupthatisthick.util.activity.DaoEditListActivity;
 import com.soupthatisthick.util.activity.DaoEditToggleListActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import soupthatisthick.encounterapp.R;
 
@@ -33,7 +35,13 @@ public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, I
 
     @Override
     protected void requestEditDetail(Long detailId, ItemList itemList, boolean deleteOnCancel) {
-        Logger.warning("Editing lists is not yet implemented!");
+        Logger.debug("Request to edit custom list (" + detailId + ", " + itemList.toString() + ", " + deleteOnCancel + ")");
+        Logger.debug(JsonUtil.toJson(itemList, true));
+
+        Intent intent = new Intent(this, EditItemListActivity.class);
+        intent.putExtra(DaoEditActivity.KEY_DELETE_ON_CANCEL, deleteOnCancel);
+        intent.putExtra(DaoEditActivity.KEY_MODEL_ID, detailId);
+        startActivity(intent);
     }
 
     @Override

@@ -1,21 +1,14 @@
 package com.soupthatisthick.encounterbuilder.activity.lookup;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemAdapter;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
-import com.soupthatisthick.encounterbuilder.model.lookup.Item;
 import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
-import com.soupthatisthick.encounterbuilder.util.adapter.CustomListAdapter;
-import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
 import com.soupthatisthick.util.Logger;
-import com.soupthatisthick.util.activity.DaoEditListActivity;
+import com.soupthatisthick.util.activity.DaoEditActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
@@ -26,34 +19,18 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
+public class EditItemListActivity extends DaoEditActivity<ItemList> {
 
-    ItemList mastModel = new ItemList();
-    UiWatcher uiWatcher = new UiWatcher() {
-        @Override
-        protected void onUiUpdate() {
-            updateUi();
-        }
-    };
-
-    private EditText nameEdit;
+    EditText nameEdit;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        nameEdit = (EditText) findViewById(R.id.eil_name_edit);
+    protected int getDeleteTitleStringId() {
+        return R.string.eil_delete_title;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        uiWatcher.listenTo(nameEdit);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        uiWatcher.ignore(nameEdit);
+    protected int getDeleteMessageStringId() {
+        return R.string.eil_delete_message;
     }
 
     @Override
@@ -62,58 +39,65 @@ public class EditItemListActivity extends DaoEditListActivity<ItemList, Item> {
     }
 
     @Override
-    protected void requestEditDetail(Long detailId, Item item, boolean deleteOnCancel) {
-        Logger.debug("REQUEST EDIT DETAIL(" + detailId + ", " + item + ", " + deleteOnCancel + ")");
-    }
-
-    @Override
-    protected int getClearListTitleStringId() {
-        return R.string.eil_clear_list_title;
-    }
-
-    @Override
-    protected int getClearListMessageStringId() {
-        return R.string.eil_clear_list_message;
-    }
-
-    @Override
-    protected int getDeleteDetailTitleStringId() {
-        return R.string.eil_delete_item_title;
-    }
-
-    @Override
-    protected int getDeleteDetailMessageStringId() {
-        return R.string.eil_delete_message;
-    }
-
-    @Override
-    protected WriteDao<Item> createDetailDao(DaoMaster daoMaster) throws Exception {
-        return new ItemDao(daoMaster);
-    }
-
-    @Override
-    protected WriteDao<ItemList> createMastDao(DaoMaster daoMaster) throws Exception {
+    protected WriteDao createWriteDao(DaoMaster daoMaster) throws Exception {
         return new EntityListDao(daoMaster);
     }
 
     @Override
-    protected CustomListAdapter<Item> createListAdapter(LayoutInflater layoutInflater) {
-        return new ExItemAdapter(layoutInflater, theDaoMaster);
+    protected void initModelWithoutUi() {
+        nameEdit = (EditText) findViewById(R.id.eil_name_edit);
+        model = new ItemList();
     }
 
-
-    /**
-     * This will save the information about the list of information.
-     *
-     * @param view
-     */
     @Override
-    protected void onClickSaveMastButton(View view) {
-
-        getMastDao().update(mastModel);
+    protected void listenToUi() {
+        uiWatcher.listenTo(nameEdit);
     }
 
-    protected final void updateUi() {
-        mastModel.setName(nameEdit.getText().toString());
+    @Override
+    protected void ignoreUi() {
+        uiWatcher.ignore(nameEdit);
+    }
+
+    @Override
+    protected void updateModelFromUi() {
+        try {
+            Logger.info("name edit(" + nameEdit.getText() + ") => model.getName()");
+            model.setName(nameEdit.getText().toString());
+            Logger.info("name edit(" + model.getName() + ")");
+        } catch (Exception e) {
+            Logger.error("Failed to update the model from the ui! \n" + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    protected void updateUiFromModel() {
+        try {
+            Logger.info("name edit() <= model.getName(" + model.getName() + ")");
+            nameEdit.setText(model.getName());
+            Logger.info("name edit(" + nameEdit.getText() + ")");
+        } catch (Exception e) {
+            Logger.error("Failed to update the ui from the model. \n" + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    protected View findSaveButton() {
+        return findViewById(R.id.eil_save_button);
+    }
+
+    @Override
+    protected View findDeleteButton() {
+        return findViewById(R.id.eil_delete_button);
+    }
+
+    @Override
+    protected View findCancelButton() {
+        return findViewById(R.id.eil_cancel_button);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_edit_item_list;
     }
 }

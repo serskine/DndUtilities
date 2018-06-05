@@ -18,6 +18,7 @@ import android.widget.ToggleButton;
 
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
+import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemListAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.TextSelectionAdapter;
@@ -47,6 +48,7 @@ import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
@@ -56,6 +58,7 @@ import com.soupthatisthick.util.adapters.WriteCellAdapter;
 import com.soupthatisthick.util.dao.Dao;
 import com.soupthatisthick.util.dao.ReadDao;
 import com.soupthatisthick.util.dao.WriteDao;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -560,24 +563,57 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      */
     public void onAddToListButtonClicked(View view)
     {
+
         try {
             final List<Object> items = getExpandedPositions();
-            Logger.info("TODO: Implement! We want to add " + items.size() + " expanded items to a list.");
-            for (Object item : items) {
-                Logger.info(" - " + item.toString());
+            Logger.debug("We have selected " + items.size() + " to add to a list.");
+            Logger.debug(JsonUtil.toJson(items, true));
+            if (items.size()<1) {
+                throw new RuntimeException("We did not select any items to add to an entity list.");
             }
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.vc_add_to_item_list_dialog_title);
 
             final ItemListSummaryAdapter itemListAdapter = new ItemListSummaryAdapter(getLayoutInflater());
-            itemListAdapter.setData(entityListDao.getAllRecords());
-            builder.setAdapter(itemListAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    throw new RuntimeException("TODO: Implement adding to a list!");
+            final List<ItemList> listOptions = entityListDao.getAllRecords();
+
+            Logger.debug("The number of lists to choose from = " + listOptions.size() + " lists.");
+            Logger.debug(JsonUtil.toJson(listOptions, true));
+
+            if (listOptions.size()<1) {
+                throw new RuntimeException("There is no list we can add the selected items to.");
+            }
+
+
+
+            itemListAdapter.setData(listOptions);
+            builder.setAdapter(
+                itemListAdapter,
+                (dialog, which) -> {
+                    try {
+                        ItemList itemList = itemListAdapter.getCastedItem(which);
+                        for (Object item : items) {
+                            try {
+                                if (item instanceof DaoModel) {
+                                    DaoModel daoModel = (DaoModel) item;
+                                    Entity entity = entityDao.create();
+                                    Category category = Category.parse(item);
+                                    entity.setParentId(itemList.getId());
+                                    entity.setCategoryColumnId(category, daoModel.getId());
+                                    entityDao.update(entity);
+                                } else {
+                                    Logger.warning("We have a selected item that is not a dao model in position.");
+                                }
+                            } catch (Exception e) {
+                                Logger.warning("Failed to add selected item (" + item + ") to list " + itemList + ". \n" + e.getMessage());
+                            }
+                        }
+                    } catch (Exception e) {
+                        Logger.error(e.getMessage(), e);
+                    }
                 }
-            });
+            );
 
             builder.setNegativeButton(
                 R.string.dialog_cancel,
