@@ -5,7 +5,17 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.soupthatisthick.encounterbuilder.model.DaoModel;
+import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
+import com.soupthatisthick.encounterbuilder.model.lookup.God;
+import com.soupthatisthick.encounterbuilder.model.lookup.Level;
+import com.soupthatisthick.encounterbuilder.model.lookup.LifeStyle;
+import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
+import com.soupthatisthick.encounterbuilder.model.lookup.Note;
+import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
+import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
@@ -23,11 +33,14 @@ public class EntityDao extends WriteDao<Entity> {
 
     public static final String TBL_ENTITY = "ENTITY";
     public static final String COL_ID = "id";
+    public static final String COL_PARENT = "parent";
     public static final String COL_METADATA = "metadata";
 
     public static final String COL_ENTITY = "ENTITY";
     public static final String COL_ARMOR = "ARMOR";
+    public static final String COL_BACKGROUND = "BACKGROUND";
     public static final String COL_CHARACTER_ADVANCEMENT = "CHARACTER_ADVANCEMENT";
+    public static final String COL_CR_DETAILS = "CR_DETAILS";
     public static final String COL_CONDITIONS = "CONDITIONS";
     public static final String COL_CONTAINERS = "CONTAINERS";
     public static final String COL_CUSTOM_MONSTERS = "CUSTOM_MONSTERS";
@@ -71,13 +84,15 @@ public class EntityDao extends WriteDao<Entity> {
     @Override
     public ContentValues getContentValues(Entity entity) {
         ContentValues cv = new ContentValues();
-        
+
         cv.put(COL_ID, entity.getId());
         cv.put(COL_METADATA, entity.getMetadata());
 
         cv.put(COL_ENTITY, entity.getEntityId());
         cv.put(COL_ARMOR, entity.getArmorId());
-        cv.put(COL_CHARACTER_ADVANCEMENT, entity.getConditionId());
+        cv.put(COL_BACKGROUND, entity.getBackgroundId());
+        cv.put(COL_CHARACTER_ADVANCEMENT, entity.getCharacterAdvancementId());
+        cv.put(COL_CONDITIONS, entity.getConditionId());
         cv.put(COL_CONTAINERS, entity.getContainerId());
         cv.put(COL_CUSTOM_MONSTERS, entity.getCustomMonsterId());
         cv.put(COL_DAO_SEARCHABLE, entity.getSearchableDaoId());
@@ -105,7 +120,7 @@ public class EntityDao extends WriteDao<Entity> {
         cv.put(COL_TRADE_GOODS, entity.getTradeGoodId());
         cv.put(COL_WATERBORNE_VECHICLES, entity.getWaterborneVechicleId());
         cv.put(COL_WEAPONS, entity.getWeaponId());
-        
+
         return cv;
     }
 
@@ -139,11 +154,15 @@ public class EntityDao extends WriteDao<Entity> {
 
         Entity entity = new Entity();
         entity.setId(cursor.getLong(cursor.getColumnIndex(COL_ID)));
+        entity.setParentId(cursor.getLong(cursor.getColumnIndex(COL_PARENT)));
         entity.setMetadata(cursor.getString(cursor.getColumnIndex(COL_METADATA)));
 
         entity.setEntityId(cursor.getLong(cursor.getColumnIndex(COL_ENTITY)));
         entity.setArmorId(cursor.getLong(cursor.getColumnIndex(COL_ARMOR)));
-        entity.setConditionId(cursor.getLong(cursor.getColumnIndex(COL_CHARACTER_ADVANCEMENT)));
+        entity.setBackgroundId(cursor.getLong(cursor.getColumnIndex(COL_BACKGROUND)));
+        entity.setConditionId(cursor.getLong(cursor.getColumnIndex(COL_CONDITIONS)));
+        entity.setChallengeRatingId(cursor.getLong(cursor.getColumnIndex(COL_CR_DETAILS)));
+        entity.setCharacterAdvancementId(cursor.getLong(cursor.getColumnIndex(COL_CHARACTER_ADVANCEMENT)));
         entity.setContainerId(cursor.getLong(cursor.getColumnIndex(COL_CONTAINERS)));
         entity.setCustomMonsterId(cursor.getLong(cursor.getColumnIndex(COL_CUSTOM_MONSTERS)));
         entity.setSearchableDaoId(cursor.getLong(cursor.getColumnIndex(COL_DAO_SEARCHABLE)));
@@ -198,4 +217,5 @@ public class EntityDao extends WriteDao<Entity> {
         columns.add(COL_ID);
         return columns;
     }
+
 }

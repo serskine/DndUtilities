@@ -13,7 +13,7 @@ import com.soupthatisthick.encounterbuilder.util.sort.Category;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 // @Entity(nameInDb = "LISTS")
-public class ItemList extends DaoModel {
+public class EntityList extends DaoModel {
 
     // @Id
     // @Property(nameInDb = "id")
@@ -23,13 +23,13 @@ public class ItemList extends DaoModel {
     private String name;
 
     // @Generated(hash = 383842011)
-    public ItemList(Long id, String name) {
+    public EntityList(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
     // @Generated(hash = 70580157)
-    public ItemList() {
+    public EntityList() {
     }
 
     /**

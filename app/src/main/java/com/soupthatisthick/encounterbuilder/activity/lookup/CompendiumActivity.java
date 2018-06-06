@@ -30,7 +30,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LevelDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
@@ -44,9 +44,11 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
@@ -56,6 +58,7 @@ import com.soupthatisthick.util.adapters.WriteCellAdapter;
 import com.soupthatisthick.util.dao.Dao;
 import com.soupthatisthick.util.dao.ReadDao;
 import com.soupthatisthick.util.dao.WriteDao;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,10 +100,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private WeaponDao weaponDao;
     private EntityDao entityDao;
 
-    CompendiumResource compendiumResource;
-
-    private ItemListDao itemListDao;
-    private ItemDao itemDao;
+    private EntityListDao entityListDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -264,8 +264,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
 
                         // Open these dao's so we can add items to lists from the Compendium Activity
-                        itemListDao = new ItemListDao(logsheetMaster);
-                        itemDao = new ItemDao(logsheetMaster);
+                        entityListDao = new EntityListDao(dndMaster);
 
                         //
                         // Start opening all the dao's for looking up items.
@@ -560,24 +559,65 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      */
     public void onAddToListButtonClicked(View view)
     {
+
         try {
             final List<Object> items = getExpandedPositions();
-            Logger.info("TODO: Implement! We want to add " + items.size() + " expanded items to a list.");
-            for (Object item : items) {
-                Logger.info(" - " + item.toString());
+            Logger.debug("We have selected " + items.size() + " to add to a list.");
+            Logger.debug(JsonUtil.toJson(items, true));
+            if (items.size()<1) {
+                throw new RuntimeException("We did not select any items to add to an entity list.");
             }
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.vc_add_to_item_list_dialog_title);
 
             final ItemListSummaryAdapter itemListAdapter = new ItemListSummaryAdapter(getLayoutInflater());
-            itemListAdapter.setData(itemListDao.getAllRecords());
-            builder.setAdapter(itemListAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    throw new RuntimeException("TODO: Implement adding to a list!");
+            final List<EntityList> listOptions = entityListDao.getAllRecords();
+
+            Logger.debug("The number of lists to choose from = " + listOptions.size() + " lists.");
+            Logger.debug(JsonUtil.toJson(listOptions, true));
+
+            if (listOptions.size()<1) {
+                throw new RuntimeException("There is no list we can add the selected items to.");
+            }
+
+
+
+            itemListAdapter.setData(listOptions);
+            builder.setAdapter(
+                itemListAdapter,
+                (dialog, which) -> {
+                    try {
+                        EntityList entityList = itemListAdapter.getCastedItem(which);
+                        for (Object item : items) {
+                            try {
+                                if (item instanceof DaoModel) {
+                                    final DaoModel daoModel = (DaoModel) item;
+                                    final Entity entity = entityDao.create();
+                                    final Category category = Category.parse(item);
+                                    final WriteDao writeDao = getDaoForCategory(category);
+                                    String metadata = writeDao.getDesirableMetadata(item);
+
+                                    // append desirable metadata from the item list as well so we
+                                    // can search for the item using information we know about the list.
+                                    metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+
+                                    entity.setParentId(entityList.getId());
+                                    entity.setMetadata(metadata);
+                                    entity.setCategoryColumnId(category, daoModel.getId());
+                                    entityDao.update(entity);
+                                } else {
+                                    Logger.warning("We have a selected item that is not a dao model in position.");
+                                }
+                            } catch (Exception e) {
+                                Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
+                            }
+                        }
+                    } catch (Exception e) {
+                        Logger.error(e.getMessage(), e);
+                    }
                 }
-            });
+            );
 
             builder.setNegativeButton(
                 R.string.dialog_cancel,
@@ -668,7 +708,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                 DaoModel displayObject = (DaoModel) getDisplayObject(foundItem);
                 displayItems.add(displayObject);
             } catch (Exception e) {
-                Logger.warning("Failed to add display object for found item. " + e.getMessage());
+                Logger.error("Failed to add display object for found item " + foundItem + ". " + e.getMessage(), e);
             }
         }
         return displayItems;
@@ -680,7 +720,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      * @param item is the item we want a display item for
      * @return the object to be displayed
      */
-    private Object getDisplayObject(DaoModel item) {
+    private Object getDisplayObject(DaoModel item) throws DaoModelException {
 
         if (item==null) {
             throw new RuntimeException("We can't get the display item of a null object!");
@@ -690,9 +730,18 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         if (item instanceof Entity) {
             Entity entity = (Entity) item;
             Category childCategory = entity.getChildCategory();
-            WriteDao<? extends Object> writeDao = getDaoForCategory(childCategory);
+            WriteDao<? extends Object> writeDao;
 
-            Long theId = entity.getCategoryColumnId(childCategory);
+            Logger.info("Processing display entity: " + entity.json());
+            try {
+                 writeDao = getDaoForCategory(childCategory);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
+            }
+
+            Long theId = null;
+            theId = entity.getCategoryColumnId(childCategory);
+
             if (theId != null) {
                 synchronized (DB_LOCK) {
                     DaoModel child = (DaoModel) writeDao.load(theId);

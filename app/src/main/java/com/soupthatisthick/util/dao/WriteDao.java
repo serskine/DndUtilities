@@ -191,6 +191,31 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
         Logger.title("Logging contents of WriteDao with table name " + getTable() + " and primary key " + getIdColumn());
         super.logContents();
     }
+
+    /**
+     * This will get desirable metadata from the record by writing to a content values and
+     * then extracting all the searchable columns from it's contents. Those values will be
+     * appended to a string seperated by spaces.
+     * @param record that we want to generate metadata for.
+     * @return a string with desirable metadata for the entity.
+     */
+    public final String getDesirableMetadata(Record record) {
+        StringBuilder sb = new StringBuilder();
+        ContentValues cv = getContentValues(record);
+        boolean isFirst = true;
+
+        sb.append("");  // Ensure it's contents are not null. At minimum an empty string.
+
+        for(String column : getSearchableColumns()) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(" ");
+            }
+            sb.append(cv.getAsString(column));
+        }
+        return sb.toString();
+    }
 }
 
 

@@ -3,6 +3,7 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 
@@ -14,10 +15,13 @@ public class Entity extends DaoModel {
 
     private Long id;
 
+    private Long parentId;
     private String metadata;
 
     private Long entityId;
     private Long armorId;
+    private Long backgroundId;
+    private Long challengeRatingId;
     private Long characterAdvancementId;
     private Long conditionId;
     private Long containerId;
@@ -53,8 +57,8 @@ public class Entity extends DaoModel {
 
     }
 
-    public Entity(Long id, String metadata) {
-        this(id, metadata,
+    public Entity(Long id, Long parentId, String metadata) {
+        this(id, parentId, metadata,
                 null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null
@@ -63,6 +67,7 @@ public class Entity extends DaoModel {
 
     public Entity(
             Long id,
+            Long parentId,
             String metadata,
             Long entityId,
             Long armorId,
@@ -97,7 +102,9 @@ public class Entity extends DaoModel {
             Long weaponId
     ) {
         this.id = id;
+        this.parentId = parentId;
         this.metadata = metadata;
+
         this.entityId = entityId;
         this.armorId = armorId;
         this.characterAdvancementId = characterAdvancementId;
@@ -216,6 +223,12 @@ public class Entity extends DaoModel {
         clearAllIds();
 
         switch(category) {
+            case BACKGROUND:
+                setBackgroundId(newId);
+                break;
+            case CHALLENGE_RATING:
+                setChallengeRatingId(newId);
+                break;
             case CONDITION:
                 setConditionId(newId);
 			    break;
@@ -261,15 +274,13 @@ public class Entity extends DaoModel {
             case ENTITY:
                 setEntityId(newId);
 			    break;
-            case BACKGROUND:
-            case CHALLENGE_RATING:
             case DEFAULT:
             default:
                 throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
     }
     
-    public Long getCategoryColumnId(@NonNull Category category) {
+    public Long getCategoryColumnId(@NonNull Category category) throws DaoModelException {
         if (category==null) {
             throw new RuntimeException("There can never be an entity column assigned to a null category.");
         }
@@ -322,13 +333,17 @@ public class Entity extends DaoModel {
                 theId = getEntityId();
 				break;
             case BACKGROUND:
+                theId = getBackgroundId();
+                break;
             case CHALLENGE_RATING:
+                theId = getChallengeRatingId();
+                break;
             case DEFAULT:
             default:
-                throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
+                throw new DaoModelException(this, "Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
         if (!isValidId(theId)) {
-            throw new RuntimeException("Category " + category + " has an invalid id value of " + ((theId==null) ? "null" : "" + theId) + ".");
+            throw new DaoModelException(this, "Category " + category + " has an invalid id value of " + ((theId==null) ? "null" : "" + theId) + ".");
         }
         return theId;
     }
@@ -341,6 +356,14 @@ public class Entity extends DaoModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getMetadata() {
@@ -365,6 +388,23 @@ public class Entity extends DaoModel {
 
     public void setArmorId(Long armorId) {
         this.armorId = armorId;
+    }
+
+
+    public Long getBackgroundId() {
+        return backgroundId;
+    }
+
+    public void setBackgroundId(Long backgroundId) {
+        this.backgroundId = backgroundId;
+    }
+
+    public Long getChallengeRatingId() {
+        return challengeRatingId;
+    }
+
+    public void setChallengeRatingId(Long challengeRatingId) {
+        this.challengeRatingId = challengeRatingId;
     }
 
     public Long getCharacterAdvancementId() {
@@ -602,4 +642,5 @@ public class Entity extends DaoModel {
     private static boolean isValidId(Long id) {
         return ((id!=null) && (id>0));
     }
+
 }

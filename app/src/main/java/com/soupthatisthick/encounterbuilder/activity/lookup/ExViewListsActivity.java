@@ -5,9 +5,9 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomListAdapter;
 import com.soupthatisthick.util.activity.DaoViewListActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
@@ -20,15 +20,15 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ExViewListsActivity extends DaoViewListActivity<ItemList> {
+public class ExViewListsActivity extends DaoViewListActivity<EntityList> {
     @Override
     protected DaoMaster createDaoMaster(Context context) throws Exception {
         return new DndMaster(context);
     }
 
     @Override
-    protected ReadDao<ItemList> createReadDao(DaoMaster db) throws Exception {
-        return new ItemListDao(db);
+    protected ReadDao<EntityList> createReadDao(DaoMaster db) throws Exception {
+        return new EntityListDao(db);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ExViewListsActivity extends DaoViewListActivity<ItemList> {
     }
 
     @Override
-    protected CustomListAdapter<ItemList> createListAdapter(LayoutInflater layoutInflater) {
+    protected CustomListAdapter<EntityList> createListAdapter(LayoutInflater layoutInflater) {
         return null;
     }
 }

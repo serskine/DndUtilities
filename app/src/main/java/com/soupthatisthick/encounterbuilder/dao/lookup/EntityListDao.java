@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
@@ -20,22 +20,22 @@ import java.util.Set;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ItemListDao extends WriteDao<ItemList> {
+public class EntityListDao extends WriteDao<EntityList> {
 
     public static final String TBL_LISTS = "LISTS";
     public static final String COL_ID = "id";
     public static final String COL_NAME = "name";
 
-    public ItemListDao(DaoMaster daoMaster) throws IOException {
+    public EntityListDao(DaoMaster daoMaster) throws IOException {
         super(daoMaster, TBL_LISTS);
     }
 
     @Override
-    public ItemList readRecord(Cursor cursor) {
-        ItemList itemList = new ItemList();
-        itemList.setId(cursor.getLong(cursor.getColumnIndex(COL_ID)));
-        itemList.setName(cursor.getString(cursor.getColumnIndex(COL_NAME)));
-        return itemList;
+    public EntityList readRecord(Cursor cursor) {
+        EntityList entityList = new EntityList();
+        entityList.setId(cursor.getLong(cursor.getColumnIndex(COL_ID)));
+        entityList.setName(cursor.getString(cursor.getColumnIndex(COL_NAME)));
+        return entityList;
     }
 
     /**
@@ -66,13 +66,13 @@ public class ItemListDao extends WriteDao<ItemList> {
      * This will build a mapping of column names to values from the specified record
      * so that they may be inserted.
      *
-     * @param itemList
+     * @param entityList
      */
     @Override
-    public ContentValues getContentValues(ItemList itemList) {
+    public ContentValues getContentValues(EntityList entityList) {
         ContentValues content = new ContentValues();
-        content.put(COL_ID, itemList.getId());
-        content.put(COL_NAME, itemList.getName());
+        content.put(COL_ID, entityList.getId());
+        content.put(COL_NAME, entityList.getName());
         return content;
     }
 
@@ -82,8 +82,8 @@ public class ItemListDao extends WriteDao<ItemList> {
      * @return a new Record to update
      */
     @Override
-    protected ItemList createNewModel() {
-        return new ItemList();
+    protected EntityList createNewModel() {
+        return new EntityList();
     }
 
     @Override
@@ -92,12 +92,12 @@ public class ItemListDao extends WriteDao<ItemList> {
     }
 
     @Override
-    public Long getId(@NonNull ItemList itemList) {
-        return itemList.getId();
+    public Long getId(@NonNull EntityList entityList) {
+        return entityList.getId();
     }
 
     @Override
-    public void setId(@NonNull ItemList itemList, @Nullable Long id) {
-        itemList.setId(id);
+    public void setId(@NonNull EntityList entityList, @Nullable Long id) {
+        entityList.setId(id);
     }
 }

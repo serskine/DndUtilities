@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.soupthatisthick.encounterMap.activity.lookup.EditItemListActivity">
+    tools:context="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity">
 
     <!-- header information -->
     <LinearLayout
@@ -53,6 +52,7 @@
     </ListView>
 
     <!--the controls -->
+    <!-- buttons for saving and deleting -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,58 +60,32 @@
         android:orientation="horizontal">
 
         <TableRow>
-            <ImageButton
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/ml_add_button"
-                android:onClick="onClickAddButton"
-                android:id="@+id/ml_add_button"
-                android:src="@drawable/ic_control_add"
-                style="@style/AppTheme.Button"
-                />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/ml_delete_button"
-                android:onClick="onClickDeleteButton"
-                android:id="@+id/ml_delete_button"
+                android:id="@+id/eil_delete_button"
                 android:src="@drawable/ic_control_delete"
                 style="@style/AppTheme.Button"
                 />
-            <ImageButton
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/ml_clear_button"
-                android:onClick="onClickClearButton"
-                android:id="@+id/ml_clear_button"
-                android:src="@drawable/ic_control_clear"
-                style="@style/AppTheme.Button"
-                />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/ml_edit_button"
-                android:onClick="onClickEditButton"
-                android:id="@+id/ml_edit_button"
-                android:src="@drawable/ic_control_edit"
-                style="@style/AppTheme.Button"
-                />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/ml_edit_button"
-                android:onClick="onClickSaveMastButton"
-                android:id="@+id/ml_save_button"
+                android:id="@+id/eil_save_button"
                 android:src="@drawable/ic_control_save"
                 style="@style/AppTheme.Button"
                 />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/eil_cancel_button"
+                android:src="@drawable/ic_control_cancel"
+                style="@style/AppTheme.Button"
+                />
         </TableRow>
-
     </TableLayout>
+
 </LinearLayout>
 

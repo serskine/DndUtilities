@@ -12,6 +12,7 @@ import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import java.util.Set;
 
@@ -100,6 +101,7 @@ public abstract class DaoEditActivity<Model> extends EditActivity {
         Logger.debug("onClickSaveButton()");
         try {
             Long id = getWriteDao().getId(model);
+            Logger.debug("___ " + model.getClass().getSimpleName() + " (" + id + ") ___\n" + JsonUtil.toJson(model, true));
             getWriteDao().update(id, model);
             finish();
         } catch (Exception e) {

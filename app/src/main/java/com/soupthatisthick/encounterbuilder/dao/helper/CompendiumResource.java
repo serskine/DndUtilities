@@ -14,7 +14,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemListDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LevelDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
@@ -27,6 +27,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
@@ -83,7 +84,7 @@ public class CompendiumResource {
     private WeaponDao weaponDao;
     private EntityDao entityDao;
 
-    private ItemListDao itemListDao;
+    private EntityListDao entityListDao;
     private ItemDao itemDao;
 
     protected final Context context;
@@ -192,8 +193,8 @@ public class CompendiumResource {
 
 
                         // These might be excluded from the compendium...
-                        itemListDao = new ItemListDao(logsheetMaster);
-                        initDao(R.string.vc_title_item_list, itemListDao);
+                        entityListDao = new EntityListDao(logsheetMaster);
+                        initDao(R.string.vc_title_item_list, entityListDao);
 
                         itemDao = new ItemDao(logsheetMaster);
                         initDao(R.string.vc_title_items, itemDao);
@@ -395,7 +396,7 @@ public class CompendiumResource {
      * @param entity is the pointer {@link Entity}
      * @return null if the child entity does not exist
      */
-    public Object getEntityChild(Entity entity) {
+    public Object getEntityChild(Entity entity) throws DaoModelException {
         Category category = entity.getChildCategory();
         WriteDao<? extends Object> writeDao = getDaoForCategory(category);
         if (writeDao == null) {

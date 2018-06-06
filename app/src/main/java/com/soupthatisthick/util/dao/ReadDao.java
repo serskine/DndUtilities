@@ -1,5 +1,6 @@
 package com.soupthatisthick.util.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
@@ -254,6 +255,4 @@ public abstract class ReadDao<Record> implements Dao<Record> {
         );
         return cursor.getCount();
     }
-
-
 }

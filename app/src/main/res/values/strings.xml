@@ -163,6 +163,8 @@
     <string name="ml_delete_button">Delete</string>
     <string name="ml_edit_button">Edit</string>
     <string name="ml_clear_button">Clear</string>
+    <string name="ml_cancel_button">Cancel</string>
+    <string name="ml_save_button">Save</string>
 
     <!-- faction strings -->
     <string name="faction_none">None</string>

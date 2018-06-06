@@ -69,7 +69,7 @@ public abstract class DatabaseHelper2 extends SQLiteOpenHelper {
         externalDir = context.getExternalFilesDir(null);
         internalDir = context.getFilesDir();
 
-        updateDatabase();
+//        updateDatabase();
     }
 
     /*
