@@ -44,6 +44,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
@@ -591,10 +592,18 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                         for (Object item : items) {
                             try {
                                 if (item instanceof DaoModel) {
-                                    DaoModel daoModel = (DaoModel) item;
-                                    Entity entity = entityDao.create();
-                                    Category category = Category.parse(item);
+                                    final DaoModel daoModel = (DaoModel) item;
+                                    final Entity entity = entityDao.create();
+                                    final Category category = Category.parse(item);
+                                    final WriteDao writeDao = getDaoForCategory(category);
+                                    String metadata = writeDao.getDesirableMetadata(item);
+
+                                    // append desirable metadata from the item list as well so we
+                                    // can search for the item using information we know about the list.
+                                    metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+
                                     entity.setParentId(entityList.getId());
+                                    entity.setMetadata(metadata);
                                     entity.setCategoryColumnId(category, daoModel.getId());
                                     entityDao.update(entity);
                                 } else {
@@ -699,7 +708,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                 DaoModel displayObject = (DaoModel) getDisplayObject(foundItem);
                 displayItems.add(displayObject);
             } catch (Exception e) {
-                Logger.warning("Failed to add display object for found item. " + e.getMessage());
+                Logger.error("Failed to add display object for found item " + foundItem + ". " + e.getMessage(), e);
             }
         }
         return displayItems;
@@ -711,7 +720,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      * @param item is the item we want a display item for
      * @return the object to be displayed
      */
-    private Object getDisplayObject(DaoModel item) {
+    private Object getDisplayObject(DaoModel item) throws DaoModelException {
 
         if (item==null) {
             throw new RuntimeException("We can't get the display item of a null object!");
@@ -721,9 +730,18 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         if (item instanceof Entity) {
             Entity entity = (Entity) item;
             Category childCategory = entity.getChildCategory();
-            WriteDao<? extends Object> writeDao = getDaoForCategory(childCategory);
+            WriteDao<? extends Object> writeDao;
 
-            Long theId = entity.getCategoryColumnId(childCategory);
+            Logger.info("Processing display entity: " + entity.json());
+            try {
+                 writeDao = getDaoForCategory(childCategory);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
+            }
+
+            Long theId = null;
+            theId = entity.getCategoryColumnId(childCategory);
+
             if (theId != null) {
                 synchronized (DB_LOCK) {
                     DaoModel child = (DaoModel) writeDao.load(theId);

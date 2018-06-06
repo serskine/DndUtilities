@@ -8,6 +8,7 @@ import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
+import com.soupthatisthick.util.Logger;
 
 /**
  * Created by Owner on 5/26/2018.
@@ -29,10 +30,14 @@ public class EntityDetailCell extends ReadCell<Entity> {
 
     @Override
     public void updateUi(Entity entity) {
-        if (entity.getEntityId() != null) {
-            Category category = entity.getChildCategory();
-            Long theId = entity.getCategoryColumnId(category);
+        try {
+            if (entity.getEntityId() != null) {
+                Category category = entity.getChildCategory();
+                Long theId = entity.getCategoryColumnId(category);
 
+            }
+        } catch (Exception e) {
+            Logger.error(e.getMessage(), e);
         }
     }
 

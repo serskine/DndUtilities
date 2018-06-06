@@ -3,6 +3,7 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 
@@ -279,7 +280,7 @@ public class Entity extends DaoModel {
         }
     }
     
-    public Long getCategoryColumnId(@NonNull Category category) {
+    public Long getCategoryColumnId(@NonNull Category category) throws DaoModelException {
         if (category==null) {
             throw new RuntimeException("There can never be an entity column assigned to a null category.");
         }
@@ -332,13 +333,17 @@ public class Entity extends DaoModel {
                 theId = getEntityId();
 				break;
             case BACKGROUND:
+                theId = getBackgroundId();
+                break;
             case CHALLENGE_RATING:
+                theId = getChallengeRatingId();
+                break;
             case DEFAULT:
             default:
-                throw new RuntimeException("Category " + category + " has not yet had a column on the entity class assigned to it yet.");
+                throw new DaoModelException(this, "Category " + category + " has not yet had a column on the entity class assigned to it yet.");
         }
         if (!isValidId(theId)) {
-            throw new RuntimeException("Category " + category + " has an invalid id value of " + ((theId==null) ? "null" : "" + theId) + ".");
+            throw new DaoModelException(this, "Category " + category + " has an invalid id value of " + ((theId==null) ? "null" : "" + theId) + ".");
         }
         return theId;
     }

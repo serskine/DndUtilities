@@ -27,6 +27,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
+import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
@@ -395,7 +396,7 @@ public class CompendiumResource {
      * @param entity is the pointer {@link Entity}
      * @return null if the child entity does not exist
      */
-    public Object getEntityChild(Entity entity) {
+    public Object getEntityChild(Entity entity) throws DaoModelException {
         Category category = entity.getChildCategory();
         WriteDao<? extends Object> writeDao = getDaoForCategory(category);
         if (writeDao == null) {
