@@ -99,10 +99,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private WeaponDao weaponDao;
     private EntityDao entityDao;
 
-    CompendiumResource compendiumResource;
-
     private EntityListDao entityListDao;
-    private ItemDao itemDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -266,8 +263,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
 
                         // Open these dao's so we can add items to lists from the Compendium Activity
-                        entityListDao = new EntityListDao(logsheetMaster);
-                        itemDao = new ItemDao(logsheetMaster);
+                        entityListDao = new EntityListDao(dndMaster);
 
                         //
                         // Start opening all the dao's for looking up items.
