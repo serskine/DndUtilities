@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.activity.DaoEditActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
@@ -19,7 +19,7 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class EditItemListActivity extends DaoEditActivity<ItemList> {
+public class EditEntityListActivity extends DaoEditActivity<EntityList> {
 
     EditText nameEdit;
 
@@ -46,7 +46,7 @@ public class EditItemListActivity extends DaoEditActivity<ItemList> {
     @Override
     protected void initModelWithoutUi() {
         nameEdit = (EditText) findViewById(R.id.eil_name_edit);
-        model = new ItemList();
+        model = new EntityList();
     }
 
     @Override

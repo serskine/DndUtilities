@@ -4,17 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemListAdapter;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.activity.DaoEditActivity;
-import com.soupthatisthick.util.activity.DaoEditListActivity;
 import com.soupthatisthick.util.activity.DaoEditToggleListActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
@@ -26,7 +23,7 @@ import soupthatisthick.encounterapp.R;
  * Created by Owner on 4/21/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, ItemList> {
+public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, EntityList> {
 
     @Override
     protected DaoMaster createDaoMaster(Context context) throws Exception {
@@ -34,11 +31,11 @@ public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, I
     }
 
     @Override
-    protected void requestEditDetail(Long detailId, ItemList itemList, boolean deleteOnCancel) {
-        Logger.debug("Request to edit custom list (" + detailId + ", " + itemList.toString() + ", " + deleteOnCancel + ")");
-        Logger.debug(JsonUtil.toJson(itemList, true));
+    protected void requestEditDetail(Long detailId, EntityList entityList, boolean deleteOnCancel) {
+        Logger.debug("Request to edit custom list (" + detailId + ", " + entityList.toString() + ", " + deleteOnCancel + ")");
+        Logger.debug(JsonUtil.toJson(entityList, true));
 
-        Intent intent = new Intent(this, EditItemListActivity.class);
+        Intent intent = new Intent(this, EditEntityListActivity.class);
         intent.putExtra(DaoEditActivity.KEY_DELETE_ON_CANCEL, deleteOnCancel);
         intent.putExtra(DaoEditActivity.KEY_MODEL_ID, detailId);
         startActivity(intent);
@@ -70,7 +67,7 @@ public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, I
     }
 
     @Override
-    protected CustomToggleAdapter<ItemList> createToggleListAdapter(LayoutInflater layoutInflater) {
+    protected CustomToggleAdapter<EntityList> createToggleListAdapter(LayoutInflater layoutInflater) {
         return new ExItemListAdapter(layoutInflater);
     }
 

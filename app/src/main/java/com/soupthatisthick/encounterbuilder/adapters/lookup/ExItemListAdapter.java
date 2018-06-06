@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
-import com.soupthatisthick.encounterbuilder.view.cell.CompendiumCell;
-import com.soupthatisthick.encounterbuilder.view.cell.detail.CompendiumDetailCell;
 import com.soupthatisthick.encounterbuilder.view.cell.detail.ItemListDetailCell;
-import com.soupthatisthick.encounterbuilder.view.cell.summary.CompendiumSummaryCell;
 import com.soupthatisthick.encounterbuilder.view.cell.summary.ItemListSummaryCell;
 
 /**
@@ -18,7 +15,7 @@ import com.soupthatisthick.encounterbuilder.view.cell.summary.ItemListSummaryCel
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ExItemListAdapter extends CustomToggleAdapter<ItemList> {
+public class ExItemListAdapter extends CustomToggleAdapter<EntityList> {
 
     public ExItemListAdapter(LayoutInflater inflater) {
         super(inflater);
@@ -27,7 +24,7 @@ public class ExItemListAdapter extends CustomToggleAdapter<ItemList> {
     @Override
     public View getCollapsedView(int position, View convertView, ViewGroup parent) {
         ItemListSummaryCell cell = new ItemListSummaryCell(inflater, convertView, parent);
-        ItemList item = getCastedItem(position);
+        EntityList item = getCastedItem(position);
         cell.updateUi(item);
         return cell.getView();
     }
@@ -35,7 +32,7 @@ public class ExItemListAdapter extends CustomToggleAdapter<ItemList> {
     @Override
     public View getExpandedView(int position, View convertView, ViewGroup parent) {
         ItemListDetailCell cell = new ItemListDetailCell(inflater, convertView, parent);
-        ItemList item = getCastedItem(position);
+        EntityList item = getCastedItem(position);
         cell.updateUi(item);
         return cell.getView();
     }

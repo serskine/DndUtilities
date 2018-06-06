@@ -570,7 +570,7 @@ public class CompendiumFragment extends ViewToggleListFragment<Object> {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Logger.debug("CLICKED ON POSITION " + which);
-//                        ItemList list = itemListAdapter.getCastedItem(which);
+//                        EntityList list = itemListAdapter.getCastedItem(which);
 //                        for (Object itemObject : items) {
 //                            if (itemObject instanceof DaoModel) {
 //                                DaoModel model = (DaoModel) itemObject;

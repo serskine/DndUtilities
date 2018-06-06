@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
 import com.soupthatisthick.util.Logger;
 
@@ -16,7 +16,7 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ItemListDetailCell extends ReadCell<ItemList> {
+public class ItemListDetailCell extends ReadCell<EntityList> {
 
     private static final String NEW_LIST = "New List";
     private TextView theTitle;
@@ -27,11 +27,11 @@ public class ItemListDetailCell extends ReadCell<ItemList> {
     }
 
     @Override
-    public void updateUi(ItemList itemList) {
+    public void updateUi(EntityList entityList) {
         theTitle.setText(
-            (itemList.getName()==null)
-            ?   getView().getResources().getString(R.string.text_key_value, "ItemList", "" + itemList.getId())
-            :   itemList.getName()
+            (entityList.getName()==null)
+            ?   getView().getResources().getString(R.string.text_key_value, "EntityList", "" + entityList.getId())
+            :   entityList.getName()
         );
         // TODO: Create a description for a list here.
         Logger.warning("Currently the detail of an item list doesn't exist.");

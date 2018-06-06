@@ -234,7 +234,7 @@
             android:label="@string/title_activity_camera"
             android:launchMode="standard"
             />
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditItemListActivity" />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity" />
         <activity android:name="com.soupthatisthick.encounterbuilder.activity.storage.StorageActivity"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <!--

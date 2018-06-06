@@ -18,7 +18,6 @@ import android.widget.ToggleButton;
 
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
-import com.soupthatisthick.encounterbuilder.adapters.lookup.ExItemListAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.TextSelectionAdapter;
@@ -48,7 +47,7 @@ import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
@@ -576,7 +575,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             builder.setTitle(R.string.vc_add_to_item_list_dialog_title);
 
             final ItemListSummaryAdapter itemListAdapter = new ItemListSummaryAdapter(getLayoutInflater());
-            final List<ItemList> listOptions = entityListDao.getAllRecords();
+            final List<EntityList> listOptions = entityListDao.getAllRecords();
 
             Logger.debug("The number of lists to choose from = " + listOptions.size() + " lists.");
             Logger.debug(JsonUtil.toJson(listOptions, true));
@@ -592,21 +591,21 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
                 itemListAdapter,
                 (dialog, which) -> {
                     try {
-                        ItemList itemList = itemListAdapter.getCastedItem(which);
+                        EntityList entityList = itemListAdapter.getCastedItem(which);
                         for (Object item : items) {
                             try {
                                 if (item instanceof DaoModel) {
                                     DaoModel daoModel = (DaoModel) item;
                                     Entity entity = entityDao.create();
                                     Category category = Category.parse(item);
-                                    entity.setParentId(itemList.getId());
+                                    entity.setParentId(entityList.getId());
                                     entity.setCategoryColumnId(category, daoModel.getId());
                                     entityDao.update(entity);
                                 } else {
                                     Logger.warning("We have a selected item that is not a dao model in position.");
                                 }
                             } catch (Exception e) {
-                                Logger.warning("Failed to add selected item (" + item + ") to list " + itemList + ". \n" + e.getMessage());
+                                Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
                             }
                         }
                     } catch (Exception e) {

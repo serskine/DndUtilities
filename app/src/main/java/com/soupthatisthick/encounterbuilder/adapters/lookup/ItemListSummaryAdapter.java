@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.soupthatisthick.encounterbuilder.model.lookup.ItemList;
+import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
 import com.soupthatisthick.encounterbuilder.util.adapter.CustomListAdapter;
 import com.soupthatisthick.encounterbuilder.view.cell.summary.ItemListSummaryCell;
 
@@ -14,7 +14,7 @@ import com.soupthatisthick.encounterbuilder.view.cell.summary.ItemListSummaryCel
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class ItemListSummaryAdapter extends CustomListAdapter<ItemList> {
+public class ItemListSummaryAdapter extends CustomListAdapter<EntityList> {
     public ItemListSummaryAdapter(LayoutInflater inflater) {
         super(inflater);
     }
