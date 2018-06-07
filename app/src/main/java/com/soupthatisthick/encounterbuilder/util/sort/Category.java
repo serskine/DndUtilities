@@ -7,6 +7,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.CustomMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
@@ -63,6 +64,7 @@ public enum Category
     LIFESTYLE(-15, LifeStyleDao.TBL_LIFESTYLE, LifeStyleDao.COL_ID),
     MOUNT(-16, MountDao.TBL_MOUNTS, MountDao.COL_ID),
     ENTITY(-17, EntityDao.TBL_ENTITY, EntityDao.COL_ID),
+    ENTITY_LIST(-18, EntityListDao.TBL_LISTS, EntityListDao.COL_ID)
     ;
 
     public final int orderValue;

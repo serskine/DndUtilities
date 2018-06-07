@@ -24,7 +24,7 @@ public class DndUtilApp extends MultiDexApplication {
     }
 
 
-//    private CompendiumResource compendiumResource = null;
+    private CompendiumResource compendiumResource = null;
 
     @CallSuper
     @Override
@@ -32,8 +32,8 @@ public class DndUtilApp extends MultiDexApplication {
     {
         super.onCreate();
         INSTANCE = this;
-//        compendiumResource = new CompendiumResource(getApplicationContext());
-//        compendiumResource.loadAllData();
+        compendiumResource = new CompendiumResource(getApplicationContext());
+        compendiumResource.loadAllData();
     }
 
     /**
@@ -45,15 +45,15 @@ public class DndUtilApp extends MultiDexApplication {
     @CallSuper
     public void onTerminate() {
         super.onTerminate();
-//        compendiumResource = null;
+        compendiumResource = null;
         INSTANCE = null;
     }
 
-//    /**
-//     * This will return the resource for the compendium
-//     * @return
-//     */
-//    public CompendiumResource getCompendiumResource() {
-//        return compendiumResource;
-//    }
+    /**
+     * This will return the resource for the compendium
+     * @return
+     */
+    public CompendiumResource getCompendiumResource() {
+        return compendiumResource;
+    }
 }

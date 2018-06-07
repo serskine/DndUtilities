@@ -16,7 +16,6 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
-import com.soupthatisthick.encounterbuilder.DndUtilApp;
 import com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.CompendiumAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapter;
@@ -77,9 +76,32 @@ import soupthatisthick.encounterapp.R;
  */
 
 @SuppressWarnings({"unused", "unchecked", "SpellCheckingInspection"})
-public class CompendiumActivity extends ViewToggleListActivity<Object> {
+public class CompendiumActivityOld extends ViewToggleListActivity<Object> {
 
     private final Object DB_LOCK = new Object();
+    private DndMaster dndMaster;                // Contains all the spells etc.
+    private EncounterMaster encounterMaster;    // Contains all the level information
+    private LogsheetMaster logsheetMaster;      // Contains all the custom lists we might add items
+
+    private SpellDao spellDao;
+    private CustomMonsterDao customMonsterDao;
+    private StandardMonsterDao standardMonsterDao;
+    private MagicItemDao magicItemDao;
+    private NotesDao notesDao;
+    private FeatDao featDao;
+    private BackgroundDao backgroundDao;
+    private ConditionDao conditionDao;
+    private LevelDao levelDao;
+    private ChallengeRatingDao challengeRatingDao;
+    private EquipmentDao equipmentDao;
+    private GodsDao godsDao;
+    private ArmorDao armorDao;
+    private LifeStyleDao lifeStyleDao;
+    private MountDao mountDao;
+    private WeaponDao weaponDao;
+    private EntityDao entityDao;
+
+    private EntityListDao entityListDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -91,8 +113,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private final Set<Integer> selectedPositions = new HashSet<>();
 
     static AsyncTask<Object, Object, Boolean> LOAD_TASK;
-
-    private CompendiumResource compendiumResource;
 
     /**
      * This is called to toggle the selected state of a position from on to off or off to on
@@ -127,9 +147,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
         @Override
         public void positionUpdated(
-            WriteCellAdapter<?> source,
-            Object model,
-            int position
+                WriteCellAdapter<?> source,
+                Object model,
+                int position
         ) {
             Selection item = (Selection) model;
 
@@ -207,8 +227,152 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
     @Override
     public void loadAllData() {
-        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
-        usableDaos = compendiumResource.getUsableDaos();    // Reference to the same map
+        final AsyncTask<Object, Object, Boolean> loadTask = new AsyncTask<Object, Object, Boolean>()
+        {
+
+            /**
+             * Override this method to perform a computation on a background thread. The
+             * specified parameters are the parameters passed to {@link #execute}
+             * by the caller of this task.
+             * <p>
+             * This method can call {@link #publishProgress} to publish updates
+             * on the UI thread.
+             *
+             * @param params The parameters of the task.
+             * @return A result, defined by the subclass of this task.
+             * @see #onPreExecute()
+             * @see #onPostExecute
+             * @see #publishProgress
+             */
+            @Override
+            protected Boolean doInBackground(Object... params) {
+                Logger.info(" - waiting for DB_LOCK [loadAllData().AsyncTask]");
+                synchronized (DB_LOCK) {
+
+                    Logger.info(" - initializing the usable daos map");
+                    usableDaos = new TreeMap<>();
+
+                    Logger.info(" - aquired DB_LOCK [loadAllData().AsyncTask]");
+                    try {
+                        dndMaster = new DndMaster(getBaseContext());
+                        Logger.info("Opened the dndMaster on database " + dndMaster.getDatabaseName() + ".");
+
+                        encounterMaster = new EncounterMaster(getBaseContext());
+                        Logger.info("Opened the encounterMaster on database " + encounterMaster.getDatabaseName() + ".");
+
+                        logsheetMaster = new LogsheetMaster(getBaseContext());
+                        Logger.info("Opened the logsheetMaster on database " + logsheetMaster.getDatabaseName() + ".");
+
+
+                        // Open these dao's so we can add items to lists from the Compendium Activity
+                        entityListDao = new EntityListDao(dndMaster);
+
+                        //
+                        // Start opening all the dao's for looking up items.
+                        //
+
+                        spellDao = new SpellDao(dndMaster);
+                        initDao(R.string.vc_title_spell, spellDao);
+
+                        magicItemDao = new MagicItemDao(dndMaster);
+                        initDao(R.string.vc_title_magic_items, magicItemDao);
+
+                        customMonsterDao = new CustomMonsterDao(dndMaster);
+                        initDao(R.string.vc_title_custom_monsters, customMonsterDao);
+
+                        standardMonsterDao = new StandardMonsterDao(dndMaster);
+                        initDao(R.string.vc_title_standard_monsters, standardMonsterDao);
+
+                        notesDao = new NotesDao(dndMaster);
+                        initDao(R.string.vc_title_notes, notesDao);
+
+                        featDao = new FeatDao(dndMaster);
+                        initDao(R.string.vc_title_feats, featDao);
+
+                        backgroundDao = new BackgroundDao(dndMaster);
+                        initDao(R.string.vc_title_backgrounds, backgroundDao);
+
+                        conditionDao = new ConditionDao(dndMaster);
+                        initDao(R.string.vc_title_conditions, conditionDao);
+
+                        levelDao = new LevelDao(encounterMaster);
+                        initDao(R.string.vc_title_levels, levelDao);
+
+                        challengeRatingDao = new ChallengeRatingDao(encounterMaster);
+                        initDao(R.string.vc_title_challenge_ratings, challengeRatingDao);
+
+                        equipmentDao = new EquipmentDao(dndMaster);
+                        initDao(R.string.vc_title_equipment, equipmentDao);
+
+                        godsDao = new GodsDao(dndMaster);
+                        initDao(R.string.vc_title_gods, godsDao);
+
+                        armorDao = new ArmorDao(dndMaster);
+                        initDao(R.string.vc_title_armor, armorDao);
+
+                        lifeStyleDao = new LifeStyleDao(dndMaster);
+                        initDao(R.string.vc_title_lifestyles, lifeStyleDao);
+
+                        mountDao = new MountDao(dndMaster);
+                        initDao(R.string.vc_title_mounts, mountDao);
+
+                        weaponDao = new WeaponDao(dndMaster);
+                        initDao(R.string.vc_title_weapons, weaponDao);
+
+                        entityDao = new EntityDao(dndMaster);
+                        initDao(R.string.vc_title_entity, entityDao);
+
+                        Logger.info("Completed opening all the dao's!");
+
+                        return Boolean.TRUE;
+                    } catch (Exception e) {
+                        Logger.error("Failed to open all the dao's!\n" + e.getMessage(), e);
+                        finish();
+                        return Boolean.FALSE;
+                    }
+                }
+            }
+
+            /**
+             * Executed after all the data has been loaded.
+             * @param result indicates if the load was successful
+             */
+            @Override
+            @MainThread
+            protected void onPostExecute(Boolean result) {
+                synchronized (DB_LOCK) {
+                    Logger.info("Initializing the filter list");
+                    ArrayList<Selection> selectionsList = new ArrayList<>();
+                    selectedFilters.clear();
+
+                    // Add the option for all filters
+                    Selection selection;
+
+                    for (String table : usableDaos.keySet()) {
+                        selection = new Selection();
+                        selection.setSelected(true);
+                        selection.setItem(table);
+                        selectionsList.add(selection);
+                        if (selection.isSelected()) {
+                            selectedFilters.add(table);
+                        }
+                        Logger.info("Adding a selection");
+                        Logger.info(" - text:       " + selection.getItem());
+                        Logger.info(" - isSelected: " + selection.isSelected());
+                    }
+
+                    theSelectionAdapter.setData(selectionsList);
+                }
+            }
+        };
+
+        // If we already have a loading task on the go, this will cancel it and we will start over.
+        if (LOAD_TASK!=null && !LOAD_TASK.isCancelled()) {
+            LOAD_TASK.cancel(true);
+        }
+        LOAD_TASK = loadTask;
+        LOAD_TASK.execute(null, null, null);
+
     }
 
     private void initDao(int titleResourceId, ReadDao<?> dao)
@@ -273,9 +437,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
     @Override
     protected List<Object> getAllRecords() {
-        
+
         final List<Object> objects = new ArrayList<>();
-        
+
         synchronized (DB_LOCK)
         {
             clearSelections();
@@ -402,9 +566,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
         try {
             final List<Object> items = getExpandedPositions();
-            final EntityListDao entityListDao = (EntityListDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
-            final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY);
-
             Logger.debug("We have selected " + items.size() + " to add to a list.");
             Logger.debug(JsonUtil.toJson(items, true));
             if (items.size()<1) {
@@ -428,46 +589,46 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
             itemListAdapter.setData(listOptions);
             builder.setAdapter(
-                itemListAdapter,
-                (dialog, which) -> {
-                    try {
-                        EntityList entityList = itemListAdapter.getCastedItem(which);
-                        for (Object item : items) {
-                            try {
-                                if (item instanceof DaoModel) {
-                                    final DaoModel daoModel = (DaoModel) item;
-                                    final Entity entity = entityDao.create();
-                                    final Category category = Category.parse(item);
-                                    final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
-                                    String metadata = writeDao.getDesirableMetadata(item);
+                    itemListAdapter,
+                    (dialog, which) -> {
+                        try {
+                            EntityList entityList = itemListAdapter.getCastedItem(which);
+                            for (Object item : items) {
+                                try {
+                                    if (item instanceof DaoModel) {
+                                        final DaoModel daoModel = (DaoModel) item;
+                                        final Entity entity = entityDao.create();
+                                        final Category category = Category.parse(item);
+                                        final WriteDao writeDao = getDaoForCategory(category);
+                                        String metadata = writeDao.getDesirableMetadata(item);
 
-                                    // append desirable metadata from the item list as well so we
-                                    // can search for the item using information we know about the list.
-                                    metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+                                        // append desirable metadata from the item list as well so we
+                                        // can search for the item using information we know about the list.
+                                        metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
 
-                                    entity.setParentId(entityList.getId());
-                                    entity.setMetadata(metadata);
-                                    entity.setCategoryColumnId(category, daoModel.getId());
-                                    entityDao.update(entity);
-                                } else {
-                                    Logger.warning("We have a selected item that is not a dao model in position.");
+                                        entity.setParentId(entityList.getId());
+                                        entity.setMetadata(metadata);
+                                        entity.setCategoryColumnId(category, daoModel.getId());
+                                        entityDao.update(entity);
+                                    } else {
+                                        Logger.warning("We have a selected item that is not a dao model in position.");
+                                    }
+                                } catch (Exception e) {
+                                    Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
                                 }
-                            } catch (Exception e) {
-                                Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
                             }
+                        } catch (Exception e) {
+                            Logger.error(e.getMessage(), e);
                         }
-                    } catch (Exception e) {
-                        Logger.error(e.getMessage(), e);
                     }
-                }
             );
 
             builder.setNegativeButton(
-                R.string.dialog_cancel,
+                    R.string.dialog_cancel,
                     (dialog, which) -> Logger.info("CANCEL CLICKED")
             );
             builder.setPositiveButton(
-                R.string.dialog_confirm,
+                    R.string.dialog_confirm,
                     (dialog, which) -> Logger.info("OK CLICKED!")
             );
             builder.show();
@@ -486,6 +647,53 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
         return items;
     }
 
+
+
+    private WriteDao<?> getDaoForCategory(Category category) {
+        if (category==null) {
+            throw new RuntimeException("We can't determine a writeDao for a null category!");
+        }
+
+        switch(category) {
+            case CONDITION:
+                return conditionDao;
+            case CUSTOM_MONSTER:
+                return customMonsterDao;
+            case STANDARD_MONSTER:
+                return standardMonsterDao;
+            case MAGIC_ITEM:
+                return magicItemDao;
+            case SPELL:
+                return spellDao;
+            case FEAT:
+                return featDao;
+            case BACKGROUND:
+                return backgroundDao;
+            case ARMOR:
+                return armorDao;
+            case WEAPON:
+                return weaponDao;
+            case EQUIPMENT:
+                return equipmentDao;
+            case NOTE:
+                return notesDao;
+            case CHALLENGE_RATING:
+                return challengeRatingDao;
+            case LEVEL:
+                return levelDao;
+            case GOD:
+                return godsDao;
+            case LIFESTYLE:
+                return lifeStyleDao;
+            case MOUNT:
+                return mountDao;
+            case ENTITY:
+                return entityDao;
+            case DEFAULT:
+            default:
+                throw new RuntimeException("Failed to determine a dao for category " + category + ".");
+        }
+    }
 
     private List<?> getDisplayObjects(List<? extends DaoModel> foundItems) {
         List<DaoModel> displayItems = new ArrayList<>();
@@ -520,7 +728,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
             Logger.info("Processing display entity: " + entity.json());
             try {
-                 writeDao = compendiumResource.getDaoForCategory(childCategory);
+                writeDao = getDaoForCategory(childCategory);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
             }

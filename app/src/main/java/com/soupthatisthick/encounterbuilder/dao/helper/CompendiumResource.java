@@ -1,5 +1,6 @@
 package com.soupthatisthick.encounterbuilder.dao.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.MainThread;
@@ -53,14 +54,15 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
+@SuppressWarnings({"unchecked", "SpellCheckingInspection", "MismatchedQueryAndUpdateOfCollection"})
 public class CompendiumResource {
 
 
     /**
      * These variables track the usable dao's and the columns we are allowed to search
      */
-    private Map<String, ReadDao<? extends Object>> usableDaos;
-    private Set<String> selectedFilters = new HashSet<>();
+    private Map<String, ReadDao<?>> usableDaos;
+    private final Set<String> selectedFilters = new HashSet<>();
 
     private final Object DB_LOCK = new Object();
     private DndMaster dndMaster;
@@ -88,11 +90,16 @@ public class CompendiumResource {
     private EntityListDao entityListDao;
     private ItemDao itemDao;
 
-    protected final Context context;
+    private final Context context;
+
+    private static AsyncTask<Object, Object, Boolean> LOAD_TASK;
+
+    private int currentStep = 0;
+    private int numberOfSteps = 22;
 
     /**
      * This will create a central resource to access all of the data in a compendium
-     * @param context
+     * @param context is where the resource is contains. It should be the application context
      */
     public CompendiumResource(
         Context context
@@ -104,9 +111,15 @@ public class CompendiumResource {
     /**
      * This will attempt to load all the data into the compendium for searching
      */
-    public void loadAllData()
+    @SuppressLint("StaticFieldLeak")
+    public synchronized void loadAllData()
     {
-        final AsyncTask<Object, Object, Boolean> loadTask = new AsyncTask<Object, Object, Boolean>()
+        Logger.info("Loading all compendium Resource.");
+        if (LOAD_TASK!=null && !LOAD_TASK.isCancelled()) {
+            LOAD_TASK.cancel(true);
+        }
+
+        LOAD_TASK = new AsyncTask<Object, Object, Boolean>()
         {
 
             /**
@@ -129,7 +142,9 @@ public class CompendiumResource {
                 synchronized (DB_LOCK) {
 
                     Logger.info(" - initializing the usable daos map");
-                    usableDaos = new TreeMap<>();
+
+                    // This must be thread safe but also allow sorting by the key.
+                    usableDaos = Collections.synchronizedMap(new TreeMap<>());
 
                     Logger.info(" - aquired DB_LOCK [loadAllData().AsyncTask]");
                     try {
@@ -215,7 +230,7 @@ public class CompendiumResource {
 
             /**
              * Executed after all the data has been loaded.
-             * @param result
+             * @param result indicates if there are results
              */
             @Override
             @MainThread
@@ -240,15 +255,20 @@ public class CompendiumResource {
                         Logger.info(" - text:       " + selection.getItem());
                         Logger.info(" - isSelected: " + selection.isSelected());
                     }
+
+                    // TODO: Determine what we want to do with the selection list
                 }
             }
         };
-        loadTask.execute(null, null, null);
+
+
+        LOAD_TASK.execute(null, null, null);
 
     }
 
-    private void initDao(final int titleResourceId, final ReadDao<? extends Object> dao)
+    private void initDao(final int titleResourceId, final ReadDao<?> dao)
     {
+        @SuppressLint("StaticFieldLeak")
         AsyncTask<Void,Void,Void> loadDaoTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -256,14 +276,14 @@ public class CompendiumResource {
                 Logger.info("Opened dao on table " + dao.getTable() + ".");
                 dao.logSchema();
                 usableDaos.put(name, dao);
-
+                nextStep();
                 return null;
             }
         };
         loadDaoTask.execute();
     }
 
-    public final List<Object> searchForResults(String searchText) throws Exception {
+    public synchronized final List<Object> searchForResults(String searchText) {
 
         final List<Object> objects = new ArrayList<>();
 
@@ -272,7 +292,7 @@ public class CompendiumResource {
             for(String key : selectedFilters)
             {
                 Logger.debug("Including " + key);
-                ReadDao<? extends Object> readDao = usableDaos.get(key);
+                ReadDao<?> readDao = usableDaos.get(key);
                 addRecordsLike(searchText, readDao, objects);
             }
 
@@ -284,7 +304,7 @@ public class CompendiumResource {
     }
 
 
-    public final List<Object> getAllRecords() throws Exception {
+    public synchronized final List<Object> getAllRecords() {
 
         final List<Object> objects = new ArrayList<>();
 
@@ -292,7 +312,7 @@ public class CompendiumResource {
         {
             for(String key : selectedFilters)
             {
-                ReadDao<? extends Object> readDao = usableDaos.get(key);
+                ReadDao<?> readDao = usableDaos.get(key);
                 addAllRecords(readDao, objects);
             }
 
@@ -301,7 +321,7 @@ public class CompendiumResource {
         }
     }
 
-    private void addRecordsLike(@NonNull String searchText, ReadDao<? extends Object> dao, List<Object> results)
+    private void addRecordsLike(@NonNull String searchText, ReadDao<?> dao, List<Object> results)
     {
         try {
             if (dao == entityDao) {
@@ -320,7 +340,7 @@ public class CompendiumResource {
         }
     }
 
-    private void addAllRecords(ReadDao<? extends Object> dao, List<Object> results)
+    private void addAllRecords(ReadDao<?> dao, List<Object> results)
     {
         try {
             results.addAll(dao.getAllRecords());
@@ -331,7 +351,7 @@ public class CompendiumResource {
 
     /**
      * This is calleed when we attempt to access a dao session table but fail.
-     * @param dao
+     * @param dao indicates which dao the session failed on
      */
     private void onDaoSessionFail(Dao<?> dao, Exception e)
     {
@@ -341,15 +361,15 @@ public class CompendiumResource {
 
     /**
      * This is the method that wil determine how the objects will be displayed in the adapter
-     * @param theList
+     * @param theList is a list of display objects we wish to sort
      */
-    private static final void sortObjects(@NonNull List<Object> theList)
+    private static void sortObjects(@NonNull List<Object> theList)
     {
         Collections.sort(theList, new SortByTitleComparator());
     }
 
 
-    public WriteDao<? extends Object> getDaoForCategory(Category category) throws Exception {
+    public synchronized WriteDao<?> getDaoForCategory(Category category) throws Exception {
         if (category==null) {
             throw new Exception("We can't determine a writeDao for a null category!");
         }
@@ -403,7 +423,7 @@ public class CompendiumResource {
      * @param item is the item we want a display item for
      * @return the object to be displayed
      */
-    public Object getDisplayObject(DaoModel item) throws DaoModelException {
+    private synchronized Object getDisplayObject(DaoModel item) throws DaoModelException {
 
         if (item==null) {
             throw new RuntimeException("We can't get the display item of a null object!");
@@ -413,7 +433,7 @@ public class CompendiumResource {
         if (item instanceof Entity) {
             Entity entity = (Entity) item;
             Category childCategory = entity.getChildCategory();
-            WriteDao<? extends Object> writeDao;
+            WriteDao<?> writeDao;
 
             Logger.info("Processing display entity: " + entity.json());
             try {
@@ -422,7 +442,7 @@ public class CompendiumResource {
                 throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
             }
 
-            Long theId = null;
+            Long theId;
             theId = entity.getCategoryColumnId(childCategory);
 
             if (theId != null) {
@@ -442,5 +462,41 @@ public class CompendiumResource {
         }
     }
 
+    public synchronized Map<String, ReadDao<?>> getUsableDaos() {
+        return this.usableDaos;
+    }
 
+    public synchronized int getStep() {
+        return currentStep;
+    }
+
+    private synchronized void nextStep() {
+        currentStep++;
+        if (getStep() >= getNumberOfSteps()) {
+            Logger.info("Progress completed!");
+        }
+    }
+
+    public synchronized int getNumberOfSteps() {
+        return numberOfSteps;
+    }
+
+    public synchronized boolean isCompleted() {
+        return (getStep() >= getNumberOfSteps());
+    }
+
+    private synchronized void cancelSteps() {
+        if (LOAD_TASK != null && !LOAD_TASK.isCancelled()) {
+            LOAD_TASK.cancel(true);
+        }
+        currentStep = 0;
+    }
+
+    public synchronized float getProgress() {
+        if (isCompleted()) {
+            return 1F;
+        } else {
+            return ((float) getStep() / (float) getNumberOfSteps());
+        }
+    }
 }

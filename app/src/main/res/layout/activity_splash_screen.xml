@@ -6,6 +6,16 @@
     android:background="@color/splash_screen"
     >
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/theSplashProgressBar"
+        android:progress="0"
+        android:indeterminate="false"
+
+        style="@style/AppTheme.ProgressBar"
+        />
+
     <TextView
         android:id="@+id/theSplashLabel"
         android:layout_width="match_parent"
