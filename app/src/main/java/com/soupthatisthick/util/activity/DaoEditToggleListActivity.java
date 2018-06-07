@@ -333,6 +333,7 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
     }
 
 
+    @Override
     public void onClickAddDetailButton(View view) {
         Logger.debug("onClickAddDetailButton()");
 

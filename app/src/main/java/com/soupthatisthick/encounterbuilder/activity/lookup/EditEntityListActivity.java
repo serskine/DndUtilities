@@ -154,4 +154,13 @@ public class EditEntityListActivity extends DaoEditToggleListActivity<EntityList
          }
     }
 
+    /**
+     * This will open the compendium for us to select items to add to lists.
+     * @param view is the view we clicked on.
+     */
+    @Override
+    public final void onClickAddDetailButton(View view) {
+        Intent intent = new Intent(this, CompendiumActivity.class);
+        startActivity(intent);
+    }
 }
