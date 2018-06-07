@@ -28,7 +28,8 @@
                 android:hint="@string/ee_metadata"
                 android:imeOptions="actionDone"
                 android:inputType="text"
-                style="@style/AppTheme.BigHeader"
+
+                style="@style/AppTheme.EditMultiline"
                 />
         </ScrollView>
 
