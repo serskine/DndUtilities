@@ -28,6 +28,7 @@ import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
+import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
@@ -306,7 +307,7 @@ public class CompendiumResource {
             if (dao == entityDao) {
                 List<Entity> theEntities = entityDao.getRecordsLike(searchText);
                 for(Entity theEntity : theEntities) {
-                    Object child = getEntityChild(theEntity);
+                    Object child = getDisplayObject(theEntity);
                     if (child!=null) {
                         results.add(child);
                     }
@@ -348,8 +349,11 @@ public class CompendiumResource {
     }
 
 
-    public WriteDao<? extends Object> getDaoForCategory(Category category) {
-        if (category==null) return null;
+    public WriteDao<? extends Object> getDaoForCategory(Category category) throws Exception {
+        if (category==null) {
+            throw new Exception("We can't determine a writeDao for a null category!");
+        }
+
         switch(category) {
             case CONDITION:
                 return conditionDao;
@@ -386,31 +390,57 @@ public class CompendiumResource {
             case ENTITY:
                 return entityDao;
             case DEFAULT:
-                return null;
+            default:
+                throw new Exception("Failed to determine a dao for category " + category + ".");
         }
-        throw new RuntimeException("Failed to determine a dao for category " + category + ".");
     }
 
+
+
     /**
-     * This is used to get the child entity from of the specified Entity model
-     * @param entity is the pointer {@link Entity}
-     * @return null if the child entity does not exist
+     * This is a recursive method used to return the object we wish to display in the compendium.
+     * It it's an entity, it will recursively call itself until it finds a non-Entity object or null
+     * @param item is the item we want a display item for
+     * @return the object to be displayed
      */
-    public Object getEntityChild(Entity entity) throws DaoModelException {
-        Category category = entity.getChildCategory();
-        WriteDao<? extends Object> writeDao = getDaoForCategory(category);
-        if (writeDao == null) {
-            return null;
-        } else {
-            Long theId = entity.getCategoryColumnId(category);
+    public Object getDisplayObject(DaoModel item) throws DaoModelException {
+
+        if (item==null) {
+            throw new RuntimeException("We can't get the display item of a null object!");
+        }
+
+        // Recursively call by it's child object
+        if (item instanceof Entity) {
+            Entity entity = (Entity) item;
+            Category childCategory = entity.getChildCategory();
+            WriteDao<? extends Object> writeDao;
+
+            Logger.info("Processing display entity: " + entity.json());
+            try {
+                writeDao = getDaoForCategory(childCategory);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
+            }
+
+            Long theId = null;
+            theId = entity.getCategoryColumnId(childCategory);
+
             if (theId != null) {
                 synchronized (DB_LOCK) {
-                    return writeDao.load(theId);
+                    DaoModel child = (DaoModel) writeDao.load(theId);
+                    if (child==null) {
+                        throw new RuntimeException("Entity(" + entity.getId() + ") refers to table " + writeDao.getTable() + "(" + theId + ") but the record does not exist!");
+                    } else {
+                        return getDisplayObject(child);
+                    }
                 }
             } else {
-                return null;
+                throw new RuntimeException("Entity(" + entity.getId() + ") is isolated and points to nothing!");
             }
+        } else {
+            return item;
         }
     }
+
 
 }

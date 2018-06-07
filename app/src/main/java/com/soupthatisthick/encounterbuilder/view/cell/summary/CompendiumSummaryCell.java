@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
 import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
 import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
 import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
+import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
 import com.soupthatisthick.encounterbuilder.model.lookup.Feat;
 import com.soupthatisthick.encounterbuilder.model.lookup.God;
@@ -33,7 +35,6 @@ import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
 
 public class CompendiumSummaryCell extends CompendiumCell
 {
-
     public CompendiumSummaryCell(LayoutInflater inflater, View convertView, ViewGroup parent)
     {
         super(inflater, convertView, parent);
@@ -48,7 +49,12 @@ public class CompendiumSummaryCell extends CompendiumCell
      * @param parent
      * @return
      */
-    public static final ReadCell<?> createSummaryCell(Category category, LayoutInflater inflater, View convertView, ViewGroup parent) {
+    public static final ReadCell<?> createSummaryCell(
+            Category category,
+            LayoutInflater inflater,
+            View convertView,
+            ViewGroup parent
+    ) {
         switch (category) {
             case CONDITION:
                 ConditionSummaryCell conditionDetailedCell = new ConditionSummaryCell(inflater, convertView, parent);
@@ -98,6 +104,9 @@ public class CompendiumSummaryCell extends CompendiumCell
             case MOUNT:
                 MountSummaryCell mountSummaryCell = new MountSummaryCell(inflater, convertView, parent);
                 return mountSummaryCell;
+            case ENTITY:
+                EntitySummaryCell entitySummaryCell = new EntitySummaryCell(inflater, convertView, parent);
+                return entitySummaryCell;
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;
@@ -179,6 +188,9 @@ public class CompendiumSummaryCell extends CompendiumCell
                 break;
             case MOUNT:
                 ((MountSummaryCell) cell).updateUi((Mount) item);
+                break;
+            case ENTITY:
+                ((EntitySummaryCell) cell).updateUi((Entity) item);
                 break;
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);

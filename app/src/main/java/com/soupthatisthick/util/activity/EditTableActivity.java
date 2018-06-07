@@ -134,23 +134,18 @@ public class EditTableActivity extends DaoEditToggleListActivity<Object, Content
     }
 
     @Override
-    protected WriteDao<ContentValues> createWriteDao(DaoMaster db) throws Exception {
-        return new ContentValuesDao(db, table, primaryKey);
+    protected WriteDao<ContentValues> createDetailDao(DaoMaster daoMaster) throws Exception {
+        return new ContentValuesDao(daoMaster, table, primaryKey);
+    }
+
+    @Override
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
     }
 
     @Override
     protected CustomToggleAdapter<ContentValues> createToggleListAdapter(LayoutInflater layoutInflater) {
         return new ContentValuesAdapter(layoutInflater, primaryKey);
-    }
-
-    /**
-     * This will save the information about the list of information.
-     *
-     * @param view
-     */
-    @Override
-    protected void onClickSaveMastButton(View view) {
-        // Do nothing. This is read only.
     }
 
 }

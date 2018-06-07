@@ -25,8 +25,13 @@ import soupthatisthick.encounterapp.R;
 
 public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity<Mast, Detail>
 {
+
+    public static final String KEY_MODEL_ID = "KEY_MODEL_ID";
+    public static final String KEY_DELETE_ON_CANCEL = "KEY_DELETE_ON_CANCEL";
+
     private WriteDao<Detail> detailDao;
     private WriteDao<Mast> mastDao;
+    private DaoMaster daoMaster;
 
     protected final WriteDao<Detail> getDetailDao()
     {
@@ -71,7 +76,7 @@ public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity
         Logger.debug("onResume()");
         super.onResume();
         try {
-            DaoMaster daoMaster = createDaoMaster(getBaseContext());
+            daoMaster = createDaoMaster(getBaseContext());
             detailDao = createDetailDao(daoMaster);
             mastDao = createMastDao(daoMaster);
         } catch (Exception e) {
@@ -88,7 +93,7 @@ public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity
 
         super.onPause();
 
-        DaoMaster.close(theDaoMaster);
+        DaoMaster.close(getDaoMaster());
     }
 
 
@@ -97,15 +102,15 @@ public abstract class DaoEditListActivity<Mast, Detail> extends EditListActivity
     protected void loadAllData() {
         Logger.debug("loadAllData()");
         try {
-            theDaoMaster = createDaoMaster(getBaseContext());
-            detailDao = createDetailDao(theDaoMaster);
+            setDaoMaster(createDaoMaster(getBaseContext()));
+            detailDao = createDetailDao(getDaoMaster());
             if (detailDao!=null) {
                 Logger.info("Opened write dao for table " + detailDao.getTable() + ".");
             } else {
                 Logger.warning("There is no detail dao!");
             }
 
-            mastDao = createMastDao(theDaoMaster);
+            mastDao = createMastDao(getDaoMaster());
             if (mastDao!=null) {
                 Logger.info("Opened write dao for table " + mastDao.getTable() + ".");
             } else {

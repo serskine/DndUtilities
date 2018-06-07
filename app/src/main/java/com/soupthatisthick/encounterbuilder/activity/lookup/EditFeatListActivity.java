@@ -60,8 +60,13 @@ public class EditFeatListActivity extends DaoEditToggleListActivity<Object, Feat
     }
 
     @Override
-    protected WriteDao<Feat> createWriteDao(DaoMaster db) throws Exception {
-        return new FeatDao(db);
+    protected WriteDao<Feat> createDetailDao(DaoMaster daoMaster) throws Exception {
+        return new FeatDao(daoMaster);
+    }
+
+    @Override
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
     }
 
     @Override
@@ -69,13 +74,4 @@ public class EditFeatListActivity extends DaoEditToggleListActivity<Object, Feat
         return new ExFeatAdapter(layoutInflater);
     }
 
-    /**
-     * This will save the information about the list of information.
-     *
-     * @param view
-     */
-    @Override
-    protected void onClickSaveMastButton(View view) {
-        // Do nothing. There is no need for a save button
-    }
 }

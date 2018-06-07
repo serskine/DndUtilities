@@ -345,4 +345,8 @@
     <string name="st_db_logsheet">Logsheets Database</string>
     <string name="st_db_encounter">Encounter Database</string>
     <string name="st_db_compendium">Compendium Database</string>
+
+    <!-- view entity strings -->
+    <string name="cell_entity_category">Category: %s</string>
+    <string name="cell_entity_title">Entity: %d</string>
 </resources>

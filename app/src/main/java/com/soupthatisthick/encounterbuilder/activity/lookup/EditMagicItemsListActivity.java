@@ -34,10 +34,10 @@ public class EditMagicItemsListActivity extends DaoEditToggleListActivity<Object
         saveMastButton.setVisibility(View.GONE);
     }
 
-    @Override
-    protected WriteDao<MagicItem> createWriteDao(DaoMaster db) throws Exception {
-        return new MagicItemDao(db);
-    }
+//    @Override
+//    protected WriteDao<MagicItem> createWriteDao(DaoMaster db) throws Exception {
+//        return new MagicItemDao(db);
+//    }
 
     @Override
     protected void requestEditDetail(Long detailId, MagicItem magicItem, boolean deleteOnCancel) {
@@ -69,15 +69,20 @@ public class EditMagicItemsListActivity extends DaoEditToggleListActivity<Object
         return R.string.emi_list_delete_message;
     }
 
+    @Override
+    protected WriteDao<MagicItem> createDetailDao(DaoMaster daoMaster) throws Exception {
+        return new MagicItemDao(daoMaster);
+    }
+
+    @Override
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
+    }
+
 
     @Override
     protected DaoMaster createDaoMaster(Context context) throws Exception {
         return new DndMaster(getBaseContext());
     }
 
-
-    @Override
-    protected void onClickSaveMastButton(View view) {
-
-    }
 }

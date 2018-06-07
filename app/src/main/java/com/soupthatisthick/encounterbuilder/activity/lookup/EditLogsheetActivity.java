@@ -32,7 +32,11 @@ public class EditLogsheetActivity extends DaoEditListActivity<Pc, Session>
     protected final UiWatcher uiWatcher = new UiWatcher() {
         @Override
         protected void onUiUpdate() {
-            updateModelFromUi();
+            try {
+                updateModelFromUi();
+            } catch (Exception e) {
+                Logger.error(e.getMessage(), e);
+            }
         }
     };
 
@@ -165,15 +169,35 @@ public class EditLogsheetActivity extends DaoEditListActivity<Pc, Session>
      */
     protected void updateUiFromModel()
     {
-        Logger.toast(getApplication(), "UPDATING THE UI FROM THE MODEL");
+        Logger.debug("updateUiFromModel()");
     }
+//
+//    @Override
+//    protected void loadModelFromBackEndStore() {
+//        Logger.debug("loadModelFromBackEndStore()");
+//    }
+//
+//    @Override
+//    protected void initModelWithoutUi() {
+//        Logger.debug("initModelWithoutUi()");
+//    }
+//
+//    @Override
+//    protected void listenToUi() {
+//        Logger.debug("listenToUi()");
+//    }
+//
+//    @Override
+//    protected void ignoreUi() {
+//        Logger.debug("ignoreUi()");
+//    }
 
     /**
      * This is called when we want to update the model from the UI
      */
     protected void updateModelFromUi()
     {
-        Logger.toast(getApplication(), "UPDATING THE MODEL FROM THE UI");
+        Logger.debug("updateModelFromUi()");
     }
 
 }

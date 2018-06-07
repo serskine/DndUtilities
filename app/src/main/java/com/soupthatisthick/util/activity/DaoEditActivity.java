@@ -31,14 +31,6 @@ public abstract class DaoEditActivity<Model> extends EditActivity {
 
     protected Model model = null;
 
-    protected final UiWatcher uiWatcher = new UiWatcher() {
-        @Override
-        protected void onUiUpdate() {
-            ignoreUi();
-            updateModelFromUi();
-            listenToUi();
-        }
-    };
 
     protected abstract int getDeleteTitleStringId();
     protected abstract int getDeleteMessageStringId();
@@ -88,7 +80,6 @@ public abstract class DaoEditActivity<Model> extends EditActivity {
                 throw new RuntimeException(output);
             } else {
                 Logger.info("Loaded model with id " + theId + " from table " + getWriteDao().getTable() + ".\n");
-                logModel();
             }
         } catch (Exception e) {
             Logger.error(e.getMessage(), e);
@@ -210,8 +201,4 @@ public abstract class DaoEditActivity<Model> extends EditActivity {
         return output;
     }
 
-    protected void logModel()
-    {
-        // TO Be implemented by subclasses
-    }
 }

@@ -16,6 +16,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
 import com.soupthatisthick.encounterbuilder.model.lookup.Note;
 import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
+import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
@@ -216,6 +217,23 @@ public class EntityDao extends WriteDao<Entity> {
         List<String> columns = new ArrayList<>();
         columns.add(COL_ID);
         return columns;
+    }
+
+    /**
+     * This will return an empty list if we can't get any items.
+     * @param parentId identifies the parent entity
+     * @return a {@link List<Entity>}
+     */
+    public List<Entity> getChildrenOf(Long parentId) {
+        try {
+            return getRecords(
+                    COL_PARENT + "=?",
+                    new String[]{parentId.toString()}
+            );
+        } catch (Exception e) {
+            Logger.error(e.getMessage(), e);
+            return new ArrayList<>();
+        }
     }
 
 }

@@ -74,13 +74,13 @@ public class EditSpellBookActivity extends DaoEditToggleListActivity<Object, Spe
     }
 
     @Override
-    protected WriteDao<Spell> createWriteDao(DaoMaster db) throws Exception {
-        return new SpellDao(db);
+    protected WriteDao<Spell> createDetailDao(DaoMaster daoMaster) throws Exception {
+        return new SpellDao(daoMaster);
     }
 
     @Override
-    protected void onClickSaveMastButton(View view) {
-        // Do nothing. There is no mast to save
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
     }
 
 }

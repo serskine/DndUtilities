@@ -100,8 +100,8 @@ public class CompendiumDetailCell extends CompendiumCell {
                 MountDetailCell mountDetailCell = new MountDetailCell(inflater, convertView, parent);
                 return mountDetailCell;
             case ENTITY:
-                CompendiumDetailCell compendiumDetailCell = new CompendiumDetailCell(inflater, convertView, parent);
-
+                EntityDetailCell entityDetailCell = new EntityDetailCell(inflater, convertView, parent);
+                return entityDetailCell;
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;

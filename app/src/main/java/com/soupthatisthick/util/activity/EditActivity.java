@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.view.View;
 
+import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
 import com.soupthatisthick.util.Logger;
 
 /**
@@ -13,6 +14,15 @@ import com.soupthatisthick.util.Logger;
  */
 
 public abstract class EditActivity extends AppActivity {
+
+    protected final UiWatcher uiWatcher = new UiWatcher() {
+        @Override
+        protected void onUiUpdate() {
+            ignoreUi();
+            updateModelFromUi();
+            listenToUi();
+        }
+    };
 
     protected View saveButton, deleteButton, cancelButton;
 

@@ -25,10 +25,10 @@ public class EditMonsterManualActivity extends DaoEditToggleListActivity<Object,
         return new DndMaster(context);
     }
 
-    @Override
-    protected WriteDao<CustomMonster> createWriteDao(DaoMaster db) throws Exception {
-        return new CustomMonsterDao(db);
-    }
+//    @Override
+//    protected WriteDao<CustomMonster> createWriteDao(DaoMaster db) throws Exception {
+//        return new CustomMonsterDao(db);
+//    }
 
     @Override
     protected void requestEditDetail(Long detailId, CustomMonster customMonster, boolean deleteOnCancel) {
@@ -58,11 +58,16 @@ public class EditMonsterManualActivity extends DaoEditToggleListActivity<Object,
         return R.string.em_list_delete_message;
     }
 
+    @Override
+    protected WriteDao<CustomMonster> createDetailDao(DaoMaster daoMaster) throws Exception {
+        return new CustomMonsterDao(daoMaster);
+    }
 
     @Override
-    protected void onClickSaveMastButton(View view) {
-        Logger.toast(getApplication(), R.string.test_to_be_implemented);
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
     }
+
 
     @Override
     protected CustomToggleAdapter<CustomMonster> createToggleListAdapter(LayoutInflater layoutInflater) {

@@ -62,8 +62,13 @@ public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, E
     }
 
     @Override
-    protected WriteDao createWriteDao(DaoMaster daoMaster) throws Exception {
+    protected WriteDao<EntityList> createDetailDao(DaoMaster daoMaster) throws Exception {
         return new EntityListDao(daoMaster);
+    }
+
+    @Override
+    protected WriteDao<Object> createMastDao(DaoMaster daoMaster) throws Exception {
+        return null;
     }
 
     @Override
@@ -72,7 +77,38 @@ public class EditCustomListsActivity extends DaoEditToggleListActivity<Object, E
     }
 
     @Override
-    protected void onClickSaveMastButton(View view) {
-        Logger.debug("Saving the mast of lists is not yet implemented");
+    protected void initUiWithoutModel() {
+        super.initUiWithoutModel();
+        saveMastButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void initModelWithoutUi() {
+        // Do nothing. We don't use the model
+    }
+
+    @Override
+    protected void listenToUi() {
+        // Do nothing. We don't use the model
+    }
+
+    @Override
+    protected void ignoreUi() {
+        // Do nothing. We dont use the model
+    }
+
+    @Override
+    protected void updateModelFromUi() {
+        // Do nothing. we don't use the mast
+    }
+
+    @Override
+    protected void updateUiFromModel() {
+        // Do nothing, we don't use the mast
+    }
+
+    @Override
+    protected void loadModelFromBackEndStore() {
+        // Do nothing. We don't use the mast
     }
 }
