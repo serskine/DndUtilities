@@ -22,6 +22,7 @@ import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
 import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.activity.DaoEditActivity;
 import com.soupthatisthick.util.activity.DaoEditListActivity;
 import com.soupthatisthick.util.activity.DaoEditToggleListActivity;
 import com.soupthatisthick.util.dao.DaoMaster;
@@ -55,7 +56,12 @@ public class EditEntityListActivity extends DaoEditToggleListActivity<EntityList
 
     @Override
     protected void requestEditDetail(Long detailId, Entity entity, boolean deleteOnCancel) {
-        Logger.warning("Editing entity details is not allowed. Only addition and removal are.");
+        Logger.info("request to edit entity " + entity.toString() + " with id " + detailId);
+
+        Intent intent = new Intent(this, EditEntityActivity.class);
+        intent.putExtra(DaoEditActivity.KEY_DELETE_ON_CANCEL, deleteOnCancel);
+        intent.putExtra(DaoEditActivity.KEY_MODEL_ID, detailId);
+        startActivity(intent);
     }
 
 

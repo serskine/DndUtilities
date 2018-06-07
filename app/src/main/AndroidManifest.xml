@@ -234,7 +234,15 @@
             android:label="@string/title_activity_camera"
             android:launchMode="standard"
             />
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity" />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity"
+            android:label="@string/title_activity_edit_entity_list"
+            android:launchMode="standard"
+            />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityActivity"
+            android:label="@string/title_activity_edit_entity"
+            android:launchMode="standard"
+            />
+
         <activity android:name="com.soupthatisthick.encounterbuilder.activity.storage.StorageActivity"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <!--
