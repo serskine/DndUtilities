@@ -2,6 +2,9 @@ package com.soupthatisthick.encounterbuilder.util;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -186,4 +189,21 @@ public class Text {
         }
         return true;
     }
+
+
+    public static final Spanned propertySpan(@NonNull String keyText, @Nullable String valueText)
+    {
+        keyText = (valueText==null || valueText.length()<1) ? "" : keyText;
+        final SpannableStringBuilder str = new SpannableStringBuilder(keyText + valueText);
+        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, keyText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return str;
+    }
+
+    public static final Spanned boldSpan(String text)
+    {
+        final SpannableStringBuilder str = new SpannableStringBuilder(text);
+        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return str;
+    }
+
 }

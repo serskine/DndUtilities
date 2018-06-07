@@ -127,12 +127,6 @@ public class EditContentValuesActivity extends DaoEditActivity<ContentValues> {
         return R.layout.activity_edit_content_values;
     }
 
-    @Override
-    protected void logModel()
-    {
-        logContent("Model Content", model);
-    }
-
     /**
      * Logs the information about the content to the console
      * @param title

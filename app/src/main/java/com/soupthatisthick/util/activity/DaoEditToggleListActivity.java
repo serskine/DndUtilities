@@ -3,6 +3,7 @@ package com.soupthatisthick.util.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.CallSuper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -10,6 +11,7 @@ import android.widget.ExpandableListView;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,13 +24,31 @@ import soupthatisthick.encounterapp.R;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggleListActivity<Mast, Detail>
-{
-    private WriteDao<Detail> writeDao;
+public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggleListActivity<Mast, Detail> {
 
-    protected final WriteDao<Detail> getWriteDao()
-    {
-        return this.writeDao;
+    public static final String KEY_MODEL_ID = "KEY_MODEL_ID";
+    public static final String KEY_DELETE_ON_CANCEL = "KEY_DELETE_ON_CANCEL";
+
+    private WriteDao<Detail> detailDao;
+    private WriteDao<Mast> mastDao;
+
+    protected Mast mast = null;
+
+    protected final Mast getMast() {
+        return this.mast;
+    }
+
+    protected final Mast setMast(Mast mast) {
+        this.mast = mast;
+        return this.mast;
+    }
+
+    protected final WriteDao<Detail> getDetailDao() {
+        return this.detailDao;
+    }
+
+    protected final WriteDao<Mast> getMastDao() {
+        return this.mastDao;
     }
 
     protected abstract DaoMaster createDaoMaster(Context context) throws Exception;
@@ -40,6 +60,53 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
     protected abstract int getDeleteDetailTitleStringId();
     protected abstract int getDeleteDetailMessageStringId();
 
+
+    protected final void onClickSaveMastButton(View view)
+    {
+        Logger.debug("onClickSaveButton()");
+        if (getMastDao() != null) {
+            try {
+                Long id = getMastDao().getId(getMast());
+                Logger.debug("___ " + getMast().getClass().getSimpleName() + " (" + id + ") ___\n" + JsonUtil.toJson(getMast(), true));
+                getMastDao().update(id, getMast());
+                finish();
+            } catch (Exception e) {
+                Logger.error(e.getMessage(), e);
+            }
+        } else {
+            Logger.warning("We have a null mast dao. Assuming the mast doesn't apply when editing this list.");
+        }
+    }
+
+    @Override
+    protected void initModelWithoutUi() {
+        Logger.warning("initModelWithoutUi() currently does nothing!");
+    }
+
+    @Override
+    protected void listenToUi() {
+        Logger.warning("listenToUi() currently does nothing!");
+    }
+
+    @Override
+    protected void ignoreUi() {
+        Logger.warning("ignoreUi() currently does nothing!");
+    }
+
+    @Override
+    protected void updateModelFromUi() {
+        Logger.warning("updateModelFromUi() currently does nothing!");
+    }
+
+    @Override
+    protected void updateUiFromModel() {
+        Logger.warning("updateUiFromModel() currently does nothing!");
+    }
+
+    @Override
+    protected void loadModelFromBackEndStore() {
+        Logger.warning("loadModelFromBackEndStore() currently does nothing!");
+    }
 
     @Override
     protected int getLayoutId()
@@ -59,42 +126,72 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
         return (EditText) findViewById(R.id.ml_search_edit);
     }
 
-    protected abstract WriteDao<Detail> createWriteDao(DaoMaster db) throws Exception;
+    // Handle the data dao creation
+    protected abstract WriteDao<Detail> createDetailDao(DaoMaster daoMaster) throws Exception;
+    protected abstract WriteDao<Mast> createMastDao(DaoMaster daoMaster) throws Exception;
 
     @Override
-    protected void onResume()
+    @CallSuper
+    protected void onStart()
     {
-        Logger.debug("onResume()");
+        Logger.debug("onStart()");
+        super.onStart();
         try {
-            DaoMaster daoMaster = createDaoMaster(getBaseContext());
-            writeDao = createWriteDao(daoMaster);
+            loadAllData();
         } catch (Exception e) {
             Logger.error(e.getMessage(), e);
-
             finish();
         }
+    }
+
+
+    @CallSuper
+    @Override
+    protected void onResume() {
         super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Logger.debug("onPause()");
-
-        super.onPause();
-
-        DaoMaster.close(db);
+        Logger.debug("onResume()");
+        try {
+            loadModelFromBackEndStore();
+        } catch (Exception e) {
+            Logger.error(e.getMessage(), e);
+            finish();
+        }
     }
 
 
     @Override
-    protected void loadAllData() {
+    @CallSuper
+    protected void onStop() {
+        Logger.debug("onStop()");
+
+        super.onStop();
+
+        DaoMaster.close(getDaoMaster());
+    }
+
+    /**
+     * This method will load up all the data from the databases
+     */
+    protected final void loadAllData() {
         Logger.debug("loadAllData()");
         try {
-            db = createDaoMaster(getBaseContext());
-            writeDao = createWriteDao(db);
-            Logger.info("Opened writeDao for table " + writeDao.getTable() + ".");
+            setDaoMaster(createDaoMaster(getBaseContext()));
+            detailDao = createDetailDao(getDaoMaster());
+            if (detailDao!=null) {
+                Logger.info("Opened write dao for table " + detailDao.getTable() + ".");
+            } else {
+                Logger.warning("There is no detail dao!");
+            }
+
+            mastDao = createMastDao(getDaoMaster());
+            if (mastDao!=null) {
+                Logger.info("Opened write dao for table " + mastDao.getTable() + ".");
+            } else {
+                Logger.warning("There is no mast dao!");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to open the writeDao!", e);
+            Logger.error(e.getMessage(), e);
+            finish();
         }
     }
 
@@ -112,14 +209,14 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
         if (searchText.length()>0)
         {
             try {
-                results = getWriteDao().getRecordsLike(searchText);
+                results = getDetailDao().getRecordsLike(searchText);
             } catch (IOException e) {
                 Logger.error("Could not get records like '" + searchText + "'", e);
                 results = new ArrayList<>();
             }
         } else {
             try {
-                results = getWriteDao().getAllRecords();
+                results = getDetailDao().getAllRecords();
             } catch (IOException e) {
                 Logger.error("Could not get all records.", e);
                 results = new ArrayList<>();
@@ -131,7 +228,7 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
 
 
     protected List<Detail> getAllRecords() throws Exception {
-        return getWriteDao().getAllRecords();
+        return getDetailDao().getAllRecords();
     }
 
 
@@ -156,16 +253,56 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
         return findViewById(R.id.ml_clear_button);
     }
 
+
     @Override
     protected View findSaveMastButton() {
-        View view = findViewById(R.id.ml_save_button);
-        view.setVisibility(View.GONE);
-        return view;
+        return findViewById(R.id.ml_save_button);
     }
 
 
+    @CallSuper
+    protected final void hideMastControls()
+    {
+        findSaveMastButton().setVisibility(View.GONE);
+    }
 
+    @CallSuper
+    protected void showDetailControls()
+    {
+        findClearDetailsButton().setVisibility(View.VISIBLE);
+        findAddDetailButton().setVisibility(View.VISIBLE);
+        findDeleteDetailButton().setVisibility(View.VISIBLE);
+        findEditDetailButton().setVisibility(View.VISIBLE);
+    }
 
+    @CallSuper
+    protected void hideDetailControls()
+    {
+        findClearDetailsButton().setVisibility(View.GONE);
+        findAddDetailButton().setVisibility(View.GONE);
+        findDeleteDetailButton().setVisibility(View.GONE);
+        findEditDetailButton().setVisibility(View.GONE);
+    }
+
+    @CallSuper
+    protected void showAllControls()
+    {
+        showMastControls();
+        showDetailControls();
+    }
+
+    @CallSuper
+    protected final void showMastControls()
+    {
+        findSaveMastButton().setVisibility(View.VISIBLE);
+    }
+
+    @CallSuper
+    protected void hideAllControls()
+    {
+        hideMastControls();
+        hideDetailControls();
+    }
 
     private void deleteSelectedDetail()
     {
@@ -174,7 +311,7 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
         try {
             if (isDetailSelected()) {
                 Detail magicItem = getSelectedDetail();
-                getWriteDao().delete(getWriteDao().getId(magicItem));
+                getDetailDao().delete(getDetailDao().getId(magicItem));
                 searchForText();
             }
         } catch (Exception e) {
@@ -188,19 +325,21 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
         Logger.debug("clearAllDetails()");
 
         try {
-            getWriteDao().clear();
+            getDetailDao().clear();
             searchForText();
         } catch (Exception e) {
             Logger.error(e.getMessage(), e);
         }
     }
 
+
+    @Override
     public void onClickAddDetailButton(View view) {
         Logger.debug("onClickAddDetailButton()");
 
         try {
-            Detail detail = getWriteDao().create();
-            requestEditDetail(getWriteDao().getId(detail), detail, true);
+            Detail detail = getDetailDao().create();
+            requestEditDetail(getDetailDao().getId(detail), detail, true);
         } catch (Exception e) {
             Logger.error(e.getMessage(), e);
         }
@@ -261,7 +400,7 @@ public abstract class DaoEditToggleListActivity<Mast, Detail> extends EditToggle
 
         try {
             Detail detail = getDetailAtPosition(position);
-            requestEditDetail(getWriteDao().getId(detail), detail, false);
+            requestEditDetail(getDetailDao().getId(detail), detail, false);
         } catch (Exception e) {
             Logger.error(e.getMessage(), e);
         }

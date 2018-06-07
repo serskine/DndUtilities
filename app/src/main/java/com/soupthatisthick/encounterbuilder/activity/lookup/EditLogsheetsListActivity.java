@@ -32,6 +32,36 @@ public class EditLogsheetsListActivity extends DaoEditListActivity<Object, Pc>
     private PcDao pcDao;
     private SessionDao sessionDao;
 
+//    @Override
+//    protected void initModelWithoutUi() {
+//
+//    }
+//
+//    @Override
+//    protected void listenToUi() {
+//
+//    }
+//
+//    @Override
+//    protected void ignoreUi() {
+//
+//    }
+//
+//    @Override
+//    protected void updateModelFromUi() {
+//
+//    }
+//
+//    @Override
+//    protected void updateUiFromModel() {
+//
+//    }
+//
+//    @Override
+//    protected void loadModelFromBackEndStore() {
+//
+//    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {

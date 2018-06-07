@@ -75,7 +75,9 @@
     <string name="title_activity_camera">Camera Activity</string>
     <string name="title_activity_search_filters">Select Search Filters</string>
     <string name="title_activity_test">TEST ACTIVITY</string>
-    <string name="title_activity_storage">Storage Activite</string>
+    <string name="title_activity_storage">Storage Activity</string>
+    <string name="title_activity_edit_entity_list">Edit Entity List</string>
+    <string name="title_activity_edit_entity">Edit Entity</string>
 
     <string name="add_player_text">Add Player</string>
     <string name="remove_player_text">Remove Player</string>
@@ -345,4 +347,8 @@
     <string name="st_db_logsheet">Logsheets Database</string>
     <string name="st_db_encounter">Encounter Database</string>
     <string name="st_db_compendium">Compendium Database</string>
+
+    <!-- view entity strings -->
+    <string name="cell_entity_category">Category: %s</string>
+    <string name="cell_entity_title">Entity: %d</string>
 </resources>

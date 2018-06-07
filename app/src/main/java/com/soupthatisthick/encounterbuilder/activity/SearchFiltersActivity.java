@@ -67,6 +67,36 @@ public class SearchFiltersActivity extends DaoEditListActivity<Object, SearchFil
         return new SearchFilterAdapter(layoutInflater);
     }
 
+//    @Override
+//    protected void initModelWithoutUi() {
+//
+//    }
+//
+//    @Override
+//    protected void listenToUi() {
+//
+//    }
+//
+//    @Override
+//    protected void ignoreUi() {
+//
+//    }
+//
+//    @Override
+//    protected void updateModelFromUi() {
+//
+//    }
+//
+//    @Override
+//    protected void updateUiFromModel() {
+//
+//    }
+//
+//    @Override
+//    protected void loadModelFromBackEndStore() {
+//
+//    }
+
     /**
      * This will save the information about the list of information.
      *

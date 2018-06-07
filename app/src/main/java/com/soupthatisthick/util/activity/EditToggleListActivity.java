@@ -5,6 +5,7 @@ import android.support.annotation.CallSuper;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.soupthatisthick.encounterbuilder.util.listeners.UiWatcher;
 import com.soupthatisthick.util.Logger;
 
 /**
@@ -13,6 +14,23 @@ import com.soupthatisthick.util.Logger;
  */
 
 public abstract class EditToggleListActivity<Mast, Detail> extends ViewToggleListActivity<Detail> {
+    protected final UiWatcher uiWatcher = new UiWatcher() {
+        @Override
+        protected void onUiUpdate() {
+            ignoreUi();
+            updateModelFromUi();
+            listenToUi();
+        }
+    };
+
+    // Used to maintain control of editing the list
+    protected abstract void initModelWithoutUi();
+    protected abstract void listenToUi();
+    protected abstract void ignoreUi();
+    protected abstract void updateModelFromUi();
+    protected abstract void updateUiFromModel();
+    protected abstract void loadModelFromBackEndStore();
+
     protected View clearDetailsButton, editDetailButton, addDetailButton, deleteDetailButton, saveMastButton;
 
     protected int selectedPosition = -1;
@@ -56,72 +74,15 @@ public abstract class EditToggleListActivity<Mast, Detail> extends ViewToggleLis
         return getDetailAtPosition(getSelectedPosition());
     }
 
+
     @CallSuper
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        addDetailButton = findAddDetailButton();
-        deleteDetailButton = findDeleteDetailButton();
-        editDetailButton = findEditDetailButton();
-        clearDetailsButton = findClearDetailsButton();
-        saveMastButton = findSaveMastButton();
-
-        addDetailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickAddDetailButton(v);
-            }
-        });
-
-        deleteDetailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickDeleteDetailButton(v);
-            }
-        });
-
-        editDetailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Logger.info("Edit button pressed. Selected position = " + getSelectedPosition());
-                if (isDetailSelected()) {
-                    onClickEditDetailButton(v, getSelectedPosition());
-                } else {
-                    Logger.info("There is no selected detail.");
-                }
-            }
-        });
-
-        clearDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickClearDetailsButton(v);
-            }
-        });
-
-        saveMastButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickAddDetailButton(v);
-            }
-        });
-
-        Logger.debug("Setting on item click listener for the list");
-        theExpandableListView.setFocusable(true);
-        theExpandableListView.setClickable(true);
-        theExpandableListView.setSelection(0);
-        theExpandableListView.setOnGroupClickListener(
-                new ExpandableListView.OnGroupClickListener() {
-                    @Override
-                    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                        Logger.debug("CLICKED ON GROUP POSITION " + groupPosition);
-                        setSelectedPosition(groupPosition);
-                        return false;
-                    }
-                }
-        );
+        initUiWithoutModel();
+        initModelWithoutUi();
     }
 
     protected abstract int getLayoutId();
@@ -163,4 +124,115 @@ public abstract class EditToggleListActivity<Mast, Detail> extends ViewToggleLis
      */
     protected abstract void onClickSaveMastButton(View view);
 
+    @CallSuper
+    protected void initUiWithoutModel()
+    {
+
+        addDetailButton = findAddDetailButton();
+        deleteDetailButton = findDeleteDetailButton();
+        editDetailButton = findEditDetailButton();
+        clearDetailsButton = findClearDetailsButton();
+        saveMastButton = findSaveMastButton();
+
+        addDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    onClickAddDetailButton(v);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                }
+            }
+        });
+
+        deleteDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    onClickDeleteDetailButton(v);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                }
+            }
+        });
+
+        editDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Logger.info("Edit button pressed. Selected position = " + getSelectedPosition());
+                try {
+                    if (isDetailSelected()) {
+                        onClickEditDetailButton(v, getSelectedPosition());
+                    } else {
+                        Logger.info("There is no selected detail.");
+                    }
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                }
+            }
+        });
+
+        clearDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    onClickClearDetailsButton(v);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                }
+            }
+        });
+
+        saveMastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    onClickSaveMastButton(v);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                }
+            }
+        });
+
+        Logger.debug("Setting on item click listener for the list");
+
+        theExpandableListView.setFocusable(true);
+        theExpandableListView.setClickable(true);
+        theExpandableListView.setSelection(0);
+
+        theExpandableListView.setOnGroupClickListener(
+                new ExpandableListView.OnGroupClickListener() {
+                    @Override
+                    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                        Logger.debug("CLICKED ON GROUP POSITION " + groupPosition);
+                        setSelectedPosition(groupPosition);
+                        return false;
+                    }
+                }
+        );
+
+    }
+
+
+    @Override
+    @CallSuper
+    protected void onResume()
+    {
+        super.onResume();
+        Logger.debug("onResume()");
+
+        loadModelFromBackEndStore();
+        ignoreUi();
+        updateUiFromModel();
+        listenToUi();
+    }
+
+    @Override
+    @CallSuper
+    protected void onPause()
+    {
+        super.onPause();
+        Logger.debug("onPause()");
+
+    }
 }

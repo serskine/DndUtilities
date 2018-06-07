@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Edit Feat Activity Strings -->
+    <string name="ee_delete_title">Delete Entity?</string>
+    <string name="ee_delete_message">Are you sure you want to delete this entity? This action can not be undone.</string>
+    <string name="ee_metadata">Metadata</string>
+</resources>

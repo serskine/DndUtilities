@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_saving_throws"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_skills"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -407,7 +407,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_damage_resistances"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -422,7 +422,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_damage_immunities"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -438,7 +438,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_condition_immunities"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -453,7 +453,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_senses"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 
@@ -468,7 +468,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/em_languages"
-                style="@style/AppTheme.Normal"
+                style="@style/AppTheme.EditMultiline"
                 />
         </LinearLayout>
 

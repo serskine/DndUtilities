@@ -39,7 +39,7 @@ public abstract class ViewToggleListActivity<DataType> extends AppActivity {
     protected EditText theSearchEdit;
     protected Spinner theTableSpinner;
     protected CustomToggleAdapter<DataType> theListAdapter;
-    protected DaoMaster db;
+    private DaoMaster theDaoMaster;
 
     protected static final String KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT";
     protected static final int SHARED_PREF_MODE = 0;
@@ -171,6 +171,14 @@ public abstract class ViewToggleListActivity<DataType> extends AppActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPref.edit();
         sharedPrefEditor.putString(KEY_SEARCH_TEXT, theSearchEdit.getText().toString());
         sharedPrefEditor.commit();
+    }
+
+    protected DaoMaster getDaoMaster() {
+        return theDaoMaster;
+    }
+
+    protected void setDaoMaster(DaoMaster theDaoMaster) {
+        this.theDaoMaster = theDaoMaster;
     }
 
     /**

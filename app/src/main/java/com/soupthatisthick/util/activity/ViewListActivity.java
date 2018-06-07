@@ -29,7 +29,7 @@ public abstract class ViewListActivity<DataType> extends AppActivity {
     protected ListView theListView;
     protected EditText theSearchEdit;
     protected CustomListAdapter<DataType> theListAdapter;
-    protected DaoMaster theDaoMaster;
+    private DaoMaster theDaoMaster;
 
     protected static final String KEY_SEARCH_TEXT = "KEY_SEARCH_TEXT";
     protected static final int SHARED_PREF_MODE = 0;
@@ -173,5 +173,13 @@ public abstract class ViewListActivity<DataType> extends AppActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPref.edit();
         sharedPrefEditor.putString(KEY_SEARCH_TEXT, theSearchEdit.getText().toString());
         sharedPrefEditor.commit();
+    }
+
+    public DaoMaster getDaoMaster() {
+        return theDaoMaster;
+    }
+
+    public void setDaoMaster(DaoMaster theDaoMaster) {
+        this.theDaoMaster = theDaoMaster;
     }
 }
