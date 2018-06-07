@@ -44,7 +44,7 @@
             android:hint="@string/ef_description"
             android:imeOptions="actionDone"
             android:inputType="text"
-            style="@style/AppTheme.Normal"
+            style="@style/AppTheme.EditMultiline"
             />
 
 

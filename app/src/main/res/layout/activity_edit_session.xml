@@ -4,7 +4,7 @@
     android:id="@+id/activity_edit_session"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.soupthatisthick.encounterMap.activity.lookup.EditSessionActivity"
+    tools:context="com.soupthatisthick.encounterbuilder.activity.lookup.EditSessionActivity"
     android:orientation="vertical"
     >
 

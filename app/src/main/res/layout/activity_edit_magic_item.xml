@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/emi_description"
                 android:gravity="start"
-                style="@style/AppTheme.EditField"
+                style="@style/AppTheme.EditMultiline"
                 />
             <!--style="@style/AppTheme.EditMultiline"-->
 
