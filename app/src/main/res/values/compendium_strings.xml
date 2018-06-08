@@ -9,6 +9,11 @@
     <string name="vc_add_to_item_list">Add to list</string>
     <string name="vc_add_to_item_list_dialog_title">Add item to list?</string>
 
+    <!-- These are the various resource strings we will use to represent the titles of all the DaoMasters's -->
+    <string name="vc_title_master_dnd">Dnd Master</string>
+    <string name="vc_title_master_logsheets">Logsheet Master</string>
+    <string name="vc_title_master_encounter">Encounters Master</string>
+
     <!-- These are the various resource strings we will use to represent the titles of all the Dao's -->
     <string name="vc_title_spell">Spells</string>
     <string name="vc_title_magic_items">Magic Items</string>

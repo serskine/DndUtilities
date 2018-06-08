@@ -3,7 +3,6 @@ package com.soupthatisthick.encounterbuilder.dao.helper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.RecoverySystem;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
@@ -31,20 +30,20 @@ import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
-import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.announcer.Announcer;
 import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
+import com.soupthatisthick.encounterbuilder.util.progress.TaskManager;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.dao.Dao;
+import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.ReadDao;
 import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +61,9 @@ import soupthatisthick.encounterapp.R;
 public class CompendiumResource {
 
     public interface Listener extends ProgressMonitor.Listener {
+        void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster);
+        void loadDaoMasterFailure(String daoMasterKey);
+
         void loadDaoSuccess(String daoKey, ReadDao readDao);
         void loadDaoFailure(String daoKey);
     }
@@ -162,6 +164,9 @@ public class CompendiumResource {
 
                     Logger.info(" - aquired DB_LOCK [loadAllData().AsyncTask]");
                     try {
+
+                        final TaskManager<Void, Void, Void> daoMasterTaskManager = new TaskManager();
+
                         dndMaster = new DndMaster(context);
                         Logger.info("Opened the dndMaster on database " + dndMaster.getDatabaseName() + ".");
                         progressMonitor.recordSuccess();
@@ -176,86 +181,73 @@ public class CompendiumResource {
 
                         // Create instances of the dao's
 
-                        spellDao = new SpellDao(dndMaster);
-                        initDao(R.string.vc_title_spell, spellDao);
-                        progressMonitor.recordSuccess();
+                        final TaskManager<Void, Void, Void> daoTaskManager = new TaskManager();
 
-                        magicItemDao = new MagicItemDao(dndMaster);
-                        initDao(R.string.vc_title_magic_items, magicItemDao);
-                        progressMonitor.recordSuccess();
+                        entityListDao = new EntityListDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_item_list, entityListDao));
 
-                        customMonsterDao = new CustomMonsterDao(dndMaster);
-                        initDao(R.string.vc_title_custom_monsters, customMonsterDao);
-                        progressMonitor.recordSuccess();
-
-                        standardMonsterDao = new StandardMonsterDao(dndMaster);
-                        initDao(R.string.vc_title_standard_monsters, standardMonsterDao);
-                        progressMonitor.recordSuccess();
-
-                        notesDao = new NotesDao(dndMaster);
-                        initDao(R.string.vc_title_notes, notesDao);
-                        progressMonitor.recordSuccess();
-
-                        featDao = new FeatDao(dndMaster);
-                        initDao(R.string.vc_title_feats, featDao);
-                        progressMonitor.recordSuccess();
-
-                        backgroundDao = new BackgroundDao(dndMaster);
-                        initDao(R.string.vc_title_backgrounds, backgroundDao);
-                        progressMonitor.recordSuccess();
-
-                        conditionDao = new ConditionDao(dndMaster);
-                        initDao(R.string.vc_title_conditions, conditionDao);
-                        progressMonitor.recordSuccess();
-
-                        levelDao = new LevelDao(encounterMaster);
-                        initDao(R.string.vc_title_levels, levelDao);
-                        progressMonitor.recordSuccess();
-
-                        challengeRatingDao = new ChallengeRatingDao(encounterMaster);
-                        initDao(R.string.vc_title_challenge_ratings, challengeRatingDao);
-                        progressMonitor.recordSuccess();
-
-                        equipmentDao = new EquipmentDao(dndMaster);
-                        initDao(R.string.vc_title_equipment, equipmentDao);
-                        progressMonitor.recordSuccess();
-
-                        godsDao = new GodsDao(dndMaster);
-                        initDao(R.string.vc_title_gods, godsDao);
-                        progressMonitor.recordSuccess();
-
-                        armorDao = new ArmorDao(dndMaster);
-                        initDao(R.string.vc_title_armor, armorDao);
-                        progressMonitor.recordSuccess();
-
-                        lifeStyleDao = new LifeStyleDao(dndMaster);
-                        initDao(R.string.vc_title_lifestyles, lifeStyleDao);
-                        progressMonitor.recordSuccess();
-
-                        mountDao = new MountDao(dndMaster);
-                        initDao(R.string.vc_title_mounts, mountDao);
-                        progressMonitor.recordSuccess();
-
-                        weaponDao = new WeaponDao(dndMaster);
-                        initDao(R.string.vc_title_weapons, weaponDao);
-                        progressMonitor.recordSuccess();
-
-
-                        // These might be excluded from the compendium...
-                        entityListDao = new EntityListDao(logsheetMaster);
-                        initDao(R.string.vc_title_item_list, entityListDao);
-                        progressMonitor.recordSuccess();
-
-                        itemDao = new ItemDao(logsheetMaster);
-                        initDao(R.string.vc_title_items, itemDao);
-                        progressMonitor.recordSuccess();
+                        itemDao = new ItemDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_items, itemDao));
 
                         entityDao = new EntityDao(dndMaster);
-                        initDao(R.string.vc_title_entity, entityDao);
-                        progressMonitor.recordSuccess();
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_entity, entityDao));
+
+
+                        spellDao = new SpellDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_spell, spellDao));
+
+                        magicItemDao = new MagicItemDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_magic_items, magicItemDao));
+
+                        customMonsterDao = new CustomMonsterDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_custom_monsters, customMonsterDao));
+
+                        standardMonsterDao = new StandardMonsterDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_standard_monsters, standardMonsterDao));
+
+                        notesDao = new NotesDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_notes, notesDao));
+
+                        featDao = new FeatDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_feats, featDao));
+
+                        backgroundDao = new BackgroundDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_backgrounds, backgroundDao));
+
+                        conditionDao = new ConditionDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_conditions, conditionDao));
+
+                        levelDao = new LevelDao(encounterMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_levels, levelDao));
+
+                        challengeRatingDao = new ChallengeRatingDao(encounterMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_challenge_ratings, challengeRatingDao));
+
+                        equipmentDao = new EquipmentDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_equipment, equipmentDao));
+
+                        godsDao = new GodsDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_gods, godsDao));
+
+                        armorDao = new ArmorDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_armor, armorDao));
+
+                        lifeStyleDao = new LifeStyleDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_lifestyles, lifeStyleDao));
+
+                        mountDao = new MountDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_mounts, mountDao));
+
+                        weaponDao = new WeaponDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_weapons, weaponDao));
+
+                        daoTaskManager.startAllPendingTasks();
+                        daoMasterTaskManager.waitForAllTasksToFinish();
+                        daoMasterTaskManager.clear(true);
 
                         Logger.info("Completed opening all the dao's!");
                         progressMonitor.recordRemainderAsSuccess();
+
 
                         return Boolean.TRUE;
                     } catch (Exception e) {
@@ -282,10 +274,34 @@ public class CompendiumResource {
         LOAD_TASK.execute(null, null, null);
 
     }
+    
 
-    private void initDao(final int titleResourceId, final ReadDao<?> dao)
-    {
+
+    private AsyncTask<Void,Void,Void> initDaoMasterTask(final int titleResourceId, final DaoMaster daoMaster) {
         @SuppressLint("StaticFieldLeak")
+        AsyncTask<Void,Void,Void> loadDaoMasterTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String name = context.getResources().getString(titleResourceId);
+                try {
+                    Logger.info("Opened dao on table " + daoMaster.getDatabaseName() + ".");
+                    daoMaster.logSchema();
+                    // Add to usable dao master map???
+                    listeners.announce().loadDaoMasterSuccess(name, daoMaster);
+                    progressMonitor.recordSuccess();
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                    listeners.announce().loadDaoMasterFailure(name);
+                    progressMonitor.recordFailure();
+                }
+                return null;
+            }
+        };
+        return loadDaoMasterTask;
+    }
+
+    private AsyncTask<Void,Void,Void> initDaoTask(final int titleResourceId, final ReadDao<?> dao)
+    {
         AsyncTask<Void,Void,Void> loadDaoTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -295,14 +311,16 @@ public class CompendiumResource {
                     dao.logSchema();
                     usableDaos.put(name, dao);
                     listeners.announce().loadDaoSuccess(name, dao);
+                    progressMonitor.recordSuccess();
                 } catch (Exception e) {
                     Logger.error(e.getMessage(), e);
                     listeners.announce().loadDaoFailure(name);
+                    progressMonitor.recordFailure();
                 }
                 return null;
             }
         };
-        loadDaoTask.execute();
+        return loadDaoTask;
     }
 
     public synchronized final List<Object> searchForResults(String searchText) {

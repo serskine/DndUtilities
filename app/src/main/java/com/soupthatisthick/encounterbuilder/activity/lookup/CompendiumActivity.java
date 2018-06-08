@@ -1,10 +1,8 @@
 package com.soupthatisthick.encounterbuilder.activity.lookup;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -23,41 +21,22 @@ import com.soupthatisthick.encounterbuilder.adapters.lookup.ItemListSummaryAdapt
 import com.soupthatisthick.encounterbuilder.adapters.lookup.SelectionAdapter;
 import com.soupthatisthick.encounterbuilder.adapters.lookup.TextSelectionAdapter;
 import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.EquipmentDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.FeatDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.GodsDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.ItemDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.EntityListDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.LevelDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.MountDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.NotesDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.CustomMonsterDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.SpellDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.WeaponDao;
-import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
-import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
-import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
-import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
+import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
 import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
-import com.soupthatisthick.encounterbuilder.util.adapter.CustomToggleAdapter;
 import com.soupthatisthick.util.activity.ViewToggleListActivity;
 import com.soupthatisthick.util.adapters.WriteCellAdapter;
 import com.soupthatisthick.util.dao.Dao;
+import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.ReadDao;
 import com.soupthatisthick.util.dao.WriteDao;
 import com.soupthatisthick.util.json.JsonUtil;
@@ -68,7 +47,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import soupthatisthick.encounterapp.R;
 
@@ -86,8 +64,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
     ArrayList<Selection> selectionsList = new ArrayList<>();
 
     private CompendiumResource compendiumResource;
-    private EntityListDao entityListDao;
-    private EntityDao entityDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -423,7 +399,14 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
             builder.setTitle(R.string.vc_add_to_item_list_dialog_title);
 
             final ItemListSummaryAdapter itemListAdapter = new ItemListSummaryAdapter(getLayoutInflater());
-            final List<EntityList> listOptions = entityListDao.getAllRecords();
+
+            List<EntityList> listOptions;
+            try {
+                listOptions = (List<EntityList>) compendiumResource.getDaoForCategory(Category.ENTITY_LIST).getAllRecords();
+            } catch (Exception e) {
+                Logger.error(e.getMessage(), e);
+                listOptions = new ArrayList<>();
+            }
 
             Logger.debug("The number of lists to choose from = " + listOptions.size() + " lists.");
             Logger.debug(JsonUtil.toJson(listOptions, true));
@@ -439,11 +422,13 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
                     itemListAdapter,
                     (dialog, which) -> {
                         try {
+
                             EntityList entityList = itemListAdapter.getCastedItem(which);
                             for (Object item : items) {
                                 try {
                                     if (item instanceof DaoModel) {
                                         final DaoModel daoModel = (DaoModel) item;
+                                        final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
                                         final Entity entity = entityDao.create();
                                         final Category category = Category.parse(item);
                                         final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
@@ -451,7 +436,12 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
 
                                         // append desirable metadata from the item list as well so we
                                         // can search for the item using information we know about the list.
-                                        metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+                                        try {
+                                            EntityListDao entityListDao = (EntityListDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
+                                            metadata += ((metadata.length() > 0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+                                        } catch (Exception e) {
+                                            Logger.error(e.getMessage(), e);
+                                        }
 
                                         entity.setParentId(entityList.getId());
                                         entity.setMetadata(metadata);
@@ -581,38 +571,17 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
     }
 
     @Override
-    public void loadDaoSuccess(String daoKey, ReadDao readDao) {
-//
-//        usableDaos = compendiumResource.getUsableDaos();
-//
-//        Logger.info("Initializing the filter list");
-//        selectedFilters.clear();
-//
-//        // Add the option for all filters
-//        Selection selection;
-//
-//        for (String table : usableDaos.keySet()) {
-//            selection = new Selection();
-//            selection.setSelected(true);
-//            selection.setItem(table);
-//            selectionsList.add(selection);
-//            if (selection.isSelected()) {
-//                selectedFilters.add(table);
-//            }
-//            Logger.info("Adding a selection");
-//            Logger.info(" - text:       " + selection.getItem());
-//            Logger.info(" - isSelected: " + selection.isSelected());
-//        }
-//
-//        // This will refresh the contents of the adapter to match the selection list
-//        theSelectionAdapter.setData(selectionsList);
+    public void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster) {
+        // Do nothing. We dont care at this time
+    }
 
-        // Check if its one of the dao's we need to use in the activity
-        if (readDao instanceof EntityListDao) {
-            entityListDao = (EntityListDao) readDao;
-        } else if (readDao instanceof EntityDao) {
-            entityDao = (EntityDao) readDao;
-        }
+    @Override
+    public void loadDaoMasterFailure(String daoMasterKey) {
+        // Do nothing. We dont care at this time
+    }
+
+    @Override
+    public void loadDaoSuccess(String daoKey, ReadDao readDao) {
     }
 
     @Override

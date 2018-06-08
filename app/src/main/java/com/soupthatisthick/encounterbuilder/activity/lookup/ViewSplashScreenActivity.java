@@ -15,6 +15,7 @@ import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.activity.AppActivity;
+import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.ReadDao;
 
 import soupthatisthick.encounterapp.R;
@@ -74,11 +75,23 @@ public class ViewSplashScreenActivity extends AppActivity implements CompendiumR
     }
 
     @Override
+    public void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster) {
+        // do nothing. We don't care at this point.
+    }
+
+    @Override
+    public void loadDaoMasterFailure(String daoMasterKey) {
+        // do nothing. We don't care at this point.
+    }
+
+    @Override
     public void loadDaoSuccess(String daoKey, ReadDao readDao) {
+        // do nothing. We don't care at this point.
     }
 
     @Override
     public void loadDaoFailure(String daoKey) {
+        // do nothing. We don't care at this point.
     }
 
 }
