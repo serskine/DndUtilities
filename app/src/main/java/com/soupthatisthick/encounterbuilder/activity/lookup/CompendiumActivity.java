@@ -50,6 +50,7 @@ import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.model.lookup.EntityList;
+import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
@@ -77,9 +78,16 @@ import soupthatisthick.encounterapp.R;
  */
 
 @SuppressWarnings({"unused", "unchecked", "SpellCheckingInspection"})
-public class CompendiumActivity extends ViewToggleListActivity<Object> {
+public class CompendiumActivity extends ViewToggleListActivity<Object> implements CompendiumResource.Listener {
 
     private final Object DB_LOCK = new Object();
+
+    // This is the set that we will use to update the dataset on the adapter
+    ArrayList<Selection> selectionsList = new ArrayList<>();
+
+    private CompendiumResource compendiumResource;
+    private EntityListDao entityListDao;
+    private EntityDao entityDao;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -91,8 +99,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     private final Set<Integer> selectedPositions = new HashSet<>();
 
     static AsyncTask<Object, Object, Boolean> LOAD_TASK;
-
-    private CompendiumResource compendiumResource;
 
     /**
      * This is called to toggle the selected state of a position from on to off or off to on
@@ -121,15 +127,13 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
      */
     private Map<String, ReadDao<?>>  usableDaos;
     private final Set<String> selectedFilters = new HashSet<>();
-
-
     private class FilterSelectionListener implements WriteCellAdapter.Listener {
 
         @Override
         public void positionUpdated(
-            WriteCellAdapter<?> source,
-            Object model,
-            int position
+                WriteCellAdapter<?> source,
+                Object model,
+                int position
         ) {
             Selection item = (Selection) model;
 
@@ -206,18 +210,20 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
     }
 
     @Override
-    public void loadAllData() {
+    public void onResume() {
+        super.onResume();
         compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
-        usableDaos = compendiumResource.getUsableDaos();    // Reference to the same map
+        compendiumResource.addListener(this);
     }
 
-    private void initDao(int titleResourceId, ReadDao<?> dao)
-    {
-        String name = getResources().getString(titleResourceId);
-        Logger.info("Opened dao on table " + dao.getTable() + ".");
-        dao.logSchema();
-        usableDaos.put(name, dao);
+    @Override
+    public void onPause() {
+        super.onPause();
+        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
+        compendiumResource.removeListener(this);
     }
+
+
     @Override
     protected EditText findSearchEditText() {
         return (EditText) findViewById(R.id.theSearchEdit);
@@ -273,9 +279,9 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
     @Override
     protected List<Object> getAllRecords() {
-        
+
         final List<Object> objects = new ArrayList<>();
-        
+
         synchronized (DB_LOCK)
         {
             clearSelections();
@@ -288,6 +294,11 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             sortObjects(objects);
             return objects;
         }
+    }
+
+    @Override
+    protected void loadAllData() {
+        // Do nothing. This is handled in the compendium resource.
     }
 
     private void addRecordsLike(@NonNull String searchText, ReadDao<?> dao, List<Object> results)
@@ -402,9 +413,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
         try {
             final List<Object> items = getExpandedPositions();
-            final EntityListDao entityListDao = (EntityListDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
-            final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY);
-
             Logger.debug("We have selected " + items.size() + " to add to a list.");
             Logger.debug(JsonUtil.toJson(items, true));
             if (items.size()<1) {
@@ -428,46 +436,46 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
             itemListAdapter.setData(listOptions);
             builder.setAdapter(
-                itemListAdapter,
-                (dialog, which) -> {
-                    try {
-                        EntityList entityList = itemListAdapter.getCastedItem(which);
-                        for (Object item : items) {
-                            try {
-                                if (item instanceof DaoModel) {
-                                    final DaoModel daoModel = (DaoModel) item;
-                                    final Entity entity = entityDao.create();
-                                    final Category category = Category.parse(item);
-                                    final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
-                                    String metadata = writeDao.getDesirableMetadata(item);
+                    itemListAdapter,
+                    (dialog, which) -> {
+                        try {
+                            EntityList entityList = itemListAdapter.getCastedItem(which);
+                            for (Object item : items) {
+                                try {
+                                    if (item instanceof DaoModel) {
+                                        final DaoModel daoModel = (DaoModel) item;
+                                        final Entity entity = entityDao.create();
+                                        final Category category = Category.parse(item);
+                                        final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
+                                        String metadata = writeDao.getDesirableMetadata(item);
 
-                                    // append desirable metadata from the item list as well so we
-                                    // can search for the item using information we know about the list.
-                                    metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
+                                        // append desirable metadata from the item list as well so we
+                                        // can search for the item using information we know about the list.
+                                        metadata += ((metadata.length()>0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
 
-                                    entity.setParentId(entityList.getId());
-                                    entity.setMetadata(metadata);
-                                    entity.setCategoryColumnId(category, daoModel.getId());
-                                    entityDao.update(entity);
-                                } else {
-                                    Logger.warning("We have a selected item that is not a dao model in position.");
+                                        entity.setParentId(entityList.getId());
+                                        entity.setMetadata(metadata);
+                                        entity.setCategoryColumnId(category, daoModel.getId());
+                                        entityDao.update(entity);
+                                    } else {
+                                        Logger.warning("We have a selected item that is not a dao model in position.");
+                                    }
+                                } catch (Exception e) {
+                                    Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
                                 }
-                            } catch (Exception e) {
-                                Logger.warning("Failed to add selected item (" + item + ") to list " + entityList + ". \n" + e.getMessage());
                             }
+                        } catch (Exception e) {
+                            Logger.error(e.getMessage(), e);
                         }
-                    } catch (Exception e) {
-                        Logger.error(e.getMessage(), e);
                     }
-                }
             );
 
             builder.setNegativeButton(
-                R.string.dialog_cancel,
+                    R.string.dialog_cancel,
                     (dialog, which) -> Logger.info("CANCEL CLICKED")
             );
             builder.setPositiveButton(
-                R.string.dialog_confirm,
+                    R.string.dialog_confirm,
                     (dialog, which) -> Logger.info("OK CLICKED!")
             );
             builder.show();
@@ -520,7 +528,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
             Logger.info("Processing display entity: " + entity.json());
             try {
-                 writeDao = compendiumResource.getDaoForCategory(childCategory);
+                writeDao = compendiumResource.getDaoForCategory(childCategory);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
             }
@@ -544,6 +552,74 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> {
             return item;
         }
     }
+
+
+    @Override
+    public void update(ProgressMonitor monitor, int numSteps, int numFailedSteps, int numSuccessSteps, int numPendingSteps) {
+        Logger.info("Initializing the filter list");
+        ArrayList<Selection> selectionsList = new ArrayList<>();
+        selectedFilters.clear();
+
+        // Add the option for all filters
+        Selection selection;
+        usableDaos = compendiumResource.getUsableDaos();
+
+        for (String table : usableDaos.keySet()) {
+            selection = new Selection();
+            selection.setSelected(true);
+            selection.setItem(table);
+            selectionsList.add(selection);
+            if (selection.isSelected()) {
+                selectedFilters.add(table);
+            }
+            Logger.info("Adding a selection");
+            Logger.info(" - text:       " + selection.getItem());
+            Logger.info(" - isSelected: " + selection.isSelected());
+        }
+
+        theSelectionAdapter.setData(selectionsList);
+    }
+
+    @Override
+    public void loadDaoSuccess(String daoKey, ReadDao readDao) {
+//
+//        usableDaos = compendiumResource.getUsableDaos();
+//
+//        Logger.info("Initializing the filter list");
+//        selectedFilters.clear();
+//
+//        // Add the option for all filters
+//        Selection selection;
+//
+//        for (String table : usableDaos.keySet()) {
+//            selection = new Selection();
+//            selection.setSelected(true);
+//            selection.setItem(table);
+//            selectionsList.add(selection);
+//            if (selection.isSelected()) {
+//                selectedFilters.add(table);
+//            }
+//            Logger.info("Adding a selection");
+//            Logger.info(" - text:       " + selection.getItem());
+//            Logger.info(" - isSelected: " + selection.isSelected());
+//        }
+//
+//        // This will refresh the contents of the adapter to match the selection list
+//        theSelectionAdapter.setData(selectionsList);
+
+        // Check if its one of the dao's we need to use in the activity
+        if (readDao instanceof EntityListDao) {
+            entityListDao = (EntityListDao) readDao;
+        } else if (readDao instanceof EntityDao) {
+            entityDao = (EntityDao) readDao;
+        }
+    }
+
+    @Override
+    public void loadDaoFailure(String daoKey) {
+        Logger.warning("Failed to load dao for " + daoKey + ".");
+    }
+
 
 
 }

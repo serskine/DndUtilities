@@ -3,6 +3,7 @@ package com.soupthatisthick.encounterbuilder.dao.helper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.RecoverySystem;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
@@ -32,6 +33,8 @@ import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 import com.soupthatisthick.encounterbuilder.model.Selection;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
+import com.soupthatisthick.encounterbuilder.util.announcer.Announcer;
+import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.encounterbuilder.util.sort.SortByTitleComparator;
 import com.soupthatisthick.util.Logger;
@@ -41,6 +44,7 @@ import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,10 +61,19 @@ import soupthatisthick.encounterapp.R;
 @SuppressWarnings({"unchecked", "SpellCheckingInspection", "MismatchedQueryAndUpdateOfCollection"})
 public class CompendiumResource {
 
+    public interface Listener extends ProgressMonitor.Listener {
+        void loadDaoSuccess(String daoKey, ReadDao readDao);
+        void loadDaoFailure(String daoKey);
+    }
+
+    private final Announcer<CompendiumResource.Listener> listeners = Announcer.to(CompendiumResource.Listener.class);
 
     /**
      * These variables track the usable dao's and the columns we are allowed to search
      */
+
+    private final ProgressMonitor progressMonitor;
+
     private Map<String, ReadDao<?>> usableDaos;
     private final Set<String> selectedFilters = new HashSet<>();
 
@@ -94,9 +107,6 @@ public class CompendiumResource {
 
     private static AsyncTask<Object, Object, Boolean> LOAD_TASK;
 
-    private int currentStep = 0;
-    private int numberOfSteps = 22;
-
     /**
      * This will create a central resource to access all of the data in a compendium
      * @param context is where the resource is contains. It should be the application context
@@ -106,6 +116,7 @@ public class CompendiumResource {
     )
     {
         this.context = context;
+        this.progressMonitor = new ProgressMonitor(0);
     }
 
     /**
@@ -139,6 +150,9 @@ public class CompendiumResource {
             @Override
             protected Boolean doInBackground(Object... params) {
                 Logger.info(" - waiting for DB_LOCK [loadAllData().AsyncTask]");
+
+                progressMonitor.init(22);
+
                 synchronized (DB_LOCK) {
 
                     Logger.info(" - initializing the usable daos map");
@@ -150,79 +164,104 @@ public class CompendiumResource {
                     try {
                         dndMaster = new DndMaster(context);
                         Logger.info("Opened the dndMaster on database " + dndMaster.getDatabaseName() + ".");
+                        progressMonitor.recordSuccess();
 
                         encounterMaster = new EncounterMaster(context);
                         Logger.info("Opened the encounterMaster on database " + encounterMaster.getDatabaseName() + ".");
+                        progressMonitor.recordSuccess();
 
                         logsheetMaster = new LogsheetMaster(context);
                         Logger.info("Opened the logsheet master on database " + logsheetMaster.getDatabaseName() + ".");
+                        progressMonitor.recordSuccess();
 
                         // Create instances of the dao's
 
                         spellDao = new SpellDao(dndMaster);
                         initDao(R.string.vc_title_spell, spellDao);
+                        progressMonitor.recordSuccess();
 
                         magicItemDao = new MagicItemDao(dndMaster);
                         initDao(R.string.vc_title_magic_items, magicItemDao);
+                        progressMonitor.recordSuccess();
 
                         customMonsterDao = new CustomMonsterDao(dndMaster);
                         initDao(R.string.vc_title_custom_monsters, customMonsterDao);
+                        progressMonitor.recordSuccess();
 
                         standardMonsterDao = new StandardMonsterDao(dndMaster);
                         initDao(R.string.vc_title_standard_monsters, standardMonsterDao);
+                        progressMonitor.recordSuccess();
 
                         notesDao = new NotesDao(dndMaster);
                         initDao(R.string.vc_title_notes, notesDao);
+                        progressMonitor.recordSuccess();
 
                         featDao = new FeatDao(dndMaster);
                         initDao(R.string.vc_title_feats, featDao);
+                        progressMonitor.recordSuccess();
 
                         backgroundDao = new BackgroundDao(dndMaster);
                         initDao(R.string.vc_title_backgrounds, backgroundDao);
+                        progressMonitor.recordSuccess();
 
                         conditionDao = new ConditionDao(dndMaster);
                         initDao(R.string.vc_title_conditions, conditionDao);
+                        progressMonitor.recordSuccess();
 
                         levelDao = new LevelDao(encounterMaster);
                         initDao(R.string.vc_title_levels, levelDao);
+                        progressMonitor.recordSuccess();
 
                         challengeRatingDao = new ChallengeRatingDao(encounterMaster);
                         initDao(R.string.vc_title_challenge_ratings, challengeRatingDao);
+                        progressMonitor.recordSuccess();
 
                         equipmentDao = new EquipmentDao(dndMaster);
                         initDao(R.string.vc_title_equipment, equipmentDao);
+                        progressMonitor.recordSuccess();
 
                         godsDao = new GodsDao(dndMaster);
                         initDao(R.string.vc_title_gods, godsDao);
+                        progressMonitor.recordSuccess();
 
                         armorDao = new ArmorDao(dndMaster);
                         initDao(R.string.vc_title_armor, armorDao);
+                        progressMonitor.recordSuccess();
 
                         lifeStyleDao = new LifeStyleDao(dndMaster);
                         initDao(R.string.vc_title_lifestyles, lifeStyleDao);
+                        progressMonitor.recordSuccess();
 
                         mountDao = new MountDao(dndMaster);
                         initDao(R.string.vc_title_mounts, mountDao);
+                        progressMonitor.recordSuccess();
 
                         weaponDao = new WeaponDao(dndMaster);
                         initDao(R.string.vc_title_weapons, weaponDao);
+                        progressMonitor.recordSuccess();
 
 
                         // These might be excluded from the compendium...
                         entityListDao = new EntityListDao(logsheetMaster);
                         initDao(R.string.vc_title_item_list, entityListDao);
+                        progressMonitor.recordSuccess();
 
                         itemDao = new ItemDao(logsheetMaster);
                         initDao(R.string.vc_title_items, itemDao);
+                        progressMonitor.recordSuccess();
 
                         entityDao = new EntityDao(dndMaster);
                         initDao(R.string.vc_title_entity, entityDao);
+                        progressMonitor.recordSuccess();
 
                         Logger.info("Completed opening all the dao's!");
+                        progressMonitor.recordRemainderAsSuccess();
 
                         return Boolean.TRUE;
                     } catch (Exception e) {
                         Logger.error("Failed to open all the dao's! " + e.getMessage(), e);
+                        progressMonitor.recordRemainderAsFailure();
+
                         return Boolean.FALSE;
                     }
                 }
@@ -235,29 +274,7 @@ public class CompendiumResource {
             @Override
             @MainThread
             protected void onPostExecute(Boolean result) {
-                synchronized (DB_LOCK) {
-                    Logger.info("Initializing the filter list");
-                    ArrayList<Selection> selectionsList = new ArrayList<>();
-                    selectedFilters.clear();
-
-                    // Add the option for all filters
-                    Selection selection;
-
-                    for (String table : usableDaos.keySet()) {
-                        selection = new Selection();
-                        selection.setSelected(true);
-                        selection.setItem(table);
-                        selectionsList.add(selection);
-                        if (selection.isSelected()) {
-                            selectedFilters.add(table);
-                        }
-                        Logger.info("Adding a selection");
-                        Logger.info(" - text:       " + selection.getItem());
-                        Logger.info(" - isSelected: " + selection.isSelected());
-                    }
-
-                    // TODO: Determine what we want to do with the selection list
-                }
+                // Do nothing. Listeners will respond when the progress Monitor fires
             }
         };
 
@@ -273,10 +290,15 @@ public class CompendiumResource {
             @Override
             protected Void doInBackground(Void... voids) {
                 String name = context.getResources().getString(titleResourceId);
-                Logger.info("Opened dao on table " + dao.getTable() + ".");
-                dao.logSchema();
-                usableDaos.put(name, dao);
-                nextStep();
+                try {
+                    Logger.info("Opened dao on table " + dao.getTable() + ".");
+                    dao.logSchema();
+                    usableDaos.put(name, dao);
+                    listeners.announce().loadDaoSuccess(name, dao);
+                } catch (Exception e) {
+                    Logger.error(e.getMessage(), e);
+                    listeners.announce().loadDaoFailure(name);
+                }
                 return null;
             }
         };
@@ -409,6 +431,8 @@ public class CompendiumResource {
                 return mountDao;
             case ENTITY:
                 return entityDao;
+            case ENTITY_LIST:
+                return entityListDao;
             case DEFAULT:
             default:
                 throw new Exception("Failed to determine a dao for category " + category + ".");
@@ -466,37 +490,19 @@ public class CompendiumResource {
         return this.usableDaos;
     }
 
-    public synchronized int getStep() {
-        return currentStep;
+    public Set<String> getSelectedFilters() {
+        return this.selectedFilters;
     }
 
-    private synchronized void nextStep() {
-        currentStep++;
-        if (getStep() >= getNumberOfSteps()) {
-            Logger.info("Progress completed!");
-        }
+    public void addListener(CompendiumResource.Listener listener) {
+        progressMonitor.addListener(listener);
+        listeners.addListener(listener);
     }
 
-    public synchronized int getNumberOfSteps() {
-        return numberOfSteps;
-    }
-
-    public synchronized boolean isCompleted() {
-        return (getStep() >= getNumberOfSteps());
-    }
-
-    private synchronized void cancelSteps() {
-        if (LOAD_TASK != null && !LOAD_TASK.isCancelled()) {
-            LOAD_TASK.cancel(true);
-        }
-        currentStep = 0;
-    }
-
-    public synchronized float getProgress() {
-        if (isCompleted()) {
-            return 1F;
-        } else {
-            return ((float) getStep() / (float) getNumberOfSteps());
-        }
+    public void removeListener(CompendiumResource.Listener listener) {
+        progressMonitor.removeListener(listener);
+        listeners.removeListener(listener);
     }
 }
+
+

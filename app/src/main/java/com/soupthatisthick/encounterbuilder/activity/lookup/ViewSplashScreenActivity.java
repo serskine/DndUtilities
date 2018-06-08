@@ -11,12 +11,15 @@ import android.widget.ProgressBar;
 import com.soupthatisthick.encounterbuilder.DndUtilApp;
 import com.soupthatisthick.encounterbuilder.activity.MainActivity;
 import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
+import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
+import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.activity.AppActivity;
+import com.soupthatisthick.util.dao.ReadDao;
 
 import soupthatisthick.encounterapp.R;
 
-public class ViewSplashScreenActivity extends AppActivity {
+public class ViewSplashScreenActivity extends AppActivity implements CompendiumResource.Listener {
 
 //    private final long DELAY = 1000;
     private final long DELAY = 100;
@@ -36,52 +39,46 @@ public class ViewSplashScreenActivity extends AppActivity {
     public void onResume()
     {
         super.onResume();
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        DndUtilApp.getInstance().getCompendiumResource().addListener(this);
+    }
 
-                while (!updateProgressBar()) {
-                    try {
-                        Thread.sleep(DELAY);
-                    } catch (InterruptedException e) {
-                        Logger.error(e.getMessage(), e);
-                    }
-                }
-
-                Intent intent = new Intent(ViewSplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        }, DELAY);
-
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        DndUtilApp.getInstance().getCompendiumResource().removeListener(this);
     }
 
     /**
-     * Will update the progress bar and return true if the progress is completed.
-     * @return true if we have completed our progress
+     * These are triggered when the progress monitor updates
+     * @param monitor
+     * @param numSteps
+     * @param numFailedSteps
+     * @param numSuccessSteps
+     * @param numPendingSteps
      */
-    private boolean updateProgressBar() {
-        CompendiumResource compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
-        boolean isCompleted = compendiumResource.isCompleted();
+    @Override
+    public void update(ProgressMonitor monitor, int numSteps, int numFailedSteps, int numSuccessSteps, int numPendingSteps) {
 
-        int step = compendiumResource.getStep();
-        int maxStep = compendiumResource.getNumberOfSteps();
+        final int numCompletedSteps = numSteps - numPendingSteps;
+        Logger.info("PROGRESS: " + numCompletedSteps + " / " + numSteps);
 
-        Logger.info("PROGRESS: " + step + " / " + maxStep);
+        progressBar.setMax(numSteps);
+        progressBar.setProgress(numCompletedSteps);
 
-        progressBar.setIndeterminate(false);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            progressBar.setMin(0);
+        if (numPendingSteps<1) {
+            Intent intent = new Intent(ViewSplashScreenActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
+    }
 
-        progressBar.setMax(maxStep);
-        progressBar.setProgress(step);
+    @Override
+    public void loadDaoSuccess(String daoKey, ReadDao readDao) {
+    }
 
-
-        return isCompleted;
+    @Override
+    public void loadDaoFailure(String daoKey) {
     }
 
 }
