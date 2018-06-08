@@ -428,7 +428,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
                                 try {
                                     if (item instanceof DaoModel) {
                                         final DaoModel daoModel = (DaoModel) item;
-                                        final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
+                                        final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY);
                                         final Entity entity = entityDao.create();
                                         final Category category = Category.parse(item);
                                         final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
