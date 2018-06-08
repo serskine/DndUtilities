@@ -4,6 +4,15 @@
     <entry_points version="2.0">
       <entry_point TYPE="method" FQNAME="com.soupthatisthick.encounterbuilder.dao.ContentValuesDao ContentValuesDao(com.soupthatisthick.encounterbuilder.dao.DaoMaster daoMaster, java.lang.String tableName)" />
     </entry_points>
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="searchForResults" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="getAllRecords" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="getUsableDaos" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="sortObjects" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="addAllRecords" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="addRecordsLike" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="onDaoSessionFail" />
+    <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="getDisplayObject" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />

@@ -189,6 +189,13 @@
     </style>
 
 
+    <style name="AppTheme.ProgressBar">
+        <item name="android:indeterminate">false</item>
+        <item name="android:progressDrawable">@style/Widget.AppCompat.ProgressBar.Horizontal</item>
+    </style>
+
+
+
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
@@ -205,7 +212,6 @@
     </style>
 
     <style name="ButtonBarButton" />
-
 
 
 
