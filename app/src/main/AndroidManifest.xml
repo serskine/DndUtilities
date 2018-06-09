@@ -34,6 +34,11 @@
         android:name="com.soupthatisthick.encounterbuilder.DndUtilApp"
         >
 
+        <provider
+            android:name="com.soupthatisthick.encounterbuilder.activity.error.CrashProvider"
+            android:authorities="${applicationId}.crashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
 
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ViewSplashScreenActivity"
@@ -54,6 +59,10 @@
             android:label="@string/app_name"
             >
         </activity>
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.error.CrashActivity"
+            android:process=":error_activity"
+            />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity"
             android:label="Edit Databases Activity"
