@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:orientation="vertical"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:ignore="UselessParent"
+        style="@style/AppTheme.Scroll"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,14 +22,16 @@
             android:paddingBottom="@dimen/margin_large"
             android:paddingLeft="@dimen/margin_large"
             android:paddingRight="@dimen/margin_large"
-            android:paddingTop="@dimen/margin_large">
+            android:paddingTop="@dimen/margin_large"
+            >
 
             <ImageView
                 android:id="@+id/customactivityoncrash_error_activity_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
-                android:src="@drawable/ic_control_error" />
+                android:src="@drawable/slain_dragon_transparent"
+                style="@style/AppTheme.Picture"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,23 +39,32 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:gravity="center"
                 android:text="@string/customactivityoncrash_error_activity_error_occurred_explanation"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.BigHeader"/>
 
-            <Button
-                android:id="@+id/customactivityoncrash_error_activity_restart_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
-                android:text="@string/customactivityoncrash_error_activity_close_app" />
 
-            <Button
-                android:id="@+id/customactivityoncrash_error_activity_more_info_button"
-                style="@style/AppTheme.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/customactivityoncrash_error_activity_error_details"
-                android:textColor="@color/error_text_color" />
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/customactivityoncrash_error_activity_restart_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customactivityoncrash_error_activity_close_app"
+            android:layout_weight="1"
+            style="@style/AppTheme.Button"/>
+
+        <Button
+            android:id="@+id/customactivityoncrash_error_activity_more_info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customactivityoncrash_error_activity_error_details"
+            android:layout_weight="1"
+            style="@style/AppTheme.Button"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

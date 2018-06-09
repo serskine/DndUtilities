@@ -34,6 +34,8 @@ public class MainActivity extends AppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        throw new RuntimeException("TESTING ERROR !!!");
     }
 
     public void onClickTestButton(View view)
