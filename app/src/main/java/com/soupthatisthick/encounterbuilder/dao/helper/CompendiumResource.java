@@ -414,47 +414,70 @@ public class CompendiumResource {
             throw new Exception("We can't determine a writeDao for a null category!");
         }
 
+        WriteDao<?> theDao;
         switch(category) {
             case CONDITION:
-                return conditionDao;
+                theDao = conditionDao;
+				break;
             case CUSTOM_MONSTER:
-                return customMonsterDao;
+                theDao = customMonsterDao;
+				break;
             case STANDARD_MONSTER:
-                return standardMonsterDao;
+                theDao = standardMonsterDao;
+				break;
             case MAGIC_ITEM:
-                return magicItemDao;
+                theDao = magicItemDao;
+				break;
             case SPELL:
-                return spellDao;
+                theDao = spellDao;
+				break;
             case FEAT:
-                return featDao;
+                theDao = featDao;
+				break;
             case BACKGROUND:
-                return backgroundDao;
+                theDao = backgroundDao;
+				break;
             case ARMOR:
-                return armorDao;
+                theDao = armorDao;
+				break;
             case WEAPON:
-                return weaponDao;
+                theDao = weaponDao;
+				break;
             case EQUIPMENT:
-                return equipmentDao;
+                theDao = equipmentDao;
+				break;
             case NOTE:
-                return notesDao;
+                theDao = notesDao;
+				break;
             case CHALLENGE_RATING:
-                return challengeRatingDao;
+                theDao = challengeRatingDao;
+				break;
             case LEVEL:
-                return levelDao;
+                theDao = levelDao;
+				break;
             case GOD:
-                return godsDao;
+                theDao = godsDao;
+				break;
             case LIFESTYLE:
-                return lifeStyleDao;
+                theDao = lifeStyleDao;
+				break;
             case MOUNT:
-                return mountDao;
+                theDao = mountDao;
+				break;
             case ENTITY:
-                return entityDao;
+                theDao = entityDao;
+				break;
             case ENTITY_LIST:
-                return entityListDao;
+                theDao = entityListDao;
+				break;
             case DEFAULT:
             default:
                 throw new Exception("Failed to determine a dao for category " + category + ".");
         }
+        if (theDao==null) {
+            throw new Exception("The dao for category " + category + " has not yet been loaded!");
+        }
+        return theDao;
     }
 
 

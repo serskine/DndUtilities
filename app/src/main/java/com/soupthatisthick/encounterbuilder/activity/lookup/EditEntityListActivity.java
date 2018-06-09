@@ -97,7 +97,10 @@ public class EditEntityListActivity extends DaoEditToggleListActivity<EntityList
 
     @Override
     protected CustomToggleAdapter<Entity> createToggleListAdapter(LayoutInflater layoutInflater) {
-        return new EntityAdapter(layoutInflater, new CompendiumResource(getApplicationContext()));
+        EntityAdapter entityAdapter = new EntityAdapter(layoutInflater, new CompendiumResource(getApplicationContext()));
+        entityAdapter.setCollapsedType(EntityAdapter.DisplayType.ENTITY_CONTENTS);
+        entityAdapter.setExpandedType(EntityAdapter.DisplayType.ENTITY_CONTENTS);
+        return entityAdapter;
     }
 
     @Override
