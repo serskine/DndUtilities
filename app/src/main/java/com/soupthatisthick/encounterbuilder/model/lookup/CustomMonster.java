@@ -4,115 +4,54 @@ import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
+import java.util.Locale;
+
 
 /**
  * Created by Owner on 1/26/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-// @Entity(nameInDb = "CUSTOM_MONSTERS")
 public class CustomMonster extends DaoModel {
 
-    // @Id
-    // @Property(nameInDb = "id")
     private Long id;
-
-    // @Property(nameInDb = "name")
     private String name;
-
-    // @Property(nameInDb = "type")
     private String type;
-
-    // @Property(nameInDb = "alignment")
     private String alignment;
-
-    // @Property(nameInDb = "ac")
     private int ac;
-
-    // @Property(nameInDb = "acType")
     private String acType;
-
-    // @Property(nameInDb = "hp")
     private String hp;
-
-    // @Property(nameInDb = "hd")
     private String hd;
-
-    // @Property(nameInDb = "speed")
     private String speed;
-
-    // @Property(nameInDb = "str")
     private int strength;
-
-    // @Property(nameInDb = "dex")
     private int dexterity;
-
-    // @Property(nameInDb = "con")
     private int constitution;
-
-    // @Property(nameInDb = "int")
     private int intelligence;
-
-    // @Property(nameInDb = "wis")
     private int wisdom;
-
-    // @Property(nameInDb = "cha")
     private int charisma;
-
-    // @Property(nameInDb = "saves")
     private String saves;
-
-    // @Property(nameInDb = "skills")
     private String skills;
-
-    // @Property(nameInDb = "dmgResistance")
     private String dmgResistance;
-
-    // @Property(nameInDb = "dmgImmunity")
     private String dmgImmunity;
-
-    // @Property(nameInDb = "conditionImmunity")
     private String conditionImmunity;
-
-    // @Property(nameInDb = "senses")
     private String senses;
-
-    // @Property(nameInDb = "languages")
     private String languages;
-
-    // @Property(nameInDb = "cr")
     private String cr;
-
-    // @Property(nameInDb = "xp")
     private int xp;
-
-    // @Property(nameInDb = "abilities")
     private String abilities;
-
-    // @Property(nameInDb = "actions")
     private String actions;
-
-    // @Property(nameInDb = "legendary")
     private String legendaryActions;
-
-    // @Property(nameInDb = "other")
     private String other;
-
-    // @Property(nameInDb = "source")
     private String source;
 
 
-    // @Generated(hash = 1458489455)
     public CustomMonster(Long id, String name, String type, String alignment,
-            int ac, String acType, String hp, String hd, String speed, int strength,
-            int dexterity, int constitution, int intelligence, int wisdom,
-            int charisma, String saves, String skills, String dmgResistance,
-            String dmgImmunity, String conditionImmunity, String senses,
-            String languages, String cr, int xp, String abilities, String actions,
-            String legendaryActions, String other, String source) {
+        int ac, String acType, String hp, String hd, String speed, int strength,
+        int dexterity, int constitution, int intelligence, int wisdom,
+        int charisma, String saves, String skills, String dmgResistance,
+        String dmgImmunity, String conditionImmunity, String senses,
+        String languages, String cr, int xp, String abilities, String actions,
+        String legendaryActions, String other, String source
+    ) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -144,8 +83,8 @@ public class CustomMonster extends DaoModel {
         this.source = source;
     }
 
-    // @Generated(hash = 759376027)
     public CustomMonster() {
+        // Do nothing
     }
 
 
@@ -381,9 +320,8 @@ public class CustomMonster extends DaoModel {
         this.source = source;
     }
 
-    // @Override
     public String toString()
     {
-        return String.format("%s (%s %d xp)", getName(), getCr(), getXp());
+        return String.format(Locale.CANADA, "%s (%s %d xp)", getName(), getCr(), getXp());
     }
 }
