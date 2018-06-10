@@ -2,36 +2,24 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
+import java.util.Locale;
+
 
 /**
  * Created by Owner on 2/17/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-// @Entity(nameInDb = "sqlite_master")
+@SuppressWarnings("WeakerAccess")
 public class Table extends DaoModel {
 
-    // @Property(nameInDb = "type")
     private String type;
-
-    // @Property(nameInDb = "name")
     private String name;
-
-    // @Property(nameInDb = "tbl_name")
     private String tableName;
-
-    // @Property(nameInDb = "rootpage")
     private Long rootPage;
-
-    // @Property(nameInDb = "sql")
     private String sql;
 
-    // @Generated(hash = 1147649556)
-    public Table(String type, String name, String tableName, Long rootPage,
-            String sql) {
+    public Table(String type, String name, String tableName, Long rootPage, String sql) {
         this.type = type;
         this.name = name;
         this.tableName = tableName;
@@ -39,8 +27,8 @@ public class Table extends DaoModel {
         this.sql = sql;
     }
 
-    // @Generated(hash = 752389689)
     public Table() {
+        // Do nothing
     }
 
     public String getType() {
@@ -83,14 +71,12 @@ public class Table extends DaoModel {
         this.sql = sql;
     }
 
-    // @Override
     public Long getId() {
-        return new Long(getName().hashCode());  // Same name tables will match
+        return (long) getName().hashCode();  // Same name tables will match
     }
 
-    // @Override
     public String toString()
     {
-        return String.format("%s(%d)", getName(), getId());
+        return String.format(Locale.CANADA, "%s(%d)", getName(), getId());
     }
 }
