@@ -2,49 +2,26 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
-
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-// // @Entity(nameInDb = "ARMOR")
 public class Armor extends DaoModel {
 
-    // // @Id
     private Long id;
-
-    // // @Property(nameInDb = "id")
     private String name;
-
-    // // @Property(nameInDb = "cost")
     private String cost;
-
-    // // @Property(nameInDb = "ac")
     private String ac;
-
-    // // @Property(nameInDb = "strength")
     private String strengthRequirement;
-
-    // // @Property(nameInDb = "stealth")
     private String stealthEffect;
-
-    // // @Property(nameInDb = "weight")
     private String weight;
-
-    // // @Property(nameInDb = "type")
     private String type;
-
-    // // @Property(nameInDb = "description")
     private String description;
 
-    // // @Generated(hash = 1795786874)
     public Armor(Long id, String name, String cost, String ac,
-            String strengthRequirement, String stealthEffect, String weight,
-            String type, String description) {
+        String strengthRequirement, String stealthEffect, String weight,
+        String type, String description
+    ) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -56,8 +33,7 @@ public class Armor extends DaoModel {
         this.description = description;
     }
 
-    // // @Generated(hash = 560524666)
-    public Armor() {
+        public Armor() {
     }
 
     public Long getId() {
