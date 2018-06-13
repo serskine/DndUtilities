@@ -3,6 +3,9 @@
     <!-- Application theme. -->
     <style name="MonsterTheme" parent="AppTheme">
     </style>
+    <style name="MonsterTheme.ul">
+        <item name="list-style-type">none</item>
+    </style>
 
     <style name="MonsterTheme.abilitiesblock">
     </style>

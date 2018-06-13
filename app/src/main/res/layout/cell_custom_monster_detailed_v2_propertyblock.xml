@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/monster_stat_block"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/MonsterTheme.propertyblock"
+    >
+    <TextView
+        android:id="@+id/monster_propertyblock_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MonsterTheme.propertyblock.content.h4"
+        >
+    </TextView>
+    <!-- remember to set the style of the first element differently from the remainder -->
+    <LinearLayout
+        android:id="@+id/monster_propertyblock_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MonsterTheme.propertyblock.content"
+        >
+    </LinearLayout>
+</LinearLayout>

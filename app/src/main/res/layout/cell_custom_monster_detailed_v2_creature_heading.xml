@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/monster_stat_block"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/monster_creature_heading_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MonsterTheme.creatureheading.content.h1"
+        >
+    </TextView>
+    <TextView
+        android:id="@+id/monster_creature_heading_size_type_alignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MonsterTheme.creatureheading.content.h2"
+        >
+    </TextView>
+</LinearLayout>

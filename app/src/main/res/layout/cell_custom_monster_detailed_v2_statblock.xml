@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/monster_stat_block"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/MonsterTheme.statblock"
+    >
+    <FrameLayout
+        android:id="@+id/monster_creature_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/monster_top_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/monster_properties_abilities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+    <TextView
+        android:id="@+id/monster_actions_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Actions"
+        style="@style/MonsterTheme.statblock.content.h3"
+        >
+    </TextView>
+    <LinearLayout
+        android:id="@+id/monster_properties_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+</LinearLayout>
