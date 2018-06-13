@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Application theme. -->
+    <style name="MonsterTheme" parent="AppTheme">
+    </style>
+
+    <style name="MonsterTheme.abilitiesblock">
+    </style>
+
+    <style name="MonsterTheme.abilitiesblock.table">
+        <item name="width">match_parent</item>
+        <item name="border">0px</item>
+        <item name="border-collapse">collapse</item>
+    </style>
+
+    <style name="MonsterTheme.abilitiesblock.table.element">
+        <item name="width">50px</item>
+        <item name="text-align">center</item>
+    </style>
+
+    <style name="MonsterTheme.creatureheading">
+    </style>
+    <style name="MonsterTheme.creatureheading.content">
+    </style>
+    <style name="MonsterTheme.creatureheading.content.h1">
+        <item name="font-family">'Libre Baskerville', 'Lora', 'Calisto MT',
+            'Bookman Old Style', Bookman, 'Goudy Old Style',
+            Garamond, 'Hoefler Text', 'Bitstream Charter',
+            Georgia, serif;
+        </item>
+        <item name="color">#7A200D</item>
+        <item name="font-weight">700</item>
+        <item name="margin">0px</item>
+        <item name="font-size">23px</item>
+        <item name="letter-spacing">1px</item>
+        <item name="font-variant">small-caps</item>
+    </style>
+    <style name="MonsterTheme.creatureheading.content.h2">
+        <font-weight>normal</font-weight>
+        <font-style>italic</font-style>
+        <font-size>12px</font-size>
+        <margin>0</margin>
+    </style>
+    <style name="MonsterTheme.propertyblock">
+    </style>
+    <style name="MonsterTheme.propertyblock.host">
+        <item name="margin-top">0.3 em</item>
+        <item name="margin-bottom">0.9em</item>
+        <item name="margin-line-height">1.5</item>
+        <item name="display">block</item>
+    </style>
+    <style name="MonsterTheme.propertyblock.content">
+    </style>
+    <style name="MonsterTheme.propertyblock.content.h4">
+        <item name="margin">0</item>
+        <item name="display">inline</item>
+        <item name="font-weight">bold</item>
+        <item name="font-style">italic</item>
+    </style>
+    <style name="MonsterTheme.propertyblock.content.p">
+        <item name="text-indent">1em</item>
+        <item name="margin">0</item>
+    </style>
+    <style name="MonsterTheme.propertyblock.content.p.firstoftype">
+        <item name="display">inline</item>
+        <item name="text-indent">0</item>
+    </style>
+    <style name="MonsterTheme.propertyline">
+    </style>
+    <style name="MonsterTheme.propertyline.host">
+        <item name="line-height">1.4</item>
+        <item name="display">block</item>
+        <item name="text-indent">-1em</item>
+        <item name="padding-left">1em</item>
+    </style>
+    <style name="MonsterTheme.propertyline.content">
+    </style>
+    <style name="MonsterTheme.propertyline.content.h4">
+        <item name="margin">0</item>
+        <item name="display">inline</item>
+        <item name="font-weight">bold</item>
+    </style>
+    <style name="MonsterTheme.propertyline.content.p">
+        <item name="text-indent">1em</item>
+        <item name="margin">0</item>
+    </style>
+    <style name="MonsterTheme.propertyline.content.p.firstoftype">
+        <item name="display">inline</item>
+        <item name="text-indent">0</item>
+    </style>
+    <style name="MonsterTheme.statblock">
+    </style>
+    <style name="MonsterTheme.statblock.bar">
+        <item name="height">5px</item>
+        <item name="background">#E69A28</item>
+        <item name="border">1px solid #000</item>
+        <item name="position">relative</item>
+        <item name="z-index">1</item>
+    </style>
+    <style name="MonsterTheme.statblock.host">
+        <item name="display">inline-block</item>
+    </style>
+    <style name="MonsterTheme.statblock.contentwrap">
+        <item name="font-family">'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
+            sans-serif</item>
+        <item name="font-size">13.5px</item>
+        <item name="background">#FDF1DC</item>
+        <item name="padding">0.6em</item>
+        <item name="padding-bottom">0.5em</item>
+        <item name="border">1px #DDD solid</item>
+        <item name="box-shadow">0 0 1.5em #867453</item>
+        <item name="position">relative</item>
+        <item name="z-index">0</item>
+        <item name="margin-left">2px</item>
+        <item name="margin-right">2px</item>
+        <item name="width">400px</item>
+
+        <item name="-webkit-columns">400px</item>
+        <item name="-moz-columns">400px</item>
+        <item name="columns">400px</item>
+
+        <item name="-webkit-column-gap">40px</item>
+        <item name="-moz-column-gap">40px</item>
+        <item name="column-gap">40px</item>
+
+        <item name="-webkit-column-fill">auto</item>
+        <item name="-moz-column-fill">auto</item>
+        <item name="column-fill">auto</item>
+
+    </style>
+
+    <style name="MonsterTheme.statblock.contentwrap.datatwocolumn">
+        <item name="width">800px</item>
+    </style>
+
+    <style name="MonsterTheme.statblock.content">
+    </style>
+    <style name="MonsterTheme.statblock.content.h3">
+        <item name="border-bottom">1 px solid #7A200D</item>
+        <item name="color">#7A200D</item>
+        <item name="font-size">21px</item>
+        <item name="font-variant">small-caps</item>
+        <item name="font-weight">normal</item>
+        <item name="letter-spacing">1px</item>
+        <item name="margin">0</item>
+        <item name="margin-bottom">0.3em</item>
+        <item name="break-inside">avoid-column</item>
+        <item name="break-after">avoid-column</item>
+    </style>
+
+    <style name="MonsterTheme.statblock.content.p">
+        <item name="margin-top">0.3em</item>
+        <item name="margin-bottom">0.9em</item>
+        <item name="line-height">1.5</item>
+    </style>
+
+    <style name="MonsterTheme.statblock.content.lastchild">
+        <item name="margin-bottom">0</item>
+    </style>
+    <style name="MonsterTheme.taperedrule">
+    </style>
+    <style name="MonsterTheme.taperedrule.svg">
+        <item name="fill">#922610</item>
+        <item name="stroke">#922610</item>
+        <item name="margin-top">0.6em</item>
+        <item name="margin-bottom">0.35em</item>
+    </style>
+    <style name="MonsterTheme.topstats">
+    </style>
+    <style name="MonsterTheme.topstats.content">
+        <item name="color">#7A200D</item>
+    </style>
+
+</resources>
+
+
+
