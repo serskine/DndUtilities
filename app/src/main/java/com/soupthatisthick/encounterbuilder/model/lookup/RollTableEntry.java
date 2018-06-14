@@ -2,59 +2,33 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
+import java.util.Objects;
+
 
 /**
  * Created by Owner on 5/9/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-// @Entity(nameInDb = "ROLL_TABLE_ENTRY")
+@SuppressWarnings("SpellCheckingInspection")
 public class RollTableEntry extends DaoModel {
 
-    // @Id
-    // @Property(nameInDb = "entryId")
     private Long id;
-
-    // @Property(nameInDb = "tableId")
     private Long tableId;
-
-    // @Property(nameInDb = "rerollTableId")
     private Long reRollTableId;
-
-    // @Property(nameInDb = "minRoll")
     private Integer minRoll;
-
-    // @Property(nameInDb = "maxRoll")
     private Integer maxRoll;
-
-    // @Property(nameInDb = "dieQty")
     private Integer dieQty;
-
-    // @Property(nameInDb = "dieSize")
     private Integer dieSize;
-
-    // @Property(nameInDb = "rollMul")
     private Integer rollMul;
-
-    // @Property(nameInDb = "rollAvg")
     private Integer rollAvg;
-
-    // @Property(nameInDb = "result")
     private String result;
-
-    // @Property(nameInDb = "unit")
     private String unit;
-
-    // @Property(nameInDb = "unitGpValue")
     private Double unitGpValue;
 
-    // @Generated(hash = 132354382)
     public RollTableEntry(Long id, Long tableId, Long reRollTableId, Integer minRoll, Integer maxRoll,
-            Integer dieQty, Integer dieSize, Integer rollMul, Integer rollAvg, String result, String unit,
-            Double unitGpValue) {
+        Integer dieQty, Integer dieSize, Integer rollMul, Integer rollAvg, String result, String unit,
+        Double unitGpValue
+    ) {
         this.id = id;
         this.tableId = tableId;
         this.reRollTableId = reRollTableId;
@@ -69,8 +43,8 @@ public class RollTableEntry extends DaoModel {
         this.unitGpValue = unitGpValue;
     }
 
-    // @Generated(hash = 466988778)
     public RollTableEntry() {
+        // Do nothing
     }
 
     public Long getId() {
@@ -153,10 +127,8 @@ public class RollTableEntry extends DaoModel {
         this.result = result;
     }
 
-    // @Override
-    public String toString()
-    {
-        String rollText =   (getMinRoll()==getMaxRoll())
+    public String toString() {
+        String rollText =   (getMinRoll().equals(getMaxRoll()))
                             ?   ("" + getMinRoll())
                             :   ("" + getMinRoll() + "-" + getMaxRoll());
         String rerollText = (getReRollTableId()==null) ? "" : " => Table(" + getReRollTableId() + ")";

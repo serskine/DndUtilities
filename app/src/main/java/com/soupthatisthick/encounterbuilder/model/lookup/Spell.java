@@ -2,56 +2,29 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 1/27/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-// @Entity(nameInDb = "EDITABLE_SPELLS")
 public class Spell extends DaoModel {
 
-    // @Id
-    // @Property(nameInDb = "id")
     private Long id;
-
-    // @Property(nameInDb = "level")
     private int level;
-
-    // @Property(nameInDb = "name")
     private String name;
-
-    // @Property(nameInDb = "type")
     private String type;
-
-    // @Property(nameInDb = "castingTime")
     private String castingTime;
-
-    // @Property(nameInDb = "range")
     private String range;
-
-    // @Property(nameInDb = "components")
     private String components;
-
-    // @Property(nameInDb = "duration")
     private String duration;
-
-    // @Property(nameInDb = "description")
     private String description;
-
-    // @Property(nameInDb = "materials")
     private String materials;
-
-    // @Property(nameInDb = "class")
     private String classes;
 
-    // @Generated(hash = 449169983)
     public Spell(Long id, int level, String name, String type, String castingTime,
-            String range, String components, String duration, String description,
-            String materials, String classes) {
+        String range, String components, String duration, String description,
+        String materials, String classes
+    ) {
         this.id = id;
         this.level = level;
         this.name = name;
@@ -65,8 +38,8 @@ public class Spell extends DaoModel {
         this.classes = classes;
     }
 
-    // @Generated(hash = 2133214849)
     public Spell() {
+        // Do nothing
     }
 
     public int getLevel() {
@@ -157,7 +130,6 @@ public class Spell extends DaoModel {
         this.id = id;
     }
 
-    // @Override
     public String toString()
     {
         return "spell(" + getId()+")[" + getName() + "]";

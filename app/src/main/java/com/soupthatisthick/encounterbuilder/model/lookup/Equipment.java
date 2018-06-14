@@ -2,40 +2,22 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-// // @Entity(nameInDb = "EQUIPMENT")
 public class Equipment extends DaoModel {
 
-    // // @Id
-    // // @Property(nameInDb = "id")
     private Long id;
-
-    // // @Property(nameInDb = "name")
     private String name;
-
-    // // @Property(nameInDb = "cost")
     private String cost;
-
-    // // @Property(nameInDb = "weight")
     private String weight;
-
-    // // @Property(nameInDb = "description")
     private String description;
-
-    // // @Property(nameInDb = "type")
     private String type;
 
-    // // @Generated(hash = 366681975)
     public Equipment(Long id, String name, String cost, String weight,
-            String description, String type) {
+        String description, String type) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -44,8 +26,8 @@ public class Equipment extends DaoModel {
         this.type = type;
     }
 
-    // // @Generated(hash = 748305627)
     public Equipment() {
+        // Do nothing
     }
 
     public Long getId() {
