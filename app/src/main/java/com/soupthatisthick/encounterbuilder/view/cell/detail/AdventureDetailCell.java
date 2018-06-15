@@ -15,7 +15,7 @@ import soupthatisthick.encounterapp.R;
 public class AdventureDetailCell extends ReadCell<Adventure> {
 
     private TextView theTitle, theCode, theLevelBand, theRuntimeHours;
-    private HtmlView theNotes, theDescription;
+    private TextView theNotes, theDescription;
 
     public AdventureDetailCell(LayoutInflater inflater, View convertView, ViewGroup parent) {
         super(inflater, convertView, parent);

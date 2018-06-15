@@ -22,6 +22,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.LifeStyle;
 import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
 import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
 import com.soupthatisthick.encounterbuilder.model.lookup.Note;
+import com.soupthatisthick.encounterbuilder.model.lookup.Season;
 import com.soupthatisthick.encounterbuilder.model.lookup.Spell;
 import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
@@ -112,6 +113,8 @@ public class CompendiumSummaryCell extends CompendiumCell
                 AdventureSummaryCell adventureSummryCell = new AdventureSummaryCell(inflater, convertView, parent);
                 return adventureSummryCell;
             case SEASON:
+                SeasonSummaryCell seasonSummaryCell = new SeasonSummaryCell(inflater, convertView, parent);
+                return seasonSummaryCell;
             case ENTITY_LIST:
             case DEFAULT:
             default:
@@ -205,6 +208,8 @@ public class CompendiumSummaryCell extends CompendiumCell
                 ((AdventureSummaryCell) cell).updateUi((Adventure) item);
                 break;
             case SEASON:
+                ((SeasonSummaryCell) cell).updateUi((Season) item);
+                break;
             case DEFAULT:
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);
