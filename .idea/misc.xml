@@ -13,6 +13,51 @@
     <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" />
     <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="onDaoSessionFail" />
     <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="getDisplayObject" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Armor" method="Armor" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating" method="ChallengeRating" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Contact" method="Contact" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Contact" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster" method="CustomMonster" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.EntityList" method="EntityList" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Item" method="init" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Item" method="setListId" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Item" method="Item" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Item" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.MagicItem" method="MagicItem" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.MagicItem" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Mount" method="Mount" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Mount" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Note" method="Note" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Note" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Pc" method="Pc" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Pc" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.RollTableEntry" method="RollTableEntry" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.RollTableEntry" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.RollTableEntry" method="toString" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.SearchFilter" method="getAllowed" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.SearchFilter" method="setAllowed" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.SearchFilter" method="SearchFilter" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.SearchFilter" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.SearchFilter" method="toString" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Session" method="Session" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Session" method="setRowId" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Session" method="getId" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Setting" method="Setting" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Setting" method="getName" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Spell" method="Spell" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster" method="StandardMonster" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster" method="calcScore" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getSql" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getRootPage" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getTableName" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getType" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="Table" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="toString" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getName" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getId" />
+    <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Weapon" method="Weapon" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
