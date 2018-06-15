@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
+import com.soupthatisthick.encounterbuilder.model.lookup.Adventure;
 import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
@@ -107,6 +108,12 @@ public class CompendiumSummaryCell extends CompendiumCell
             case ENTITY:
                 EntitySummaryCell entitySummaryCell = new EntitySummaryCell(inflater, convertView, parent);
                 return entitySummaryCell;
+            case ADVENTURE:
+                AdventureSummaryCell adventureSummryCell = new AdventureSummaryCell(inflater, convertView, parent);
+                return adventureSummryCell;
+            case SEASON:
+            case ENTITY_LIST:
+            case DEFAULT:
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;
@@ -192,6 +199,13 @@ public class CompendiumSummaryCell extends CompendiumCell
             case ENTITY:
                 ((EntitySummaryCell) cell).updateUi((Entity) item);
                 break;
+            case ENTITY_LIST:
+                break;
+            case ADVENTURE:
+                ((AdventureSummaryCell) cell).updateUi((Adventure) item);
+                break;
+            case SEASON:
+            case DEFAULT:
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);
                 break;

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.soupthatisthick.encounterbuilder.model.lookup.Adventure;
 import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
@@ -102,6 +103,12 @@ public class CompendiumDetailCell extends CompendiumCell {
             case ENTITY:
                 EntityDetailCell entityDetailCell = new EntityDetailCell(inflater, convertView, parent);
                 return entityDetailCell;
+            case ADVENTURE:
+                AdventureDetailCell adventureDetailCell = new AdventureDetailCell(inflater, convertView, parent);
+                return adventureDetailCell;
+            case ENTITY_LIST:
+            case SEASON:
+            case DEFAULT:
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;
@@ -184,6 +191,12 @@ public class CompendiumDetailCell extends CompendiumCell {
             case ENTITY:
                 ((EntityDetailCell) cell).updateUi((Entity) item);
                 break;
+            case ADVENTURE:
+                ((AdventureDetailCell) cell).updateUi((Adventure) item);
+                break;
+            case ENTITY_LIST:
+            case SEASON:
+            case DEFAULT:
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);
                 break;

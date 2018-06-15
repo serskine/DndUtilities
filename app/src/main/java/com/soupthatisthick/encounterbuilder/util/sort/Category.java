@@ -2,6 +2,7 @@ package com.soupthatisthick.encounterbuilder.util.sort;
 
 import android.support.annotation.Nullable;
 
+import com.soupthatisthick.encounterbuilder.dao.lookup.AdventureDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
@@ -16,10 +17,12 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MountDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.NotesDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.SeasonDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.SpellDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.WeaponDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.BackgroundDao;
+import com.soupthatisthick.encounterbuilder.model.lookup.Adventure;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
 import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
@@ -34,6 +37,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.LifeStyle;
 import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
 import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
 import com.soupthatisthick.encounterbuilder.model.lookup.Note;
+import com.soupthatisthick.encounterbuilder.model.lookup.Season;
 import com.soupthatisthick.encounterbuilder.model.lookup.Spell;
 import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
@@ -64,7 +68,9 @@ public enum Category
     LIFESTYLE(-15, LifeStyleDao.TBL_LIFESTYLE, LifeStyleDao.COL_ID),
     MOUNT(-16, MountDao.TBL_MOUNTS, MountDao.COL_ID),
     ENTITY(-17, EntityDao.TBL_ENTITY, EntityDao.COL_ID),
-    ENTITY_LIST(-18, EntityListDao.TBL_LISTS, EntityListDao.COL_ID)
+    ENTITY_LIST(-18, EntityListDao.TBL_LISTS, EntityListDao.COL_ID),
+    SEASON(-19, SeasonDao.TBL_SEASON, SeasonDao.COL_ID),
+    ADVENTURE(-20, AdventureDao.TBL_ADVENTURE, AdventureDao.COL_ID)
     ;
 
     public final int orderValue;
@@ -132,6 +138,12 @@ public enum Category
         }
         if (item.getClass().equals(Entity.class)) {
             return ENTITY;
+        }
+        if (item.getClass().equals(Season.class)) {
+            return SEASON;
+        }
+        if (item.getClass().equals(Adventure.class)) {
+            return ADVENTURE;
         }
         return DEFAULT;
     }

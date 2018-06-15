@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
+import com.soupthatisthick.encounterbuilder.dao.lookup.AdventureDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
@@ -21,6 +22,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MountDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.NotesDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.SeasonDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.SpellDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.WeaponDao;
@@ -100,6 +102,8 @@ public class CompendiumResource {
     private LifeStyleDao lifeStyleDao;
     private MountDao mountDao;
     private WeaponDao weaponDao;
+    private SeasonDao seasonDao;
+    private AdventureDao adventureDao;
     private EntityDao entityDao;
 
     private EntityListDao entityListDao;
@@ -153,7 +157,7 @@ public class CompendiumResource {
             protected Boolean doInBackground(Object... params) {
                 Logger.info(" - waiting for DB_LOCK [loadAllData().AsyncTask]");
 
-                progressMonitor.init(22);
+                progressMonitor.init(24);
 
                 synchronized (DB_LOCK) {
 
@@ -240,6 +244,12 @@ public class CompendiumResource {
 
                         weaponDao = new WeaponDao(dndMaster);
                         daoTaskManager.add(initDaoTask(R.string.vc_title_weapons, weaponDao));
+
+                        seasonDao = new SeasonDao(dndMaster);
+                        daoMasterTaskManager.add(initDaoTask(R.string.vc_title_season, seasonDao));
+
+                        adventureDao = new AdventureDao(dndMaster);
+                        daoMasterTaskManager.add(initDaoTask(R.string.vc_title_adventure, adventureDao));
 
                         daoTaskManager.startAllPendingTasks();
                         daoMasterTaskManager.waitForAllTasksToFinish();

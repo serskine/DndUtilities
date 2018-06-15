@@ -26,8 +26,8 @@ public class AdventureDao extends WriteDao<Adventure> {
     public static final String COL_SEASON_ID = "seasonId";
     public static final String COL_DESCRIPTION = "description";
 
-    public AdventureDao(DaoMaster daoMaster, @NonNull String tableName) throws IOException {
-        super(daoMaster, tableName);
+    public AdventureDao(DaoMaster daoMaster) throws IOException {
+        super(daoMaster, TBL_ADVENTURE);
     }
 
     @Override
