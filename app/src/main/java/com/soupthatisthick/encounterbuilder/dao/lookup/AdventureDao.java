@@ -71,12 +71,14 @@ public class AdventureDao extends WriteDao<Adventure> {
         Adventure adventure = new Adventure();
 
         adventure.setId(cursor.getLong(cursor.getColumnIndex(COL_ID)));
+        adventure.setSeasonId(cursor.getLong(cursor.getColumnIndex(COL_SEASON_ID)));
+
+        adventure.setTitle(cursor.getString(cursor.getColumnIndex(COL_TITLE)));
         adventure.setCode(cursor.getString(cursor.getColumnIndex(COL_CODE)));
         adventure.setDescription(cursor.getString(cursor.getColumnIndex(COL_DESCRIPTION)));
         adventure.setLevelBand(cursor.getString(cursor.getColumnIndex(COL_LEVEL_BAND)));
         adventure.setNotes(cursor.getString(cursor.getColumnIndex(COL_NOTES)));
         adventure.setRuntimeHours(cursor.getString(cursor.getColumnIndex(COL_RUNTIME_HOURS)));
-        adventure.setSeasonId(cursor.getLong(cursor.getColumnIndex(COL_SEASON_ID)));
 
         return adventure;
     }

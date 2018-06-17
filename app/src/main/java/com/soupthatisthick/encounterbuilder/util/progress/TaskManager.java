@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 
 import com.soupthatisthick.util.Logger;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class TaskManager<Params, Progress, Result>{
 
@@ -50,17 +52,31 @@ public class TaskManager<Params, Progress, Result>{
 
     public TaskManager startAllPendingTasks(Params... params) {
         synchronized (tasks) {
+            final int expectedCount = tasks.size();
+            int started=0;
+            int skipped=0;
+            Logger.info("Starting " + expectedCount + " tasks if not already started.");
             for (AsyncTask<Params, Progress, Result> task : tasks) {
                 if (task.getStatus() == AsyncTask.Status.PENDING) {
+                    started++;
                     task.execute(params);
+                } else {
+                    skipped++;
                 }
             }
+            Logger.info("Started " + started + "/" + expectedCount + " tasks. Skipped " + skipped + "/" + expectedCount + " tasks.");
         }
         return this;
     }
 
     public TaskManager waitForAllTasksToFinish() {
+        return waitForAllTasksToFinish(-1, 500);
+    }
+
+    public TaskManager waitForAllTasksToFinish(final long timeoutMs, final long delayMs) {
         boolean done;
+        long started = new Date().getTime();
+        long finished = started + timeoutMs;
         do {
             synchronized (tasks) {
                 done = true;
@@ -70,8 +86,18 @@ public class TaskManager<Params, Progress, Result>{
                         break;
                     }
                 }
-                Status status = getStatus();
-                Logger.debug("Status: " + status);
+            }
+            try {
+                Thread.sleep(delayMs);
+            } catch (InterruptedException e) {
+
+            }
+            long now = new Date().getTime();
+            long waited = now-started;
+            Logger.debug(" - waited " + waited + " ms ...");
+            if (timeoutMs>=0 && finished<now) {
+                Logger.warning("Compendium finished early!");
+                done = true;
             }
         } while(!done);
         return this;

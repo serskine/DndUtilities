@@ -157,7 +157,7 @@ public class CompendiumResource {
             protected Boolean doInBackground(Object... params) {
                 Logger.info(" - waiting for DB_LOCK [loadAllData().AsyncTask]");
 
-                progressMonitor.init(24);
+                progressMonitor.init(21);
 
                 synchronized (DB_LOCK) {
 
@@ -169,19 +169,22 @@ public class CompendiumResource {
                     Logger.info(" - aquired DB_LOCK [loadAllData().AsyncTask]");
                     try {
 
-                        final TaskManager<Void, Void, Void> daoMasterTaskManager = new TaskManager();
+                        final TaskManager<Void, Void, Void> daoMasterTaskManager = new TaskManager<>();
 
                         dndMaster = new DndMaster(context);
-                        Logger.info("Opened the dndMaster on database " + dndMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_dnd, dndMaster));
 
                         encounterMaster = new EncounterMaster(context);
-                        Logger.info("Opened the encounterMaster on database " + encounterMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_encounter, encounterMaster));
 
                         logsheetMaster = new LogsheetMaster(context);
-                        Logger.info("Opened the logsheet master on database " + logsheetMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_logsheets, logsheetMaster));
+
+                        daoMasterTaskManager.startAllPendingTasks();
+//                        daoMasterTaskManager.waitForAllTasksToFinish();
+//                        daoMasterTaskManager.clear(false);
+
+                        Logger.info("Finished loading the dao masters!");
 
                         // Create instances of the dao's
 
@@ -246,14 +249,14 @@ public class CompendiumResource {
                         daoTaskManager.add(initDaoTask(R.string.vc_title_weapons, weaponDao));
 
                         seasonDao = new SeasonDao(dndMaster);
-                        daoMasterTaskManager.add(initDaoTask(R.string.vc_title_season, seasonDao));
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_season, seasonDao));
 
                         adventureDao = new AdventureDao(dndMaster);
-                        daoMasterTaskManager.add(initDaoTask(R.string.vc_title_adventure, adventureDao));
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_adventure, adventureDao));
 
                         daoTaskManager.startAllPendingTasks();
-                        daoMasterTaskManager.waitForAllTasksToFinish();
-                        daoMasterTaskManager.clear(true);
+//                        daoTaskManager.waitForAllTasksToFinish();
+//                        daoTaskManager.clear(true);
 
                         Logger.info("Completed opening all the dao's!");
                         progressMonitor.recordRemainderAsSuccess();

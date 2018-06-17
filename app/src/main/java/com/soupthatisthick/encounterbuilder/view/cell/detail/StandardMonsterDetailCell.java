@@ -270,15 +270,6 @@ public class StandardMonsterDetailCell extends ReadCell<StandardMonster> {
     public static final String myHtmlString(String html)
     {
         String parsed = htmlString(html).toString();
-//        String removeLeading = "\\s*<html>(\\s*<br>)*\\s*";
-//        String removeTrailing = "\\s*<br>*\\s*</html>\\s*";
-//        String removeListElements = "(<li>)|(</li>)";
-//        String removeMultiLineBreaks = "<br>(\\s*<br>)*";
-//        parsed = parsed.replace(removeLeading,EMPTY);
-//        parsed = parsed.replace(removeTrailing, EMPTY);
-//        parsed = parsed.replace(removeListElements, EMPTY);
-//        parsed = parsed.replace(removeMultiLineBreaks, "<br>");
-
         return parsed;
     }
     

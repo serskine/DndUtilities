@@ -14,14 +14,6 @@
         style="@style/AppTheme.BigHeader"
         />
     <TextView
-        android:id="@+id/theCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|start"
-        android:scaleType="fitXY"
-        style="@style/AppTheme.Strong"
-        />
-    <TextView
         android:id="@+id/theLevelBand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
