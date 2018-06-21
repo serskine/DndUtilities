@@ -56,14 +56,12 @@ import soupthatisthick.encounterapp.R;
  */
 
 @SuppressWarnings({"unused", "unchecked", "SpellCheckingInspection"})
-public class CompendiumActivity extends ViewToggleListActivity<Object> implements CompendiumResource.Listener {
+public class CompendiumActivity extends ViewToggleListActivity<Object> {
 
     private final Object DB_LOCK = new Object();
 
     // This is the set that we will use to update the dataset on the adapter
     ArrayList<Selection> selectionsList = new ArrayList<>();
-
-    private CompendiumResource compendiumResource;
 
     private ViewGroup theFilterGroup, theResultsGroup;
     private ToggleButton theFiltersButton, theSearchButton;
@@ -184,21 +182,6 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
     protected int getMinSearchTextLength() {
         return 2;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
-        compendiumResource.addListener(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
-        compendiumResource.removeListener(this);
-    }
-
 
     @Override
     protected EditText findSearchEditText() {
@@ -402,7 +385,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
 
             List<EntityList> listOptions;
             try {
-                listOptions = (List<EntityList>) compendiumResource.getDaoForCategory(Category.ENTITY_LIST).getAllRecords();
+                listOptions = (List<EntityList>) getCompendiumResource().getDaoForCategory(Category.ENTITY_LIST).getAllRecords();
             } catch (Exception e) {
                 Logger.error(e.getMessage(), e);
                 listOptions = new ArrayList<>();
@@ -428,16 +411,16 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
                                 try {
                                     if (item instanceof DaoModel) {
                                         final DaoModel daoModel = (DaoModel) item;
-                                        final EntityDao entityDao = (EntityDao) compendiumResource.getDaoForCategory(Category.ENTITY);
+                                        final EntityDao entityDao = (EntityDao) getCompendiumResource().getDaoForCategory(Category.ENTITY);
                                         final Entity entity = entityDao.create();
                                         final Category category = Category.parse(item);
-                                        final WriteDao writeDao = compendiumResource.getDaoForCategory(category);
+                                        final WriteDao writeDao = getCompendiumResource().getDaoForCategory(category);
                                         String metadata = writeDao.getDesirableMetadata(item);
 
                                         // append desirable metadata from the item list as well so we
                                         // can search for the item using information we know about the list.
                                         try {
-                                            EntityListDao entityListDao = (EntityListDao) compendiumResource.getDaoForCategory(Category.ENTITY_LIST);
+                                            EntityListDao entityListDao = (EntityListDao) getCompendiumResource().getDaoForCategory(Category.ENTITY_LIST);
                                             metadata += ((metadata.length() > 0) ? " " : "") + (entityListDao.getDesirableMetadata(entityList));
                                         } catch (Exception e) {
                                             Logger.error(e.getMessage(), e);
@@ -518,7 +501,7 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
 
             Logger.info("Processing display entity: " + entity.json());
             try {
-                writeDao = compendiumResource.getDaoForCategory(childCategory);
+                writeDao = getCompendiumResource().getDaoForCategory(childCategory);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to add display entity "  + entity.toString() + ".\n" + e.getMessage(), e);
             }
@@ -546,13 +529,15 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
 
     @Override
     public void update(ProgressMonitor monitor, int numSteps, int numFailedSteps, int numSuccessSteps, int numPendingSteps) {
+        super.update(monitor, numSteps, numFailedSteps, numSuccessSteps, numPendingSteps);
+
         Logger.info("Initializing the filter list");
         ArrayList<Selection> selectionsList = new ArrayList<>();
         selectedFilters.clear();
 
         // Add the option for all filters
         Selection selection;
-        usableDaos = compendiumResource.getUsableDaos();
+        usableDaos = getCompendiumResource().getUsableDaos();
 
         for (String table : usableDaos.keySet()) {
             selection = new Selection();
@@ -568,24 +553,29 @@ public class CompendiumActivity extends ViewToggleListActivity<Object> implement
         }
 
         theSelectionAdapter.setData(selectionsList);
+        theSelectionAdapter.notifyObservers();
     }
 
     @Override
     public void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster) {
         // Do nothing. We dont care at this time
+        super.loadDaoMasterSuccess(daoMasterKey, daoMaster);
     }
 
     @Override
     public void loadDaoMasterFailure(String daoMasterKey) {
         // Do nothing. We dont care at this time
+        super.loadDaoMasterFailure(daoMasterKey);
     }
 
     @Override
     public void loadDaoSuccess(String daoKey, ReadDao readDao) {
+        super.loadDaoSuccess(daoKey, readDao);
     }
 
     @Override
     public void loadDaoFailure(String daoKey) {
+        super.loadDaoFailure(daoKey);
         Logger.warning("Failed to load dao for " + daoKey + ".");
     }
 

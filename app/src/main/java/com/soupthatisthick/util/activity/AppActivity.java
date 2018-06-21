@@ -9,7 +9,12 @@ import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.soupthatisthick.encounterbuilder.DndUtilApp;
+import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
+import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
 import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.dao.DaoMaster;
+import com.soupthatisthick.util.dao.ReadDao;
 
 import java.util.Set;
 
@@ -18,9 +23,10 @@ import java.util.Set;
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-public class AppActivity extends Activity {
+public class AppActivity extends Activity implements CompendiumResource.Listener {
 
     protected SharedPreferences globalPreferences;
+    private CompendiumResource compendiumResource;
 
     @CallSuper
     @Override
@@ -48,5 +54,59 @@ public class AppActivity extends Activity {
         {
             Logger.info(" - " + setting);
         }
+    }
+
+    @Override
+    @CallSuper
+    public void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster) {
+        Logger.info("DaoMaster " + daoMasterKey + ": LOADED");
+    }
+
+    @Override
+    @CallSuper
+    public void loadDaoMasterFailure(String daoMasterKey) {
+        Logger.warning("DaoMaster " + daoMasterKey + ": NOT LOADED");
+    }
+
+    @Override
+    @CallSuper
+    public void loadDaoSuccess(String daoKey, ReadDao readDao) {
+        Logger.info("ReadDao " + daoKey + ": LOADED");
+    }
+
+    @Override
+    @CallSuper
+    public void loadDaoFailure(String daoKey) {
+        Logger.warning("ReadDao " + daoKey + ": NOT LOADED");
+    }
+
+    @Override
+    @CallSuper
+    public void update(ProgressMonitor monitor, int numSteps, int numFailedSteps, int numSuccessSteps, int numPendingSteps) {
+        Logger.info(String.format(
+                "PROGRESS : numSteps %d, numSuccess %d, numFailed %d, numPending %d",
+                numSteps, numSuccessSteps, numFailedSteps, numPendingSteps
+        ));
+    }
+
+    @Override
+    @CallSuper
+    protected void onResume() {
+        super.onResume();
+        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
+        compendiumResource.addListener(this);
+    }
+
+    @Override
+    @CallSuper
+    protected void onPause() {
+        super.onPause();
+        compendiumResource = DndUtilApp.getInstance().getCompendiumResource();
+        compendiumResource.removeListener(this);
+    }
+
+
+    protected final CompendiumResource getCompendiumResource() {
+        return this.compendiumResource;
     }
 }

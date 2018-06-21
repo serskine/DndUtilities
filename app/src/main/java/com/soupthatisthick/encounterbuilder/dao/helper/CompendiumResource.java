@@ -483,6 +483,12 @@ public class CompendiumResource {
             case ENTITY_LIST:
                 theDao = entityListDao;
 				break;
+            case SEASON:
+                theDao = seasonDao;
+                break;
+            case ADVENTURE:
+                theDao = adventureDao;
+                break;
             case DEFAULT:
             default:
                 throw new Exception("Failed to determine a dao for category " + category + ".");
