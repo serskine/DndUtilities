@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Date;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -79,15 +80,21 @@ public class TaskManagerTest {
     public void taskManagerTest() {
         Logger.info("taskManagerTest()");
         TaskManager<Void, Void, Void> taskManager = new TaskManager<>();
-
-        for(int i=0; i<10; i++) {
+        TimedTask[] tasks = new TimedTask[10];
+        for(int i=0; i<tasks.length; i++) {
             final TimedTask timedTask = new TimedTask("Task[" + i + "]", 10, 1000);
+            tasks[i] = timedTask;
             taskManager.add(timedTask);
         }
+
         taskManager.startAllPendingTasks();
         taskManager.waitForAllTasksToFinish();
         Logger.info("All Timed tasks completed!");
-        assertTrue(true);
+
+        for(int i=0; i<tasks.length; i++) {
+            final TimedTask task = tasks[i];
+            assertEquals("Task should be FINISHED:", AsyncTask.Status.FINISHED, task.getStatus());
+        }
     }
 
 
