@@ -1,8 +1,9 @@
-package com.soupthatisthick.util.taskmanager;
+package com.soupthatisthick.encounterbuilder.util.taskmanager;
 
 import android.os.AsyncTask;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.soupthatisthick.encounterbuilder.InstrumentationTest;
 import com.soupthatisthick.encounterbuilder.util.progress.TaskManager;
 import com.soupthatisthick.util.Logger;
 
@@ -20,15 +21,15 @@ import static junit.framework.Assert.assertTrue;
  * Created by Owner on 6/17/2018.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-public class TaskManagerTest {
+public class TaskManagerTest extends InstrumentationTest {
 
-    @Before
-    public void setup() {
+    @Override
+    protected void onSetup() {
 
     }
 
-    @After
-    public void tearDown() {
+    @Override
+    protected void onTeardown() {
 
     }
 
