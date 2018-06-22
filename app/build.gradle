@@ -6,8 +6,8 @@ android {
         applicationId "com.soupthatisthick.encounterbuilder"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 13
-        versionName "Alpha"
+        versionCode 14
+        versionName "Alpha v14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
