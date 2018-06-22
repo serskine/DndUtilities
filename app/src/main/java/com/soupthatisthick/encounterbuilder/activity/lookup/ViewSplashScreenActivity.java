@@ -20,7 +20,7 @@ import com.soupthatisthick.util.dao.ReadDao;
 
 import soupthatisthick.encounterapp.R;
 
-public class ViewSplashScreenActivity extends AppActivity implements CompendiumResource.Listener {
+public class ViewSplashScreenActivity extends AppActivity {
 
 //    private final long DELAY = 1000;
     private final long DELAY = 100;
@@ -61,13 +61,14 @@ public class ViewSplashScreenActivity extends AppActivity implements CompendiumR
     @Override
     public void update(ProgressMonitor monitor, int numSteps, int numFailedSteps, int numSuccessSteps, int numPendingSteps) {
 
+        super.update(monitor, numSteps, numFailedSteps, numSuccessSteps, numPendingSteps);
         final int numCompletedSteps = numSteps - numPendingSteps;
         Logger.info("PROGRESS: " + numCompletedSteps + " / " + numSteps);
 
         progressBar.setMax(numSteps);
         progressBar.setProgress(numCompletedSteps);
 
-        if (numPendingSteps<1) {
+        if (numPendingSteps < 1) {
             Intent intent = new Intent(ViewSplashScreenActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -77,21 +78,25 @@ public class ViewSplashScreenActivity extends AppActivity implements CompendiumR
     @Override
     public void loadDaoMasterSuccess(String daoMasterKey, DaoMaster daoMaster) {
         // do nothing. We don't care at this point.
+        super.loadDaoMasterSuccess(daoMasterKey, daoMaster);
     }
 
     @Override
     public void loadDaoMasterFailure(String daoMasterKey) {
         // do nothing. We don't care at this point.
+        super.loadDaoMasterFailure(daoMasterKey);
     }
 
     @Override
     public void loadDaoSuccess(String daoKey, ReadDao readDao) {
         // do nothing. We don't care at this point.
+        super.loadDaoSuccess(daoKey, readDao);
     }
 
     @Override
     public void loadDaoFailure(String daoKey) {
         // do nothing. We don't care at this point.
+        super.loadDaoFailure(daoKey);
     }
 
 }

@@ -31,31 +31,26 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:design:27.1.1'
-    compile 'com.android.support:appcompat-v7:27.1.1'
-    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
-    testCompile 'junit:junit:4.12'
-    compile 'junit:junit:4.12'
-    compile 'com.android.support.test:runner:1.0.2'
-    testCompile 'org.mockito:mockito-core:2.8.47'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
+    implementation 'com.android.support.test:runner:1.0.2'
 
-    compile 'com.google.firebase:firebase-appindexing:15.0.1'
+    implementation 'com.google.firebase:firebase-appindexing:15.0.1'
 
     // needed for multidex support
-    compile 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:1.0.3'
 
     // Json
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.5'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
-
-    // Unirest http messages
-    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.5'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 
     // Json Path
-    compile group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.2.0'
+//    implementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.2.0'
 }

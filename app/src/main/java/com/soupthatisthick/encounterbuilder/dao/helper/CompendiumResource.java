@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
+import com.soupthatisthick.encounterbuilder.dao.lookup.AdventureDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ArmorDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ChallengeRatingDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.ConditionDao;
@@ -21,6 +22,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.LifeStyleDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MagicItemDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.MountDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.NotesDao;
+import com.soupthatisthick.encounterbuilder.dao.lookup.SeasonDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.SpellDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.lookup.WeaponDao;
@@ -100,6 +102,8 @@ public class CompendiumResource {
     private LifeStyleDao lifeStyleDao;
     private MountDao mountDao;
     private WeaponDao weaponDao;
+    private SeasonDao seasonDao;
+    private AdventureDao adventureDao;
     private EntityDao entityDao;
 
     private EntityListDao entityListDao;
@@ -153,7 +157,7 @@ public class CompendiumResource {
             protected Boolean doInBackground(Object... params) {
                 Logger.info(" - waiting for DB_LOCK [loadAllData().AsyncTask]");
 
-                progressMonitor.init(22);
+                progressMonitor.init(21);
 
                 synchronized (DB_LOCK) {
 
@@ -165,19 +169,22 @@ public class CompendiumResource {
                     Logger.info(" - aquired DB_LOCK [loadAllData().AsyncTask]");
                     try {
 
-                        final TaskManager<Void, Void, Void> daoMasterTaskManager = new TaskManager();
+                        final TaskManager<Void, Void, Void> daoMasterTaskManager = new TaskManager<>();
 
                         dndMaster = new DndMaster(context);
-                        Logger.info("Opened the dndMaster on database " + dndMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_dnd, dndMaster));
 
                         encounterMaster = new EncounterMaster(context);
-                        Logger.info("Opened the encounterMaster on database " + encounterMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_encounter, encounterMaster));
 
                         logsheetMaster = new LogsheetMaster(context);
-                        Logger.info("Opened the logsheet master on database " + logsheetMaster.getDatabaseName() + ".");
-                        progressMonitor.recordSuccess();
+                        daoMasterTaskManager.add(initDaoMasterTask(R.string.vc_title_master_logsheets, logsheetMaster));
+
+                        daoMasterTaskManager.startAllPendingTasks();
+//                        daoMasterTaskManager.waitForAllTasksToFinish();
+//                        daoMasterTaskManager.clear(false);
+
+                        Logger.info("Finished loading the dao masters!");
 
                         // Create instances of the dao's
 
@@ -241,9 +248,15 @@ public class CompendiumResource {
                         weaponDao = new WeaponDao(dndMaster);
                         daoTaskManager.add(initDaoTask(R.string.vc_title_weapons, weaponDao));
 
+                        seasonDao = new SeasonDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_season, seasonDao));
+
+                        adventureDao = new AdventureDao(dndMaster);
+                        daoTaskManager.add(initDaoTask(R.string.vc_title_adventure, adventureDao));
+
                         daoTaskManager.startAllPendingTasks();
-                        daoMasterTaskManager.waitForAllTasksToFinish();
-                        daoMasterTaskManager.clear(true);
+//                        daoTaskManager.waitForAllTasksToFinish();
+//                        daoTaskManager.clear(true);
 
                         Logger.info("Completed opening all the dao's!");
                         progressMonitor.recordRemainderAsSuccess();
@@ -470,6 +483,12 @@ public class CompendiumResource {
             case ENTITY_LIST:
                 theDao = entityListDao;
 				break;
+            case SEASON:
+                theDao = seasonDao;
+                break;
+            case ADVENTURE:
+                theDao = adventureDao;
+                break;
             case DEFAULT:
             default:
                 throw new Exception("Failed to determine a dao for category " + category + ".");

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.soupthatisthick.encounterbuilder.model.lookup.Adventure;
 import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
 import com.soupthatisthick.encounterbuilder.model.lookup.Background;
 import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
@@ -20,6 +21,7 @@ import com.soupthatisthick.encounterbuilder.model.lookup.LifeStyle;
 import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
 import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
 import com.soupthatisthick.encounterbuilder.model.lookup.Note;
+import com.soupthatisthick.encounterbuilder.model.lookup.Season;
 import com.soupthatisthick.encounterbuilder.model.lookup.Spell;
 import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
 import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
@@ -102,6 +104,14 @@ public class CompendiumDetailCell extends CompendiumCell {
             case ENTITY:
                 EntityDetailCell entityDetailCell = new EntityDetailCell(inflater, convertView, parent);
                 return entityDetailCell;
+            case ADVENTURE:
+                AdventureDetailCell adventureDetailCell = new AdventureDetailCell(inflater, convertView, parent);
+                return adventureDetailCell;
+            case SEASON:
+                SeasonDetailCell seasonDetailCell = new SeasonDetailCell(inflater, convertView, parent);
+                return seasonDetailCell;
+            case ENTITY_LIST:
+            case DEFAULT:
             default:
                 DefaultCompendiumCell defaultCompendiumCell = new DefaultCompendiumCell(inflater, convertView, parent);
                 return defaultCompendiumCell;
@@ -184,6 +194,14 @@ public class CompendiumDetailCell extends CompendiumCell {
             case ENTITY:
                 ((EntityDetailCell) cell).updateUi((Entity) item);
                 break;
+            case ADVENTURE:
+                ((AdventureDetailCell) cell).updateUi((Adventure) item);
+                break;
+            case SEASON:
+                ((SeasonDetailCell) cell).updateUi((Season) item);
+                break;
+            case ENTITY_LIST:
+            case DEFAULT:
             default:
                 ((DefaultCompendiumCell) cell).updateUi(item);
                 break;

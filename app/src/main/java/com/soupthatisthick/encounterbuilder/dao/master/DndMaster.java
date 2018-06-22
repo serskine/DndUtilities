@@ -159,6 +159,14 @@ public class DndMaster extends DaoMaster {
                 is = res.openRawResource(R.raw.dnd_migrate_12_to_13);
                 tag = "dnd_migrate_12_to_13";
                 break;
+            case 13:
+                is = res.openRawResource(R.raw.dnd_migrate_13_to_14);
+                tag = "dnd_migrate_13_to_14";
+                break;
+            case 15:
+                is = res.openRawResource(R.raw.dnd_migrate_14_to_15);
+                tag = "dnd_migrate_14_to_15";
+                break;
             default:
                 is = null;
                 tag = "dnd_db";
