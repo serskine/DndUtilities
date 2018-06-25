@@ -269,7 +269,7 @@
                 android:id="@+id/theSteath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/enm_steath"
+                android:hint="@string/enm_stealth"
                 style="@style/AppTheme.Normal"
                 />
             <EditText

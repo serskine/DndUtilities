@@ -4,7 +4,7 @@
     <string name="pref_category_compendium_summary">These settings will alter the behaviour and appearance of the compendium you use to search for things.</string>
 
     <string name="pref_use_filters_title">Filter Compendium Categories</string>
-    <string name="pref_use_filters_key">pref_use_filters_key</string>
+    <string name="pref_use_filters_key">Use Filters</string>
     <string name="pref_use_filters_summary_on">Only categories selected will be searched in the compendium and the option to select those categories will be visible.</string>
     <string name="pref_use_filters_summary_off">All categories will be seached in the compendium and the option to select the categories searched will be hidden.</string>
 </resources>

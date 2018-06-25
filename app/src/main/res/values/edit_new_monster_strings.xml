@@ -7,7 +7,7 @@
     <string name="enm_armor_class">Armor Class</string>
     <string name="enm_armor_class_type">Ac Type</string>
     <string name="enm_hit_points">Hit Points</string>
-    <string name="enm_ability_score">--</string>
+    <string name="enm_ability_score" translatable="false">--</string>
     <string name="enm_damage_vulnerability">Damage Vulnerabilities</string>
     <string name="enm_damage_resistances">Damage Resistances</string>
     <string name="enm_damage_immunities">Damage Immunities</string>
@@ -53,7 +53,7 @@
     <string name="enm_performance">Performance</string>
     <string name="enm_perception">Perception</string>
     <string name="enm_religion">Religion</string>
-    <string name="enm_steath">Steath</string>
+    <string name="enm_stealth">Stealth</string>
     <string name="enm_survival">Survival</string>
     <string name="enm_languages">Languages</string>
     <string name="enm_senses">Senses</string>
