@@ -6,8 +6,8 @@
     <string name="dao_session_fail">Failed to open dao session for table %s!</string>
 
     <!-- common default strings -->
-    <string name="view_visible_unknown">/?/?/?</string>
-    <string name="view_invisible_unknown"></string>
+    <string name="view_visible_unknown" translatable="false">/?/?/?</string>
+    <string name="view_invisible_unknown" translatable="false"></string>
 
     <!-- The TODO: Not Yet Supported -->
     <string name="not_supported">Feature not yet supported.</string>
@@ -17,10 +17,10 @@
     <string name="dialog_cancel">Cancel</string>
 
     <!-- A generic string used to display a name in bold followed by a value in normal text -->
-    <string name="text_key_value"><b>%s:</b> %s</string>
+    <string name="text_key_value" translatable="false"><b>%s:</b> %s</string>
 
     <!-- regex strings -->
-    <string name="regex_signed_integer">(+|-)?[0123456789]+</string>
+    <string name="regex_signed_integer" translatable="false">(+|-)?[0123456789]+</string>
 
     <!-- test strings -->
     <string name="test_string">TEST</string>
@@ -109,7 +109,7 @@
     <string name="main_button_view_compendium">D&amp;D Compendium</string>
     <string name="main_button_view_monsters">Monster Manual</string>
     <string name="main_button_view_magic_items">Magic Items Vault</string>
-    <string name="main_button_edit_logsheets">Logsheets</string>
+    <string name="main_button_edit_logsheets">Log Sheets</string>
     <string name="main_button_roll_for_loot">Roll for Loot</string>
     <string name="main_button_view_logs">View Logs</string>
     <string name="main_button_settings">Settings</string>
@@ -248,7 +248,7 @@
     <string name="em_armor_class_type">Ac Type</string>
     <string name="em_hit_points">Hit Points</string>
     <string name="em_speed">Speed</string>
-    <string name="em_ability_score">--</string>
+    <string name="em_ability_score" translatable="false">--</string>
     <string name="em_damage_resistances">Damage Resistances</string>
     <string name="em_damage_immunities">Damage Immunities</string>
     <string name="em_condition_immunities">Condition Immunities</string>
@@ -328,7 +328,7 @@
 
     <!-- View Logs Activity -->
     <string name="vl_refresh_button">Refresh Button</string>
-    <string name="log_entry_regex">(\\d+)-(\\d+) (\\d+):(\\d+):(\\d+)</string>
+    <string name="log_entry_regex" translatable="false">(\\d+)-(\\d+) (\\d+):(\\d+):(\\d+)</string>
 
     <!-- Storage Activity -->
     <string name="st_export_title">Export Database</string>
@@ -351,4 +351,5 @@
     <!-- view entity strings -->
     <string name="cell_entity_category">Category: %s</string>
     <string name="cell_entity_title">Entity: %d</string>
+    <string name="esp_delete_title">Are you certain you want to delete all spells? This actions can not be undone.</string>
 </resources>

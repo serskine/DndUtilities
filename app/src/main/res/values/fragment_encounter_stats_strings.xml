@@ -5,8 +5,8 @@
     <string name="fes_normal">Normal</string>
     <string name="fes_hard">Hard</string>
     <string name="fes_deadly">Deadly</string>
-    <string name="fes_multiply"> x </string>
-    <string name="fes_equals"> = </string>
+    <string name="fes_multiply" translatable="false"> x </string>
+    <string name="fes_equals" translatable="false"> = </string>
 
     <string name="fes_xp">%d xp</string>
     <string name="fes_enemy_xp_formula">Total XP: %1$.2f x %2$d party xp = %3$2d xp</string>
