@@ -351,5 +351,4 @@
     <!-- view entity strings -->
     <string name="cell_entity_category">Category: %s</string>
     <string name="cell_entity_title">Entity: %d</string>
-    <string name="esp_delete_title">Are you certain you want to delete all spells? This actions can not be undone.</string>
 </resources>
