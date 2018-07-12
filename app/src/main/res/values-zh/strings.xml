@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">D&D Utilities</string>
+    <string name="app_name">D&amp;D Utilities</string>
     <string name="skill_animal_handling">动物处理</string>
     <string name="skill_acrobatics">杂技</string>
     <string name="skill_arcana">阿卡纳</string>

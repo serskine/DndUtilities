@@ -1,5 +1,6 @@
 package com.soupthatisthick.util.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.soupthatisthick.encounterbuilder.DndUtilApp;
 import com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource;
@@ -17,6 +20,8 @@ import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.ReadDao;
 
 import java.util.Set;
+
+import soupthatisthick.encounterapp.R;
 
 /**
  * Created by Owner on 5/28/2017.
@@ -28,12 +33,31 @@ public class AppActivity extends Activity implements CompendiumResource.Listener
     protected SharedPreferences globalPreferences;
     private CompendiumResource compendiumResource;
 
+    private Button backButton;
+    private Button forwardButton;
+    private ProgressBar progressBar;
+
     @CallSuper
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         globalPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getActionBar().setDisplayShowCustomEnabled(true);
+//        getActionBar().setCustomView(R.layout.action_bar_custom);
+//
+//        final View actionbarView = getActionBar().getCustomView();
+//        backButton = actionbarView.findViewById(R.id.action_bar_back);
+//        forwardButton = actionbarView.findViewById(R.id.action_bar_forward);
+//        progressBar = actionbarView.findViewById(R.id.action_bar_progress);
+//
+//        backButton.setOnClickListener(this::onBackButtonClicked);
+//        forwardButton.setOnClickListener(this::onForwardButtonClicked);
+//        progressBar.setMax(100);
+//        progressBar.setProgress(100);
+
     }
 
     protected final void hideSoftKeyboard()
@@ -108,5 +132,34 @@ public class AppActivity extends Activity implements CompendiumResource.Listener
 
     protected final CompendiumResource getCompendiumResource() {
         return this.compendiumResource;
+    }
+
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public Button getForwardButton() {
+        return forwardButton;
+    }
+
+    public void setForwardButton(Button forwardButton) {
+        this.forwardButton = forwardButton;
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public void setProgressBar(ProgressBar progressBar) {
+        this.progressBar = progressBar;
+    }
+
+    @CallSuper
+    public void onBackButtonClicked(View view) {
+        Logger.info("Actionbar back button clicked");
+    }
+
+    public void onForwardButtonClicked(View view) {
+        Logger.info("Actionbar forward button clicked");
     }
 }

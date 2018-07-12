@@ -9,6 +9,8 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.soupthatisthick.encounterbuilder.util.view.ViewUtil;
+
 /**
  * Created by Owner on 3/27/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
@@ -28,6 +30,7 @@ public class HtmlView extends android.support.v7.widget.AppCompatTextView {
         Spanned toRet = null;
 
         if (text==null) text = "";
+        text = ViewUtil.preprocessHtml(text);
         text = text.trim();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
