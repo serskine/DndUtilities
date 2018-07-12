@@ -1,0 +1,22 @@
+<resources>
+    <string name="test_html_list">
+        <ul>
+            <li>ul line 1</li>
+            <li>ul line 2</li>
+            <li>ul line 3</li>
+            <li>ul line 4</li>
+        </ul>
+        <ol>
+            <li>ol line 1</li>
+            <li>ol line 2</li>
+            <li>ol line 3</li>
+            <li>ol line 4</li>
+        </ol>
+        <dl>
+            <li>dl line 1</li>
+            <li>dl line 2</li>
+            <li>dl line 3</li>
+            <li>dl line 4</li>
+        </dl>
+    </string>
+</resources>

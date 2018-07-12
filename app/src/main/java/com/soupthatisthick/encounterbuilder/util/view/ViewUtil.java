@@ -21,6 +21,7 @@ import soupthatisthick.encounterapp.R;
  */
 
 public class ViewUtil {
+    private static final String EMPTY = "";
 
     // These color values are used for pre marshmellow devices.
     // Otherwise the colors used are defined in the Colors resources file.
@@ -198,12 +199,8 @@ public class ViewUtil {
 
     public static final Spanned toHtml(String text)
     {
-//        if (text==null) text = "";
-//        text = text.trim();
-//        text = text.replace("<?html>","");
-//        text = text.replace("<?body>","");
 
-        text = myHtmlString(text);
+        text = preprocessHtml(text);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
         {
@@ -216,33 +213,102 @@ public class ViewUtil {
     }
 
     /**
-     * This is a preprocessing method of sorts.
-     * @param html
-     * @return
+     * This method will take a text string in html and turn it into a span that is visible on a text view
+     * see https://commonsware.com/blog/Android/2010/05/26/html-tags-supported-by-textview.html for details.
+     * Tags supported...
+     *      <a href="...">
+     *      <b>
+     *      <big>
+     *      <blockquote>
+     *      <br>
+     *      <cite>
+     *      <dfn>
+     *      <div align="...">
+     *      <em>
+     *      <font size="..." color="..." face="...">
+     *      <h1><h2><h3><h4><h5><h6>
+     *      <i>
+     *      <img src="...">
+     *      <p>
+     *      <small>
+     *      <strike>
+     *      <strong>
+     *      <sub>
+     *      <sup>
+     *      <tt>
+     *      <u>
+     * @param html is the html we want to transform.
+     * @return the preformatted Html
      */
-    private static final String myHtmlString(String html)
+    public static final String preprocessHtml(final String html)
     {
+        String parsed = html;
 
+        parsed = processIrrelevantTags(parsed);
+        parsed = processLeadingAndTrailingTags(parsed);
+        parsed = processLineBreaks(parsed);
+        parsed = processListTags(parsed);
+
+        return parsed;
+    }
+
+    private static final String processIrrelevantTags(String html) {
         if (html==null) html = "";
         html = html.trim();
         html = html.replace("<?html>","");
         html = html.replace("<?body>","");
+        return html;
+    }
 
-        String EMPTY = "";
-        String parsed = html;
+    private static final String processLeadingAndTrailingTags(String html) {
+
 
         String removeLeading = "\\s*<html>(\\s*<br>)*\\s*";
         String removeTrailing = "\\s*<br>*\\s*</html>\\s*";
-        String removeMultiLineBreaks = "<br>(\\s*<br>)*";
-        String endListElements = "</li>";
-        String startListElement = "<li>";
 
-        parsed = parsed.replace(removeLeading,EMPTY);
-        parsed = parsed.replace(removeTrailing, EMPTY);
-        parsed = parsed.replace(startListElement, " • ");
-        parsed = parsed.replace(endListElements, "<br>");
-        parsed = parsed.replace(removeMultiLineBreaks, "<br>");
+        html = html.replace(removeLeading,EMPTY);
+        html = html.replace(removeTrailing, EMPTY);
 
-        return parsed;
+        return html;
+    }
+
+    private static final String processLineBreaks(String html) {
+
+        String lineBreakTagNames[] = {"br", "bR", "Br", "BR"};
+        for(String tagName : lineBreakTagNames) {
+            String removeMultiLineBreaks = "<" + tagName + ">(\\s*<" + tagName + ">)*";
+            html = html.replace(removeMultiLineBreaks, "<" + tagName + ">");
+        }
+        return html;
+    }
+
+    private static final String processListTags(String html) {
+
+        String listTags[] = {
+                "ol", "ul", "dl",
+                "OL", "UL", "DL",
+                "Ol", "Ul", "Dl",
+                "oL", "uL", "dL",
+        };
+
+        String listElemTags[] = {
+                "li", "LI", "Li", "lI"
+        };
+
+        for (String tagName : listTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "<p>");
+            html = html.replace(closeTag, "</p>");
+        }
+
+        for (String tagName : listElemTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "<br/> • ");
+            html = html.replace(closeTag, "<br/>");
+        }
+
+        return html;
     }
 }

@@ -44,19 +44,19 @@ public class AppActivity extends Activity implements CompendiumResource.Listener
         super.onCreate(savedInstanceState);
         globalPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getActionBar().setDisplayShowCustomEnabled(true);
-        getActionBar().setCustomView(R.layout.action_bar_custom);
-
-        final View actionbarView = getActionBar().getCustomView();
-        backButton = actionbarView.findViewById(R.id.action_bar_back);
-        forwardButton = actionbarView.findViewById(R.id.action_bar_forward);
-        progressBar = actionbarView.findViewById(R.id.action_bar_progress);
-
-        backButton.setOnClickListener(this::onBackButtonClicked);
-        forwardButton.setOnClickListener(this::onForwardButtonClicked);
-        progressBar.setMax(100);
-        progressBar.setProgress(100);
+//        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getActionBar().setDisplayShowCustomEnabled(true);
+//        getActionBar().setCustomView(R.layout.action_bar_custom);
+//
+//        final View actionbarView = getActionBar().getCustomView();
+//        backButton = actionbarView.findViewById(R.id.action_bar_back);
+//        forwardButton = actionbarView.findViewById(R.id.action_bar_forward);
+//        progressBar = actionbarView.findViewById(R.id.action_bar_progress);
+//
+//        backButton.setOnClickListener(this::onBackButtonClicked);
+//        forwardButton.setOnClickListener(this::onForwardButtonClicked);
+//        progressBar.setMax(100);
+//        progressBar.setProgress(100);
 
     }
 
