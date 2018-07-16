@@ -351,4 +351,40 @@
     <!-- view entity strings -->
     <string name="cell_entity_category">Category: %s</string>
     <string name="cell_entity_title">Entity: %d</string>
+
+    <!-- test html string -->
+    <string name="test_html">
+            &lt;ul&gt;
+                &lt;li&gt;The Quick brown fox jumped over the lazy dogs.&lt;/&gt;&lt;/li
+                &lt;li&gt;&lt;i&gt;The Quick brown fox jumped over the lazy dogs.&lt;/i&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;b&gt;The Quick brown fox jumped over the lazy dogs.&lt;/b&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;u&gt;The Quick brown fox jumped over the lazy dogs.&lt;/u&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h1&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h1&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h2&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h2&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h3&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h3&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h4&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h4&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h5&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h5&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;h6&gt;The Quick brown fox jumped over the lazy dogs.&lt;/h6&gt;&lt;/&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;em&gt;The Quick brown fox jumped over the lazy dogs.&lt;/em&gt;&lt;/&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+    </string>
+    <string name="test_beholder">
+        &lt;p&gt;&lt;i&gt;&lt;b&gt;Bite. &lt;/b&gt;Melee Weapon Attack:&lt;/i&gt; +5 to hit, reach 5ft., one target. &lt;i&gt;Hit: &lt;/i&gt; 14 (4d6) piercing damage.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;&lt;b&gt;Eye Rays. &lt;/b&gt;&lt;/i&gt; The beholder shoots three of the following magical eye rays at random (reroll duplicates), choosing one to three targets it can see within 120 feet of it:&lt;br&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;i&gt;1. Charm Ray: &lt;/i&gt;The targeted creature must succeed on a DC 16 Wisdom Saving throw or be charmed by the beholder for 1 hour, or until the beholder harms the creature.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;2. Paralyzing Ray. &lt;/i&gt;The targeted creature must succeed on a DC 16 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;3. Fear Ray. &lt;/i&gt;The targeted creature must succeed on a DC 16 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of it's turns, ending the effect on itself on a success.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;4. Slowing Ray. &lt;/i&gt;The targeted creature must succeed on a DC 16 Dexterity saving throw. On a failed save, the target's speed is halved for 1 minute. In addition, the creature can't take reactions, and it can either take an action or a bonus action on it's turn, not both. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;5. Enervation Ray. &lt;/i&gt;The targeted creature must make a DC 16 Constitution saving throw, taking 36 (8d8) necrotic damage on a failed save, or half as much damage on a successful one.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;6. Telekenetic Ray. &lt;/i&gt; If the target is a creature, it must succeed on a DC 16 Strength saving throw or the beholder moves it up to 30 feet in any direction. It is restrained by the ray's telekenetic grip until the start of the beholder's next turn or until the beholder is incapacitated.&lt;br&gt;
+If the target is an object weighing 300 pounds or less that isn't being worn or carried, it is moved up to 30 feet in any direction. The beholder can also exert fine control on objects with this ray, such as manipulating a simple tool or opening a door or container.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;7. Sleep Ray &lt;/i&gt;The targeted creature must succeed on a DC 16 Wisdom saving throw or fall asleep and remain unconcious for 1 minute. The target awakens if it takes damage or another creature takes an action to wake it. This ray has no effect on constructs and undead.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;8. Petrification Ray &lt;/i&gt;The targeted creature must succeed on a DC 16 Dexterity saving throw. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the &lt;i&gt;greater restoration&lt;/i&gt; spell or other magic.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;9. Disintegration Ray &lt;/i&gt;If the target is a creature, it must succeed on a DC 16 Dexterity saving throw or take 45 (10d8) force damage. If this damage reduces the creature to 0 hit points, its body becomes a pile of fine gray dust.&lt;br&gt;
+If the target is a Large or smaller nonmagical object or creation of magical force, it is disintegrated without a saving throw. If the target is a Huge or larger object or creation of magical force, this ray disentegrates a 10-foot cube of it.&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;10. Death Ray &lt;/i&gt;The targeted creature must succeed on a DC 16 Dexterity saving throw or take 55 (10d10) necrotic damage. The target dies if the ray reduces it to 0 hit points.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+</string>
 </resources>

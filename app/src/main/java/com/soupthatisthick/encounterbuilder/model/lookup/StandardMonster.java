@@ -197,7 +197,6 @@ public class StandardMonster extends DaoModel {
 	 * 	 * 	 * 	 */
 	private static int getBonus(@Nullable Integer skillOrSave, int modifier) {
 		if (skillOrSave==null) {
-			Logger.debug("skillOrSave is null");
 			return modifier;
 		} else {
 			return skillOrSave;

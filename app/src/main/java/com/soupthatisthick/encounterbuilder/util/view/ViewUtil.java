@@ -248,8 +248,25 @@ public class ViewUtil {
         parsed = processLeadingAndTrailingTags(parsed);
         parsed = processLineBreaks(parsed);
         parsed = processListTags(parsed);
+        parsed = processItalicTags(parsed);
 
         return parsed;
+    }
+
+    private static final String processItalicTags(String html) {
+
+        String italicTags[] = {
+                "i", "I", "em", "EM", "Em", "eM"
+        };
+
+        for (String tagName : italicTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "<em>");
+            html = html.replace(closeTag, "</em>");
+        }
+
+        return html;
     }
 
     private static final String processIrrelevantTags(String html) {

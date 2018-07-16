@@ -9,7 +9,10 @@ import android.widget.TextView;
 import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
 import com.soupthatisthick.encounterbuilder.util.translater.ScoreTranslater;
 import com.soupthatisthick.encounterbuilder.util.Text;
+import com.soupthatisthick.encounterbuilder.util.view.ViewUtil;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
+import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.json.JsonUtil;
 
 import java.util.Locale;
 
@@ -73,6 +76,7 @@ public class StandardMonsterDetailCell extends ReadCell<StandardMonster> {
 
     public void updateUi(StandardMonster monster)
     {
+//        Logger.info("_____ STANDARD MONSTER _____\n" + JsonUtil.toJson(monster, true, true) + "\n____________________________\n");
         this.theName.setText(monster.getName());
 
         theTypeAndAlign.setText(monster.getType() + DELIM + monster.getAlignment());
@@ -109,7 +113,7 @@ public class StandardMonsterDetailCell extends ReadCell<StandardMonster> {
 
         updateUiPowers(monster);
 
-        this.theSource.setText(myHtmlString(monster.getSource()));
+        this.theSource.setText(htmlString(monster.getSource()));
 
         checkVisibilities();
 
@@ -170,11 +174,14 @@ public class StandardMonsterDetailCell extends ReadCell<StandardMonster> {
 
     private void updateUiPowers(StandardMonster monster)
     {
-        this.theReactions.setText(myHtmlString(monster.getReactions()));
-        this.theAbilities.setText(myHtmlString(monster.getSpecialAbilities()));
-        this.theActions.setText(myHtmlString(monster.getActions()));
-        this.theLegendary.setText(myHtmlString(monster.getLegendaryActions()));
-        this.theOther.setText(myHtmlString(UNKNOWN));
+        this.theReactions.setText(htmlString(monster.getReactions()));
+        this.theAbilities.setText(htmlString(monster.getSpecialAbilities()));
+
+        Logger.info("Actions: " + monster.getActions());
+
+        this.theActions.setText(htmlString(monster.getActions()));
+        this.theLegendary.setText(htmlString(monster.getLegendaryActions()));
+        this.theOther.setText(htmlString(UNKNOWN));
 
     }
 

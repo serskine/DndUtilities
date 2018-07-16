@@ -79,9 +79,15 @@ public abstract class AbstractCell {
 
     protected static final Spanned titleString(@NonNull String title, @Nullable String text)
     {
-        title = (text==null || text.length()<1) ? "" : title;
-        final SpannableStringBuilder str = new SpannableStringBuilder(title + text);
-        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        final String modifiedTitle = ((text==null) || (text.length()<1))    ? "" : title;
+        final String modifiedText = ((text==null) || (text.length()<1))     ? "" : text;
+        final SpannableStringBuilder str = new SpannableStringBuilder(modifiedTitle + modifiedText);
+        str.setSpan(
+                new android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                0,
+                modifiedTitle.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
         return str;
     }
 
