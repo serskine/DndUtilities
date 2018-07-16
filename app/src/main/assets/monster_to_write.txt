@@ -1,0 +1,44 @@
+Deva:               mm 16
+Planetar:           mm 17
+Abominable, Yeti:   mm 306
+Solar:              mm 18
+Banshee:            mm 23
+Death Tyrant:       mm 29
+Spectator:          mm 30
+Needle Blight:      mm 32
+Twig Blight:        mm 32
+Vine Blight:        mm 32
+Bugbear Chief:      mm 33
+Bully Wug:          mm 35
+Cambion:            mm 36
+Couatl:             mm 43
+Crawling Claw:      mm 44
+Cyclops:            mm 45
+Death Knight:       mm 47
+Demilich:           mm 48
+Balor:              mm 55
+Barlgura:           mm 56
+Chasme:             mm 57
+Glabrezu:           mm 58
+Goristro:           mm 59
+Hezrou:             mm 60
+Manes:              mm 60
+Marilith:           mm 61
+Nalfeshnee:         mm 62
+Quasit:             mm 63
+Shadow Demon:       mm 64
+Vrock:              mm 64
+Yochlol:            mm 65
+Barbed Devil:       mm 70
+Bearded Devil:      mm 70
+Bone Devil:         mm 71
+Chain Devil:        mm 72
+Erinyes:            mm 73
+Horned Devil:       mm 74
+Ice Devil:          mm 75
+Imp:                mm 76
+Pit Fiend:          mm 77
+Spined Devil:       mm 78
+--- Continue on Dinosaurs page 79 ---
+
+
