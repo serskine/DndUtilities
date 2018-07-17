@@ -3,7 +3,25 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
-import com.soupthatisthick.util.Logger;
+import com.soupthatisthick.util.podam.ConditionSetAttrStrategy;
+import com.soupthatisthick.util.podam.DamageSetAttrStrategy;
+import com.soupthatisthick.util.podam.DiceRollAttributeStrategy;
+import com.soupthatisthick.util.podam.FullNameAttributeStrategy;
+import com.soupthatisthick.util.podam.HtmlTextStrategy;
+import com.soupthatisthick.util.podam.IntegerTextAttributeStrategy;
+import com.soupthatisthick.util.podam.LanguageSetAttrStrategy;
+import com.soupthatisthick.util.podam.MonsterAbilityScoreAttributeStrategy;
+import com.soupthatisthick.util.podam.MonsterAlignmentAttributeStrategy;
+import com.soupthatisthick.util.podam.MonsterArmorClassAttributeStrategy;
+import com.soupthatisthick.util.podam.MonsterCrStrategy;
+import com.soupthatisthick.util.podam.MonsterSizeAndCreatureTypeAttrStrategy;
+import com.soupthatisthick.util.podam.MonsterSizeAttributeStrategy;
+import com.soupthatisthick.util.podam.MonsterSpeedAttributeStrategy;
+import com.soupthatisthick.util.podam.MonsterSubtypeAttrStrategy;
+import com.soupthatisthick.util.podam.ProficiencyAttributeStrategy;
+import com.soupthatisthick.util.podam.SourceMaterialAttrStrategy;
+
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 
 /**
@@ -17,61 +35,112 @@ public class StandardMonster extends DaoModel {
     // The variables
     //
 	private Long id;
+	@PodamStrategyValue(value = FullNameAttributeStrategy.class)
 	private String name;
+	@PodamStrategyValue(value = MonsterSizeAttributeStrategy.class)
 	private String size;
+	@PodamStrategyValue(value = MonsterSizeAndCreatureTypeAttrStrategy.class)
 	private String type;
+	@PodamStrategyValue(value = MonsterSubtypeAttrStrategy.class)
 	private String subType;
+	@PodamStrategyValue(value = MonsterAlignmentAttributeStrategy.class)
 	private String alignment;
+
+	@PodamStrategyValue(value = MonsterArmorClassAttributeStrategy.class)
 	private String armorClass;
+	@PodamStrategyValue(value = IntegerTextAttributeStrategy.class)
 	private String hitPoints;
+	@PodamStrategyValue(value = DiceRollAttributeStrategy.class)
 	private String hitDice;
+	@PodamStrategyValue(value = MonsterSpeedAttributeStrategy.class)
 	private String speed;
 
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int strength;
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int dexterity;
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int constitution;
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int intelligence;
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int wisdom;
+	@PodamStrategyValue(value = MonsterAbilityScoreAttributeStrategy.class)
 	private int charisma;
 
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer strengthSave;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer dexteritySave;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer constitutionSave;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer intelligenceSave;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer wisdomSave;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer charismaSave;
 
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer acrobatics;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer arcana;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer athletics;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer deception;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer history;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer insight;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer investigation;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer intimidation;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer medicine;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer nature;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer perception;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer performance;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer persuasion;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer religion;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer stealth;
+	@PodamStrategyValue(value = ProficiencyAttributeStrategy.class)
 	private Integer survival;
 
+	@PodamStrategyValue(value = DamageSetAttrStrategy.class)
 	private String damageVulnerabilities;
+	@PodamStrategyValue(value = DamageSetAttrStrategy.class)
 	private String damageResistances;
+	@PodamStrategyValue(value = DamageSetAttrStrategy.class)
 	private String damageImmunities;
+	@PodamStrategyValue(value = ConditionSetAttrStrategy.class)
 	private String conditionImmunities;
 
+	@PodamStrategyValue(value = HtmlTextStrategy.class)
 	private String senses;
+	@PodamStrategyValue(value = LanguageSetAttrStrategy.class)
 	private String languages;
+
+	@PodamStrategyValue(value = MonsterCrStrategy.class)
 	private String challengeRating;
 
+	@PodamStrategyValue(value = HtmlTextStrategy.class)
 	private String specialAbilities;
+	@PodamStrategyValue(value = HtmlTextStrategy.class)
 	private String actions;
+	@PodamStrategyValue(value = HtmlTextStrategy.class)
 	private String legendaryActions;
+	@PodamStrategyValue(value = HtmlTextStrategy.class)
 	private String reactions;
 
+	@PodamStrategyValue(value = SourceMaterialAttrStrategy.class)
 	private String source;
 
 	public StandardMonster(Long id, String name, String size, String type,

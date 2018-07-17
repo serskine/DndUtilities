@@ -30,6 +30,8 @@ CREATE TABLE `MONSTERS` (
 	`source`	TEXT -> source
 );
 
+
+
 CREATE TABLE `STANDARD_MONSTERS` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`name`	TEXT,
@@ -83,3 +85,5 @@ CREATE TABLE `STANDARD_MONSTERS` (
 	`source`	TEXT
 );
 
+-- sql to select direct relational information
+select id, name, hit_points, hit_Dice, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, damage_resistances, damage_immunities, condition_immunities, senses, languages, special_abilities, actions, legendary_actions , reactions, source from STANDARD_MONSTERS;
