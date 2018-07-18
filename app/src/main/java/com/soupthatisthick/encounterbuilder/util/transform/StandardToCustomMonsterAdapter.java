@@ -64,22 +64,22 @@ public class StandardToCustomMonsterAdapter implements ConversionAdapter<Standar
     private void updateSkills(final StandardMonster standardMonster, final CustomMonster customMonster) {
         final StringBuilder sb = new StringBuilder();
         final String skills[] = {
-            profHtml("Acrobatics", standardMonster.getAcrobatics(), standardMonster.getDexterityMod()),
-            profHtml("Arcana", standardMonster.getArcana(), standardMonster.getIntelligenceMod()),
-            profHtml("Athletics", standardMonster.getAthletics(), standardMonster.getStrengthMod()),
-            profHtml("Deception", standardMonster.getDeception(), standardMonster.getCharismaMod()),
-            profHtml("History", standardMonster.getHistory(), standardMonster.getIntelligenceMod()),
-            profHtml("Insight", standardMonster.getInsight(), standardMonster.getWisdomMod()),
-            profHtml("Intimidation", standardMonster.getIntimidation(), standardMonster.getCharismaMod()),
-            profHtml("Investigation", standardMonster.getInvestigation(), standardMonster.getIntelligenceMod()),
-            profHtml("Medicine", standardMonster.getMedicine(), standardMonster.getWisdomMod()),
-            profHtml("Nature", standardMonster.getNature(), standardMonster.getWisdomMod()),
-            profHtml("Performance", standardMonster.getPerformance(), standardMonster.getCharismaMod()),
-            profHtml("Perception", standardMonster.getPerception(), standardMonster.getWisdomMod()),
-            profHtml("Persuasion", standardMonster.getPersuasion(), standardMonster.getCharismaMod()),
-            profHtml("Religion", standardMonster.getReligion(), standardMonster.getIntelligenceMod()),
-            profHtml("Stealth", standardMonster.getStealth(), standardMonster.getDexterityMod()),
-            profHtml("Survival", standardMonster.getSurvival(), standardMonster.getWisdomMod())
+            profHtml("Acrobatics",      standardMonster.getAcrobatics(),    standardMonster.getDexterityMod()),
+            profHtml("Arcana",          standardMonster.getArcana(),        standardMonster.getIntelligenceMod()),
+            profHtml("Athletics",       standardMonster.getAthletics(),     standardMonster.getStrengthMod()),
+            profHtml("Deception",       standardMonster.getDeception(),     standardMonster.getCharismaMod()),
+            profHtml("History",         standardMonster.getHistory(),       standardMonster.getIntelligenceMod()),
+            profHtml("Insight",         standardMonster.getInsight(),       standardMonster.getWisdomMod()),
+            profHtml("Intimidation",    standardMonster.getIntimidation(),  standardMonster.getCharismaMod()),
+            profHtml("Investigation",   standardMonster.getInvestigation(), standardMonster.getIntelligenceMod()),
+            profHtml("Medicine",        standardMonster.getMedicine(),      standardMonster.getWisdomMod()),
+            profHtml("Nature",          standardMonster.getNature(),        standardMonster.getIntelligenceMod()),
+            profHtml("Performance",     standardMonster.getPerformance(),   standardMonster.getCharismaMod()),
+            profHtml("Perception",      standardMonster.getPerception(),    standardMonster.getWisdomMod()),
+            profHtml("Persuasion",      standardMonster.getPersuasion(),    standardMonster.getCharismaMod()),
+            profHtml("Religion",        standardMonster.getReligion(),      standardMonster.getIntelligenceMod()),
+            profHtml("Stealth",         standardMonster.getStealth(),       standardMonster.getDexterityMod()),
+            profHtml("Survival",        standardMonster.getSurvival(),      standardMonster.getWisdomMod())
         };
 
         // Append only the skills that provide different bonuses than their ability modifier.
@@ -108,18 +108,23 @@ public class StandardToCustomMonsterAdapter implements ConversionAdapter<Standar
 
     private void updateExperienceInfo(final StandardMonster standardMonster, final CustomMonster customMonster) {
         final String cr = standardMonster.getChallengeRating();
-        int openIdx = cr.indexOf("(");
+        if (cr != null) {
+            int openIdx = cr.indexOf("(");
 
-        String crValue = (openIdx<0) ? cr : cr.substring(0, openIdx);
-        int xpValue;
-        try {
-            xpValue = challengeToXp(crValue);
-        } catch (Exception e) {
-            Logger.warning("Assuming xp=0. " + e.getMessage());
-            xpValue = 0;
+            String crValue = (openIdx < 0) ? cr : cr.substring(0, openIdx);
+            int xpValue;
+            try {
+                xpValue = challengeToXp(crValue);
+            } catch (Exception e) {
+                Logger.warning("Assuming xp=0. " + e.getMessage());
+                xpValue = 0;
+            }
+            customMonster.setXp(xpValue);
+            customMonster.setCr(crValue);
+        } else {
+            customMonster.setXp(0);
+            customMonster.setCr(null);
         }
-        customMonster.setXp(xpValue);
-        customMonster.setCr(crValue);
     }
 
     private int challengeToXp(String cr) {
@@ -237,20 +242,25 @@ public class StandardToCustomMonsterAdapter implements ConversionAdapter<Standar
         // Determine the ac, acType from the armor_class field on the StandardMonster
         //
         final String armor_class = standardMonster.getArmorClass();
-        int openIdx = armor_class.indexOf("(");
-        String acType;
-        int ac;
-        if (openIdx<0) {
-            acType = null;
-            ac = Integer.parseInt(armor_class.trim());
-        } else {
-            int closeIdx = armor_class.indexOf(")");
-            ac = Integer.parseInt(armor_class.substring(0, openIdx).trim());
-            acType = armor_class.substring(openIdx+1, closeIdx);
-        }
+        if (armor_class != null) {
+            int openIdx = armor_class.indexOf("(");
+            String acType;
+            int ac;
+            if (openIdx < 0) {
+                acType = null;
+                ac = Integer.parseInt(armor_class.trim());
+            } else {
+                int closeIdx = armor_class.indexOf(")");
+                ac = Integer.parseInt(armor_class.substring(0, openIdx).trim());
+                acType = armor_class.substring(openIdx + 1, closeIdx);
+            }
 
-        customMonster.setAc(ac);
-        customMonster.setAcType(acType);
+            customMonster.setAc(ac);
+            customMonster.setAcType(acType);
+        } else {
+            customMonster.setAc(10);
+            customMonster.setAcType(null);
+        }
     }
 
     private String intText(int value) {

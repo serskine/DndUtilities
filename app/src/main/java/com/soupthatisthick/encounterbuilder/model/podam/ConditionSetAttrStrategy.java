@@ -1,8 +1,10 @@
-package com.soupthatisthick.util.podam;
+package com.soupthatisthick.encounterbuilder.model.podam;
 
 import org.apache.commons.lang3.RandomUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import uk.co.jemos.podam.common.AttributeStrategy;
@@ -25,7 +27,7 @@ public class ConditionSetAttrStrategy implements AttributeStrategy<String> {
     };
 
     @Override
-    public String getValue() {
+    public String getValue(Class<?> attrType, List<Annotation> attrAnnotations) {
         if (RandomUtils.nextBoolean()) {
             Set<String> types = new HashSet<>();
             final int numTries = RandomUtils.nextInt(0, CONDITIONS.length-2);

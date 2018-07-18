@@ -1,41 +1,38 @@
-package com.soupthatisthick.util.podam;
+package com.soupthatisthick.encounterbuilder.model.podam;
 
 import org.apache.commons.lang3.RandomUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import uk.co.jemos.podam.common.AttributeStrategy;
 
-public class LanguageSetAttrStrategy implements AttributeStrategy<String> {
-    String[] LANGUAGES = new String[] {
-        "Common",
-        "Dwarvish",
-        "Elvish",
-        "Giant",
-        "Gnomish",
-        "Goblin",
-        "Halfling",
-        "Orc",
-        "Abyssal",
-        "Celestial",
-        "Draconic",
-        "Deep Speech",
-        "Infernal",
-        "Primordial",
-        "Sylvan",
-        "Undercommon"
+public class DamageSetAttrStrategy implements AttributeStrategy<String> {
+    String[] DTYPES = new String[] {
+        "bludgeoning",
+        "slashing",
+        "piercing",
+        "necrotic",
+        "fire",
+        "cold",
+        "thunder",
+        "acid",
+        "poison",
+        "lightning",
+        "force"
     };
 
     @Override
-    public String getValue() {
+    public String getValue(Class<?> attrType, List<Annotation> attrAnnotations) {
         if (RandomUtils.nextBoolean()) {
             Set<String> types = new HashSet<>();
-            final int numTries = RandomUtils.nextInt(0, LANGUAGES.length-2);
+            final int numTries = RandomUtils.nextInt(0, DTYPES.length-2);
 
             for(int i=0; i<numTries; i++) {
-                final int idx = RandomUtils.nextInt(0, LANGUAGES.length);
-                final String type = LANGUAGES[idx];
+                final int idx = RandomUtils.nextInt(0, DTYPES.length);
+                final String type = DTYPES[idx];
                 types.add(type);
             }
 

@@ -1,15 +1,25 @@
-package com.soupthatisthick.util.podam;
+package com.soupthatisthick.encounterbuilder.model.podam;
 
 import org.apache.commons.lang3.RandomUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import uk.co.jemos.podam.common.AttributeStrategy;
 
 public class MonsterSpeedAttributeStrategy implements AttributeStrategy<String> {
+
+    private int randomSpeed(boolean isEnabled) {
+        if (!isEnabled) {
+            return 0;
+        }
+        return 5 * RandomUtils.nextInt(5, 8);
+    }
+
     @Override
-    public String getValue() {
+    public String getValue(Class<?> attrType, List<Annotation> attrAnnotations) {
         boolean isWalk = RandomUtils.nextInt(1, 7) <= 4;
         boolean isFly = RandomUtils.nextInt(1, 7) == 1;
         boolean isHover = (isFly && RandomUtils.nextInt(1, 7) <= 2);
@@ -40,12 +50,5 @@ public class MonsterSpeedAttributeStrategy implements AttributeStrategy<String> 
             }
         }
         return sb.toString();
-    }
-
-    private int randomSpeed(boolean isEnabled) {
-        if (!isEnabled) {
-            return 0;
-        }
-        return 5 * RandomUtils.nextInt(5, 8);
     }
 }

@@ -1,5 +1,8 @@
 package com.soupthatisthick.util.podam;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
+
 import io.codearte.jfairy.Fairy;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
@@ -14,7 +17,7 @@ public class FullNameAttributeStrategy implements AttributeStrategy<String> {
     // Public Methods ------------------------------------------------------------------------------------ Public Methods
 
     @Override
-    public String getValue() {
+    public String getValue(Class<?> attrType, List<Annotation> attrAnnotations) {
         return Fairy.create().person().getFullName();
     }
 

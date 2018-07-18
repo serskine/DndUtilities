@@ -47,8 +47,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     // Object generation
-    implementation 'uk.co.jemos.podam:podam:7.0.5.RELEASE'
-    implementation 'io.codearte.jfairy:jfairy:0.5.7'
+    implementation 'uk.co.jemos.podam:podam:7.1.1.RELEASE'
+    implementation 'io.codearte.jfairy:jfairy:0.5.9'
 
     // Json
     implementation 'com.fasterxml.jackson.core:jackson-core:2.9.5'

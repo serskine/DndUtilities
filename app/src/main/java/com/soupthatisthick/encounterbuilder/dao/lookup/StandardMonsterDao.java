@@ -231,10 +231,8 @@ public class StandardMonsterDao extends WriteDao<StandardMonster> {
         int columnIndex = cursor.getColumnIndex(colName);
         String text = cursor.getString(columnIndex);
         if (Text.isBlank(text)) {
-            Logger.debug(" - " + colName + " = \"" + text + "\"");
             return null;
         } else {
-            Logger.debug(" - " + colName + " = \"" + cursor.getString(columnIndex) + "\"");
             return cursor.getInt(columnIndex);
         }
     }
