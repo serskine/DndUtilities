@@ -569,6 +569,18 @@ public class CompendiumResource {
         progressMonitor.removeListener(listener);
         listeners.removeListener(listener);
     }
+
+    public DndMaster getDndMaster() {
+        return this.dndMaster;
+    }
+
+    public LogsheetMaster getLogsheetMaster() {
+        return logsheetMaster;
+    }
+
+    public EncounterMaster getEncounterMaster() {
+        return encounterMaster;
+    }
 }
 
 

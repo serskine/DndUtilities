@@ -10,6 +10,7 @@ import com.soupthatisthick.encounterbuilder.dao.lookup.StandardMonsterDao;
 import com.soupthatisthick.encounterbuilder.dao.master.DndMaster;
 import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
 import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
+import com.soupthatisthick.encounterbuilder.util.DatabaseHelper2;
 import com.soupthatisthick.encounterbuilder.util.sort.Category;
 import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.dao.Dao;
@@ -22,11 +23,14 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 
 public class StandardToCustomMonsterDaoTest extends InstrumentationTest {
 
+
     private CompendiumResource compendiumResource;
+    private DndMaster dndMaster;
     private WriteDao<StandardMonster> standardMonsterDao;
     private WriteDao<CustomMonster> customMonsterDao;
 
@@ -35,8 +39,9 @@ public class StandardToCustomMonsterDaoTest extends InstrumentationTest {
     protected void onSetup() {
         try {
             compendiumResource = ((DndUtilApp) context.getApplicationContext()).getCompendiumResource();
-            standardMonsterDao = loadDao(StandardMonster.class, 500, 10);
-            customMonsterDao = loadDao(CustomMonster.class, 500, 10);
+            dndMaster = compendiumResource.getDndMaster();
+            standardMonsterDao = loadDao(StandardMonster.class, 1000, 100);
+            customMonsterDao = loadDao(CustomMonster.class, 1000, 100);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -44,7 +49,11 @@ public class StandardToCustomMonsterDaoTest extends InstrumentationTest {
 
     @Override
     protected void onTeardown() {
-
+        try {
+            dndMaster.copy(DatabaseHelper2.Location.WORKING_DATABASE_DIR, DatabaseHelper2.Location.EXTERNAL_FILES_DIR, true);
+        } catch (Exception e) {
+            Logger.error(e.getMessage(), e);
+        }
     }
 
     @Test
@@ -75,6 +84,19 @@ public class StandardToCustomMonsterDaoTest extends InstrumentationTest {
 
     }
 
+    @Test
+    public void addStandardMonstersToCustomMonsters() throws Exception {
+        List<StandardMonster> standardMonsterList = standardMonsterDao.getAllRecords();
+        for(StandardMonster standardMonster : standardMonsterList) {
+            CustomMonster customMonster = customMonsterDao.create();
+            customMonster.updateFrom(standardMonster);
+            boolean isUpdated = customMonsterDao.update(customMonster);
+            assertEquals("Custom monster saved: ", true, customMonsterDao.update(customMonster));
+        }
+
+
+    }
+
     private void logStandardMonster(StandardMonster standardMonster) {
         Logger.info("\n___ standard monster ___\n" + JsonUtil.toJson(standardMonster, true, true));
     }
@@ -89,10 +111,11 @@ public class StandardToCustomMonsterDaoTest extends InstrumentationTest {
         while(dao==null) {
             try {
                 Thread.sleep(sleepInterval);
+                Logger.info("Loading dao for " + tClass.getCanonicalName() + "....");
                 dao = compendiumResource.getDaoForClass(tClass);
             } catch (Exception e) {
                 numErrors++;
-                Logger.error("Error[" + numErrors + "]: " + e.getMessage(), e);
+                Logger.warning("Error[" + numErrors + "]: " + e.getMessage());
                 if (maxErrors>=0 && numErrors >= maxErrors) {
                     fail("Max number or errors reached!. Final error: " + e.getMessage());
                 }
