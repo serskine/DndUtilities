@@ -1,0 +1,3 @@
+ALTER TABLE 'MAGIC_ITEMS' ADD COLUMN 'treasure_points' 'INTEGER' DEFAULT 0;
+
+PRAGMA user_version = 16;
