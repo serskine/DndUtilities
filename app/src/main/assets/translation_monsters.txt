@@ -1,0 +1,89 @@
+CREATE TABLE `MONSTERS` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,  
+	`name`	TEXT,       -> name
+	`type`	TEXT,       -> size + type + subtype
+	`alignment`	TEXT,   -> alignment
+	`ac`	REAL,       -> part of armor_class
+	`acType`	TEXT,   -> part of armor_class
+	`hp`	TEXT,       -> hit_points
+	`hd`	TEXT,       -> hit_dice    
+	`speed`	TEXT,       -> speed
+	`str`	TEXT,       -> strength
+	`dex`	TEXT,       -> dexterity
+	`con`	TEXT,       -> constitution
+	`int`	TEXT,       -> intelligence
+	`wis`	TEXT,       -> wisdom
+	`cha`	TEXT,       -> charisma
+	`saves`	TEXT,       -> strength_save + dexterity_save + constitution_save + intelligence_save + wisdom_save + charisma_save
+	`skills`	TEXT,   -> `acrobatics`+`arcana`+`athletics`+`deception`+`history`+`insight`+`intimidation`+`investigation`+`medicine`+`nature`+`performance`+`perception`+`persuasion`+`religion`+`stealth`+`survival`	TEXT,
+	`dmgResistance`	TEXT, -> damage_resistances
+	`dmgImmunity`	TEXT, -> damage_immunities
+	`conditionImmunity`	TEXT, -> condition_immunities
+	`senses`	TEXT, -> senses
+	`languages`	TEXT, -> languages
+	`cr`	TEXT, -> part of challenge_rating
+	`xp`	TEXT, -> part of challenge_rating
+	`abilities`	TEXT, -> special_abilities
+	`actions`	TEXT, -> actions
+	`legendary`	TEXT, -> legendary_actions
+	`other`	TEXT, -> reactions
+	`source`	TEXT -> source
+);
+
+
+
+CREATE TABLE `STANDARD_MONSTERS` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`name`	TEXT,
+	`size`	TEXT,
+	`type`	TEXT,
+	`subtype`	TEXT,
+	`alignment`	TEXT,
+	`armor_class`	TEXT,
+	`hit_points`	TEXT,
+	`hit_dice`	TEXT,
+	`speed`	TEXT,
+	`strength`	TEXT,
+	`dexterity`	TEXT,
+	`constitution`	TEXT,
+	`intelligence`	TEXT,
+	`wisdom`	TEXT,
+	`charisma`	TEXT,
+	`strength_save`	TEXT,
+	`dexterity_save`	TEXT,
+	`constitution_save`	TEXT,
+	`intelligence_save`	TEXT,
+	`wisdom_save`	TEXT,
+	`charisma_save`	TEXT,
+	`acrobatics`	TEXT,
+	`arcana`	TEXT,
+	`athletics`	TEXT,
+	`deception`	TEXT,
+	`history`	TEXT,
+	`insight`	TEXT,
+	`intimidation`	TEXT,
+	`investigation`	TEXT,
+	`medicine`	TEXT,
+	`nature`	TEXT,
+	`performance`	TEXT,
+	`perception`	TEXT,
+	`persuasion`	TEXT,
+	`religion`	TEXT,
+	`stealth`	TEXT,
+	`survival`	TEXT,
+	`languages`	TEXT,
+	`senses`	TEXT,
+	`challenge_rating`	TEXT,
+	`damage_vulnerabilities`	TEXT,
+	`damage_resistances`	TEXT,
+	`damage_immunities`	TEXT,
+	`condition_immunities`	TEXT,
+	`special_abilities`	TEXT,
+	`reactions`	TEXT,
+	`actions`	TEXT,
+	`legendary_actions`	TEXT,
+	`source`	TEXT
+);
+
+-- sql to select direct relational information
+select id, name, hit_points, hit_Dice, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, damage_resistances, damage_immunities, condition_immunities, senses, languages, special_abilities, actions, legendary_actions , reactions, source from STANDARD_MONSTERS;

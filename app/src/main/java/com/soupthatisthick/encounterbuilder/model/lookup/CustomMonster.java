@@ -3,8 +3,10 @@ package com.soupthatisthick.encounterbuilder.model.lookup;
 import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
+import com.soupthatisthick.encounterbuilder.util.transform.StandardToCustomMonsterAdapter;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 
 /**
@@ -43,14 +45,114 @@ public class CustomMonster extends DaoModel {
     private String other;
     private String source;
 
+    public CustomMonster(final StandardMonster standardMonster) {
+        StandardToCustomMonsterAdapter adapter = new StandardToCustomMonsterAdapter();
+        adapter.apply(standardMonster, this);
+    }
 
-    public CustomMonster(Long id, String name, String type, String alignment,
-        int ac, String acType, String hp, String hd, String speed, int strength,
-        int dexterity, int constitution, int intelligence, int wisdom,
-        int charisma, String saves, String skills, String dmgResistance,
-        String dmgImmunity, String conditionImmunity, String senses,
-        String languages, String cr, int xp, String abilities, String actions,
-        String legendaryActions, String other, String source
+    public CustomMonster(
+            Long id,
+            String name,
+            String type,
+            String alignment,
+            int ac,
+            String acType,
+            String hp,
+            String hd,
+            String speed,
+            int strength,
+            int dexterity,
+            int constitution,
+            int intelligence,
+            int wisdom,
+            int charisma,
+            String saves,
+            String skills,
+            String dmgResistance,
+            String dmgImmunity,
+            String conditionImmunity,
+            String senses,
+            String languages,
+            String cr,
+            int xp,
+            String abilities,
+            String actions,
+            String legendaryActions,
+            String other,
+            String source
+    ) {
+        init(
+            id, name, type, alignment, ac, acType, hp, hd, speed,
+            strength, dexterity, constitution, intelligence, wisdom, charisma,
+            saves, skills, dmgResistance, dmgImmunity, conditionImmunity,
+            senses, languages, cr, xp,
+            abilities, actions, legendaryActions,
+            other, source
+        );
+    }
+
+    /**
+     * Used to ensure EVERY field is updated on the pojo
+     * @param id
+     * @param name
+     * @param type
+     * @param alignment
+     * @param ac
+     * @param acType
+     * @param hp
+     * @param hd
+     * @param speed
+     * @param strength
+     * @param dexterity
+     * @param constitution
+     * @param intelligence
+     * @param wisdom
+     * @param charisma
+     * @param saves
+     * @param skills
+     * @param dmgResistance
+     * @param dmgImmunity
+     * @param conditionImmunity
+     * @param senses
+     * @param languages
+     * @param cr
+     * @param xp
+     * @param abilities
+     * @param actions
+     * @param legendaryActions
+     * @param other
+     * @param source
+     */
+    public void init(
+            Long id,
+            String name,
+            String type,
+            String alignment,
+            int ac,
+            String acType,
+            String hp,
+            String hd,
+            String speed,
+            int strength,
+            int dexterity,
+            int constitution,
+            int intelligence,
+            int wisdom,
+            int charisma,
+            String saves,
+            String skills,
+            String dmgResistance,
+            String dmgImmunity,
+            String conditionImmunity,
+            String senses,
+            String languages,
+            String cr,
+            int xp,
+            String abilities,
+            String actions,
+            String legendaryActions,
+            String other,
+            String source
     ) {
         this.id = id;
         this.name = name;
@@ -323,5 +425,9 @@ public class CustomMonster extends DaoModel {
     public String toString()
     {
         return String.format(Locale.CANADA, "%s (%s %d xp)", getName(), getCr(), getXp());
+    }
+
+    public void updateFrom(StandardMonster standardMonster) {
+        setName(standardMonster.getName());
     }
 }

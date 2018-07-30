@@ -32,6 +32,7 @@ import com.soupthatisthick.encounterbuilder.dao.master.EncounterMaster;
 import com.soupthatisthick.encounterbuilder.dao.master.LogsheetMaster;
 import com.soupthatisthick.encounterbuilder.exception.DaoModelException;
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
+import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
 import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
 import com.soupthatisthick.encounterbuilder.util.announcer.Announcer;
 import com.soupthatisthick.encounterbuilder.util.progress.ProgressMonitor;
@@ -46,6 +47,7 @@ import com.soupthatisthick.util.dao.WriteDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -421,6 +423,10 @@ public class CompendiumResource {
         Collections.sort(theList, new SortByTitleComparator());
     }
 
+    public synchronized <T> WriteDao<T> getDaoForClass(Class<T> classType) throws Exception {
+        Category category = Category.findForClass(classType);
+        return (WriteDao<T>) getDaoForCategory(category);
+    }
 
     public synchronized WriteDao<?> getDaoForCategory(Category category) throws Exception {
         if (category==null) {
@@ -562,6 +568,18 @@ public class CompendiumResource {
     public void removeListener(CompendiumResource.Listener listener) {
         progressMonitor.removeListener(listener);
         listeners.removeListener(listener);
+    }
+
+    public DndMaster getDndMaster() {
+        return this.dndMaster;
+    }
+
+    public LogsheetMaster getLogsheetMaster() {
+        return logsheetMaster;
+    }
+
+    public EncounterMaster getEncounterMaster() {
+        return encounterMaster;
     }
 }
 

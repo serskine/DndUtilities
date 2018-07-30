@@ -132,7 +132,7 @@ public abstract class WriteDao<Record> extends ReadDao<Record> implements Crud<L
     {
         Long id = getId(record);
         if (id==null) {
-            Logger.debug("updating record (" + id.toString() + ") in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName());
+            Logger.debug("Failed to update record (" + id.toString() + ") in dao for table " + getTable() + " in theDaoMaster " + daoMaster.getDatabaseName() + ". The record does not exist.");
             return false;
         } else {
             return update(id, record);
