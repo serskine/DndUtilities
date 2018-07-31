@@ -64,7 +64,8 @@ CREATE TABLE IF NOT EXISTS "MAGIC_ITEMS" (
 	`rarity`	TEXT,
 	`attunement`	TEXT,
 	`location`	TEXT,
-	`description`	TEXT
+	`description`	TEXT,
+	`treasure_points` INTEGER
 );
 CREATE TABLE IF NOT EXISTS "LIST_ITEMS" (
 	`itemId`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -331,4 +332,4 @@ CREATE INDEX idx_standard_monsters on STANDARD_MONSTERS(
 );
 CREATE INDEX idx_weapons on WEAPONS(name, properties, type);
 
-PRAGMA user_version = 13;
+PRAGMA user_version = 16;

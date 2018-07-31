@@ -43,8 +43,9 @@ public class MagicItemSummaryCell extends ReadCell<MagicItem> {
         theName.setText(item.getName());
 
         String attunementField = isEmpty(item.getAttunement()) ? "" : " (" + stripBrackets(item.getAttunement()) + ")";
+        String treasurePointsField = (item.getTreasurePoints() < 1) ? "" : " (" + item.getTreasurePoints() + " TP)";
 
-        String typeLine = item.getType() + ", " + item.getRarity() + attunementField;
+        String typeLine = item.getType() + ", " + item.getRarity() + attunementField + treasurePointsField;
         theType.setText(typeLine);
 
         theLocation.setText(item.getLocation());

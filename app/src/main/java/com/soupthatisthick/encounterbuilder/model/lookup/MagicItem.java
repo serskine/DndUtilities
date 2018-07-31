@@ -18,8 +18,9 @@ public class MagicItem extends DaoModel {
     private String attunement;
     private String location;
     private String description;
+    private int treasurePoints;
 
-    public MagicItem(Long id, String name, String type, String rarity, String attunement, String location, String description) {
+    public MagicItem(Long id, String name, String type, String rarity, String attunement, String location, String description, int treasurePoints) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -27,6 +28,7 @@ public class MagicItem extends DaoModel {
         this.attunement = attunement;
         this.location = location;
         this.description = description;
+        this.treasurePoints = treasurePoints;
     }
 
     public MagicItem() {
@@ -90,6 +92,14 @@ public class MagicItem extends DaoModel {
     }
 
     public String toString() {
-        return "magicItem[" + getId() + "][" + getName() + "][" + getType() + "][" + getRarity() + "][" + getAttunement() + "]";
+        return "magicItem[" + getId() + "][" + getName() + "][" + getType() + "][" + getRarity() + "][" + getAttunement() + "][" + getTreasurePoints() + " tp]";
+    }
+
+    public int getTreasurePoints() {
+        return treasurePoints;
+    }
+
+    public void setTreasurePoints(int treasurePoints) {
+        this.treasurePoints = treasurePoints;
     }
 }

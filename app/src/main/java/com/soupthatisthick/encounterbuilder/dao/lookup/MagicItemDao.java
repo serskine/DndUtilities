@@ -28,6 +28,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
     public static final String COL_TYPE = "type";
     public static final String COL_RARITY = "rarity";
     public static final String COL_ATTUNEMENT = "attunement";
+    public static final String COL_TREASURE_POINTS = "treasure_points";
 
 
     // These are to be added later for AL legal items.
@@ -49,6 +50,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
         content.put(COL_ATTUNEMENT, magicItem.getAttunement());
         content.put(COL_DESC, magicItem.getDescription());
         content.put(COL_LOCATION, magicItem.getLocation());
+        content.put(COL_TREASURE_POINTS, magicItem.getTreasurePoints());
 
         return content;
     }
@@ -87,6 +89,8 @@ public class MagicItemDao extends WriteDao<MagicItem> {
         item.setDescription(cursor.getString(cursor.getColumnIndex(COL_DESC)));
         item.setLocation(cursor.getString(cursor.getColumnIndex(COL_LOCATION)));
 
+        item.setTreasurePoints(cursor.getInt(cursor.getColumnIndex(COL_TREASURE_POINTS)));
+
         return item;
     }
 
@@ -114,6 +118,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
     public List<String> getColumnSortingOrder() {
         List<String> columns = new ArrayList<>();
         columns.add(COL_NAME);
+        columns.add(COL_TREASURE_POINTS);
         columns.add(COL_RARITY);
         columns.add(COL_TYPE);
         columns.add(COL_ATTUNEMENT);
