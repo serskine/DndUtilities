@@ -107,7 +107,7 @@ public class DndMaster extends DaoMaster {
     protected void upgrade(SQLiteDatabase db, int currentVersion) throws Exception {
         super.upgrade(db, currentVersion);
         Resources res = this.getContext().getResources();
-        Logger.info("Upgrading database to version " + currentVersion + ".");
+        Logger.info("Upgrading database (currently version " + currentVersion + ")");
         InputStream is;
         String tag;
         switch(currentVersion) {
