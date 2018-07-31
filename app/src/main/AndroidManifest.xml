@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="soupthatisthick.encounterapp"
-    android:versionCode="1"
-    android:versionName="1">
+    android:versionCode="@integer/version_code"
+    android:versionName="@string/version_name"
+    >
+
     <uses-sdk
         android:minSdkVersion="22"
         android:targetSdkVersion="23" />

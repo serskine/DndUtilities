@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="version_code">15</integer>
+    <string name="version_name">@string/version_name_A</string>
+
+    <!-- dnd phonetic alphabet string -->
+    <string name="version_name_A">Azuth</string>
+    <string name="version_name_B">Bane</string>
+    <string name="version_name_C">Chauntea</string>
+    <string name="version_name_D">Demogorgon</string>
+    <string name="version_name_E">Eldath</string>
+    <string name="version_name_F">Fzoul</string>
+    <string name="version_name_G">Gruumish</string>
+    <string name="version_name_H">Helm</string>
+    <string name="version_name_I">Ilmater</string>
+    <string name="version_name_J">Jergal</string>
+    <string name="version_name_K">Kelemvor</string>
+    <string name="version_name_L">Lolth</string>
+    <string name="version_name_M">Myrkul</string>
+    <string name="version_name_N">Nebelun</string>
+    <string name="version_name_O">Oghma</string>
+    <string name="version_name_P">Panzuriel</string>
+    <string name="version_name_Q">Qotal</string>
+    <string name="version_name_R">Rhyxali</string>
+    <string name="version_name_S">Sune</string>
+    <string name="version_name_T">Tymora</string>
+    <string name="version_name_U">Umberlee</string>
+    <string name="version_name_V">Vhara</string>
+    <string name="version_name_W">Waukeen</string>
+    <string name="version_name_X">Xerfilstyx</string>
+    <string name="version_name_Y">Yondalla</string>
+    <string name="version_name_Z">Zuggtmoy</string>
+
+    <string-array name="version_name">
+        <item>Ao</item>
+        <item>Bane</item>
+        <item>Chauntea</item>
+        <item>Demogorgon</item> // remove?
+        <item>Eldath</item>
+        <item>Fzoul</item>
+        <item>Gruumish</item>
+        <item>Helm</item>
+        <item>Ilmater</item>
+        <item>Jergal</item>
+        <item>Kelemvor</item>
+        <item>Lolth</item>
+        <item>Myrkul</item>
+        <item>Nebelun</item>
+        <item>Oghma</item>
+        <item>Panzuriel</item>
+        <item>Qotal</item>
+        <item>Rhyxali</item>
+        <item>Sune</item>
+        <item>Tymora</item>
+        <item>Umberlee</item>
+        <item>Vhara</item>
+        <item>Waukeen</item>
+        <item>Xerfilstyx</item>
+        <item>Yondalla</item>
+        <item>Zuggtmoy</item>
+    </string-array>
+
+    <!-- phonetic alphabet string -->
+    <string-array name="phonetic">
+        <item>alpha</item>
+        <item>brave</item>
+        <item>charlie</item>
+        <item>delta</item>
+        <item>echo</item>
+        <item>foxtrot</item>
+        <item>golf</item>
+        <item>hotel</item>
+        <item>india</item>
+        <item>juliet</item>
+        <item>kilo</item>
+        <item>lima</item>
+        <item>mike</item>
+        <item>november</item>
+        <item>oscar</item>
+        <item>papa</item>
+        <item>quebec</item>
+        <item>romeo</item>
+        <item>sierra</item>
+        <item>tango</item>
+        <item>uniform</item>
+        <item>victor</item>
+        <item>whiskey</item>
+        <item>x-ray</item>
+        <item>yankee</item>
+        <item>zulu</item>
+    </string-array>
 
     <!-- common error strings -->
     <string name="dao_master_fail">Failed to open dao master on database %s!</string>
