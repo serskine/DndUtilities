@@ -22,7 +22,7 @@ import soupthatisthick.encounterapp.R;
 
 public class DndMaster extends DaoMaster {
 
-    public static final int VERSION = 13;
+    public static final int VERSION = 16;
     private static final String DB_FILE = "dnd.db";
 
     // This represents the number of sql errors we will allow before throwing a fatal error.
@@ -163,9 +163,13 @@ public class DndMaster extends DaoMaster {
                 is = res.openRawResource(R.raw.dnd_migrate_13_to_14);
                 tag = "dnd_migrate_13_to_14";
                 break;
-            case 15:
+            case 14:
                 is = res.openRawResource(R.raw.dnd_migrate_14_to_15);
                 tag = "dnd_migrate_14_to_15";
+                break;
+            case 15:
+                is = res.openRawResource(R.raw.dnd_migrate_15_to_16);
+                tag = "dnd_migrate_15_to_16";
                 break;
             default:
                 is = null;
