@@ -168,6 +168,10 @@
     <string name="title_activity_edit_entity_list">Edit Entity List</string>
     <string name="title_activity_edit_entity">Edit Entity</string>
 
+    <string name="title_service_compendium">Compendium Service</string>
+
+    <string name="description_service_compendium">This service is used to retrieve all the records from the various databases held locally on the phone.</string>
+
     <string name="add_player_text">Add Player</string>
     <string name="remove_player_text">Remove Player</string>
     <string name="add_monster_text">Add Monster</string>

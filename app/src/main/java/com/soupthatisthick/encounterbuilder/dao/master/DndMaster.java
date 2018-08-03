@@ -50,7 +50,7 @@ public class DndMaster extends DaoMaster {
      *           @param tag is used to identify the spurce in the logs
      * @param is is the input stream we retrieve the sql from
      * @param allowableErrorCount is the number of sql statement errors we will allow before aborting
-     * @returnthe number of errors encountered while executing the sql statements
+     * @return the number of errors encountered while executing the sql statements
      */
     protected static final int processSql(
         @NonNull String tag,

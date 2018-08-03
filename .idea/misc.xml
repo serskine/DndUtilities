@@ -3,6 +3,8 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0">
       <entry_point TYPE="method" FQNAME="com.soupthatisthick.encounterbuilder.dao.ContentValuesDao ContentValuesDao(com.soupthatisthick.encounterbuilder.dao.DaoMaster daoMaster, java.lang.String tableName)" />
+      <entry_point TYPE="field" FQNAME="com.soupthatisthick.encounterbuilder.service.CompendiumService logsheetMaster" />
+      <entry_point TYPE="field" FQNAME="com.soupthatisthick.encounterbuilder.service.CompendiumService.Action SEARCH" />
     </entry_points>
     <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="searchForResults" />
     <pattern value="com.soupthatisthick.encounterbuilder.dao.helper.CompendiumResource" method="getAllRecords" />
@@ -58,6 +60,10 @@
     <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getName" />
     <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Table" method="getId" />
     <pattern value="com.soupthatisthick.encounterbuilder.model.lookup.Weapon" method="Weapon" />
+    <pattern value="com.soupthatisthick.encounterbuilder.service.CompendiumService" method="getDaoForCategory" />
+    <pattern value="com.soupthatisthick.encounterbuilder.service.CompendiumService" method="CompendiumService" />
+    <pattern value="com.soupthatisthick.encounterbuilder.service.CompendiumService" method="onHandleIntent" />
+    <pattern value="com.soupthatisthick.encounterbuilder.service.CompendiumService" method="getDaoWithTitle" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
