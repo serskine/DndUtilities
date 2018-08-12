@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.soupthatisthick.encounterbuilder"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 15
         versionName "Azuth"
@@ -58,6 +58,11 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 
+    // Async file transfer tasks
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+
     // Json Path
 //    implementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.2.0'
+
+
 }
