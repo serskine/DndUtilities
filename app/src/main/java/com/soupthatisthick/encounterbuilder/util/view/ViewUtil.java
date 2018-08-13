@@ -247,10 +247,47 @@ public class ViewUtil {
         parsed = processIrrelevantTags(parsed);
         parsed = processLeadingAndTrailingTags(parsed);
         parsed = processLineBreaks(parsed);
+        parsed = processTableTags(parsed);
         parsed = processListTags(parsed);
         parsed = processItalicTags(parsed);
 
         return parsed;
+    }
+
+    /**
+     * This will convert the tables into lists. It won't be pretty but it will work
+     * after the lists have been processed.
+     * @param html is the html we wish to process
+     * @return replaces table html into list html
+     */
+    public static final String processTableTags(String html) {
+        String tableTags[] = {"table", "TABLE"};
+        String rowTags[] = {"tr", "TR", "tR", "Tr"};
+        String headerTags[] = {"th", "Th", "tH", "TH"};
+        String dataTags[] = {"td", "Td", "tD", "TD"};
+
+        for (String tagName : tableTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "<pre><ul>");
+            html = html.replace(closeTag, "</ul></pre>");
+        }
+
+        for(String tagName : rowTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "<li>");
+            html = html.replace(closeTag, "</li>");
+        }
+
+        for(String tagName : dataTags) {
+            final String openTag = "<" + tagName + ">";
+            final String closeTag = "</" + tagName + ">";
+            html = html.replace(openTag, "\t");
+            html = html.replace(closeTag, "");
+        }
+
+        return html;
     }
 
     private static final String processItalicTags(String html) {

@@ -68,6 +68,7 @@ public class Logger {
         String TAG = getTag(src);
         try {
             Log.d(TAG, text);
+            logger.info(TAG + text);
         } catch (Exception e)
         {
             logger.info(TAG + text);
@@ -89,6 +90,7 @@ public class Logger {
             } else {
                 Log.e(TAG, text);
             }
+            logger.severe(TAG + text);
         } catch (Exception ex)
         {
             logger.severe(TAG + text);
@@ -107,6 +109,7 @@ public class Logger {
         String TAG = getTag(src);
         try {
             Log.i(TAG, text);
+            logger.info(TAG + text);
         } catch (Exception e)
         {
             logger.info(TAG + text);
@@ -125,6 +128,7 @@ public class Logger {
         String TAG = getTag(src);
         try {
             Log.w(TAG, text);
+            logger.warning(TAG + text);
         } catch (Exception e)
         {
             logger.warning(TAG + text);
@@ -148,6 +152,7 @@ public class Logger {
         String TAG = getTag(src);
         try {
             Log.i(TAG, text);
+            logger.info(TAG + text);
         } catch (Exception e)
         {
             logger.info(TAG + text);

@@ -58,6 +58,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 
+    // jsoup HTML parser library @ https://jsoup.org/
+    implementation 'org.jsoup:jsoup:1.11.3'
+
     // Json Path
 //    implementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.2.0'
 }

@@ -5,6 +5,7 @@ import com.soupthatisthick.util.Logger;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.fail;
 
 public class ViewUtilTest {
 
@@ -77,6 +78,29 @@ public class ViewUtilTest {
 
         String observed = ViewUtil.preprocessHtml(inputHtml);
         Logger.info("\n" + observed);
+    }
+
+    @Test
+    public void preprocessHtml_creationText() {
+        final String inputHtml = "\"<p>You pull wisps of shadow material from the Shadowfell to create a nonliving object of vegetable matter within range - soft goods, rope, wood, or something similar. You can also use this spell to create mineral objects such as stone, crystal, or metal. The object created must be no larger than a 5-foot cube, and the object must be of a form and material that you have seen before.</p>\n" +
+                "<p>The duration depends on the object's material. If the object is composed of multiple materials, use the shortest duration.</p>\n" +
+                "<table>\n" +
+                "<tr><th><b>Material</b></th><th>Duration</th></tr>\n" +
+                "<tr><td>Vegetable matter</td><td>1 day</td></tr>\n" +
+                "<tr><td>Stone/crystal</td><td>12 hours</td></tr>\n" +
+                "<tr><td>Precious metals</td><td>1 hour</td></tr>\n" +
+                "<tr><td>Gems</td><td>10 minutes </td></tr>\n" +
+                "<tr><td>Adamantine/Mithral</td><td> 1 minute</td></tr>\n" +
+                "</table>\n" +
+                "<p>Using any material created by this spell as another spell's material component causes that spell to fail.</p>\n" +
+                "<p><b>At Higher Levels:</b> When you cast this spell using a spell slot of 6th level or higher, the cube increases by 5 feet for each slot level above 5th.</p>\"";
+        String observed = ViewUtil.preprocessHtml(inputHtml);
+        System.out.println("\n" + observed);
+    }
+
+    @Test
+    public void preprocessHtml_tables() {
+        fail("TODO: Implement!");
     }
 
     @Test
