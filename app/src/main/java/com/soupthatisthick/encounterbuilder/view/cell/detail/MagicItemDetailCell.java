@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
+import com.soupthatisthick.encounterbuilder.util.Text;
+import com.soupthatisthick.encounterbuilder.util.view.ViewUtil;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
 
 import soupthatisthick.encounterapp.R;
@@ -17,7 +19,7 @@ import soupthatisthick.encounterapp.R;
 
 public class MagicItemDetailCell extends ReadCell<MagicItem> {
 
-    public TextView theName, theType, theLocation, theDescription;
+    public TextView theName, theType, theLocation, theDescription, theTreasureValue;
 
     public MagicItemDetailCell(LayoutInflater inflater, View convertView, ViewGroup parent) {
         super(inflater, convertView, parent);
@@ -30,6 +32,7 @@ public class MagicItemDetailCell extends ReadCell<MagicItem> {
         theName = (TextView) view.findViewById(R.id.theName);
         theType = (TextView) view.findViewById(R.id.theType);
         theLocation = (TextView) view.findViewById(R.id.theLocation);
+        theTreasureValue = (TextView) view.findViewById(R.id.theTreasureValue);
         theDescription = (TextView) view.findViewById(R.id.theDescription);
 
         return view;
@@ -44,14 +47,22 @@ public class MagicItemDetailCell extends ReadCell<MagicItem> {
         theName.setText(item.getName());
 
         String attunementField = isEmpty(item.getAttunement()) ? "" : " (" + stripBrackets(item.getAttunement()) + ")";
-        String treasurePointsField = (item.getTreasurePoints() < 1) ? "" : " (" + item.getTreasurePoints() + " TP)";
 
-        String typeLine = item.getType() + ", " + item.getRarity() + attunementField + treasurePointsField;
+        String typeLine = item.getType() + ", " + item.getRarity() + attunementField;
         theType.setText(typeLine);
 
         theLocation.setText(item.getLocation());
         theDescription.setText(htmlString(item.getDescription()));
 
+        final String treasureField = "" + Text.toString(item.getTreasureTableText()) + " (" + item.getTreasurePoints() + " TCP)";
+        theTreasureValue.setText(
+            (item.getTreasurePoints()==0)
+            ?   ""
+            :   titleString(
+                    ((item.getTreasureTables().size() > 1) ? "Treasure Tables: " :"Treasure Table: "),
+                    treasureField
+                )
+        );
         checkVisibility();
     }
 
@@ -66,5 +77,6 @@ public class MagicItemDetailCell extends ReadCell<MagicItem> {
     {
         theLocation.setVisibility(isEmpty(theLocation.getText()) ? View.GONE : View.VISIBLE);
         theDescription.setVisibility(isEmpty(theDescription.getText()) ? View.GONE : View.VISIBLE);
+        theTreasureValue.setVisibility(isEmpty(theTreasureValue.getText()) ? View.GONE : View.VISIBLE);
     }
 }

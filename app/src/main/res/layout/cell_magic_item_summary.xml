@@ -26,6 +26,14 @@
 
     <!-- MagicItem Location -->
     <TextView
+        android:id="@+id/theTreasureValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Normal"
+        />
+
+    <!-- MagicItem Location -->
+    <TextView
         android:id="@+id/theLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
