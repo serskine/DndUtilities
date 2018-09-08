@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
+import com.soupthatisthick.encounterbuilder.util.translater.CommaListTranslater;
 import com.soupthatisthick.util.dao.DaoMaster;
 import com.soupthatisthick.util.dao.WriteDao;
 
@@ -29,6 +30,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
     public static final String COL_RARITY = "rarity";
     public static final String COL_ATTUNEMENT = "attunement";
     public static final String COL_TREASURE_POINTS = "treasure_points";
+    public static final String COL_TREASURE_TABLE = "treasure_table";
 
 
     // These are to be added later for AL legal items.
@@ -90,6 +92,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
         item.setLocation(cursor.getString(cursor.getColumnIndex(COL_LOCATION)));
 
         item.setTreasurePoints(cursor.getInt(cursor.getColumnIndex(COL_TREASURE_POINTS)));
+        item.setTreasureTableText(cursor.getString(cursor.getColumnIndex(COL_TREASURE_TABLE)));
 
         return item;
     }
@@ -105,6 +108,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
         columns.add(COL_ATTUNEMENT);
         // We don't want to search the description to prevent to many hits
         columns.add(COL_LOCATION);
+        columns.add(COL_TREASURE_TABLE);
 
         return columns;
     }
@@ -124,6 +128,7 @@ public class MagicItemDao extends WriteDao<MagicItem> {
         columns.add(COL_ATTUNEMENT);
         return columns;
     }
+
 
 
 }

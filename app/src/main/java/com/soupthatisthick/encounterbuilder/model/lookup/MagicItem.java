@@ -1,6 +1,9 @@
 package com.soupthatisthick.encounterbuilder.model.lookup;
 
 import com.soupthatisthick.encounterbuilder.model.DaoModel;
+import com.soupthatisthick.encounterbuilder.util.translater.CommaListTranslater;
+
+import java.util.Set;
 
 
 /**
@@ -19,8 +22,9 @@ public class MagicItem extends DaoModel {
     private String location;
     private String description;
     private int treasurePoints;
+    private String treasureTableText;
 
-    public MagicItem(Long id, String name, String type, String rarity, String attunement, String location, String description, int treasurePoints) {
+    public MagicItem(Long id, String name, String type, String rarity, String attunement, String location, String description, int treasurePoints, String treasureTableText) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -29,6 +33,7 @@ public class MagicItem extends DaoModel {
         this.location = location;
         this.description = description;
         this.treasurePoints = treasurePoints;
+        this.treasureTableText = treasureTableText;
     }
 
     public MagicItem() {
@@ -101,5 +106,21 @@ public class MagicItem extends DaoModel {
 
     public void setTreasurePoints(int treasurePoints) {
         this.treasurePoints = treasurePoints;
+    }
+
+    public String getTreasureTableText() {
+        return treasureTableText;
+    }
+
+    public void setTreasureTableText(String treasureTableText) {
+        this.treasureTableText = treasureTableText;
+    }
+
+    public Set<String> getTreasureTables() {
+        return CommaListTranslater.asSet(getTreasureTableText());
+    }
+
+    public void setTreasureTables(Set<String> tables) {
+        setTreasureTableText(CommaListTranslater.asText(tables));
     }
 }
