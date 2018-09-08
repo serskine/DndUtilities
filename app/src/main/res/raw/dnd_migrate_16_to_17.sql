@@ -11,7 +11,7 @@
 -- 24 points
 -- SELECT MI.name, MI.treasure_points, MI.treasure_table FROM MAGIC_ITEMS MI
 -- where (treasure_table like '%I%');
-ALTER TABLE 'MAGIC_ITEMS' ADD COLUMN 'treasure_table';
+ALTER TABLE 'MAGIC_ITEMS' ADD COLUMN 'treasure_table' 'text';
 
 -- convert the old table to the new table
 update MAGIC_ITEMS SET treasure_points = (treasure_points * 2);
