@@ -1,4 +1,9 @@
 <resources>
+    <string name="test_html_edit">Enter html here...</string>
+    <string name="test_html_tag_p">&lt;P&gt;</string>
+    <string name="test_html_tag_table">&lt;table&gt;</string>
+    <string name="test_html_tag_ul">&lt;ul&gt;</string>
+    <string name="text_html_text">Text</string>
     <string name="test_html_list">
         <ul>
             <li>ul line 1</li>

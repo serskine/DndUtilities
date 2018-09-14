@@ -13,7 +13,19 @@
         android:scaleType="fitXY"
         style="@style/AppTheme.BigHeader"
         />
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--
+    <com.android.xamoom.htmltextview.HtmlTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/theContent"
+        android:gravity="center_vertical|start"
+        android:scaleType="fitXY"
+        style="@style/AppTheme.Weak"
+        />
+    -->
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/theContent"

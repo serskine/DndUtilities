@@ -45,22 +45,28 @@
         <item name="android:textSize">@dimen/text_big</item>
         <item name="android:inputType">textCapCharacters</item>
     </style>
+
     <style name="AppTheme.Strong" parent="AppTheme">
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="AppTheme.Strong.Error" parent="AppTheme.Strong">
         <item name="android:textColor">@color/error_text_color</item>
     </style>
+
     <style name="AppTheme.Normal" parent="AppTheme">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/normal_text_color</item>
     </style>
+
     <style name="AppTheme.Normal.Error" parent="AppTheme.Normal">
         <item name="android:textColor">@color/error_text_color</item>
     </style>
+
     <style name="AppTheme.Weak" parent="AppTheme">
         <item name="android:textStyle">italic</item>
     </style>
+
     <style name="AppTheme.Weak.Error" parent="AppTheme.Weak">
         <item name="android:textColor">@color/error_text_color</item>
     </style>
@@ -74,20 +80,22 @@
     </style>
 
 
-
     <style name="AppTheme.Search" parent="AppBaseTheme">
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/text_normal</item>
     </style>
+
     <style name="AppTheme.Shadow" parent="AppBaseTheme">
         <item name="android:background">@drawable/shadow_nine_patch</item>
         <item name="android:padding">27dp</item>
     </style>
+
     <style name="AppTheme.Scroll" parent="AppBaseTheme">
         <item name="android:background">@drawable/scoll_wide</item>
         <item name="android:padding">30dp</item>
     </style>
+
     <style name="AppTheme.Scroll.Cell" parent="AppTheme.Scroll">
         <item name="android:descendantFocusability">blocksDescendants</item>
     </style>
@@ -97,6 +105,7 @@
         <item name="android:background">@drawable/goldframe</item>
         <item name="android:padding">30dp</item>
     </style>
+
     <style name="AppTheme.Center" parent="AppBaseTheme">
         <item name="android:gravity">center_horizontal</item>
     </style>
@@ -113,30 +122,39 @@
     <style name="AppTheme.AddButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_add</item>
     </style>
+
     <style name="AppTheme.DeleteButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_delete</item>
     </style>
+
     <style name="AppTheme.ClearButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_clear</item>
     </style>
+
     <style name="AppTheme.EditButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_edit</item>
     </style>
+
     <style name="AppTheme.SaveButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_save</item>
     </style>
+
     <style name="AppTheme.SearchButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_search</item>
     </style>
+
     <style name="AppTheme.PrintButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_print</item>
     </style>
+
     <style name="AppTheme.CancelButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_cancel</item>
     </style>
+
     <style name="AppTheme.PlayButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_play</item>
     </style>
+
     <style name="AppTheme.PauseButton" parent="AppTheme.Button">
         <item name="android:src">@drawable/ic_control_pause</item>
     </style>
@@ -155,8 +173,7 @@
         <item name="android:scrollbars">vertical</item>
     </style>
 
-    <style name="AppTheme.CheckBox" parent="AppTheme.Normal">
-    </style>
+    <style name="AppTheme.CheckBox" parent="AppTheme.Normal"></style>
 
     <style name="AppTheme.LineBreak" parent="AppTheme">
         <item name="android:src">@drawable/ic_mv_linebreak</item>
@@ -185,15 +202,13 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
-    <style name="AppTheme.TabItem" parent="AppTheme">
-    </style>
+    <style name="AppTheme.TabItem" parent="AppTheme"></style>
 
 
     <style name="AppTheme.ProgressBar">
         <item name="android:indeterminate">false</item>
         <item name="android:progressDrawable">@style/Widget.AppCompat.ProgressBar.Horizontal</item>
     </style>
-
 
 
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
@@ -213,6 +228,14 @@
 
     <style name="ButtonBarButton" />
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

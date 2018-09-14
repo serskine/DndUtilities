@@ -3,6 +3,7 @@ package com.soupthatisthick.encounterbuilder.util.view;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.os.PatternMatcher;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -12,6 +13,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import com.soupthatisthick.encounterbuilder.util.Text;
+import com.soupthatisthick.util.string.Table;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 import soupthatisthick.encounterapp.R;
 
@@ -247,11 +254,11 @@ public class ViewUtil {
         parsed = processIrrelevantTags(parsed);
         parsed = processLeadingAndTrailingTags(parsed);
         parsed = processLineBreaks(parsed);
-        parsed = processTableTags(parsed);
         parsed = processListTags(parsed);
         parsed = processItalicTags(parsed);
+        parsed = processTableTags(parsed);
 
-        return parsed;
+        return Text.toString(parsed);
     }
 
     /**
@@ -261,33 +268,40 @@ public class ViewUtil {
      * @return replaces table html into list html
      */
     public static final String processTableTags(String html) {
-        String tableTags[] = {"table", "TABLE"};
-        String rowTags[] = {"tr", "TR", "tR", "Tr"};
-        String headerTags[] = {"th", "Th", "tH", "TH"};
-        String dataTags[] = {"td", "Td", "tD", "TD"};
+        if (html==null) html = "";
+//        String tableTags[] = {"table", "TABLE"};
+//        String rowTags[] = {"tr", "TR", "tR", "Tr"};
+//        String headerTags[] = {"th", "Th", "tH", "TH"};
+//        String dataTags[] = {"td", "Td", "tD", "TD"};
 
-        for (String tagName : tableTags) {
-            final String openTag = "<" + tagName + ">";
-            final String closeTag = "</" + tagName + ">";
-            html = html.replace(openTag, "<pre><ul>");
-            html = html.replace(closeTag, "</ul></pre>");
+        List<Table> tableList = Table.getTables(Table.fromHtml(html));
+
+        // We don't support sub tables. So every odd token contains non-table content
+        String[] tokens = html.split(Table.REGEX_TAG_TABLE);
+
+        StringBuilder sb = new StringBuilder();
+        int tokenIdx = 0;
+        int tableIdx = 0;
+        while(tokenIdx < tokens.length) {
+            sb.append(tokens[tokenIdx]);
+            if (tableIdx<tableList.size()) {
+                Table table = tableList.get(tableIdx);
+                sb.append("<p><tt>\n").append(table.describeCells(
+                        false,
+                        true,
+                        " ",
+                        "-",
+                        " "
+                    )
+                ).append("\n</tt></p>");
+                tableIdx++;
+                tokenIdx++; // We want it incremented twice only if we append table data.
+            }
+            tokenIdx++; // Advance the token.
         }
 
-        for(String tagName : rowTags) {
-            final String openTag = "<" + tagName + ">";
-            final String closeTag = "</" + tagName + ">";
-            html = html.replace(openTag, "<li>");
-            html = html.replace(closeTag, "</li>");
-        }
-
-        for(String tagName : dataTags) {
-            final String openTag = "<" + tagName + ">";
-            final String closeTag = "</" + tagName + ">";
-            html = html.replace(openTag, "\t");
-            html = html.replace(closeTag, "");
-        }
-
-        return html;
+        final String text = sb.toString();
+        return text.replace("\n", "<br/>").replace(" ", "&nbsp;");
     }
 
     private static final String processItalicTags(String html) {

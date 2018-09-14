@@ -2,40 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="soupthatisthick.encounterapp"
     android:versionCode="@integer/version_code"
-    android:versionName="@string/version_name"
-    >
+    android:versionName="@string/version_name">
 
     <uses-sdk
         android:minSdkVersion="22"
         android:targetSdkVersion="23" />
-    <uses-permission
-        android:name="android.permission.CAMERA"
-        />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        />
-    <uses-permission
-        android:name="android.permission.READ_PHONE_STATE"
-        />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        />
-    <uses-permission
-        android:name="android.permission.INTERNET"
-        />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false"
-        />
+        android:required="false" />
+
     <application
+        android:name="com.soupthatisthick.encounterbuilder.DndUtilApp"
         android:allowBackup="true"
         android:icon="@drawable/dnd_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.soupthatisthick.encounterbuilder.DndUtilApp"
-        >
-
+        android:theme="@style/AppTheme">
         <provider
             android:name="com.soupthatisthick.encounterbuilder.activity.error.CrashProvider"
             android:authorities="${applicationId}.crashinitprovider"
@@ -45,32 +34,24 @@
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ViewSplashScreenActivity"
             android:label="@string/app_name"
-            android:launchMode="standard" >
+            android:launchMode="standard">
             <intent-filter>
-                <action
-                    android:name="android.intent.action.MAIN"
-                    />
-                <category
-                    android:name="android.intent.category.LAUNCHER"
-                    />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            android:label="@string/app_name"
-            >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.error.CrashActivity"
-            android:process=":error_activity"
-            />
+            android:process=":error_activity" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity"
             android:label="Edit Databases Activity"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
-
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMapActivity"
             android:label="Edit Map Activity"
@@ -121,16 +102,15 @@
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity"
             android:label="@string/title_activity_compendium"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            />
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
         />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditMagicItemActivity"
             android:label="@string/title_activity_edit_magic_item"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditMagicItemActivity"
-            android:windowSoftInputMode="adjustPan"
-            />/>
+            android:windowSoftInputMode="adjustPan" />
+        />
         />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellBookActivity"
@@ -143,29 +123,26 @@
             android:label="@string/title_activity_edit_spell"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditSpellActivity"
-            android:windowSoftInputMode="adjustPan"
-            />/>
+            android:windowSoftInputMode="adjustPan" />
+        />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditCustomMonsterActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_edit_monster"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditMonsterManualActivity"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.PrintLogsheetActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_print_logsheet"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditLogsheetActivity"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_edit_content_values"
             android:launchMode="standard"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditNotesActivity"
             android:label="@string/title_activity_edit_notes_list"
@@ -173,16 +150,12 @@
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditNoteActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_edit_note"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity" />
-        <activity
-            android:name="com.soupthatisthick.encounterbuilder.activity.TestActivity"
-            />
-        <activity
-            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExViewListsActivity"
-            />
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditContentValuesActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.TestActivity" />
+        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.ExViewListsActivity" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditCustomListsActivity"
             android:label="@string/title_activity_custom_lists"
@@ -195,10 +168,10 @@
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditContactActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_edit_contact"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditContactsActivity" />
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.ExEditContactsActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatListActivity"
             android:label="@string/title_activity_edit_feats_list"
@@ -206,55 +179,51 @@
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_edit_feat"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatListActivity" />
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditFeatListActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.builder.MeasureEncounterActivity"
-            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_measure_encounter"
             android:launchMode="standard"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.soupthatisthick.encounterbuilder.activity.lookup.LootTableActivity"
             android:label="@string/title_activity_roll_for_loot"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            />
-
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.SettingsActivity"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.SettingsActivity"
             android:label="@string/title_activity_edit_settings"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            />
-
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.SearchFiltersActivity"
             android:label="@string/title_activity_search_filters"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity"
-            />
-        <activity android:name="com.soupthatisthick.util.activity.EditTableActivity"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.CompendiumActivity" />
+        <activity
+            android:name="com.soupthatisthick.util.activity.EditTableActivity"
             android:label="@string/title_activity_test"
             android:launchMode="standard"
-            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
-            />
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity" />
 
         <!-- MAP EDITING TOOLS -->
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.CameraActivity"
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.CameraActivity"
             android:label="@string/title_activity_camera"
-            android:launchMode="standard"
-            />
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityListActivity"
             android:label="@string/title_activity_edit_entity_list"
-            android:launchMode="standard"
-            />
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.lookup.EditEntityActivity"
             android:label="@string/title_activity_edit_entity"
-            android:launchMode="standard"
-            />
-
-        <activity android:name="com.soupthatisthick.encounterbuilder.activity.storage.StorageActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.storage.StorageActivity"
             android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.lookup.EditDatabasesActivity" />
         <!--
             ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -263,5 +232,13 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.soupthatisthick.encounterbuilder.activity.HtmlActivity"
+            android:label="@string/title_activity_html"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.soupthatisthick.encounterbuilder.activity.MainActivity"
+            ></activity>
     </application>
+
 </manifest>

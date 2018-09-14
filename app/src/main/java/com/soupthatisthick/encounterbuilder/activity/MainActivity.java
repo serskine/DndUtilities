@@ -38,7 +38,7 @@ public class MainActivity extends AppActivity {
 
     public void onClickTestButton(View view)
     {
-        Intent intent = new Intent(this, EditCustomListsActivity.class);
+        Intent intent = new Intent(this, HtmlActivity.class);
         startActivity(intent);
     }
 

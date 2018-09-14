@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="version_code">15</integer>
+    <integer name="version_code">18</integer>
     <string name="version_name">@string/version_name_A</string>
 
     <!-- dnd phonetic alphabet string -->
@@ -35,7 +35,8 @@
         <item>Ao</item>
         <item>Bane</item>
         <item>Chauntea</item>
-        <item>Demogorgon</item> // remove?
+        <item>Demogorgon</item>
+        // remove?
         <item>Eldath</item>
         <item>Fzoul</item>
         <item>Gruumish</item>
@@ -476,4 +477,5 @@ If the target is a Large or smaller nonmagical object or creation of magical for
 &lt;/ul&gt;
 &lt;/p&gt;
 </string>
+    <string name="title_activity_html">HtmlActivity</string>
 </resources>

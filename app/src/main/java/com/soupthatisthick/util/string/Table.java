@@ -5,8 +5,18 @@ import com.soupthatisthick.util.Logger;
 import com.soupthatisthick.util.json.JsonUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Table implements Serializable {
+    public static final String REGEX_TAG_TABLE = "</?table>";
+    public static final String REGEX_TAG_TR = "</?tr>";
+    public static final String REGEX_TAG_TD = "</?td>";
+    public static final String REGEX_TAG_TH = "</?th>";
+    public static final String REGEX_TAG_CELL = "((" + REGEX_TAG_TD + ")|(" + REGEX_TAG_TH + "))";
+
+    public static final int REGEX_FLAGS = Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE;
 
     private static final String NEWLINE = "\n";
     private static final String INTERSECTION = "-+-";
@@ -19,6 +29,52 @@ public class Table implements Serializable {
 
     public int getTableWidth() {
         return tableWidth;
+    }
+
+    public static ArrayList<Table> getTables(List<List<List<String>>> tables) {
+        ArrayList<Table> theTables = new ArrayList<>();
+        for(List<List<String>> tableData : tables) {
+            Table table = new Table(tableData);
+            theTables.add(table);
+        }
+        return theTables;
+    }
+
+    /**
+     * This will pull out all the table information and provides lists of the following
+     * Table List
+     *   Row List
+     *     Column List
+     * @param html
+     * @return
+     */
+    public static List<List<List<String>>> fromHtml(final String html) {
+        final List<List<List<String>>> tables = new ArrayList<>();
+
+        final List<String> tableTokens = Text.getNotEmpty(html.split(REGEX_TAG_TABLE, REGEX_FLAGS));
+
+        for(String tableToken : tableTokens) {
+            final List<List<String>> rows = new ArrayList<>();
+            tables.add(rows);
+
+            final List<String> rowTokens = Text.getNotEmpty(tableToken.split(REGEX_TAG_TR, REGEX_FLAGS));
+
+            for(String rowToken : rowTokens) {
+                final ArrayList<String> cells = new ArrayList<>();
+                rows.add(cells);
+
+                final List<String> cellTokens = Text.getNotEmpty(rowToken.split(REGEX_TAG_CELL, REGEX_FLAGS));
+                for(String cellToken : cellTokens) {
+                    cells.add(cellToken);
+                }
+            }
+        }
+
+        return tables;
+    }
+
+    public static List<Table> getTables(final String html) {
+        return getTables(fromHtml(html));
     }
 
     public static final class Cell implements Serializable {
@@ -82,6 +138,10 @@ public class Table implements Serializable {
         build(text);
     }
 
+    public Table(List<List<String>> table) {
+        build(table);
+    }
+
     /**
      * This will determine all the key information we need
      * @param newCells
@@ -142,6 +202,28 @@ public class Table implements Serializable {
         Cell cell = new Cell(text);
         Logger.debug("\n___ build(text) ___\n" + JsonUtil.toJson(cell, true, true));
         build(cell);
+    }
+
+    private void build(List<List<String>> table) {
+        int numRows = table.size();
+        int numCols = 0;
+        for(List<String> row : table) {
+            numCols = Math.max(row.size(), numCols);
+        }
+
+        String[][] asArray = new String[numRows][numCols];
+        for(int row=0; row<numRows; row++) {
+            final List<String> theRow = table.get(row);
+            for(int col=0; col<numCols; col++) {
+                if (col>=theRow.size()) {
+                    asArray[row][col] = "";
+                } else {
+                    asArray[row][col] = theRow.get(col);
+                }
+            }
+        }
+
+        build(asArray);
     }
 
     public String describe(
@@ -225,5 +307,23 @@ public class Table implements Serializable {
             }
         }
         return sb.toString();
+    }
+
+    public Cell[] getRow(int rowIdx) {
+        final int columnCount = numCols();
+        Cell[] row = new Cell[columnCount];
+        for(int i=0; i<columnCount; i++) {
+            row[i] = getCell(rowIdx, i);
+        }
+        return row;
+    }
+
+    public Cell[] getColumn(int columnIdx) {
+        final int rowCount = numRows();
+        Cell[] getColumn = new Cell[rowCount];
+        for(int i=0; i<rowCount; i++) {
+            getColumn[i] = getCell(i, columnIdx);
+        }
+        return getColumn;
     }
 }

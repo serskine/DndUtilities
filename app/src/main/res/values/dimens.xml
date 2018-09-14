@@ -27,5 +27,6 @@
     <dimen name="text_small">10sp</dimen>
     <dimen name="activity_half_horizontal_margin">5dp</dimen>
     <dimen name="activity_half_vertical_margin">5dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

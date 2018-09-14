@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.soupthatisthick.encounterbuilder.util.view.ViewUtil;
+import com.soupthatisthick.util.Logger;
 
 /**
  * Created by Owner on 3/27/2017.
@@ -27,11 +28,13 @@ public class HtmlView extends android.support.v7.widget.AppCompatTextView {
     @SuppressWarnings("deprecation")
     protected static final Spanned htmlString(String text)
     {
-        Spanned toRet = null;
+        Spanned toRet;
 
         if (text==null) text = "";
         text = ViewUtil.preprocessHtml(text);
         text = text.trim();
+
+        Logger.info("TEXT: " + text);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N)
         {

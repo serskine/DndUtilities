@@ -1,6 +1,7 @@
 package com.soupthatisthick.encounterbuilder.view.cell.summary;
 
 import android.support.annotation.NonNull;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,14 @@ public class TextCell extends ReadCell<String>
     {
         if (theText!=null) {
             this.theText.setText(theText);
+        } else {
+            this.theText.setText(defaultText);
+        }
+    }
+
+    public void updateUi(Spanned spanned) {
+        if (spanned!=null) {
+            this.theText.setText(spanned);
         } else {
             this.theText.setText(defaultText);
         }

@@ -65,9 +65,11 @@
         />
 
 
-    <TextView android:id="@+id/theDescription"
+    <com.android.xamoom.htmltextview.HtmlTextView
+        android:id="@+id/theDescription"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:clickable="false"
         style="@style/AppTheme.Normal"
         />
 

@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.soupthatisthick.encounterbuilder.model.lookup.Spell;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
 
+import com.android.xamoom.htmltextview.HtmlTextView;
+
 import soupthatisthick.encounterapp.R;
 
 /**
@@ -17,7 +19,9 @@ import soupthatisthick.encounterapp.R;
 
 public class SpellDetailCell extends ReadCell<Spell> {
 
-    public TextView theName, theType, theClasses, theCastingTime, theRange, theComponents, theDuration, theMaterials, theDescription;
+    public TextView theName, theType, theClasses, theCastingTime, theRange, theComponents, theDuration, theMaterials;
+//    public TextView theDescription;
+    public HtmlTextView theDescription;
 
     public SpellDetailCell(LayoutInflater inflater, View convertView, ViewGroup parent) {
         super(inflater, convertView, parent);
@@ -27,15 +31,15 @@ public class SpellDetailCell extends ReadCell<Spell> {
     public View createView(LayoutInflater inflater, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.cell_spell_detail, parent);
 
-        theName = (TextView) view.findViewById(R.id.theName);
-        theCastingTime = (TextView) view.findViewById(R.id.theCastingTime);
-        theRange = (TextView) view.findViewById(R.id.theRange);
-        theComponents = (TextView) view.findViewById(R.id.theComponents);
-        theDuration = (TextView) view.findViewById(R.id.theDuration);
-        theMaterials = (TextView) view.findViewById(R.id.theMaterials);
-        theDescription = (TextView) view.findViewById(R.id.theDescription);
-        theType = (TextView) view.findViewById(R.id.theType);
-        theClasses = (TextView) view.findViewById(R.id.theClasses);
+        theName = view.findViewById(R.id.theName);
+        theCastingTime = view.findViewById(R.id.theCastingTime);
+        theRange = view.findViewById(R.id.theRange);
+        theComponents = view.findViewById(R.id.theComponents);
+        theDuration = view.findViewById(R.id.theDuration);
+        theMaterials = view.findViewById(R.id.theMaterials);
+        theDescription = view.findViewById(R.id.theDescription);
+        theType = view.findViewById(R.id.theType);
+        theClasses = view.findViewById(R.id.theClasses);
 
         return view;
     }
@@ -58,7 +62,7 @@ public class SpellDetailCell extends ReadCell<Spell> {
 
         theDuration.setText(htmlString("<b>Duration: </b>" + spell.getDuration()));
 
-        theDescription.setText(htmlString("<br> " + spell.getDescription()));
+        theDescription.setHtmlText(spell.getDescription(), getView().getWidth());
         theType.setText(htmlString(spell.getType()));
         theClasses.setText(htmlString(spell.getClasses()));
     }

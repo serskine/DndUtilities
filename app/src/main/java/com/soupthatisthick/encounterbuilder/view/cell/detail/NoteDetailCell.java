@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.soupthatisthick.encounterbuilder.model.lookup.Note;
 import com.soupthatisthick.encounterbuilder.view.cell.ReadCell;
 
+import com.android.xamoom.htmltextview.HtmlTextView;
+
 import soupthatisthick.encounterapp.R;
 
 /**
@@ -18,7 +20,9 @@ import soupthatisthick.encounterapp.R;
 
 public class NoteDetailCell extends ReadCell<Note> {
 
-    public TextView theTitle, theContent;
+    public TextView theTitle;
+    public TextView theContent;
+//    public HtmlTextView theContent;
 
     public NoteDetailCell(LayoutInflater inflater, View convertView, ViewGroup parent) {
         super(inflater, convertView, parent);
@@ -28,8 +32,8 @@ public class NoteDetailCell extends ReadCell<Note> {
     public View createView(LayoutInflater inflater, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.cell_note_detail, parent);
 
-        theTitle = (TextView) view.findViewById(R.id.theTitle);
-        theContent = (TextView) view.findViewById(R.id.theContent);
+        theTitle = view.findViewById(R.id.theTitle);
+        theContent = view.findViewById(R.id.theContent);
 
         return view;
     }
@@ -42,13 +46,14 @@ public class NoteDetailCell extends ReadCell<Note> {
     {
         // If the title is blank, then we will use it's id to display it instead. However we
         // do NOT search by the id field, only the title field
+        final String noteTitle = "Note " + item.getId();
         theTitle.setText(
             isEmpty(item.getTitle())
-            ?   getView().getResources().getString(R.string.cell_notes_title, item.getId())
+            ?   noteTitle
             :   item.getTitle()
         );
+//        theContent.setHtmlText(item.getContent());
         theContent.setText(htmlString(item.getContent()));
-
         checkVisibility();
     }
 
@@ -58,6 +63,7 @@ public class NoteDetailCell extends ReadCell<Note> {
         // do NOT search by the id field, only the title field
         theTitle.setText(isEmpty(title) ? "Unknown Content" : title);
         theContent.setText(content);
+//        theContent.setHtmlText(content, getView().getWidth());
 
         checkVisibility();
 
@@ -66,6 +72,5 @@ public class NoteDetailCell extends ReadCell<Note> {
 
     private void checkVisibility()
     {
-        theContent.setVisibility(isEmpty(theContent.getText()) ? View.GONE : View.VISIBLE);
     }
 }

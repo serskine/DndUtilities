@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -106,4 +107,19 @@ public class Histogram<Key>
         map.clear();
     }
 
+    public Key random() {
+        if (map.isEmpty()) return null;
+        long x = 0;
+        double threshold = (Math.random() * sum);
+        Iterator<Map.Entry<Key, Long>> itr = map.entrySet().iterator();
+        Map.Entry<Key, Long> entry = null;
+        while(itr.hasNext()) {
+            entry = itr.next();
+            x += entry.getValue();
+            if (x >= threshold) {
+                return entry.getKey();
+            }
+        }
+        return entry.getKey();
+    }
 }

@@ -7,7 +7,10 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -204,6 +207,25 @@ public class Text {
         final SpannableStringBuilder str = new SpannableStringBuilder(text);
         str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return str;
+    }
+
+    /**
+     * Given an iterable of strings, this till filter out the non-null and empty strings
+     * @param tokens is the input
+     * @return is the filtered list {@link List<String>} containing non-empty strings
+     */
+    public static List<String> getNotEmpty(Iterable<String> tokens) {
+        ArrayList<String> filtered = new ArrayList<>();
+        for(String token : tokens) {
+            if (token!=null && !token.trim().isEmpty()) {
+                filtered.add(token);
+            }
+        }
+        return filtered;
+    }
+
+    public static List<String> getNotEmpty(String... tokens) {
+        return getNotEmpty(Arrays.asList(tokens));
     }
 
 }
