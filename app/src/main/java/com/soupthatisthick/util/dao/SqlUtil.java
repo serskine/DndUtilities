@@ -789,6 +789,41 @@ public class SqlUtil {
         return columns;
     }
 
+
+
+    /**
+     * This will attempt to extract an object based on the type stored in the cursor for that column.
+     * @param cursor is a reference to the cursor that iterated over the dataset.
+     * @param idx is the column index
+     * @return an Object of the appropriate type.
+     *  {@link Object} with a null value for {@value Cursor#FIELD_TYPE_NULL}
+     *  {@link Integer} for {@value Cursor#FIELD_TYPE_INTEGER}
+     *  {@link Float} for {@value Cursor#FIELD_TYPE_FLOAT}
+     *  {@link String} for {@value Cursor#FIELD_TYPE_STRING}
+     *  {@link byte[]} for {@value Cursor#FIELD_TYPE_BLOB}
+     *
+     */
+    public static final Object getColumnValue(Cursor cursor, int idx) {
+        int fieldType = cursor.getType(idx);
+        switch(fieldType) {
+            case Cursor.FIELD_TYPE_BLOB:
+                return cursor.getBlob(idx);
+            case Cursor.FIELD_TYPE_FLOAT:
+                return new Float(cursor.getFloat(idx));
+            case Cursor.FIELD_TYPE_INTEGER:
+                return new Integer(cursor.getInt(idx));
+            case Cursor.FIELD_TYPE_NULL:
+                return null;
+            case Cursor.FIELD_TYPE_STRING:
+            default:
+                return cursor.getString(idx);
+        }
+    }
+
+    public static final Object getColumnValue(Cursor cursor, String columnName) {
+        return getColumnValue(cursor, cursor.getColumnIndex(columnName));
+    }
+
     public static final Set<String> getTableColumnsSet(SQLiteDatabase db, String table)
     {
         String[] columns = getTableColumns(db, table);
